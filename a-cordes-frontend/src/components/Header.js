@@ -19,6 +19,9 @@ function Header() {
                     <LinkContainer to="/login">
                         <Nav.Link><i className="fas fa-user px-2"></i>Log in</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/cart">
+                        <Nav.Link><i className="fas fa-shopping-cart px-2"></i>Cart</Nav.Link>
+                    </LinkContainer>
                 </Nav>
                 </Navbar.Collapse>
             </Container>
