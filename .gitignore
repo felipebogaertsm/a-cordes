@@ -1,5 +1,5 @@
 *.pyc
-/backend/db.sqlite3
+/a_cordes_backend/db.sqlite3
 .DS_Store
 .env
 */settings/local.py
@@ -19,12 +19,12 @@ __pycache__/
 *.dump
 
 # npm
-node_modules/
+/a-cordes-frontend/node_modules/
 npm-debug.log
 
 # Webpack
-/frontend/bundles/*
-/frontend/webpack_bundles/*
+/a-cordes-frontend/bundles/*
+/a-cordes-frontend/webpack_bundles/*
 /webpack-stats.json
 
 # Sass
