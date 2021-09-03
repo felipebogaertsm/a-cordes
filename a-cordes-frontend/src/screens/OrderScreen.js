@@ -23,7 +23,7 @@ function OrderScreen({ match }) {
         if (!order || order._id !== Number(orderId)) {
             dispatch(getOrderDetails(orderId))
         }
-    }, [order, orderId])
+    }, [dispatch, order, orderId])
 
     return loading ? (
         <Loader/>
