@@ -99,6 +99,7 @@ def update_user(request, pk):
     user = User.objects.get(id=pk)
 
     data = request.data
+    print(data)
 
     user.first_name = data["name"]
     user.username = data["email"]
@@ -106,7 +107,7 @@ def update_user(request, pk):
     user.is_staff = data["isAdmin"]
 
     user.save()
-    
+
     serializer = UserSerializer(user, many=False)
 
     return Response(serializer.data)
