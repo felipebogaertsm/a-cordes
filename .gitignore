@@ -19,7 +19,7 @@ __pycache__/
 *.dump
 
 # npm
-/a-cordes-frontend/node_modules/
+**/node_modules/**
 npm-debug.log
 
 # Webpack
