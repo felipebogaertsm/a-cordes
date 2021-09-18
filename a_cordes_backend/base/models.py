@@ -29,9 +29,21 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)  # product that got reviewed
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)  # user that did the review
-    seller = models.ForeignKey(Seller, on_delete=models.SET_NULL, null=True)  # seller that got reviewed
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True,
+    )  # product that got reviewed
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+    )  # user that did the review
+    seller = models.ForeignKey(
+        Seller,
+        on_delete=models.SET_NULL,
+        null=True,
+    )  # seller that got reviewed
     rating = models.IntegerField(null=True, blank=True, default=0)
     comment = models.TextField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True, blank=True)

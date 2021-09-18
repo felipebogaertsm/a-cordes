@@ -5,7 +5,7 @@
 */settings/local.py
 /staticfiles/*
 /mediafiles/*
-__pycache__/
+*/__pycache__/*
 /.vscode/
 
 # coverage result
