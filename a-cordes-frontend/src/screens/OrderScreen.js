@@ -81,7 +81,7 @@ function OrderScreen({ match, history }) {
     }
 
     return loading ? (
-        <Loader/>
+        <Loader />
     ) : error ? (
         <Message variant="danger">{error}</Message>
     ) : (
@@ -158,70 +158,70 @@ function OrderScreen({ match, history }) {
 
                 <Col md={4}>
 
-                <Card>
-                    <ListGroup variant='flush'>
-                        <ListGroup.Item>
-                            <h2>Order Summary</h2>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>Item:</Col>
-                                <Col>${order.itemsPrice}</Col>
-                            </Row>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>Shipping:</Col>
-                                <Col>${order.shippingPrice}</Col>
-                            </Row>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>Tax:</Col>
-                                <Col>${order.taxPrice}</Col>
-                            </Row>
-                        </ListGroup.Item>
-
-                        <ListGroup.Item>
-                            <Row>
-                                <Col><strong>Total:</strong></Col>
-                                <Col>${order.totalPrice}</Col>
-                            </Row>
-                        </ListGroup.Item>
-
-                        {!order.isPaid && (
+                    <Card>
+                        <ListGroup variant='flush'>
                             <ListGroup.Item>
-                                {loadingPay && <Loader/>}
-                                {!sdkReady ? (
-                                    <Loader/>
-                                ) : (
-                                    <PayPalButton
-                                        amount={order.totalPrice}
-                                        onSuccess={successPaymentHandler}
-                                    />
-                                )}
+                                <h2>Order Summary</h2>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Item:</Col>
+                                    <Col>${order.itemsPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Shipping:</Col>
+                                    <Col>${order.shippingPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Tax:</Col>
+                                    <Col>${order.taxPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col><strong>Total:</strong></Col>
+                                    <Col>${order.totalPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            {!order.isPaid && (
+                                <ListGroup.Item>
+                                    {loadingPay && <Loader />}
+                                    {!sdkReady ? (
+                                        <Loader />
+                                    ) : (
+                                        <PayPalButton
+                                            amount={order.totalPrice}
+                                            onSuccess={successPaymentHandler}
+                                        />
+                                    )}
+                                </ListGroup.Item>
+                            )}
+
+                        </ListGroup>
+
+                        {loadingDeliver && <Loader />}
+
+                        {userInfo && userInfo.is_admin && order.isPaid && !order.isDelivered && (
+                            <ListGroup.Item>
+                                <Button
+                                    type='button'
+                                    className='btn btn-block'
+                                    onClick={deliverHandler}
+                                >
+                                    Mark as delivered
+                                </Button>
                             </ListGroup.Item>
                         )}
-
-                    </ListGroup>
-
-                    {loadingDeliver && <Loader/>}
-
-                    {userInfo && userInfo.is_admin && order.isPaid && !order.isDelivered && (
-                        <ListGroup.Item>
-                            <Button
-                                type='button'
-                                className='btn btn-block'
-                                onClick={deliverHandler}
-                            >
-                                Mark as delivered
-                            </Button>
-                        </ListGroup.Item>
-                    )}
-                </Card>
+                    </Card>
 
                 </Col>
             </Row>
