@@ -8,21 +8,21 @@ from base.models import *
 from base.serializers import *
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def get_products(request):
     products = Product.objects.all()
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def get_product(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAdminUser])
 def create_product(request):
     user = request.user
@@ -30,7 +30,7 @@ def create_product(request):
 
     product = Product.objects.create(
         seller=seller,
-        name='Sample Name',
+        name="Sample Name",
         price=1000,
     )
 
@@ -38,17 +38,17 @@ def create_product(request):
     return Response(serializer.data)
 
 
-@api_view(['PUT'])
+@api_view(["PUT"])
 @permission_classes([IsAdminUser])
 def update_product(request, pk):
     data = request.data
     product = Product.objects.get(_id=pk)
 
-    product.name = data['name']
-    product.price = data['price']
-    product.countInStock = data['countInStock']
-    product.description = data['description']
-    product.category = data['category']
+    product.name = data["name"]
+    product.price = data["price"]
+    product.countInStock = data["countInStock"]
+    product.description = data["description"]
+    product.category = data["category"]
 
     product.save()
 
@@ -56,28 +56,28 @@ def update_product(request, pk):
     return Response(serializer.data)
 
 
-@api_view(['DELETE'])
+@api_view(["DELETE"])
 @permission_classes([IsAdminUser])
 def delete_product(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()
-    return Response('Product deleted')
+    return Response("Product deleted")
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def upload_image(request):
     data = request.data
 
-    product_id = data['product_id']
+    product_id = data["product_id"]
     product = Product.objects.get(_id=product_id)
 
-    product.image = request.FILES.get('image')
+    product.image = request.FILES.get("image")
     product.save()
 
-    return Response('Image was uploaded')
+    return Response("Image was uploaded")
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 @permission_classes([IsAdminUser])
 def create_product_review(request, pk):
     user = request.user
@@ -89,12 +89,12 @@ def create_product_review(request, pk):
     already_exists = product.review_set.filter(user=user).exists()
 
     if already_exists:
-        content = {'details': 'Product already reviewed'}
+        content = {"detail": "Product already reviewed"}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     # Scenario 2: no rating or 0
-    if data['rating'] == 0:
-        content = {'details': 'Please select a rating'}
+    if data["rating"] == 0:
+        content = {"detail": "Please select a rating"}
         return Response(content, status=status.HTTP_400_BAD_REQUEST)
 
     # Scenario 3: create review
@@ -102,8 +102,8 @@ def create_product_review(request, pk):
         user=user,
         product=product,
         seller=seller,
-        rating=int(data['rating']),
-        comment=data['comment'],
+        rating=int(data["rating"]),
+        comment=data["comment"],
     )
 
     reviews = product.review_set.all()
@@ -114,4 +114,4 @@ def create_product_review(request, pk):
     review.save()
     product.save()
 
-    return Response('Review added')
+    return Response("Review added")
