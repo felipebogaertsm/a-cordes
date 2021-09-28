@@ -1,7 +1,7 @@
 # à cordes
 ## *An e-commerce platform for fine instruments*
 
-*à cordes* makes it easier for fine instrument sellers and buyers to connect, view and trade one of the best classical instruments in the market. Only top sellers are allowed in the platform.
+*à cordes* makes it easier for fine instrument sellers and buyers to connect, view and trade some of the best classical instruments in the market. Only top sellers are allowed in the platform.
 
 ### Tech stack
 
