@@ -9,7 +9,7 @@ sudo systemctl stop nginx
 
 # Moving important files to the user folder
 cd ~
-source ~/env/bin/activate
+source home/felipe/env/bin/activate
 
 
 # Deleting the project folder
