@@ -162,17 +162,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-
 MEDIA_URL = "/images/"
-MEDIA_ROOT = BASE_DIR / "media"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     BASE_DIR / "a-cordes-frontend/build/static",
 ]
 
-MEDIA_ROOT = "static/images"
+MEDIA_ROOT = BASE_DIR / "static/images"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
