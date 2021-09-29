@@ -7,6 +7,9 @@ class Seller(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     rating = models.DecimalField(max_digits=7, decimal_places=2)
 
+    createdAt = models.DateTimeField(auto_now_add=True, blank=True)
+    _id = models.AutoField(primary_key=True, editable=False)
+
     def __str__(self):
         return f"{self.name}"
 
@@ -24,10 +27,11 @@ class Product(models.Model):
         max_digits=7, decimal_places=2, null=True, blank=True
     )
     numReviews = models.IntegerField(null=True, blank=True, default=0)
-    createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     image = models.ImageField(
         null=True, blank=True, default="/placeholder.jpeg"
     )
+
+    createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
@@ -52,6 +56,7 @@ class Review(models.Model):
     )  # seller that got reviewed
     rating = models.IntegerField(null=True, blank=True, default=0)
     comment = models.TextField(null=True, blank=True)
+
     createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
@@ -78,6 +83,7 @@ class Order(models.Model):
     deliveredAt = models.DateTimeField(
         auto_now_add=False, null=True, blank=True
     )
+
     createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
@@ -93,7 +99,10 @@ class OrderItem(models.Model):
     price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True
     )
+
     image = models.CharField(max_length=200, null=True, blank=True)
+
+    createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
@@ -111,6 +120,8 @@ class ShippingAddress(models.Model):
     shippingPrice = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True
     )
+
+    createdAt = models.DateTimeField(auto_now_add=True, blank=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
