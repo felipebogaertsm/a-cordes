@@ -11,8 +11,6 @@ sudo systemctl stop nginx
 cd ~
 source ~/env/bin/activate
 
-# Moving the socket temporarily
-sudo mv ~/A-Cordes/a_cordes_backend/gunicorn.sock ~
 
 # Deleting the project folder
 sudo rm -rf ~/A-Cordes/
@@ -25,13 +23,12 @@ sudo rm -rf ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
 
 # Moving important files from user folder to their respective folders
 sudo mv ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
-sudo mv ~/gunicorn.sock ~/A-Cordes/a_cordes_backend
 
 sudo chown -R felipe:www-data ~/A-Cordes/
 
 # Collecting static files for Django:
 cd ~/A-Cordes/a_cordes_backend
-python3 manage.py collectstatic
+python manage.py collectstatic
 
 cd ~
 
