@@ -26,7 +26,7 @@ sudo mv ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py ~/A-Cordes
 
 sudo chown -R felipe:www-data ~/A-Cordes/
 
-cd ~
+cd ~/
 
 # Starting Nginx server
 sudo systemctl start nginx
