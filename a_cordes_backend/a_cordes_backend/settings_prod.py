@@ -30,7 +30,6 @@ SECRET_KEY = (
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "127.0.0.1",
     "www.acordes.shop",
     "acordes.shop",
 ]
@@ -116,8 +115,12 @@ WSGI_APPLICATION = "a_cordes_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "a_cordes_db",
+        "USER": "felipe",
+        "PASSWORD": "AB071829ab!",
+        "HOST": "127.0.0.1",
+        "PORT": 5432,
     }
 }
 

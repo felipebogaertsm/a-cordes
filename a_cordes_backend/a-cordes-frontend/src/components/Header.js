@@ -30,7 +30,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <SearchBox />
 
-                        <Nav className="me-auto">
+                        <Nav className="ml-auto">
                             <LinkContainer to="/">
                                 <Nav.Link><i className="fas fa-home px-2"></i>Home</Nav.Link>
                             </LinkContainer>
