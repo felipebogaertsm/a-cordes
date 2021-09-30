@@ -2,17 +2,13 @@
 /a_cordes_backend/db.sqlite3
 .DS_Store
 .env
-*/settings/local.py
+*/settings_prod.py
 /staticfiles/*
 /mediafiles/*
 */__pycache__/*
-/.vscode/
 
-# coverage result
-.coverage
-/coverage/
-
-# pycharm
+# IDEs
+.vscode/
 .idea/
 
 # data
@@ -23,25 +19,13 @@
 npm-debug.log
 
 # Webpack
-/a-cordes-frontend/bundles/*
-/a-cordes-frontend/webpack_bundles/*
-/webpack-stats.json
+a_cordes_backend/a-cordes-frontend/bundles/*
+a_cordes_backend/a-cordes-frontend/webpack_bundles/*
+a_cordes_backend/webpack-stats.json
+
+# Build
+a_cordes_backend/a-cordes-frontend/build/*
 
 # Sass
 .sass-cache
 *.map
-
-# General
-/{{project_name}}-venv/
-/venv/
-/env/
-/output/
-/cache/
-boilerplate.zip
-
-# Spritesmith
-spritesmith-generated/
-spritesmith.scss
-
-# templated email
-tmp_email/
