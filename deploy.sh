@@ -9,8 +9,11 @@ sudo systemctl stop nginx
 
 # Moving important files to the user folder
 cd ~/
-source /home/felipe/env/bin/activate
+sudo mv ~/A-Cordes/a_cordes_backend/static ~/
+sudo mv ~/A-Cordes/a_cordes_backend/staticfiles ~/
 
+# Activating venv
+source /home/felipe/env/bin/activate
 
 # Deleting the project folder
 sudo rm -rf ~/A-Cordes/
@@ -20,9 +23,13 @@ git clone https://github.com/felipebogaertsm/A-Cordes.git
 
 # Removing dev settings.py
 sudo rm -rf ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
+sudo rm -rf ~/A-Cordes/a_cordes_backend/static
+sudo rm -rf ~/A-Cordes/a_cordes_backend/staticfiles
 
 # Moving important files from user folder to their respective folders
 sudo mv ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
+sudo mv ~/static ~/A-Cordes/a_cordes_backend/
+sudo mv ~/staticfiles ~/A-Cordes/a_cordes_backend/
 
 sudo chown -R felipe:www-data ~/A-Cordes/
 

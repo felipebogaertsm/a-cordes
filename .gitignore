@@ -2,9 +2,6 @@
 /a_cordes_backend/db.sqlite3
 .DS_Store
 .env
-*/settings_prod.py
-/staticfiles/*
-/mediafiles/*
 */__pycache__/*
 
 # IDEs
