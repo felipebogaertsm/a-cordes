@@ -23,6 +23,7 @@ git clone https://github.com/felipebogaertsm/A-Cordes.git
 
 # Removing dev settings.py
 sudo rm -rf ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
+# Removing dev static files
 sudo rm -rf ~/A-Cordes/a_cordes_backend/static
 sudo rm -rf ~/A-Cordes/a_cordes_backend/staticfiles
 
