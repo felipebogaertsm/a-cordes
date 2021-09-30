@@ -10,7 +10,6 @@ sudo systemctl stop nginx
 # Moving important files to the user folder
 cd /home/felipe
 sudo mv /home/felipe/A-Cordes/a_cordes_backend/static ~/
-sudo mv /home/felipe/A-Cordes/a_cordes_backend/staticfiles ~/
 
 # Activating venv
 source /home/felipe/env/bin/activate
