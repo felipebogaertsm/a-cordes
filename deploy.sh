@@ -25,12 +25,10 @@ git clone https://github.com/felipebogaertsm/A-Cordes.git
 sudo rm -rf /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
 # Removing dev static files
 sudo rm -rf /home/felipe/A-Cordes/a_cordes_backend/static
-sudo rm -rf /home/felipe/A-Cordes/a_cordes_backend/staticfiles
 
 # Moving important files from user folder to their respective folders
 sudo mv /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
 sudo mv /home/felipe/static /home/felipe/A-Cordes/a_cordes_backend/
-sudo mv /home/felipe/staticfiles /home/felipe/A-Cordes/a_cordes_backend/
 
 sudo chown -R felipe:www-data ~/A-Cordes/
 
