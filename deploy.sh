@@ -26,6 +26,10 @@ sudo mv ~/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py ~/A-Cordes
 
 sudo chown -R felipe:www-data ~/A-Cordes/
 
+# Collecting static
+cd /home/felipe/A-Cordes/a_cordes_backend/
+python manage.py collectstatic
+
 cd ~/
 
 # Starting Nginx server
