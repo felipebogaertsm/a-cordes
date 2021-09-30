@@ -122,7 +122,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "a_cordes_db",
         "USER": "felipe",
-        "PASSWORD": os.environ.get("DB_PASS"),
+        "PASSWORD": "AB071829ab!",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }
