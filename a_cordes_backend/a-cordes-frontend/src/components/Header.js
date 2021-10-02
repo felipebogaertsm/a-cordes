@@ -20,17 +20,13 @@ function Header() {
         <header className="">
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg" id="header">
                 <Container>
-
                     <LinkContainer to="/">
                         <Navbar.Brand>à cordes</Navbar.Brand>
                     </LinkContainer>
-
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <SearchBox />
 
-                        <Nav className="m-auto">
+                        <Nav className="me-auto">
                             <LinkContainer to="/">
                                 <Nav.Link><i className="fas fa-home px-2"></i>Home</Nav.Link>
                             </LinkContainer>
@@ -56,7 +52,6 @@ function Header() {
                                     <Nav.Link><i className="fas fa-user px-2"></i>Log in</Nav.Link>
                                 </LinkContainer>
                             )}
-
                             {userInfo && userInfo.is_admin && (
                                 <NavDropdown title='Admin' id='adminmenu'>
                                     <LinkContainer to='/admin/userList'>
@@ -70,9 +65,10 @@ function Header() {
                                     </LinkContainer>
                                 </NavDropdown>
                             )}
+                            <SearchBox />
                         </Nav>
-                    </Navbar.Collapse>
 
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         </header>
