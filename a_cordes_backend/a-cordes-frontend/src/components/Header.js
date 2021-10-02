@@ -17,8 +17,8 @@ function Header() {
     };
 
     return (
-        <header>
-            <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
+        <header className="">
+            <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg" id="header">
                 <Container>
 
                     <LinkContainer to="/">
@@ -30,7 +30,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <SearchBox />
 
-                        <Nav className="ml-auto">
+                        <Nav className="m-auto">
                             <LinkContainer to="/">
                                 <Nav.Link><i className="fas fa-home px-2"></i>Home</Nav.Link>
                             </LinkContainer>

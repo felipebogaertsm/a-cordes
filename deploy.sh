@@ -4,7 +4,7 @@
 
 # !/bin/bash
 
-# Deactivating Nginx:
+# Deactivating Nginx
 sudo systemctl stop nginx
 
 # Moving important files to the user folder
@@ -29,12 +29,10 @@ sudo rm -rf /home/felipe/A-Cordes/a_cordes_backend/static
 sudo mv /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
 sudo mv /home/felipe/static /home/felipe/A-Cordes/a_cordes_backend/
 
+# Changing ownership of the new project folder
 sudo chown -R felipe:www-data ~/A-Cordes/
 
-# Collecting static
-cd /home/felipe/A-Cordes/a_cordes_backend/
-python manage.py collectstatic
-
+# Change working directory
 cd ~/
 
 # Starting Nginx server
