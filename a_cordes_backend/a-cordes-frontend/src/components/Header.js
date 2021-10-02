@@ -18,13 +18,13 @@ function Header() {
 
     return (
         <header className="">
-            <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg" id="header">
+            <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
                 <Container>
                     <LinkContainer to="/">
                         <Navbar.Brand>à cordes</Navbar.Brand>
                     </LinkContainer>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
 
                         <Nav className="me-auto">
                             <LinkContainer to="/">
