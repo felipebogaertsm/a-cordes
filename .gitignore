@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# Licensed as the GNU General Public License as published by the Free Software
+# Foundation, version 3.
+# Author: Felipe Bogaerts de Mattos
+# Contact me at felipe.bogaerts@engenharia.ufjf.br
+
 *.pyc
 /a_cordes_backend/db.sqlite3
 .DS_Store
@@ -12,7 +18,7 @@
 *.dump
 
 # npm
-**/node_modules/**
+a_cordes_backend/a-cordes-frontend/node_modules/*
 npm-debug.log
 
 # Webpack
@@ -22,6 +28,12 @@ a_cordes_backend/webpack-stats.json
 
 # Build
 a_cordes_backend/a-cordes-frontend/build/*
+
+# Staticfiles
+a_cordes_backend/staticfiles/*
+a_cordes/staticfiles/*
+a_cordes_backend/media/*
+a_cordes/media/*
 
 # Sass
 .sass-cache
