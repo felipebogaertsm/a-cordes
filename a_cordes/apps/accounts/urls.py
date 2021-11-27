@@ -9,6 +9,7 @@ from django.urls import path
 import apps.accounts.views as views
 
 urlpatterns = [
-    path("users/", views.get_users, name="get_users"),
-    path("register-user/", views.register_user, name="register-user"),
+    path("users/", views.get_users),
+    path("register-user/", views.register_user),
+    path("user/<str:pk>/", views.get_user_by_id),
 ]

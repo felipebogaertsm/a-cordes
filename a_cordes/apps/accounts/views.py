@@ -25,6 +25,14 @@ def get_users(request):
     return Response(serializer.data)
 
 
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def get_user_by_id(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
 @api_view(["POST"])
 def register_user(request):
     """
