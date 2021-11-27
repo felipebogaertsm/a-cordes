@@ -4,6 +4,9 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.db import models
+from django.apps import AppConfig
 
-# Create your models here.
+
+class AccountsConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.accounts"

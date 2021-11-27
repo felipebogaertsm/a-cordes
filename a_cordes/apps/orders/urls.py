@@ -4,9 +4,8 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.apps import AppConfig
+from django.urls import path
 
+import apps.orders.views as views
 
-class OrdersConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
-    name = "orders"
+urlpatterns = []

@@ -4,6 +4,11 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.shortcuts import render
+from django.urls import path
 
-# Create your views here.
+import apps.accounts.views as views
+
+urlpatterns = [
+    path("users/", views.get_users, name="get_users"),
+    path("register-user/", views.register_user, name="register-user"),
+]
