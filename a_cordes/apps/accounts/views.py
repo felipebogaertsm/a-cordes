@@ -4,7 +4,7 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-
+from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -12,6 +12,25 @@ from rest_framework.response import Response
 
 from apps.accounts.models import User
 from apps.accounts.serializers import UserSerializer, UserSerializerWithToken
+
+
+@api_view(["POST"])
+def register_user(request):
+    """
+    Registers user.
+    """
+    data = request.data
+
+    try:
+        user = User.objects.create_user(
+            email=data["email"],
+            password=data["password"],
+        )
+    except:
+        message = {"detail": "User creation failed."}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = UserSerializerWithToken(user, many=False)
 
 
 @api_view(["GET"])
@@ -33,20 +52,31 @@ def get_user_by_id(request, pk):
     return Response(serializer.data)
 
 
-@api_view(["POST"])
-def register_user(request):
-    """
-    Registers user.
-    """
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def update_user(request, pk):
+    user = User.objects.get(id=pk)
+
     data = request.data
 
-    try:
-        user = User.objects.create_user(
-            email=data["email"],
-            password=data["password"],
-        )
-    except:
-        message = {"detail": "User creation failed."}
-        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    user.email = data["email"]
+    user.is_active = data["is_active"]
+    user.is_staff = data["is_staff"]
+    user.is_admin = data["is_admin"]
+
+    if data["password"] != "":
+        user.password = make_password(data["password"])
+
+    user.save()
 
     serializer = UserSerializerWithToken(user, many=False)
+
+    return Response(serializer.data)
+
+
+@api_view(["DELETE"])
+@permission_classes([IsAdminUser])
+def delete_user(request):
+    user_for_deletion = User.objects.get(id=pk)
+    user_for_deletion.delete()
+    return Response("User was deleted.")

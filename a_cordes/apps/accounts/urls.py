@@ -12,4 +12,6 @@ urlpatterns = [
     path("users/", views.get_users),
     path("register-user/", views.register_user),
     path("user/<str:pk>/", views.get_user_by_id),
+    path("user-update/<str:pk>/", views.update_user),
+    path("user-delete/<str:pk>/", views.delete_user),
 ]

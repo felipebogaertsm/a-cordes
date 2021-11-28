@@ -10,9 +10,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from apps.accounts.models import User, SellerProfile, UserProfile
 from apps.accounts.forms import UserCreationForm, UserChangeForm
 
-admin.site.site_header = "FinLogic Admin"
-admin.site.site_title = "FinLogic Admin"
-admin.site.index_title = "FinLogic Admin"
+admin.site.site_header = "A-Cordes Admin"
+admin.site.site_title = "A-Cordes Admin"
+admin.site.index_title = "A-Cordes Admin"
 
 
 class UserAdmin(BaseUserAdmin):
