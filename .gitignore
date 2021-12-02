@@ -5,11 +5,11 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 *.pyc
-a_cordes_backend/db.sqlite3
-a_cordes/db.sqlite3
 .DS_Store
 .env
 */__pycache__/*
+a_cordes_backend/*
+hello
 
 # IDEs
 .vscode/
@@ -20,15 +20,19 @@ a_cordes/db.sqlite3
 
 # npm
 a_cordes_backend/a-cordes-frontend/node_modules/*
+a_cordes/frontend/node_modules/*
 npm-debug.log
 
 # Webpack
-a_cordes_backend/a-cordes-frontend/bundles/*
-a_cordes_backend/a-cordes-frontend/webpack_bundles/*
-a_cordes_backend/webpack-stats.json
+a_cordes/frontend/bundles/*
+a_cordes/frontend/webpack_bundles/*
+a_cordes/webpack-stats.json
 
 # Build
-a_cordes_backend/a-cordes-frontend/build/*
+a_cordes/frontend/build/*
+
+# DBs
+a_cordes/db.sqlite3
 
 # Staticfiles
 a_cordes_backend/staticfiles/*
