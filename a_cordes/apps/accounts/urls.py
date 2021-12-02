@@ -9,9 +9,10 @@ from django.urls import path
 import apps.accounts.views as views
 
 urlpatterns = [
-    path("users/", views.get_users),
-    path("register-user/", views.register_user),
+    path("login/", views.MyTokenObtainPairView.as_view()),
+    path("user/all/", views.get_users),
+    path("user/register/", views.register_user),
     path("user/<str:pk>/", views.get_user_by_id),
-    path("user-update/<str:pk>/", views.update_user),
-    path("user-delete/<str:pk>/", views.delete_user),
+    path("user/update/<str:pk>/", views.update_user),
+    path("user/delete/<str:pk>/", views.delete_user),
 ]

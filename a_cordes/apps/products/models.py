@@ -5,9 +5,8 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 from django.db import models
-from a_cordes_backend.base.models import Seller
 
-from apps.accounts.models import SellerProfile
+from apps.accounts.models import SellerProfile, User
 
 
 class Product(models.Model):
@@ -32,3 +31,23 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}_{self.seller.name}"
+
+
+class Review(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True,
+    )  # product that got reviewed
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+    )  # user that did the review
+    rating = models.IntegerField(null=True, blank=True, default=0)
+    comment = models.TextField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return f"{self.rating}_{self.product.name}_{self.user}"

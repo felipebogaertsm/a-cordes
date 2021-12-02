@@ -5,7 +5,8 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 *.pyc
-/a_cordes_backend/db.sqlite3
+a_cordes_backend/db.sqlite3
+a_cordes/db.sqlite3
 .DS_Store
 .env
 */__pycache__/*
