@@ -68,8 +68,8 @@ export const createOrder = (order) => async (dispatch, getState) => {
         dispatch({
             type: ORDER_CREATE_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -105,8 +105,8 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         dispatch({
             type: ORDER_DETAILS_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -143,8 +143,8 @@ export const payOrder = (id, paymentResult) => async (dispatch, getState) => {
         dispatch({
             type: ORDER_PAY_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -181,8 +181,8 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
         dispatch({
             type: ORDER_DELIVER_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -205,7 +205,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `/api/orders/myorders/`,
+            `/api/orders/my-orders/`,
             config,
         );
 
@@ -242,7 +242,7 @@ export const listOrders = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `/api/orders/`,
+            `/api/orders/all/`,
             config,
         );
 
