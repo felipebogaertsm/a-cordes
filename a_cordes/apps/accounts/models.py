@@ -58,6 +58,8 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     email = models.EmailField(max_length=255, unique=True)
 
     is_active = models.BooleanField(default=True)
@@ -80,8 +82,14 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    @property
+    def is_superuser(self):
+        return self.is_admin
+
 
 class UserProfile(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     full_name = models.CharField(max_length=255, default="", blank=True)
@@ -97,6 +105,8 @@ class UserProfile(models.Model):
 
 
 class SellerProfile(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=255)

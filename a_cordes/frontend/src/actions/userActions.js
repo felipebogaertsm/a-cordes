@@ -47,9 +47,9 @@ export const login = (email, password) => async (dispatch) => {
             }
         };
 
-        const {data} = await axios.post(
-            '/api/users/login/',
-            { 'username': email, 'password': password },
+        const { data } = await axios.post(
+            '/api/accounts/login/',
+            { 'email': email, 'password': password },
             config
         );  // send email and password and get back a token
 
@@ -60,12 +60,12 @@ export const login = (email, password) => async (dispatch) => {
 
         localStorage.setItem('userInfo', JSON.stringify(data))
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -90,9 +90,9 @@ export const register = (name, email, password) => async (dispatch) => {
             }
         };
 
-        const {data} = await axios.post(
-            '/api/users/register/',
-            { 'name': name, 'email': email, 'password': password },
+        const { data } = await axios.post(
+            '/api/accounts/user/register/',
+            { 'email': email, 'password': password },
             config
         );  // send email and password and get back a token
 
@@ -108,12 +108,12 @@ export const register = (name, email, password) => async (dispatch) => {
 
         localStorage.setItem('userInfo', JSON.stringify(data))
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_REGISTER_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -136,7 +136,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            `/api/users/${id}/`,
+            `/api/accounts/user/${id}/`,
             config
         );
 
@@ -145,12 +145,12 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             payload: data,
         });
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_DETAILS_FAIL,
             payload: error.response && error.response.data.detail
-            ? error.response.data.detail
-            : error.message,
+                ? error.response.data.detail
+                : error.message,
         })
     }
 }
@@ -190,7 +190,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 
         localStorage.setItem('userInfo', JSON.stringify(data))
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,
             payload: error.response && error.response.data.detail
@@ -218,7 +218,7 @@ export const listUsers = () => async (dispatch, getState) => {
         };
 
         const { data } = await axios.get(
-            '/api/users/',
+            '/api/accounts/user/all/',
             config,
         );
 
@@ -227,7 +227,7 @@ export const listUsers = () => async (dispatch, getState) => {
             payload: data
         });
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_LIST_FAIL,
             payload: error.response && error.response.data.detail
@@ -255,7 +255,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.delete(
-            `/api/users/delete/${id}/`,
+            `/api/accounts/user/delete/${id}/`,
             config,
         );
 
@@ -264,7 +264,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             payload: data
         });
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_DELETE_FAIL,
             payload: error.response && error.response.data.detail
@@ -292,7 +292,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.put(
-            `/api/users/update/${user._id}/`,
+            `/api/accounts/user/update/${user._id}/`,
             user,
             config,
         );
@@ -306,7 +306,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
             payload: data,
         });
 
-    } catch(error) {
+    } catch (error) {
         dispatch({
             type: USER_UPDATE_FAIL,
             payload: error.response && error.response.data.detail

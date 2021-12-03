@@ -10,6 +10,8 @@ from apps.accounts.models import SellerProfile, User
 
 
 class Product(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     seller_profile = models.ForeignKey(SellerProfile, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=255, blank=True, default="")
@@ -30,10 +32,12 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return f"{self.name}_{self.seller.name}"
+        return f"{self.name}_{self.seller_profile.name}"
 
 
 class Review(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     product = models.ForeignKey(
         Product,
         on_delete=models.SET_NULL,

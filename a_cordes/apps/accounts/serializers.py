@@ -12,11 +12,12 @@ from apps.accounts.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.SerializerMethodField(read_only=True)
+    _id = serializers.SerializerMethodField(read_only=True)
     is_admin = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ["id", "email", "is_active", "is_staff", "is_admin"]
+        fields = ["_id", "email", "is_active", "is_staff", "is_admin"]
 
     def get_email(self, obj):
         return obj.email
@@ -30,13 +31,29 @@ class UserSerializer(serializers.ModelSerializer):
     def get_is_admin(self, obj):
         return obj.is_admin
 
+    def get__id(self, obj):
+        return obj._id
+
+    def get_name(self, obj):
+        name = obj.first_name
+        if name == "":
+            name = obj.email
+        return name
+
 
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ["id", "email", "is_active", "is_staff", "is_admin", "token"]
+        fields = [
+            "_id",
+            "email",
+            "is_active",
+            "is_staff",
+            "is_admin",
+            "token",
+        ]
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)

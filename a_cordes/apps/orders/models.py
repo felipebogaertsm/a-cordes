@@ -11,6 +11,8 @@ from apps.products.models import Product
 
 
 class Order(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     seller_profile = models.ForeignKey(
         SellerProfile, on_delete=models.SET_NULL, null=True
@@ -39,6 +41,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -58,6 +62,8 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     order = models.OneToOneField(
         Order, on_delete=models.CASCADE, null=True, blank=True
