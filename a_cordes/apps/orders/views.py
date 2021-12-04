@@ -30,10 +30,9 @@ def add_order_items(request):
         # Create order:
         order = Order.objects.create(
             user=user,
-            paymentMethod=data["paymentMethod"],
-            taxPrice=data["taxPrice"],
-            shippingPrice=data["shippingPrice"],
-            totalPrice=data["totalPrice"],
+            payment_method=data["paymentMethod"],
+            shipping_price=data["shippingPrice"],
+            total_price=data["totalPrice"],
         )
 
         # Create shipping address:
@@ -41,7 +40,7 @@ def add_order_items(request):
             order=order,
             address=data["shippingAddress"]["address"],
             city=data["shippingAddress"]["city"],
-            postalCode=data["shippingAddress"]["postalCode"],
+            postal_code=data["shippingAddress"]["postalCode"],
             country=data["shippingAddress"]["country"],
         )
 
@@ -59,7 +58,7 @@ def add_order_items(request):
             )
 
             # Update stock of the sold items:
-            product.countInStock -= item.quantity
+            product.count_in_stock -= item.quantity
             product.save()
 
         serializer = OrderSerializer(order, many=False)
@@ -122,8 +121,8 @@ def update_order_to_paid(request, pk):
 def update_order_to_delivered(request, pk):
     order = Order.objects.get(_id=pk)
 
-    order.isDelivered = True
-    order.deliveredAt = datetime.now()
+    order.is_delivered = True
+    order.delivered_at = datetime.now()
     order.save()
 
     return Response("Order was delivered")

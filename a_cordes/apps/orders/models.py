@@ -14,9 +14,6 @@ class Order(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    seller_profile = models.ForeignKey(
-        SellerProfile, on_delete=models.SET_NULL, null=True
-    )
 
     payment_method = models.CharField(max_length=200, null=True, blank=True)
     shipping_price = models.DecimalField(

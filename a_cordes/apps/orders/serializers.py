@@ -24,8 +24,17 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(read_only=True)
-    ShippingAddress = serializers.SerializerMethodField(read_only=True)
+    shippingAddress = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
+
+    createdAt = serializers.DateTimeField(source="created_at")
+    deliveredAt = serializers.DateTimeField(source="delivered_at")
+    isDelivered = serializers.BooleanField(source="is_delivered")
+    paidAt = serializers.BooleanField(source="paid_at")
+    isPaid = serializers.BooleanField(source="is_paid")
+    paymentMethod = serializers.BooleanField(source="payment_method")
+    shippingPrice = serializers.BooleanField(source="shipping_price")
+    totalPrice = serializers.BooleanField(source="total_price")
 
     class Meta:
         model = Order
@@ -36,7 +45,7 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = OrderItemSerializer(items, many=True)
         return serializer.data
 
-    def get_ShippingAddress(self, obj):
+    def get_shippingAddress(self, obj):
         try:
             address = ShippingAddressSerializer(
                 obj.shippingaddress, many=False
