@@ -19,9 +19,6 @@ cd /home/felipe
 sudo rm -rf /home/felipe/A-Cordes
 git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
 
-# Moving important files from user folder to their respective folders
-sudo mv /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings_prod.py /home/felipe/A-Cordes/a_cordes_backend/a_cordes_backend/settings.py
-
 sudo chown -R felipe:www-data /home/felipe/A-Cordes/
 
 # Installing requirements:
