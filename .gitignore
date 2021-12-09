@@ -26,9 +26,6 @@ a_cordes/frontend/bundles/*
 a_cordes/frontend/webpack_bundles/*
 a_cordes/webpack-stats.json
 
-# Build
-a_cordes/frontend/build/*
-
 # DBs
 a_cordes/db.sqlite3
 
