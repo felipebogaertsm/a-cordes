@@ -29,12 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
+    "A_CORDES_SECRET_KEY",
     "django-insecure-^0$82#*senr0jzyykihvt-%^bk8xid530nnr1oq2@8ty+wxd7$",
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DEBUG")) == ("None" or "1")  # 1 == True
+DEBUG = str(os.environ.get("A_CORDES_DEBUG")) == ("None" or "1")  # 1 == True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -122,12 +122,24 @@ WSGI_APPLICATION = "a_cordes.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:  # if in development
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:  # if in production
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("A_CORDES_DATABASE_NAME"),
+            "USER": os.environ.get("A_CORDES_DATABASE_USER"),
+            "PASSWORD": os.environ.get("A_CORDES_DATABASE_PASSWORD"),
+            "HOST": os.environ.get("A_CORDES_DATABASE_HOST"),
+            "PORT": os.environ.get("A_CORDES_DATABASE_PORT"),
+        }
+    }
 
 # Custom user authentication
 
@@ -195,13 +207,18 @@ CORS_ALLOW_ALL_ORIGINS = True
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-LINODE_BUCKET = os.environ.get("LINODE_BUCKET", "a-cordes-static-staging")
-LINODE_BUCKET_REGION = os.environ.get("LINODE_BUCKET_REGION", "us-southeast-1")
+LINODE_BUCKET = os.environ.get(
+    "A_CORDES_LINODE_BUCKET", "a-cordes-static-staging"
+)
+LINODE_BUCKET_REGION = os.environ.get(
+    "A_CORDES_LINODE_BUCKET_REGION", "us-southeast-1"
+)
 LINODE_BUCKET_ACCESS_KEY = os.environ.get(
-    "LINODE_BUCKET_ACCESS_KEY", "VDE5YGMVPFZ8KW0D6BNA"
+    "A_CORDES_LINODE_BUCKET_ACCESS_KEY", "VDE5YGMVPFZ8KW0D6BNA"
 )
 LINODE_BUCKET_SECRET_KEY = os.environ.get(
-    "LINODE_BUCKET_SECRET_KEY", "CNsikEtGBN3dkhOICy8N41DTPH3VOnMpRqtg1XO0"
+    "A_CORDES_LINODE_BUCKET_SECRET_KEY",
+    "CNsikEtGBN3dkhOICy8N41DTPH3VOnMpRqtg1XO0",
 )
 
 AWS_S3_ENDPOINT_URL = f"https://{LINODE_BUCKET_REGION}.linodeobjects.com"

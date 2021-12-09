@@ -26,7 +26,9 @@ class Product(models.Model):
     review_count = models.PositiveIntegerField(blank=True, default=0)
 
     image = models.ImageField(
-        null=True, blank=True, default="/placeholder.jpeg"
+        blank=True,
+        default="products/placeholder.jpeg",
+        upload_to="products/",
     )
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
