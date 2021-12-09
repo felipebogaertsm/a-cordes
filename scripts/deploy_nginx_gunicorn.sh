@@ -28,9 +28,9 @@ sudo chown -R felipe:www-data /home/felipe/A-Cordes/
 pip3 install -r /home/felipe/A-Cordes/requirements.txt
 
 # Collecting static files for Django:
-cd /home/felipe/A-Cordes/a_cordes_backend
-python3 /home/felipe/A-Cordes/a_cordes_backend/manage.py collectstatic --noinput
-python3 /home/felipe/A-Cordes/a_cordes_backend/manage.py migrate --noinput
+cd /home/felipe/A-Cordes/a_cordes
+python3 /home/felipe/A-Cordes/a_cordes/manage.py collectstatic --noinput
+python3 /home/felipe/A-Cordes/a_cordes/manage.py migrate --noinput
 
 cd /home/felipe
 

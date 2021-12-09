@@ -8,8 +8,6 @@
 .DS_Store
 .env
 */__pycache__/*
-a_cordes_backend/*
-hello
 
 # IDEs
 .vscode/
