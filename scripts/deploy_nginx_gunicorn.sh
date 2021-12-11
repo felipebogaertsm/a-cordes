@@ -8,33 +8,33 @@
 
 # Deactivating Nginx:
 sudo systemctl stop nginx
-sudo systemctl stop a_cordes_gunicorn.service
+sudo systemctl stop a_cordes.service
 
 # Moving important files to the user folder
-cd /home/felipe
-source /home/felipe/env/bin/activate
+cd /home/admin
+source /home/admin/.venvs/a_cordes/bin/activate
 
 # Git pulling
-cd /home/felipe
-sudo rm -rf /home/felipe/A-Cordes
+cd /home/admin
+sudo rm -rf /home/admin/projects/A-Cordes
 git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
 
-sudo chown -R felipe:www-data /home/felipe/A-Cordes/
+sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
 
 # Installing requirements:
-pip3 install -r /home/felipe/A-Cordes/requirements.txt
+pip3 install -r /home/admin/projects/A-Cordes/requirements.txt
 
 # Collecting static files for Django:
-cd /home/felipe/A-Cordes/a_cordes
-python3 /home/felipe/A-Cordes/a_cordes/manage.py collectstatic --noinput
-python3 /home/felipe/A-Cordes/a_cordes/manage.py migrate --noinput
+cd /home/admin/projects/A-Cordes/a_cordes
+python3 /home/admin/projects/A-Cordes/a_cordes/manage.py collectstatic --noinput
+python3 /home/admin/projects/A-Cordes/a_cordes/manage.py migrate --noinput
 
-cd /home/felipe
+cd /home/admin
 
 # Starting Nginx server and Gunicorn service
 sudo systemctl start nginx
-sudo systemctl start a_cordes_gunicorn.service
+sudo systemctl start a_cordes.service
 
 # Restarting and refreshing the server
 sudo systemctl restart nginx
-sudo systemctl restart a_cordes_gunicorn.service
+sudo systemctl restart a_cordes.service

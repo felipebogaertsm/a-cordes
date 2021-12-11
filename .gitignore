@@ -6,6 +6,8 @@
 
 *.pyc
 .DS_Store
+.env_prod
+.env_dev
 .env
 */__pycache__/*
 
