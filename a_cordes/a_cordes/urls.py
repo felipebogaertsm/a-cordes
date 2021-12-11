@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views.static import serve
-from django.urls import path, re_path, include
+from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -35,15 +35,5 @@ urlpatterns = [
     path("api/orders/", include("apps.orders.urls")),
 ]
 
-if settings.DEBUG == settings.DEBUG:
-    urlpatterns += [
-        re_path(
-            r"^media/(?P<path>.*)$",
-            serve,
-            {
-                "document_root": settings.MEDIA_ROOT,
-            },
-        ),
-    ]
-
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
