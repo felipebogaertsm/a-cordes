@@ -17,7 +17,6 @@
 *.dump
 
 # npm
-a_cordes_backend/a-cordes-frontend/node_modules/*
 a_cordes/frontend/node_modules/*
 npm-debug.log
 
@@ -30,11 +29,8 @@ a_cordes/webpack-stats.json
 a_cordes/db.sqlite3
 
 # Staticfiles
-a_cordes_backend/staticfiles/*
 a_cordes/staticfiles/*
-a_cordes_backend/media/*
 a_cordes/media/*
 
 # Sass
 .sass-cache
-*.map
