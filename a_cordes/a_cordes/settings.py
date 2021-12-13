@@ -48,12 +48,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # storages
+    "storages",
     # drf
     "rest_framework",
     # cors
     "corsheaders",
-    # whitenoise
-    "whitenoise",
     # internal apps
     "apps.accounts.apps.AccountsConfig",
     "apps.products.apps.ProductsConfig",
@@ -91,7 +91,6 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
