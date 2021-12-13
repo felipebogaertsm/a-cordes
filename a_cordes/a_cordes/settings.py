@@ -220,6 +220,7 @@ AWS_SECRET_ACCESS_KEY = LINODE_BUCKET_SECRET_KEY
 AWS_S3_REGION_NAME = LINODE_BUCKET_REGION
 AWS_S3_USE_SSL = True
 AWS_STORAGE_BUCKET_NAME = LINODE_BUCKET
+AWS_DEFAULT_ACL = "authenticated-read"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
