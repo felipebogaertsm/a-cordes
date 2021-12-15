@@ -33,9 +33,6 @@ function Header() {
                             <LinkContainer to="/cart">
                                 <Nav.Link><i className="fas fa-shopping-cart px-2"></i>Cart</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/about">
-                                <Nav.Link><i className="fas fa-arrow-circle-right px-2"></i>About us</Nav.Link>
-                            </LinkContainer>
                         </Nav>
 
                         <Nav>
