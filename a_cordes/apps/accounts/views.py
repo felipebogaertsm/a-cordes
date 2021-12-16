@@ -81,6 +81,14 @@ def get_user_by_id(request, pk):
     return Response(serializer.data)
 
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_profile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
 @api_view(["PUT"])
 @permission_classes([IsAdminUser])
 def update_user(request, pk):
