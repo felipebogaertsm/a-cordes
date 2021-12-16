@@ -9,7 +9,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.utils import datetime_from_epoch
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.accounts.models import User
@@ -80,7 +82,7 @@ def get_user_by_id(request, pk):
 
 
 @api_view(["PUT"])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def update_user(request, pk):
     user = User.objects.get(id=pk)
 
@@ -97,6 +99,34 @@ def update_user(request, pk):
     user.save()
 
     serializer = UserSerializerWithToken(user, many=False)
+
+    return Response(serializer.data)
+
+
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def update_user_profile(request):
+    user = request.user
+    data = request.data
+
+    try:
+        user.email = data["email"]
+        user.userprofile.first_name = data["firstName"]
+        user.userprofile.last_name = data["lastName"]
+        user.userprofile.city = data["city"]
+        user.userprofile.country = data["country"]
+
+        if data["password"] != "":
+            user.password = make_password(data["password"])
+
+        user.save()
+
+        serializer = UserSerializerWithToken(user, many=False)
+    except KeyError:
+        Response(
+            "Not all fields could be updated.",
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     return Response(serializer.data)
 

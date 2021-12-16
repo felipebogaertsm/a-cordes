@@ -84,7 +84,8 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    full_name = models.CharField(max_length=255, default="", blank=True)
+    first_name = models.CharField(max_length=255, default="", blank=True)
+    last_name = models.CharField(max_length=255, default="", blank=True)
     picture = models.ImageField(blank=True, default="/user_placeholder.jpeg")
     date_of_birth = models.DateTimeField(blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, default="")

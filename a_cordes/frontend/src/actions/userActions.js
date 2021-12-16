@@ -173,7 +173,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.put(
-            `/api/users/profile/update/`,
+            `/api/accounts/user/update/profile/`,
             user,
             config
         );
