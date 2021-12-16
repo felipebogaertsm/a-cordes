@@ -27,11 +27,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_staffuser(
-        self,
-        email,
-        password=None,
-    ):
+    def create_staffuser(self, email, password=None):
         user = self.create_user(
             email,
             password=password,
@@ -41,11 +37,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(
-        self,
-        email,
-        password=None,
-    ):
+    def create_superuser(self, email, password=None):
         user = self.create_user(
             email,
             password=password,
@@ -76,14 +68,14 @@ class User(AbstractBaseUser):
     def __str__(self) -> str:
         return self.email
 
-    def has_perm(self, perm, obj=None):
+    def has_perm(self, perm, obj=None) -> bool:
         return True
 
-    def has_module_perms(self, app_label):
+    def has_module_perms(self, app_label) -> bool:
         return True
 
     @property
-    def is_superuser(self):
+    def is_superuser(self) -> bool:
         return self.is_admin
 
 
@@ -95,8 +87,8 @@ class UserProfile(models.Model):
     full_name = models.CharField(max_length=255, default="", blank=True)
     picture = models.ImageField(blank=True, default="/user_placeholder.jpeg")
     date_of_birth = models.DateTimeField(blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, default="")
+    country = models.CharField(max_length=255, blank=True, default="")
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
@@ -111,10 +103,15 @@ class SellerProfile(models.Model):
 
     name = models.CharField(max_length=255)
     picture = models.ImageField(blank=True, default="/seller_placeholder.jpeg")
-    city = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, default="")
+    country = models.CharField(max_length=255, blank=True, default="")
+    description = models.TextField(max_length=1000, blank=True, default="")
+    title = models.CharField(max_length=255, blank=True, default="")
+
+    # In order for a seller to be listed, is_approved needs to be True:
+    is_approved = models.BooleanField(blank=True, default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
