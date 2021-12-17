@@ -17,7 +17,7 @@ source /home/admin/.venvs/a_cordes/bin/activate
 # Git pulling
 cd /home/admin/projects
 sudo rm -rf /home/admin/projects/A-Cordes
-git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
+sudo git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
 
 sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
 
