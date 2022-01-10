@@ -51,7 +51,7 @@ def register_user(request):
     data = request.data
 
     try:
-        user = User.objects.create_superuser(
+        user = User.objects.create_user(
             email=data["email"],
             password=data["password"],
         )
