@@ -40,6 +40,7 @@ def get_products(request):
     page = int(page)  # making sure we're sending an integer
 
     serializer = ProductSerializer(products, many=True)
+
     return Response(
         {
             "products": serializer.data,

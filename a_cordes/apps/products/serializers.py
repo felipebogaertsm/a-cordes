@@ -21,8 +21,8 @@ class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
 
     createdAt = serializers.DateTimeField(source="created_at")
-    countInStock = serializers.DateTimeField(source="count_in_stock")
-    reviewCount = serializers.BooleanField(source="review_count")
+    countInStock = serializers.IntegerField(source="count_in_stock")
+    reviewCount = serializers.IntegerField(source="review_count")
 
     class Meta:
         model = Product
