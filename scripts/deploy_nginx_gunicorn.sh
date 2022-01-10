@@ -21,7 +21,7 @@ sudo git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
 
 # Setting environment variables:
 set -a
-source /home/admin/projects/.envs/.a_cordes
+source /home/admin/.envs/.a_cordes
 set +a
 
 sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
