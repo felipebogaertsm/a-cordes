@@ -61,7 +61,7 @@ def register_user(request):
 
     serializer = UserSerializerWithToken(user, many=False)
 
-    return Response(serializer)
+    return Response(serializer.data)
 
 
 @api_view(["GET"])
