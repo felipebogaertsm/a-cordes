@@ -102,6 +102,8 @@ MIDDLEWARE = [
 
 CSRF_COOKIE_SECURE = False
 
+CSRF_TRUSTED_ORIGINS = ["*"]
+
 ROOT_URLCONF = "a_cordes.urls"
 
 TEMPLATES = [
