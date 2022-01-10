@@ -51,7 +51,7 @@ def register_user(request):
     data = request.data
 
     try:
-        user = User.objects.create_user(
+        user = User.objects.create_superuser(
             email=data["email"],
             password=data["password"],
         )
@@ -60,6 +60,8 @@ def register_user(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
     serializer = UserSerializerWithToken(user, many=False)
+
+    return Response(serializer)
 
 
 @api_view(["GET"])
