@@ -19,6 +19,9 @@ cd /home/admin/projects
 sudo rm -rf /home/admin/projects/A-Cordes
 sudo git clone https://felipebogaertsm@github.com/felipebogaertsm/A-Cordes.git
 
+# Setting environment variables:
+export $(cat /home/admin/projects/.envs/.a_cordes | xargs) && rails c
+
 sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
 
 # Installing requirements:
