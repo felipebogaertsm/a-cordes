@@ -10,6 +10,8 @@ from apps.products.models import Product, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
+    createdAt = serializers.DateTimeField(source="created_at")
+
     class Meta:
         model = Review
         fields = "__all__"
@@ -17,6 +19,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
+
+    createdAt = serializers.DateTimeField(source="created_at")
+    countInStock = serializers.DateTimeField(source="count_in_stock")
+    reviewCount = serializers.BooleanField(source="review_count")
 
     class Meta:
         model = Product
