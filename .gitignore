@@ -8,7 +8,7 @@
 .DS_Store
 .env_prod
 .env_dev
-.env
+.envs/
 */__pycache__/*
 
 # IDEs
@@ -19,13 +19,13 @@
 *.dump
 
 # npm
-a_cordes/frontend/node_modules/*
+node_modules/
 npm-debug.log
 
 # Webpack
-a_cordes/frontend/bundles/*
-a_cordes/frontend/webpack_bundles/*
-a_cordes/webpack-stats.json
+frontend/bundles/*
+frontend/webpack_bundles/*
+webpack-stats.json
 
 # DBs
 a_cordes/db.sqlite3
@@ -36,3 +36,7 @@ a_cordes/media/*
 
 # Sass
 .sass-cache
+
+# Builds
+build/
+dist/
