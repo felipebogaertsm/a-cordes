@@ -4,13 +4,10 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-// Components:
-import { Navbar } from '../components'
+import Navbar from './Navbar/navbar'
+import NavbarItem from './NavbarItem/navbarItem'
 
-export default function Home() {
-    return (
-        <div>
-            <Navbar />
-        </div>
-    )
+export {
+    Navbar,
+    NavbarItem
 }
