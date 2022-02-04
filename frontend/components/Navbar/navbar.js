@@ -11,12 +11,13 @@ export default function Navbar() {
         <div>
             <div
                 className='
-                    flex flex-row bg-stone-900 text-stone-100
-                    h-16 px-4 border-b-2 border-white
+                    flex flex-col lg:flex-row bg-stone-900 text-stone-100
+                    h-16 px-4 border-b-2 border-white select-none
+                    whitespace-nowrap
                 '
             >
                 <NavbarItem className='text-2xl lowercase font-bold'>à cordes</NavbarItem>
-                <div className='grow'></div>
+                <div className='lg:grow'></div>
                 <NavbarItem>Products</NavbarItem>
                 <NavbarItem>Cart</NavbarItem>
                 <NavbarItem>My user</NavbarItem>

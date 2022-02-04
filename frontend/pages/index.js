@@ -5,12 +5,20 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Components:
-import { Navbar } from '../components'
+import {
+    Heading,
+    SearchInput,
+    NavbarPage,
+} from '../components'
 
 export default function Home() {
     return (
-        <div>
-            <Navbar />
-        </div>
+        <NavbarPage>
+            <div className='px-6 py-14 flex flex-row'>
+                <Heading>Latest products</Heading>
+                <div className='grow'></div>
+                <SearchInput />
+            </div>
+        </NavbarPage>
     )
 }
