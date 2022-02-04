@@ -4,11 +4,14 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-export default function formInput(props) {
+export default function FormInput(props) {
     return (
         <div className='w-full'>
             {props.label && (
-                <label>{props.label}</label>
+                <div>
+                    <label>{props.label}</label>
+                    <div className="mb-2"></div>
+                </div>
             )}
             <input
                 className='

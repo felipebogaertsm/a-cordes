@@ -4,6 +4,9 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import Link from 'next/link'
+
+// Components:
 import { NavbarItem } from "../"
 
 export default function Navbar() {
@@ -16,11 +19,21 @@ export default function Navbar() {
                     whitespace-nowrap
                 '
             >
-                <NavbarItem className='text-2xl lowercase font-bold'>à cordes</NavbarItem>
+                <Link href='/'>
+                    <NavbarItem className='text-2xl lowercase font-bold'>
+                        à cordes
+                    </NavbarItem>
+                </Link>
+
                 <div className='lg:grow'></div>
+
                 <NavbarItem>Products</NavbarItem>
                 <NavbarItem>Cart</NavbarItem>
-                <NavbarItem>My user</NavbarItem>
+                <Link href='/auth/login'>
+                    <NavbarItem>
+                        Login
+                    </NavbarItem>
+                </Link>
             </div>
         </div>
     )
