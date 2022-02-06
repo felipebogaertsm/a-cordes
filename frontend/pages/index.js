@@ -4,8 +4,8 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 // Actions:
 import { listProducts } from '../redux/actions/productActions'
@@ -17,17 +17,17 @@ import {
     NavbarPage,
 } from '../components'
 
-export default function Home() {
-    const dispatch = useDispatch();
-    const productList = useSelector(state => state.productList);
-    const { error, loading, products, page, pages } = productList;
+export default function Home(history) {
+    const dispatch = useDispatch()
 
-    console.log(products)
+    const productList = useSelector(state => state.productList)
+    const { error, loading, products, page, pages } = productList
 
-    let keyword = history.location.search
+    // let keyword = history.location.search
+    let keyword
     useEffect(() => {
-        dispatch(listProducts(keyword));
-    }, [dispatch, keyword]);
+        dispatch(listProducts(keyword))
+    }, [dispatch, keyword])
 
     return (
         <NavbarPage>
