@@ -12,6 +12,7 @@ import { listProducts } from '../redux/actions/productActions'
 
 // Components:
 import {
+    GriddedProductListing,
     Heading,
     SearchInput,
     NavbarPage,
@@ -23,7 +24,6 @@ export default function Home(history) {
     const productList = useSelector(state => state.productList)
     const { error, loading, products, page, pages } = productList
 
-    // let keyword = history.location.search
     let keyword
     useEffect(() => {
         dispatch(listProducts(keyword))
@@ -31,11 +31,21 @@ export default function Home(history) {
 
     return (
         <NavbarPage>
-            <div className='px-6 py-14 flex flex-row'>
-                <Heading>Latest products</Heading>
-                <div className='grow'></div>
-                <SearchInput />
+
+            <div className='px-6 py-14'>
+
+                <div className='flex flex-row'>
+                    <Heading>Latest products</Heading>
+                    <div className='grow'></div>
+                    <SearchInput />
+                </div>
+
+                <div className='mt-20 px-6'>
+                    <GriddedProductListing products={products} />
+                </div>
+
             </div>
+
         </NavbarPage>
     )
 }

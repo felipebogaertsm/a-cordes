@@ -5,7 +5,10 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import ButtonIconBg from './ButtonIconBg/buttonIconBg'
+import Card from './Card/card'
+import Footer from './Footer/footer'
 import FormInput from './FormInput/formInput'
+import GriddedProductListing from './GriddedProductListing/griddedProductListing'
 import Heading from './Heading/heading'
 import SearchInput from './SearchInput/searchInput'
 import Navbar from './Navbar/navbar'
@@ -14,7 +17,10 @@ import NavbarPage from './NavbarPage/navbarPage'
 
 export {
     ButtonIconBg,
+    Card,
+    Footer,
     FormInput,
+    GriddedProductListing,
     Heading,
     SearchInput,
     Navbar,

@@ -11,12 +11,12 @@ import { NavbarItem } from "../"
 
 export default function Navbar() {
     return (
-        <div>
+        <div className='w-screen'>
             <div
                 className='
-                    flex flex-col lg:flex-row bg-stone-900 text-stone-100
+                    flex flex-row bg-stone-900 text-stone-100 w-full
                     h-16 px-4 border-b-2 border-white select-none
-                    whitespace-nowrap
+                    whitespace-nowrap overflow-x-scroll no-scrollbar
                 '
             >
                 <Link href='/'>
@@ -27,7 +27,7 @@ export default function Navbar() {
 
                 <div className='lg:grow'></div>
 
-                <NavbarItem>Products</NavbarItem>
+                <NavbarItem>Makers</NavbarItem>
                 <NavbarItem>Cart</NavbarItem>
                 <Link href='/auth/login'>
                     <NavbarItem>

@@ -7,15 +7,17 @@
 // Components:
 import {
     Navbar,
+    Footer,
 } from '../../components'
 
 export default function NavbarPage(props) {
     return (
         <div>
             <Navbar />
-            <div>
+            <div className='w-full h-full overflow-x-scroll no-scrollbar'>
                 {props.children}
             </div>
+            <Footer />
         </div>
     )
 }
