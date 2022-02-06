@@ -4,6 +4,12 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+// Actions:
+import { listProducts } from '../redux/actions/productActions'
+
 // Components:
 import {
     Heading,
@@ -12,6 +18,17 @@ import {
 } from '../components'
 
 export default function Home() {
+    const dispatch = useDispatch();
+    const productList = useSelector(state => state.productList);
+    const { error, loading, products, page, pages } = productList;
+
+    console.log(products)
+
+    let keyword = history.location.search
+    useEffect(() => {
+        dispatch(listProducts(keyword));
+    }, [dispatch, keyword]);
+
     return (
         <NavbarPage>
             <div className='px-6 py-14 flex flex-row'>
