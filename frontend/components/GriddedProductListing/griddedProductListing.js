@@ -21,12 +21,13 @@ export default function GriddedProductListing({ products }) {
     return (
         <div
             className="
-                w-full h-full m-4 border-2 border-stone-200 rounded-xl py-4 
-                px-8 grid lg:grid-cols-3 xl:grid-cols-4 grid-cols-1
+            w-full h-full m-4 border-2 border-stone-200 rounded-xl py-4 
+            px-8 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+            grid-cols-1
             "
         >
             {products.map((product, index) => (
-                <div className="">
+                <div className="cursor-pointer">
                     <Card>
                         <div className="flex flex-col space-y-2">
                             <img
@@ -35,9 +36,9 @@ export default function GriddedProductListing({ products }) {
                             >
                             </img>
                             <div className="flex flex-row mx-2">
-                                <h5 className="text-stone-600">{product.name}</h5>
+                                <h6 className="text-stone-600">{product.name}</h6>
                                 <div className="grow"></div>
-                                <h5>${product.price}</h5>
+                                <h3>${Number(product.price)}</h3>
                             </div>
                         </div>
                     </Card>
