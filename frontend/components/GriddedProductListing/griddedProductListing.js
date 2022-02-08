@@ -31,7 +31,11 @@ export default function GriddedProductListing({ products }) {
                     <Card>
                         <div className="flex flex-col space-y-2">
                             <img
-                                className="rounded-xl w-full object-cover aspect-[4/3]"
+                                className="
+                                    rounded-xl w-full object-cover 
+                                    aspect-[4/3] border-opacity-10
+                                    border-2 border-amber-900
+                                "
                                 src={product.image}
                             >
                             </img>
