@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-export default function buttonIconBg(props) {
+export default function buttonIconBg({ iconPath, ...props }) {
     return (
         <div
             className='
@@ -19,7 +19,7 @@ export default function buttonIconBg(props) {
                     className='
                         w-5 h-5 hover:scale-110 transition-all duration-100
                     '
-                    src={props.iconPath}
+                    src={iconPath}
                 >
                 </img>
             </button>

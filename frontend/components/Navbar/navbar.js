@@ -4,8 +4,6 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import Link from 'next/link'
-
 // Components:
 import { NavbarItem } from "../"
 
@@ -19,21 +17,17 @@ export default function Navbar() {
                     whitespace-nowrap overflow-x-scroll no-scrollbar
                 '
             >
-                <Link href='/'>
-                    <NavbarItem className='text-2xl lowercase font-bold'>
-                        à cordes
-                    </NavbarItem>
-                </Link>
+                <NavbarItem className='text-2xl lowercase font-bold' to='/'>
+                    à cordes
+                </NavbarItem>
 
                 <div className='lg:grow'></div>
 
-                <NavbarItem>Makers</NavbarItem>
-                <NavbarItem>Cart</NavbarItem>
-                <Link href='/auth/login'>
-                    <NavbarItem>
-                        Login
-                    </NavbarItem>
-                </Link>
+                <NavbarItem to='/'>Makers</NavbarItem>
+                <NavbarItem to='/'>Cart</NavbarItem>
+                <NavbarItem to='/auth/login'>
+                    Login
+                </NavbarItem>
             </div>
         </div>
     )
