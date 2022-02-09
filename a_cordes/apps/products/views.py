@@ -72,7 +72,7 @@ def create_product(request):
     seller = SellerProfile.objects.filter(user=user)[0]
 
     product = Product.objects.create(
-        seller=seller,
+        seller_profile=seller,
         name="Sample Name",
         price=1000,
     )
