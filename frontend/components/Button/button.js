@@ -6,21 +6,29 @@
 
 export default function Button({ children, ...props }) {
     return (
-        <button className='mx-auto w-full h-14 overflow-hidden'>
-            <div
-                className='
-                bg-stone-200 rounded-lg w-full h-full mx-auto my-auto
+        <button
+            className={`
+                mx-auto w-full h-14 overflow-hidden
+                bg-stone-200 rounded-lg my-auto
                 flex content-center border-transparent border-2 
-                active:border-stone-800 transition-all duration-100
-                text-center uppercase font-semibold
-            '
-                {...props}
+                transition-all duration-100
+                text-center uppercase font-semibold relative
+                ${props.disabled ? '' : 'active:border-stone-800'}
+            `}
+            {...props}
+        >
+            <div
+                className="w-full h-full my-auto grid place-items-center"
             >
-                <div
-                    className="w-full h-full my-auto grid place-items-center"
-                >
-                    {children}
-                </div>
+                {children}
+            </div>
+            <div
+                className={`
+                    bg-white absolute w-full h-full bg-opacity-60
+                    ${props.disabled ? 'visible' : 'invisible'}
+                `}
+            >
+
             </div>
         </button>
     )

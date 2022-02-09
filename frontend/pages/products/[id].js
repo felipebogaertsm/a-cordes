@@ -64,16 +64,16 @@ export default function ProductId() {
                                 >
                                 </img>
                             </div>
-                            <div className='flex flex-col space-y-4'>
-                                <div>
+                            <div className='flex flex-col'>
+                                <div className='my-2'>
                                     <h6>Description</h6>
                                     <p>{product.description}</p>
                                 </div>
-                                <div>
+                                <div className='my-2'>
                                     <h6>Category</h6>
                                     <p>{product.category}</p>
                                 </div>
-                                <div>
+                                <div className='my-2'>
                                     <h6>Created at</h6>
                                     <p>{stringToDate(product.created_at)}</p>
                                 </div>
@@ -85,10 +85,16 @@ export default function ProductId() {
                                 </div>
                                 <div>
                                     <h6>Availability</h6>
-                                    <h3>{Number(product.count_in_stock) > 0 ? 'In Stock' : 'Out of Stock'}</h3>
+                                    <h3>
+                                        {Number(product.count_in_stock) > 0 ? 'In Stock' : 'Out of Stock'}
+                                    </h3>
+                                    <h5>
+                                        {Number(product.count_in_stock)}
+                                        {Number(product.count_in_stock) === 1 ? ' unit' : ' units'}
+                                    </h5>
                                 </div>
                                 <div>
-                                    <Button>Add to cart</Button>
+                                    <Button disabled={!product.count_in_stock}>Add to cart</Button>
                                 </div>
                             </div>
                         </div>
