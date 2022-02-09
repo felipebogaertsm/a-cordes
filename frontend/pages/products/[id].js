@@ -25,15 +25,15 @@ import { stringToDate } from '../../utils/datetime'
 export default function ProductId() {
     const dispatch = useDispatch()
 
-    const productDetails = useSelector(state => state.productDetails);
-    const { loading, error, product } = productDetails;
+    const productDetails = useSelector(state => state.productDetails)
+    const { loading, error, product } = productDetails
 
-    const cartSelector = useSelector(state => state.cart);
+    const cartSelector = useSelector(state => state.cart)
     const {
         loading: loadingCart,
         error: errorCart,
         cartItems,
-        success: successCart, } = cartSelector;
+        success: successCart, } = cartSelector
 
     const router = useRouter()
     const id = router.query.id
@@ -47,7 +47,7 @@ export default function ProductId() {
     useEffect(() => {
         if (cartItems && successCart) {
             console.log(cartItems)
-            router.push('/cart');
+            router.push('/cart')
         }
     }, [cartItems])
 
