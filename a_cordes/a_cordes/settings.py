@@ -56,8 +56,9 @@ INSTALLED_APPS = [
     "corsheaders",
     # internal apps
     "apps.accounts.apps.AccountsConfig",
-    "apps.products.apps.ProductsConfig",
+    "apps.cart.apps.CartConfig",
     "apps.orders.apps.OrdersConfig",
+    "apps.products.apps.ProductsConfig",
 ]
 
 REST_FRAMEWORK = {

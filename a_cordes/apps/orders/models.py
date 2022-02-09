@@ -6,7 +6,7 @@
 
 from django.db import models
 
-from apps.accounts.models import User, SellerProfile
+from apps.accounts.models import User
 from apps.products.models import Product
 
 

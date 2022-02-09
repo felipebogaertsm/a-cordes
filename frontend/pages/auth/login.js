@@ -20,7 +20,7 @@ export default function Login() {
 
             <div className='p-10 max-w-[500px] mx-auto flex flex-col space-y-4'>
                 <FormInput label='Email' />
-                <FormInput label='Password' />
+                <FormInput label='Password' type='password' />
             </div>
         </NavbarPage>
     )

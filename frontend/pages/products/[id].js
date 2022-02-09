@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 
 // Actions:
 import { listProductDetails } from '../../redux/actions/productActions'
+import { addToCart } from '../../redux/actions/cartActions'
 
 // Components:
 import {
@@ -27,6 +28,13 @@ export default function ProductId() {
     const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product } = productDetails;
 
+    const cartSelector = useSelector(state => state.cart);
+    const {
+        loading: loadingCart,
+        error: errorCart,
+        cartItems,
+        success: successCart, } = cartSelector;
+
     const router = useRouter()
     const id = router.query.id
 
@@ -35,6 +43,17 @@ export default function ProductId() {
             dispatch(listProductDetails(id))
         }
     }, [dispatch, id])
+
+    useEffect(() => {
+        if (cartItems && successCart) {
+            console.log(cartItems)
+            router.push('/cart');
+        }
+    }, [cartItems])
+
+    const addToCartHandler = () => {
+        dispatch(addToCart(id, 1))
+    }
 
     return (
         <NavbarPage>
@@ -94,7 +113,12 @@ export default function ProductId() {
                                     </h5>
                                 </div>
                                 <div>
-                                    <Button disabled={!product.count_in_stock}>Add to cart</Button>
+                                    <Button
+                                        disabled={!product.count_in_stock}
+                                        onClick={addToCartHandler}
+                                    >
+                                        Add to cart
+                                    </Button>
                                 </div>
                             </div>
                         </div>
