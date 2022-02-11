@@ -9,7 +9,7 @@ import { useRef, useEffect, useState } from 'react'
 // Components:
 import { ButtonIconBg } from '..'
 
-export default function FormInput({ type = 'text', value = '', ...props }) {
+export default function FormInput({ type = 'text', value = '', onChange, ...props }) {
     const [isPasswordShown, setIsPasswordShown] = useState(false)
     const [typeInput, setTypeInput] = useState(type)
 
@@ -46,6 +46,7 @@ export default function FormInput({ type = 'text', value = '', ...props }) {
                 '
                     placeholder={props.placeholder}
                     type={typeInput}
+                    onChange={(e) => onChange(e)}
                     ref={inputElement}
                 >
                 </input>

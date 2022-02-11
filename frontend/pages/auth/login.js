@@ -5,8 +5,12 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+// Actions:
+import { login } from '../../redux/actions/userActions'
 
 // Components:
 import {
@@ -17,10 +21,24 @@ import {
 } from '../../components'
 
 export default function Login() {
+    const dispatch = useDispatch()
+
+    const router = useRouter()
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const { error, loading, userInfo } = useSelector(state => state.userLogin)
+
+    useEffect(() => {
+        if (userInfo) {
+            router.push('/')
+        }
+    }, [userInfo, dispatch, router])
+
+    function loginHandler(e) {
+        dispatch(login(email, password))
+    }
 
     return (
         <NavbarPage>
@@ -48,7 +66,7 @@ export default function Login() {
                 </div>
 
                 <div className='pt-2'>
-                    <Button>Log in</Button>
+                    <Button onClick={(e) => loginHandler(e)}>Log in</Button>
                 </div>
             </div>
         </NavbarPage>

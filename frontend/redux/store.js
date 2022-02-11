@@ -21,7 +21,7 @@ const bindMiddlware = (middleware) => {
 }
 
 const initialState = {
-    userLogin: { userInfo: {} },
+    userLogin: {},
 }
 
 const store = () => createStore(reducer, initialState, bindMiddlware([...middleware]))

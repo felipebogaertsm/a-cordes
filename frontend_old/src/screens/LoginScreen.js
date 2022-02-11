@@ -19,7 +19,7 @@ function LoginScreen({ location, history }) {
     const { error, loading, userInfo } = userLogin;
 
     useEffect(() => {
-        if (userInfo) {
+        if (userInfo.token) {
             history.push(redirect)
         }
     }, [history, userInfo, redirect]);
@@ -33,8 +33,8 @@ function LoginScreen({ location, history }) {
         <FormContainer>
             <h1>Sign In</h1>
 
-            { error && <Message variant='danger'>{error}</Message> }
-            { loading && <Loader /> }
+            {error && <Message variant='danger'>{error}</Message>}
+            {loading && <Loader />}
 
             <Form onSubmit={submitHandler}>
 
