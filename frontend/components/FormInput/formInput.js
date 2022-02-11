@@ -4,23 +4,25 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
+
+// Components:
+import { ButtonIconBg } from '..'
 
 export default function FormInput({ type = 'text', value = '', ...props }) {
-    var isPasswordShown = false
-    const inputElement = useRef()
-    const imgElement = useRef()
+    const [isPasswordShown, setIsPasswordShown] = useState(false)
+    const [typeInput, setTypeInput] = useState(type)
 
-    function passwordShowHideHandler() {
+    const inputElement = useRef()
+
+    function passwordShowHideHandler(e) {
         if (isPasswordShown) {
-            inputElement.current.type = 'password'
-            isPasswordShown = false
-            imgElement.current.src = `${imgElement.current.src}`.replace('eye', 'eye_slash')
+            setTypeInput('password')
         } else {
-            inputElement.current.type = 'text'
-            isPasswordShown = true
-            imgElement.current.src = `${imgElement.current.src}`.replace('eye_slash', 'eye')
+            setTypeInput('text')
         }
+
+        setIsPasswordShown(!isPasswordShown)
     }
 
     useEffect(() => {
@@ -38,32 +40,21 @@ export default function FormInput({ type = 'text', value = '', ...props }) {
             <div className='flex flex-row space-x-2'>
                 <input
                     className='
-                    py-2 px-4 rounded-lg bg-stone-200 w-full
+                    py-2 px-4 rounded-lg bg-stone-200 w-full border-2
+                    border-amber-900 border-opacity-0
+                    focus:border-opacity-100 transition-all duration-200
                 '
                     placeholder={props.placeholder}
-                    type={type}
+                    type={typeInput}
                     ref={inputElement}
                 >
                 </input>
                 {
                     type !== 'password' ? '' :
-                        <span
-                            className='
-                                w-14 p-2 bg-zinc-200 rounded-xl border-solid border-black 
-                                flex justify-center cursor-pointer transition-all 
-                                duration-200 group
-                            '
-                            onClick={passwordShowHideHandler}
-                        >
-                            <img
-                                src={`/icons/eye_slash.svg`}
-                                className='
-                                    place-self-center w-6 group-hover:scale-105 transition-all
-                                    duration-200 opacity-70 group-hover:opacity-90
-                                '
-                                ref={imgElement}
-                            ></img>
-                        </span>
+                        <ButtonIconBg
+                            iconPath={`/icons/${isPasswordShown ? "eye_slash" : "eye"}.svg`}
+                            onClick={(e) => passwordShowHideHandler(e)}
+                        />
                 }
             </div>
         </div>
