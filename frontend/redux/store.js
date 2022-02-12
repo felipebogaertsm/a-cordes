@@ -20,10 +20,6 @@ const bindMiddlware = (middleware) => {
     return applyMiddleware(...middleware)
 }
 
-const initialState = {
-    userLogin: {},
-}
-
-const store = () => createStore(reducer, initialState, bindMiddlware([...middleware]))
+const store = () => createStore(reducer, bindMiddlware([...middleware]))
 
 export const storeWrapper = createWrapper(store, { debug: false })

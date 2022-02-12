@@ -8,7 +8,7 @@ export default function footer() {
     return (
         <div
             className="
-                min-h-fit py-2 bg-stone-200 fixed w-screen text-center
+                min-h-fit py-2 bg-stone-200 fixed w-full text-center
                 px-4 lg:px-40 bottom-0 text-zinc-400 text-sm
             "
         >

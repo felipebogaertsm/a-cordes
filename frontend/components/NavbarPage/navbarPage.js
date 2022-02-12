@@ -14,7 +14,7 @@ export default function NavbarPage(props) {
     return (
         <div>
             <Navbar />
-            <div className='w-full h-full overflow-x-scroll no-scrollbar'>
+            <div className='w-full h-full'>
                 {props.children}
             </div>
             <Footer />
