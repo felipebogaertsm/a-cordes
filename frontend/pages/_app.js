@@ -5,10 +5,15 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import '../styles/globals.css'
+import { AuthProvider } from '../contexts/auth';
 import { storeWrapper } from "../redux/store";
 
 function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />
+    return (
+        <AuthProvider>
+            <Component {...pageProps} />
+        </AuthProvider>
+    )
 }
 
 export default storeWrapper.withRedux(MyApp);

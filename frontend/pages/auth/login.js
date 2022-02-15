@@ -4,13 +4,10 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-// Actions:
-import { login } from '../../redux/actions/userActions'
 
 // Components:
 import {
@@ -20,24 +17,27 @@ import {
     FormInput,
 } from '../../components'
 
-export default function Login() {
-    const dispatch = useDispatch()
+// Contexts:
+import {
+    AuthContext
+} from '../../contexts/auth'
 
+export default function Login() {
     const router = useRouter()
+
+    const { login, authenticated } = useContext(AuthContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const { error, loading, userInfo } = useSelector(state => state.userLogin)
-
     useEffect(() => {
-        if (userInfo) {
+        if (authenticated) {
             router.push('/')
         }
-    }, [userInfo, dispatch, router])
+    }, [authenticated])
 
-    function loginHandler(e) {
-        dispatch(login(email, password))
+    async function loginHandler(e) {
+        await login(email, password)
     }
 
     return (

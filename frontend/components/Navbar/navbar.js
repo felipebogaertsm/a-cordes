@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from 'next/router'
 
@@ -14,25 +14,16 @@ import { logout } from "../../redux/actions/userActions"
 // Components:
 import { NavbarItem } from ".."
 
+// Contexts:
+import { AuthContext } from "../../contexts/auth"
+
 export default function Navbar() {
     const dispatch = useDispatch()
 
-    const router = useRouter()
-
-    const [authenticated, setAuthenticated] = useState()
-
-    const { userInfo } = useSelector(state => state.userLogin)
-
-    useEffect(() => {
-        if (userInfo) {
-            setAuthenticated(true)
-        } else {
-            setAuthenticated(false)
-        }
-    }, [userInfo, dispatch, router, dispatch])
+    const { authenticated, logout } = useContext(AuthContext)
 
     function logoutHandler() {
-        dispatch(logout())
+        logout()
     }
 
     return (

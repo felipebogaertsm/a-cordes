@@ -9,9 +9,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
+from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.utils import datetime_from_epoch
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.accounts.models import User
@@ -41,6 +40,26 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class MyUserAPI(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        """
+        Gets the current logged in user serialized with a new set of tokens.
+        """
+        user = request.user
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+
+    def delete(self, request):
+        """
+        Deletes current logged in user.
+        """
+        user = request.user
+        user.delete()
+        return Response("User deleted.")
 
 
 @api_view(["POST"])
