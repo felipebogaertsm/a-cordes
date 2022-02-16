@@ -11,6 +11,7 @@ import Footer from './Footer/footer'
 import FormInput from './FormInput/formInput'
 import GriddedProductListing from './GriddedProductListing/griddedProductListing'
 import Heading from './Heading/heading'
+import Message from './Message/message'
 import SearchInput from './SearchInput/searchInput'
 import Navbar from './Navbar/navbar'
 import NavbarItem from './NavbarItem/navbarItem'
@@ -24,6 +25,7 @@ export {
     FormInput,
     GriddedProductListing,
     Heading,
+    Message,
     SearchInput,
     Navbar,
     NavbarItem,

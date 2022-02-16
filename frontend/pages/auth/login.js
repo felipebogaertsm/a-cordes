@@ -5,7 +5,6 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useState, useEffect, useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -13,6 +12,7 @@ import { useRouter } from 'next/router'
 import {
     Button,
     Heading,
+    Message,
     NavbarPage,
     FormInput,
 } from '../../components'
@@ -25,7 +25,7 @@ import {
 export default function Login() {
     const router = useRouter()
 
-    const { login, authenticated } = useContext(AuthContext)
+    const { login, authenticated, loading, error } = useContext(AuthContext)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -66,8 +66,12 @@ export default function Login() {
                 </div>
 
                 <div className='pt-2'>
-                    <Button onClick={(e) => loginHandler(e)}>Log in</Button>
+                    <Button onClick={(e) => loginHandler(e)}>
+                        Log in {loading && <span>...</span>}
+                    </Button>
                 </div>
+
+                <div>{error ? (<Message>error</Message>) : ''}</div>
             </div>
         </NavbarPage>
     )

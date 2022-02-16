@@ -12,6 +12,8 @@ export const AuthContext = createContext({})
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(undefined)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
 
     const authenticated = Boolean(user)
 
@@ -43,6 +45,7 @@ export function AuthProvider({ children }) {
     }, [])
 
     async function fetchMyUser(token) {
+        setLoading(true)
         try {
             const { data: user } = await axios.get(
                 `${process.env.SERVER_URL}/api/accounts/my-user/`,
@@ -55,17 +58,26 @@ export function AuthProvider({ children }) {
             )
             setUser(user)
         } catch (error) {
+            setError(error)
             setUser(null)
         }
+        setLoading(false)
     }
 
     async function login(email, password) {
-        const { data: user } = await axios.post(
-            `${process.env.SERVER_URL}/api/accounts/login/`,
-            { 'email': email, 'password': password },
-            config,
-        )
-        setUser(user)
+        setLoading(true)
+        try {
+            const { data: user } = await axios.post(
+                `${process.env.SERVER_URL}/api/accounts/login/`,
+                { 'email': email, 'password': password },
+                config,
+            )
+            setUser(user)
+        } catch (error) {
+            setError(error)
+            setUser(null)
+        }
+        setLoading(false)
     }
 
     function logout() {
@@ -73,7 +85,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ authenticated, user, login, logout }}>
+        <AuthContext.Provider value={{ authenticated, user, loading, error, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
