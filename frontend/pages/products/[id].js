@@ -33,7 +33,8 @@ export default function ProductId() {
         loading: loadingCart,
         error: errorCart,
         cartItems,
-        success: successCart, } = cartSelector
+        success: successCart
+    } = cartSelector
 
     const router = useRouter()
     const id = router.query.id
@@ -104,18 +105,21 @@ export default function ProductId() {
                                 </div>
                                 <div>
                                     <h6>Availability</h6>
-                                    <h3>
-                                        {Number(product.count_in_stock) > 0 ? 'In Stock' : 'Out of Stock'}
-                                    </h3>
-                                    <h5>
-                                        {Number(product.count_in_stock)}
-                                        {Number(product.count_in_stock) === 1 ? ' unit' : ' units'}
-                                    </h5>
+                                    <div className='flex flex-row'>
+                                        <h3>
+                                            {Number(product.count_in_stock) > 0 ? 'In Stock' : 'Out of Stock'}
+                                        </h3>
+                                        <div className='grow'></div>
+                                        <h3>
+                                            {Number(product.count_in_stock)}
+                                            {Number(product.count_in_stock) === 1 ? ' unit' : ' units'}
+                                        </h3>
+                                    </div>
                                 </div>
                                 <div>
                                     <Button
                                         disabled={!product.count_in_stock}
-                                        onClick={addToCartHandler}
+                                        onClick={(e) => addToCartHandler(e)}
                                     >
                                         Add to cart
                                     </Button>
