@@ -17,11 +17,11 @@
       }
 
     h1, h2, h3, h4, h5, h6 {
-        @apply select-none uppercase tracking-wider font-semibold;
+        @apply select-none uppercase tracking-wider font-bold;
     }
 
     h1 {
-        @apply text-6xl;
+        @apply text-6xl font-serif;
     }
 
     h2 {

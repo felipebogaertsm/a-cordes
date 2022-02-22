@@ -35,8 +35,8 @@ export default function Navbar() {
                     whitespace-nowrap overflow-x-scroll no-scrollbar
                 '
             >
-                <NavbarItem className='text-2xl lowercase font-bold' to='/'>
-                    à cordes
+                <NavbarItem to='/'>
+                    <h3 className="lowercase">à cordes</h3>
                 </NavbarItem>
 
                 <div className='lg:grow'></div>
