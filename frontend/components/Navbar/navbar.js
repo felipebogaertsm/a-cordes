@@ -8,9 +8,6 @@ import { useEffect, useState, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from 'next/router'
 
-// Actions:
-import { logout } from "../../redux/actions/userActions"
-
 // Components:
 import { NavbarItem } from ".."
 

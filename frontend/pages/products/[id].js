@@ -70,8 +70,8 @@ export default function ProductId() {
                         <Heading>{product.name}</Heading>
                         <div
                             className='
-                                mt-10 md:m-0 space-x-10 space-y-10
-                                grid grid-cold-1 md:grid-cols-3
+                                mt-10 lg:m-0 space-x-10 space-y-10
+                                grid grid-cold-1 lg:grid-cols-3
                             '
                         >
                             <div>

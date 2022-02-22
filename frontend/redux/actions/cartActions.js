@@ -5,6 +5,9 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import axios from 'axios';
+import { parseCookies } from 'nookies'
+
+// Constants:
 import {
     CART_ADD_ITEM_REQUEST,
     CART_ADD_ITEM_SUCCESS,
@@ -24,14 +27,12 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
             type: CART_ADD_ITEM_REQUEST
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        const { 'acordes.token': token } = parseCookies()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
+                Authorization: `Bearer ${token}`,
             }
         }
 
