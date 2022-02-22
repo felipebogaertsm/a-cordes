@@ -27,7 +27,7 @@ set +a
 sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
 
 # Installing requirements:
-pip3 install -r /home/admin/projects/A-Cordes/requirements.txt
+pip3 install -r /home/admin/projects/A-Cordes/a_cordes/requirements.txt
 
 # Collecting static files for Django:
 cd /home/admin/projects/A-Cordes/a_cordes

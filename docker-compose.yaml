@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  backend:
+    build: a_cordes/
+    container_name: a_cordes
+    ports:
+      - "8080:8080"
+  frontend:
+    build: frontend/
+    container_name: frontend
+    ports:
+      - "3000:3000"
+
+networks:
+  nginx:
+    external: true
