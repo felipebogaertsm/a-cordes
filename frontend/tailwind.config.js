@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Open Sans', 'sans'],
-        'serif': ['Noto Serif Display', 'serif'],
+        'sans': ['Inter', 'sans'],
+        'serif': ['Merriweather', 'serif'],
       }
     },
   },

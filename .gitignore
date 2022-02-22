@@ -28,11 +28,11 @@ frontend/webpack_bundles/*
 webpack-stats.json
 
 # DBs
-a_cordes/db.sqlite3
+db.sqlite3
 
 # Staticfiles
-a_cordes/staticfiles/*
-a_cordes/media/*
+staticfiles/
+media/
 
 # Sass
 .sass-cache
