@@ -27,7 +27,6 @@ export default function Cart() {
     const { loading, error, cartItems } = useSelector(state => state.cart)
 
     const router = useRouter()
-    const id = router.query.id
 
     useEffect(() => {
         dispatch(getCart())
@@ -43,32 +42,38 @@ export default function Cart() {
                 <div className='mt-10 px-6 bg-'>
                     {loading && <p>...</p>}
                     {error && <p>{error}</p>}
-                    {cartItems && (
-                        <div className='flex flex-col space-y-4'>
-                            {cartItems.map((item, index) => (
-                                <div className='bg-stone-200 rounded-lg px-6 py-4'>
-                                    <div className='flex flex-row space-x-4'>
-                                        <img
-                                            className='
+                    {Array.isArray(cartItems) && (
+                        cartItems.length === 0 ? (
+                            <div className='mx-auto w-max space-y-4 mt-20'>
+                                <p className='text-xl'>No items in your cart.</p>
+                                <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
+                            </div>
+                        ) : (
+                            <div className='flex flex-col space-y-4'>
+                                {cartItems.map((item, index) => (
+                                    <div className='bg-stone-200 rounded-lg px-6 py-4'>
+                                        <div className='flex flex-row space-x-4'>
+                                            <img
+                                                className='
                                                 aspect-[4/3]
                                                 h-16 rounded-xl shadow-xl
                                             '
-                                            src={item.product.image}
-                                        >
-                                        </img>
-                                        <div className='my-auto'>
-                                            <h3 className='my-auto'>{item.product.name}</h3>
-                                            <p className='my-auto'>Quantity: <strong>{item.quantity}</strong></p>
+                                                src={item.product.image}
+                                            >
+                                            </img>
+                                            <div className='my-auto'>
+                                                <h3 className='my-auto'>{item.product.name}</h3>
+                                                <p className='my-auto'>Quantity: <strong>{item.quantity}</strong></p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        ))}
                 </div>
 
             </div>
 
-        </NavbarPage>
+        </NavbarPage >
     )
 }

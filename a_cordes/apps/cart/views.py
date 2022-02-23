@@ -50,7 +50,7 @@ class CartItemAPI(APIView):
 
         if product.count_in_stock < 1:
             return Response(
-                "Cannot add product to cart, count in stock is 0.",
+                "Product not available.",
                 status=status.HTTP_406_NOT_ACCEPTABLE,
             )
 
@@ -62,13 +62,22 @@ class CartItemAPI(APIView):
         if product.count_in_stock < quantity:
             quantity = product.count_in_stock
 
-        cart_item = CartItem.objects.create(
-            user=user,
-            product=product,
-            quantity=int(quantity),
-        )
+        # Verify if cart item already exists:
+        cart_item = CartItem.objects.filter(user=user).filter(product=product)
 
-        product.count_in_stock += -1
+        if cart_item.exists():
+            cart_item = cart_item[0]
+            cart_item.quantity += quantity
+            cart_item.save()
+        else:
+            cart_item = CartItem.objects.create(
+                user=user,
+                product=product,
+                quantity=quantity,
+            )
+
+        # Subtracting quantity from product count in stock:
+        product.count_in_stock += -quantity
         product.save()
 
         return Response(CartItemSerializer(cart_item, many=False).data)
