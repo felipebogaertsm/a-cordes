@@ -28,7 +28,7 @@ export default function Navbar() {
             <div
                 className='
                     flex flex-row bg-stone-900 text-stone-100 w-full
-                    h-16 px-4 border-b-2 border-white select-none
+                    h-16 px-2 md:px-4 border-b-2 border-white select-none
                     whitespace-nowrap overflow-x-scroll no-scrollbar
                 '
             >
@@ -36,20 +36,48 @@ export default function Navbar() {
                     <h3 className="lowercase">à cordes</h3>
                 </NavbarItem>
 
-                <div className='lg:grow'></div>
+                <div className='grow'></div>
 
-                <NavbarItem to='/'>Makers</NavbarItem>
-                <NavbarItem to='/cart'>Cart</NavbarItem>
+                <NavbarItem to='/'>
+                    <div className="flex flex-row space-x-2">
+                        <img
+                            src='/icons/violin.svg'
+                            className="
+                                invert h-4 my-auto
+                            "
+                        >
+                        </img>
+                        <p className="my-auto">Makers</p>
+                    </div>
+                </NavbarItem>
 
-                {authenticated ? (
-                    <NavbarItem to='/' onClick={logoutHandler}>
-                        Logout
-                    </NavbarItem>
-                ) : (
-                    <NavbarItem to='/auth/login'>
-                        Login
-                    </NavbarItem>
-                )}
+                <NavbarItem to='/cart'>
+                    <div className="flex flex-row space-x-2">
+                        <img
+                            src='/icons/cart.svg'
+                            className="
+                                invert h-6 my-auto
+                            "
+                        >
+                        </img>
+                        <p className="my-auto">Cart</p>
+                    </div>
+                </NavbarItem>
+
+                <NavbarItem to='/auth/login' onClick={logoutHandler}>
+                    <div className="flex flex-row space-x-2">
+                        <img
+                            src='/icons/user.svg'
+                            className="
+                                invert opacity-80 h-4 my-auto
+                            "
+                        >
+                        </img>
+                        <p className="my-auto">
+                            {authenticated ? 'Logout' : 'Login'}
+                        </p>
+                    </div>
+                </NavbarItem>
             </div>
         </div >
     )
