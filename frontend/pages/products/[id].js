@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -19,11 +19,18 @@ import {
     NavbarPage,
 } from '../../components'
 
+// Contexts:
+import {
+    AuthContext
+} from '../../contexts/auth'
+
 // Utilities:
 import { stringToDate } from '../../utils/datetime'
 
 export default function ProductId() {
     const dispatch = useDispatch()
+
+    const { authenticated } = useContext(AuthContext)
 
     const productDetails = useSelector(state => state.productDetails)
     const { loading, error, product } = productDetails
@@ -53,7 +60,11 @@ export default function ProductId() {
     }, [cartItems])
 
     const addToCartHandler = () => {
-        dispatch(addToCart(id, 1))
+        if (authenticated) {
+            dispatch(addToCart(id, 1))
+        } else {
+            router.push('/auth/login')
+        }
     }
 
     return (

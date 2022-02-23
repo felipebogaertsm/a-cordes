@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
-import { listProductDetails } from '../../redux/actions/productActions'
+import { getCart } from '../../redux/actions/cartActions'
 
 // Components:
 import {
@@ -24,24 +24,48 @@ import { stringToDate } from '../../utils/datetime'
 export default function Cart() {
     const dispatch = useDispatch()
 
-    const productDetails = useSelector(state => state.productDetails);
-    const { loading, error, product } = productDetails;
+    const { loading, error, cartItems } = useSelector(state => state.cart)
 
     const router = useRouter()
     const id = router.query.id
 
     useEffect(() => {
-        if (id != undefined) {
-            dispatch(listProductDetails(id))
-        }
-    }, [dispatch, id])
+        dispatch(getCart())
+    }, [])
 
     return (
         <NavbarPage>
 
             <div className='px-6 py-14'>
 
-                cart
+                <Heading>Cart</Heading>
+
+                <div className='mt-10 px-6 bg-'>
+                    {loading && <p>...</p>}
+                    {error && <p>{error}</p>}
+                    {cartItems && (
+                        <div className='flex flex-col space-y-4'>
+                            {cartItems.map((item, index) => (
+                                <div className='bg-stone-200 rounded-lg px-6 py-4'>
+                                    <div className='flex flex-row space-x-4'>
+                                        <img
+                                            className='
+                                                aspect-[4/3]
+                                                h-16 rounded-xl shadow-xl
+                                            '
+                                            src={item.product.image}
+                                        >
+                                        </img>
+                                        <div className='my-auto'>
+                                            <h3 className='my-auto'>{item.product.name}</h3>
+                                            <p className='my-auto'>Quantity: <strong>{item.quantity}</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
             </div>
 

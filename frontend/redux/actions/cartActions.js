@@ -21,7 +21,7 @@ import {
     CART_CLEAR_ITEMS,
 } from '../constants/cartConstants';
 
-export const addToCart = (id, qty) => async (dispatch, getState) => {
+export const addToCart = (id, qty) => async (dispatch) => {
     try {
         dispatch({
             type: CART_ADD_ITEM_REQUEST
@@ -37,7 +37,8 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post(
-            `${process.env.SERVER_URL}/api/cart/item/${id}/?qty=${qty}`,
+            `${process.env.SERVER_URL}/api/cart/item/0/?product_id=${id}&qty=${qty}`,
+            {},
             config,
         )
 
@@ -56,20 +57,18 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
     }
 }
 
-export const removeFromCart = (id) => async (dispatch, getState) => {
+export const removeFromCart = (id) => async (dispatch) => {
     try {
         dispatch({
             type: CART_DELETE_ITEM_REQUEST
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        const { 'acordes.token': token } = parseCookies()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
+                Authorization: `Bearer ${token}`,
             }
         }
 
@@ -93,20 +92,18 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
     }
 }
 
-export const getCart = () => async (dispatch, getState) => {
+export const getCart = () => async (dispatch) => {
     try {
         dispatch({
             type: CART_GET_ALL_REQUEST
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        const { 'acordes.token': token } = parseCookies()
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
+                Authorization: `Bearer ${token}`,
             }
         }
 
@@ -130,15 +127,13 @@ export const getCart = () => async (dispatch, getState) => {
     }
 }
 
-export const clearCart = () => async (dispatch, getState) => {
-    const {
-        userLogin: { userInfo },
-    } = getState()
+export const clearCart = () => async (dispatch) => {
+    const { 'acordes.token': token } = parseCookies()
 
     const config = {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${token}`,
         }
     }
 

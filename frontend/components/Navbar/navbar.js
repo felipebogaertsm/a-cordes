@@ -39,7 +39,7 @@ export default function Navbar() {
                 <div className='lg:grow'></div>
 
                 <NavbarItem to='/'>Makers</NavbarItem>
-                <NavbarItem to='/'>Cart</NavbarItem>
+                <NavbarItem to='/cart'>Cart</NavbarItem>
 
                 {authenticated ? (
                     <NavbarItem to='/' onClick={logoutHandler}>

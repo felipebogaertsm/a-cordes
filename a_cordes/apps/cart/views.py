@@ -68,6 +68,9 @@ class CartItemAPI(APIView):
             quantity=int(quantity),
         )
 
+        product.count_in_stock += -1
+        product.save()
+
         return Response(CartItemSerializer(cart_item, many=False).data)
 
     def put(self, request, pk):
