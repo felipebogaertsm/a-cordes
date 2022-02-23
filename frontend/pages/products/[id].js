@@ -127,12 +127,19 @@ export default function ProductId() {
                                         </h3>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='flex flex-col space-y-2'>
                                     <Button
                                         disabled={!product.count_in_stock}
                                         onClick={(e) => addToCartHandler(e)}
+                                        primary
                                     >
                                         Add to cart
+                                    </Button>
+                                    <Button
+                                        onClick={(e) => router.push('/cart')}
+                                        secondary
+                                    >
+                                        Go to cart
                                     </Button>
                                 </div>
                             </div>

@@ -43,6 +43,9 @@ export default function Cart() {
                     <Heading>Cart</Heading>
                     <div className='grow'></div>
                     <div className='w-max my-auto'>
+                        <Button onClick={(e) => { }} secondary>Clear cart</Button>
+                    </div>
+                    <div className='w-max my-auto'>
                         <Button onClick={(e) => router.push('/order')}>Order items</Button>
                     </div>
                 </div>
