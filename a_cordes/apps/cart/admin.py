@@ -6,4 +6,11 @@
 
 from django.contrib import admin
 
-# Register your models here.
+from apps.cart.models import CartItem
+
+
+class CartItemAdmin(admin.ModelAdmin):
+    readonly_fields = ("created_at",)
+
+
+admin.site.register(CartItem, CartItemAdmin)
