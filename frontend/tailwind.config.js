@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans': ['Inter', 'sans'],
-        'serif': ['Merriweather', 'serif'],
+        'serif': ['Playfair Display', 'serif'],
       }
     },
   },
