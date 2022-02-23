@@ -8,10 +8,10 @@ export default function Button({ children, ...props }) {
     return (
         <button
             className={`
-                mx-auto w-full h-14 overflow-hidden
+                mx-auto w-full py-3 overflow-hidden
                 bg-stone-200 rounded-lg my-auto
                 flex content-center border-transparent border-2 
-                transition-all duration-100
+                transition-all duration-100 px-6
                 text-center uppercase font-semibold relative
                 hover:border-amber-900
                 ${props.disabled ? '' : 'active:border-stone-800'}

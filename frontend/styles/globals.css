@@ -6,7 +6,7 @@
 
     :root {
         font-size: 16px;
-        @apply bg-zinc-100;
+        @apply bg-zinc-100 text-zinc-700;
     }
 
     @media only screen and (max-width: 480px) {
@@ -21,7 +21,7 @@
     }
 
     h1 {
-        @apply text-6xl font-serif;
+        @apply text-6xl font-serif text-black;
     }
 
     h2 {

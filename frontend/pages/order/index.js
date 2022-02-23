@@ -14,6 +14,7 @@ import { getCart } from '../../redux/actions/cartActions'
 // Components:
 import {
     Button,
+    Card,
     Heading,
     NavbarPage,
     ProductListing,
@@ -40,25 +41,44 @@ export default function Cart() {
 
 
                 <div className='flex flex-row space-x-2'>
-                    <Heading>Cart</Heading>
+                    <Heading>Order</Heading>
                     <div className='grow'></div>
                     <div className='w-max my-auto'>
-                        <Button onClick={(e) => router.push('/order')}>Order items</Button>
+                        <Button>Confirm order</Button>
                     </div>
                 </div>
 
-                <div className='mt-10 px-6'>
+                <div className='mt-10 px-6 w-full'>
+
                     {loading && <p>...</p>}
+
                     {error && <p>{error}</p>}
-                    {Array.isArray(cartItems) && (
-                        cartItems.length === 0 ? (
-                            <div className='mx-auto w-max space-y-4 mt-20'>
-                                <p className='text-xl'>No items in your cart.</p>
-                                <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
+
+                    <div className='w-full flex flex-col md:flex-row'>
+
+                        <div className='w-full md:mr-10 space-y-20'>
+                            <div>
+                                <h3>Ship to</h3>
                             </div>
-                        ) : (
-                            <ProductListing items={cartItems} />
-                        ))}
+
+                            <div>
+                                <h3>Payment method</h3>
+                            </div>
+                        </div>
+
+                        <div className='w-full'>
+                            {Array.isArray(cartItems) && (
+                                cartItems.length === 0 ? (
+                                    <div className='mx-auto w-max space-y-4'>
+                                        <p className='text-xl'>No items in your cart.</p>
+                                        <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
+                                    </div>
+                                ) : (
+                                    <ProductListing items={cartItems} />
+                                ))}
+                        </div>
+                    </div>
+
                 </div>
 
             </div>

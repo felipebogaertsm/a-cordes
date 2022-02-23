@@ -16,6 +16,7 @@ import SearchInput from './SearchInput/searchInput'
 import Navbar from './Navbar/navbar'
 import NavbarItem from './NavbarItem/navbarItem'
 import NavbarPage from './NavbarPage/navbarPage'
+import ProductListing from './ProductListing'
 
 export {
     Button,
@@ -30,4 +31,5 @@ export {
     Navbar,
     NavbarItem,
     NavbarPage,
+    ProductListing,
 }

@@ -33,7 +33,7 @@ export default function Navbar() {
                 '
             >
                 <NavbarItem to='/'>
-                    <h3 className="lowercase">à cordes</h3>
+                    <h3 className="lowercase text-white">à cordes</h3>
                 </NavbarItem>
 
                 <div className='grow'></div>
