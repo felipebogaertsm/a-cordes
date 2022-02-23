@@ -53,15 +53,11 @@ export default function Login() {
                 </div>
 
                 <div className='pt-2 divide-y-2 w-min whitespace-nowrap mx-auto'>
-                    <div className='mx-auto text-center py-2'>
-                        <Link href='/'>
-                            Don't have an account yet? Sign up
-                        </Link>
+                    <div className='mx-auto'>
+                        <Button onClick={(e) => router.push('/')} tertiary>Don't have an account yet? Sign up</Button>
                     </div>
-                    <div className='mx-auto text-center py-2'>
-                        <Link href='/'>
-                            Forgot your password?
-                        </Link>
+                    <div className='mx-auto'>
+                        <Button onClick={(e) => router.push('/')} tertiary>Forgot your password?</Button>
                     </div>
                 </div>
 
