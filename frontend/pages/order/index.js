@@ -54,9 +54,9 @@ export default function Cart() {
 
                     {error && <p>{error}</p>}
 
-                    <div className='w-full flex flex-col md:flex-row'>
+                    <div className='w-full flex flex-col lg:flex-row'>
 
-                        <div className='w-full md:mr-10 space-y-20'>
+                        <div className='w-full lg:mr-10 mb-10 space-y-20'>
                             <div>
                                 <h3>Ship to</h3>
                             </div>
