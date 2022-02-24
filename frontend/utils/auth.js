@@ -9,7 +9,6 @@ import { useEffect } from 'react'
 export function isAuthenticated() {
     useEffect(() => {
         const userInfo = localStorage.getItem('userInfo')
-        console.log(userInfo)
 
         if (userInfo) {
             return true

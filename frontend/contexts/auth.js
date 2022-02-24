@@ -29,7 +29,6 @@ export function AuthProvider({ children }) {
                 maxAge: 60 * 60 * 8, // 8 hours
             })
         } else if (user === null) {
-            console.log('hello zo')
             setCookie(undefined, 'acordes.token', '', {
                 maxAge: 60 * 60 * 8, // 8 hours
             })

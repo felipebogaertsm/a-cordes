@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
-import { clearCart, getCart } from '../../redux/actions/cart'
+import { clearCart, getCart, removeFromCart } from '../../redux/actions/cart'
 
 // Components:
 import {
@@ -40,7 +40,7 @@ export default function Cart() {
 
     useEffect(() => {
         dispatch(getCart())
-    }, [])
+    }, [dispatch])
 
     function clearCartHandler(e) {
         dispatch(clearCart())
@@ -48,6 +48,12 @@ export default function Cart() {
 
     function orderItemsHandler(e) {
         router.push('/order')
+    }
+
+    function removeFromCartHandler(e, id) {
+        e.preventDefault()
+        dispatch(removeFromCart(id))
+        window.location.reload()
     }
 
     return (
@@ -72,7 +78,7 @@ export default function Cart() {
 
                     {error && <Message>{error}</Message>}
 
-                    {!authenticated && !loadingAuth && <Message>You must be logged in to access this page.</Message>}
+                    {!(authenticated || loadingAuth) && <Message>You must be logged in to access this page.</Message>}
 
                     {!loading && !error && Array.isArray(cartItems) ? (
                         cartItems.length === 0 ? (
@@ -81,7 +87,7 @@ export default function Cart() {
                                 <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
                             </div>
                         ) : (
-                            <ProductListing items={cartItems} />
+                            <ProductListing items={cartItems} removeHandler={(e, id) => removeFromCartHandler(e, id)} />
                         )
                     ) : <div></div>}
                 </div>

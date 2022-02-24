@@ -21,7 +21,7 @@ class CartItemAPI(APIView):
     def get(self, request, pk):
         user = request.user
 
-        cart_item = CartItem.objects.filter(user=user).filter(_id=int(pk))
+        cart_item = CartItem.objects.filter(user=user).filter(_id=pk)
 
         if cart_item.exists():
             return Response(CartItemSerializer(cart_item, many=False).data)
@@ -83,7 +83,7 @@ class CartItemAPI(APIView):
         return Response(CartItemSerializer(cart_item, many=False).data)
 
     def put(self, request, pk):
-        cart_item = CartItem.objects.get(_id=int(pk))
+        cart_item = CartItem.objects.get(_id=pk)
 
         try:
             quantity = int(request.GET.get("qty"))
@@ -99,7 +99,11 @@ class CartItemAPI(APIView):
         return Response(CartItemSerializer(cart_item, many=False).data)
 
     def delete(self, request, pk):
-        cart_item = CartItem.objects.get(_id=int(pk))
+        cart_item = CartItem.objects.get(_id=pk)
+
+        product = cart_item.product
+        product.count_in_stock += cart_item.quantity
+        product.save()
 
         if cart_item.user._id != request.user._id:
             return Response(

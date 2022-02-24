@@ -55,7 +55,6 @@ export default function ProductId() {
 
     useEffect(() => {
         if (cartItems && successCart) {
-            console.log(cartItems)
             router.push('/cart')
         }
     }, [cartItems])
