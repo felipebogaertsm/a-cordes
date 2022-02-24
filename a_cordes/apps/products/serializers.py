@@ -6,12 +6,12 @@
 
 from rest_framework import serializers
 
+from apps.accounts.models import SellerProfile
+from apps.accounts.serializers import SellerProfileSerializer
 from apps.products.models import Product, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    createdAt = serializers.DateTimeField(source="created_at")
-
     class Meta:
         model = Review
         fields = "__all__"
@@ -20,13 +20,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
 
-    createdAt = serializers.DateTimeField(source="created_at")
-    countInStock = serializers.IntegerField(source="count_in_stock")
-    reviewCount = serializers.IntegerField(source="review_count")
+    seller = SellerProfileSerializer(many=False, source="seller_profile")
 
     class Meta:
         model = Product
-        fields = "__all__"
+        exclude = ("seller_profile",)
 
     def get_reviews(self, obj):
         reviews = obj.review_set.all()  # get all reviews

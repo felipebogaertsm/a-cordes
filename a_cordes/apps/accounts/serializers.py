@@ -7,7 +7,13 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.accounts.models import User
+from apps.accounts.models import User, SellerProfile
+
+
+class SellerProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SellerProfile
+        fields = "__all__"
 
 
 class UserSerializer(serializers.ModelSerializer):
