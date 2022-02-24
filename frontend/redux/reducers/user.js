@@ -31,7 +31,7 @@ import {
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
     USER_UPDATE_RESET,
-} from '../constants/userConstants';
+} from '../types/user';
 
 export const userLoginReducer = (state = {}, action) => {
     switch (action.type) {

@@ -38,8 +38,8 @@ import {
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
     USER_UPDATE_RESET,
-} from '../constants/userConstants'
-import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
+} from '../types/user'
+import { ORDER_LIST_MY_RESET } from '../types/order'
 
 export const login = (email, password) => async (dispatch) => {
     try {

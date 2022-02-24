@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
-import { getCart } from '../../redux/actions/cartActions'
+import { getCart } from '../../redux/actions/cart'
 
 // Components:
 import {

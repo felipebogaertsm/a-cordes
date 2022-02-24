@@ -19,7 +19,7 @@ import {
     CART_GET_ALL_REQUEST,
     CART_GET_ALL_FAIL,
     CART_CLEAR_ITEMS,
-} from '../constants/cartConstants';
+} from '../types/cart';
 
 export const addToCart = (id, qty) => async (dispatch) => {
     try {

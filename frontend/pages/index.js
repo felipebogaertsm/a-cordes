@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 // Actions:
-import { listProducts } from '../redux/actions/productActions'
+import { listProducts } from '../redux/actions/product'
 
 // Components:
 import {

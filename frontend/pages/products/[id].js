@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
-import { listProductDetails } from '../../redux/actions/productActions'
-import { addToCart } from '../../redux/actions/cartActions'
+import { listProductDetails } from '../../redux/actions/product'
+import { addToCart } from '../../redux/actions/cart'
 
 // Components:
 import {
