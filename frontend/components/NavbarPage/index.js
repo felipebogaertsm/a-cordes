@@ -8,7 +8,7 @@
 import {
     Navbar,
     Footer,
-} from '../../components'
+} from '..'
 
 export default function NavbarPage(props) {
     return (

@@ -16,6 +16,7 @@ import { addToCart } from '../../redux/actions/cart'
 import {
     Button,
     Heading,
+    Loader,
     NavbarPage,
 } from '../../components'
 
@@ -73,10 +74,10 @@ export default function ProductId() {
             <div className='px-6 py-14'>
 
                 {loading ? (
-                    <div>Loading...</div>
+                    <Loader />
                 ) : error ? (
                     <div>Error</div>
-                ) : product ? (
+                ) : (product && (
                     <div className='flex flex-col'>
                         <Heading>{product.name}</Heading>
                         <div
@@ -150,7 +151,7 @@ export default function ProductId() {
                             </div>
                         </div>
                     </div>
-                ) : <div>Product not found</div>}
+                ))}
 
             </div>
 
