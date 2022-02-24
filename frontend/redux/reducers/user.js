@@ -31,6 +31,10 @@ import {
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
     USER_UPDATE_RESET,
+
+    ALL_SELLER_PROFILES_REQUEST,
+    ALL_SELLER_PROFILES_SUCCESS,
+    ALL_SELLER_PROFILES_FAIL
 } from '../types/user';
 
 export const userLoginReducer = (state = {}, action) => {
@@ -146,6 +150,19 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
         case USER_UPDATE_RESET:
             return { user: {} }
 
+        default:
+            return state
+    }
+}
+
+export const allSellerProfilesReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ALL_SELLER_PROFILES_REQUEST:
+            return { loading: true }
+        case ALL_SELLER_PROFILES_SUCCESS:
+            return { loading: false, success: true, makers: action.payload }
+        case ALL_SELLER_PROFILES_FAIL:
+            return { loading: false, error: action.payload }
         default:
             return state
     }

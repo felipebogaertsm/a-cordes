@@ -5,6 +5,8 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import axios from 'axios'
+
+// Types:
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -38,6 +40,10 @@ import {
     USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
     USER_UPDATE_RESET,
+
+    ALL_SELLER_PROFILES_REQUEST,
+    ALL_SELLER_PROFILES_SUCCESS,
+    ALL_SELLER_PROFILES_FAIL,
 } from '../types/user'
 import { ORDER_LIST_MY_RESET } from '../types/order'
 
@@ -303,10 +309,6 @@ export const updateUser = (user) => async (dispatch, getState) => {
         )
 
         dispatch({
-            type: USER_UPDATE_SUCCESS,
-        })
-
-        dispatch({
             type: USER_DETAILS_SUCCESS,
             payload: data,
         })
@@ -314,6 +316,38 @@ export const updateUser = (user) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: USER_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
+        })
+    }
+}
+
+export const allSellerProfiles = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: ALL_SELLER_PROFILES_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+
+        const { data } = await axios.get(
+            `${process.env.SERVER_URL}/api/accounts/sellers/`,
+            config,
+        )
+
+        dispatch({
+            type: ALL_SELLER_PROFILES_SUCCESS,
+            payload: data,
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ALL_SELLER_PROFILES_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message,

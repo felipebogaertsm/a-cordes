@@ -38,7 +38,7 @@ export default function Navbar() {
 
                 <div className='grow'></div>
 
-                <NavbarItem to='/'>
+                <NavbarItem to='/makers'>
                     <div className="flex flex-row space-x-2">
                         <img
                             src='/icons/violin.svg'

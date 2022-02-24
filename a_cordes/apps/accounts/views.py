@@ -13,8 +13,12 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from apps.accounts.models import User
-from apps.accounts.serializers import UserSerializer, UserSerializerWithToken
+from apps.accounts.models import User, SellerProfile
+from apps.accounts.serializers import (
+    UserSerializer,
+    UserSerializerWithToken,
+    SellerProfileSerializer,
+)
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -60,6 +64,32 @@ class MyUserAPI(APIView):
         user = request.user
         user.delete()
         return Response("User deleted.")
+
+
+class SellerProfileAPI(APIView):
+    permission_classes = []
+
+    def get(self, request, pk):
+        """
+        Gets seller profile from pk.
+        """
+        seller_profile = SellerProfile.objects.get(_id=pk)
+
+        serializer = SellerProfileSerializer(seller_profile, many=False)
+        return Response(serializer.data)
+
+
+class SellerProfilesAPI(APIView):
+    permission_classes = []
+
+    def get(self, request):
+        """
+        Gets all seller profiles.
+        """
+        seller_profiles = SellerProfile.objects.all()
+
+        serializer = SellerProfileSerializer(seller_profiles, many=True)
+        return Response(serializer.data)
 
 
 @api_view(["POST"])
