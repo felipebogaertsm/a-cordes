@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -19,15 +19,28 @@ import {
     ProductListing,
 } from '../../components'
 
+// Contexts:
+import {
+    AuthContext
+} from '../../contexts/auth'
+
 // Utilities:
 import { stringToDate } from '../../utils/datetime'
 
 export default function Cart() {
     const dispatch = useDispatch()
 
-    const { loading, error, cartItems } = useSelector(state => state.cart)
+    const { authenticated, loading: loadingAuth } = useContext(AuthContext)
 
     const router = useRouter()
+
+    const { loading, error, cartItems } = useSelector(state => state.cart)
+
+    useEffect(() => {
+        if (!authenticated && !loadingAuth) {
+            router.push('/auth/login')
+        }
+    }, [authenticated, loadingAuth])
 
     useEffect(() => {
         dispatch(getCart())

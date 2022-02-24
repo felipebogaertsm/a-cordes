@@ -88,7 +88,7 @@ export default function ProductId() {
                             <div>
                                 <img
                                     className='
-                                        aspect-[4/3]
+                                        aspect-[4/3] mt-10
                                         w-full rounded-xl shadow-xl
                                     '
                                     src={product.image}
@@ -97,25 +97,30 @@ export default function ProductId() {
                             </div>
                             <div className='flex flex-col'>
                                 <div className='my-2'>
-                                    <h6>Description</h6>
+                                    <h5>Description</h5>
                                     <p>{product.description}</p>
                                 </div>
                                 <div className='my-2'>
-                                    <h6>Category</h6>
+                                    <h5>Category</h5>
                                     <p>{product.category}</p>
                                 </div>
                                 <div className='my-2'>
-                                    <h6>Created at</h6>
+                                    <h5>Crafted by</h5>
+                                    <h6>{product.seller.name}</h6>
+                                    <p>{product.seller.city}, {product.seller.country}</p>
+                                </div>
+                                <div className='my-2'>
+                                    <h5>Created at</h5>
                                     <p>{stringToDate(product.created_at)}</p>
                                 </div>
                             </div>
                             <div className='flex flex-col space-y-8'>
                                 <div>
-                                    <h6>Price</h6>
+                                    <h5>Price</h5>
                                     <h2>${Number(product.price)}</h2>
                                 </div>
                                 <div>
-                                    <h6>Availability</h6>
+                                    <h5>Availability</h5>
                                     <div className='flex flex-row'>
                                         <h3>
                                             {Number(product.count_in_stock) > 0 ? 'In Stock' : 'Out of Stock'}
