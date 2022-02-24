@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
-import { getCart } from '../../redux/actions/cart'
+import { clearCart, getCart } from '../../redux/actions/cart'
 
 // Components:
 import {
@@ -42,6 +42,14 @@ export default function Cart() {
         dispatch(getCart())
     }, [])
 
+    function clearCartHandler(e) {
+        dispatch(clearCart())
+    }
+
+    function orderItemsHandler(e) {
+        router.push('/order')
+    }
+
     return (
         <NavbarPage>
 
@@ -52,10 +60,10 @@ export default function Cart() {
                     <Heading>Cart</Heading>
                     <div className='grow'></div>
                     <div className='w-max my-auto'>
-                        <Button onClick={(e) => { }} secondary>Clear cart</Button>
+                        <Button onClick={(e) => clearCartHandler(e)} secondary>Clear cart</Button>
                     </div>
                     <div className='w-max my-auto'>
-                        <Button onClick={(e) => router.push('/order')}>Order items</Button>
+                        <Button onClick={(e) => orderItemsHandler(e)}>Order items</Button>
                     </div>
                 </div>
 
