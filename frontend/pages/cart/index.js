@@ -59,12 +59,14 @@ export default function Cart() {
                     </div>
                 </div>
 
-                <div className='mt-10 px-6 w-full'>
+                <div className='mt-10 px-6 w-full space-y-4'>
                     {loading && <div className='mx-auto'><Loader /></div>}
 
                     {error && <Message>{error}</Message>}
 
-                    {Array.isArray(cartItems) ? (
+                    {!authenticated && !loadingAuth && <Message>You must be logged in to access this page.</Message>}
+
+                    {!loading && !error && Array.isArray(cartItems) ? (
                         cartItems.length === 0 ? (
                             <div className='mx-auto w-max space-y-4 mt-20'>
                                 <p className='text-xl'>No items in your cart.</p>

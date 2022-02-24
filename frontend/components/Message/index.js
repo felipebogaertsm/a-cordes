@@ -11,11 +11,19 @@ import {
 
 export default function Message({ children, ...props }) {
     return (
-        <div className="bg-red-200 py-4 px-6 text-red-900 font-bold rounded-lg group transition-all duration-100 hover:brightness-[105%]">
+        <div
+            className="
+                bg-red-200 py-4 px-6 text-red-900 font-bold rounded-lg group
+                transition-all duration-100 hover:brightness-[105%]
+            "
+        >
             <div className='flex flex-row space-x-4' {...props}>
                 <div>
                     <img
-                        className='h-6 aspect-square object-cover group-hover:scale-105 transition-all duration-200'
+                        className='
+                            h-6 aspect-square object-cover 
+                            group-hover:scale-110 transition-all duration-200
+                        '
                         src='/icons/error.svg'
                     >
                     </img>

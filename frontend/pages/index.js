@@ -14,6 +14,8 @@ import { listProducts } from '../redux/actions/productActions'
 import {
     GriddedProductListing,
     Heading,
+    Loader,
+    Message,
     SearchInput,
     NavbarPage,
 } from '../components'
@@ -40,8 +42,18 @@ export default function Home(history) {
                     <SearchInput />
                 </div>
 
-                <div className='mt-20 px-6'>
-                    <GriddedProductListing products={products} />
+                <div className='mt-20 px-6 w-full'>
+                    {loading ? (
+                        <div className='w-full mx-auto'>
+                            <Loader />
+                        </div>
+                    ) : error ? (
+                        <Message>{error}</Message>
+                    ) : (
+                        products && (
+                            <GriddedProductListing products={products} />
+                        )
+                    )}
                 </div>
 
             </div>
