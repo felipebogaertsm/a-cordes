@@ -4,36 +4,55 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+from datetime import datetime
+
 from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from datetime import datetime
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from apps.orders.models import *
 from apps.orders.serializers import *
 
 
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def add_order_items(request):
-    user = request.user
-    data = request.data
+class OrderItemAPI(APIView):
+    permission_classes = (IsAuthenticated,)
 
-    order_items = data["orderItems"]
+    def get(self, request):
+        """
+        Getting order items for a user.
+        """
+        user = request.user
 
-    if order_items and len(order_items) == 0:
-        return Response(
-            {"detail": "No order items"}, status=status.HTTP_400_BAD_REQUEST
-        )
-    else:
-        # Create order:
-        order = Order.objects.create(
-            user=user,
-            payment_method=data["paymentMethod"],
-            shipping_price=data["shippingPrice"],
-            total_price=data["totalPrice"],
-        )
+        order_items = OrderItem.objects.filter(user=user)
+        serializer = OrderItemSerializer(order_items, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        """
+        Adding order item to order.
+        """
+        user = request.user
+        data = request.data
+
+        order_items = data["orderItems"]
+
+        if order_items and len(order_items) == 0:
+            return Response(
+                {"message": "No order items"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        order = Order.objects.filter(user=user).filter(is_paid=False)
+        if not order.exists():
+            order = Order.objects.create(
+                user=user,
+                payment_method=data["paymentMethod"],
+                shipping_price=data["shippingPrice"],
+                total_price=data["totalPrice"],
+            )
 
         # Create shipping address:
         shipping = ShippingAddress.objects.create(
