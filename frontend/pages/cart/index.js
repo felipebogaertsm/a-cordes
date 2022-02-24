@@ -15,6 +15,8 @@ import { getCart } from '../../redux/actions/cartActions'
 import {
     Button,
     Heading,
+    Loader,
+    Message,
     NavbarPage,
     ProductListing,
 } from '../../components'
@@ -37,12 +39,6 @@ export default function Cart() {
     const { loading, error, cartItems } = useSelector(state => state.cart)
 
     useEffect(() => {
-        if (!authenticated && !loadingAuth) {
-            router.push('/auth/login')
-        }
-    }, [authenticated, loadingAuth])
-
-    useEffect(() => {
         dispatch(getCart())
     }, [])
 
@@ -63,10 +59,12 @@ export default function Cart() {
                     </div>
                 </div>
 
-                <div className='mt-10 px-6'>
-                    {loading && <p>...</p>}
-                    {error && <p>{error}</p>}
-                    {Array.isArray(cartItems) && (
+                <div className='mt-10 px-6 w-full'>
+                    {loading && <div className='mx-auto'><Loader /></div>}
+
+                    {error && <Message>{error}</Message>}
+
+                    {Array.isArray(cartItems) ? (
                         cartItems.length === 0 ? (
                             <div className='mx-auto w-max space-y-4 mt-20'>
                                 <p className='text-xl'>No items in your cart.</p>
@@ -74,7 +72,8 @@ export default function Cart() {
                             </div>
                         ) : (
                             <ProductListing items={cartItems} />
-                        ))}
+                        )
+                    ) : <div></div>}
                 </div>
 
             </div>

@@ -74,7 +74,7 @@ export function AuthProvider({ children }) {
             )
             setUser(user)
         } catch (error) {
-            setError(error)
+            setError(error.message)
             setUser(null)
         }
         setLoading(false)

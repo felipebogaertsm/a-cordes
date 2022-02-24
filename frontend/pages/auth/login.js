@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import {
     Button,
     Heading,
+    Loader,
     Message,
     NavbarPage,
     FormInput,
@@ -63,11 +64,14 @@ export default function Login() {
 
                 <div className='pt-2'>
                     <Button onClick={(e) => loginHandler(e)}>
-                        Log in {loading && <span>...</span>}
+                        <div className='flex flex-row space-x-2'>
+                            <p>Log in</p>
+                            {loading && <div className='invert'><Loader /></div>}
+                        </div>
                     </Button>
                 </div>
 
-                <div>{error ? (<Message>error</Message>) : ''}</div>
+                <div>{error ? (<Message>{error}</Message>) : ''}</div>
             </div>
         </NavbarPage>
     )

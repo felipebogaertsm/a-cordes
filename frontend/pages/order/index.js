@@ -38,12 +38,6 @@ export default function Cart() {
     const router = useRouter()
 
     useEffect(() => {
-        if (!authenticated && !loadingAuth) {
-            router.push('/auth/login')
-        }
-    }, [authenticated, loadingAuth])
-
-    useEffect(() => {
         dispatch(getCart())
     }, [])
 
