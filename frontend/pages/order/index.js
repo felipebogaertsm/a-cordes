@@ -77,7 +77,7 @@ export default function Cart() {
                             {Array.isArray(cartItems) && (
                                 cartItems.length === 0 ? (
                                     <div className='mx-auto w-max space-y-4'>
-                                        <p className='text-xl'>No items in your cart.</p>
+                                        <p className='text-xl'>No items in your order.</p>
                                         <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
                                     </div>
                                 ) : (

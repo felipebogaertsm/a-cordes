@@ -45,9 +45,11 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                         <div className='my-auto'>
                             <h6 className='my-auto'>$ <span className='text-3xl'>{item.product.price}</span></h6>
                         </div>
-                        <div className='my-auto text-sm'>
-                            <Button onClick={(e) => removeHandler(e, item._id)}>Remove</Button>
-                        </div>
+                        {removeHandler && (
+                            <div className='my-auto text-sm'>
+                                <Button onClick={(e) => removeHandler(e, item._id)}>Remove</Button>
+                            </div>
+                        )}
                     </div>
                 </div>
             ))}
