@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
@@ -43,10 +43,11 @@ export default function Cart() {
     }, [dispatch])
 
     function clearCartHandler(e) {
+        e.preventDefault()
         dispatch(clearCart())
     }
 
-    function orderItemsHandler(e) {
+    function checkoutHandler(e) {
         router.push('/order')
     }
 
@@ -69,7 +70,7 @@ export default function Cart() {
                         <Button onClick={(e) => clearCartHandler(e)} secondary>Clear cart</Button>
                     </div>
                     <div className='w-max my-auto'>
-                        <Button onClick={(e) => orderItemsHandler(e)}>Order items</Button>
+                        <Button onClick={(e) => checkoutHandler(e)}>Go to Checkout</Button>
                     </div>
                 </div>
 
@@ -80,7 +81,7 @@ export default function Cart() {
 
                     {!(authenticated || loadingAuth) && <Message>You must be logged in to access this page.</Message>}
 
-                    {!loading && !error && Array.isArray(cartItems) ? (
+                    {Array.isArray(cartItems) ? (
                         cartItems.length === 0 ? (
                             <div className='mx-auto w-max space-y-4 mt-20'>
                                 <p className='text-xl'>No items in your cart.</p>

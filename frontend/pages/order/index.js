@@ -4,17 +4,18 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 // Actions:
 import { getCart } from '../../redux/actions/cart'
+import { createOrder } from '../../redux/actions/order'
 
 // Components:
 import {
     Button,
-    Card,
+    FormInput,
     Heading,
     NavbarPage,
     ProductListing,
@@ -31,15 +32,64 @@ import { stringToDate } from '../../utils/datetime'
 export default function Cart() {
     const dispatch = useDispatch()
 
-    const { loading, error, cartItems } = useSelector(state => state.cart)
+    const [paymentMethod, setPaymentMethod] = useState('Cash')
 
-    const { authenticated, loading: loadingAuth } = useContext(AuthContext)
+    const [itemsPrice, setItemsPrice] = useState(0)
+    const [shippingPrice, setShippingPrice] = useState(50)
+    const [taxPrice, setTaxPrice] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
+
+    const [shippingAddress, setShippingAddress] = useState('')
+    const [shippingCity, setShippingCity] = useState('')
+    const [shippingPostalCode, setShippingPostalCode] = useState('')
+    const [shippingCountry, setShippingCountry] = useState('')
+
+    const { loading, error, cartItems } = useSelector(state => state.cart)
 
     const router = useRouter()
 
     useEffect(() => {
         dispatch(getCart())
     }, [])
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            let newItemsPrice = 0
+
+            for (let i = 0; i < cartItems.length; i++) {
+                newItemsPrice += cartItems[i].product.price
+            }
+
+            setItemsPrice(newItemsPrice)
+        }
+    }, [cartItems])
+
+    useEffect(() => {
+        setTotalPrice(itemsPrice + shippingPrice + taxPrice)
+    }, [itemsPrice, shippingPrice, taxPrice])
+
+    function orderItemsHandler(e) {
+        e.preventDefault()
+        dispatch(
+            createOrder(
+                {
+                    orderItems: cartItems,
+                    shippingAddress: {
+                        address: shippingAddress,
+                        city: shippingCity,
+                        postalCode: shippingPostalCode,
+                        country: shippingCountry
+                    },
+                    paymentMethod: paymentMethod,
+                    itemsPrice: itemsPrice,
+                    shippingPrice: shippingPrice,
+                    taxPrice: taxPrice,
+                    totalPrice: totalPrice,
+                }
+            )
+        )
+        router.push('/order')
+    }
 
     return (
         <NavbarPage>
@@ -51,7 +101,7 @@ export default function Cart() {
                     <Heading>Order</Heading>
                     <div className='grow'></div>
                     <div className='w-max my-auto'>
-                        <Button>Confirm order</Button>
+                        <Button onClick={(e) => orderItemsHandler(e)}>Confirm order</Button>
                     </div>
                 </div>
 
@@ -63,13 +113,22 @@ export default function Cart() {
 
                     <div className='w-full flex flex-col lg:flex-row'>
 
-                        <div className='w-full lg:mr-10 mb-10 space-y-20'>
+                        <div className='w-full lg:mr-10 mb-10 space-y-10'>
                             <div>
                                 <h3>Ship to</h3>
+                                <div className='my-2 space-y-2'>
+                                    <FormInput onChange={(e) => setShippingAddress(e.target.value)} label='Address' />
+                                    <FormInput onChange={(e) => setShippingCity(e.target.value)} label='City' />
+                                    <FormInput onChange={(e) => setShippingPostalCode(e.target.value)} label='Postal Code' />
+                                    <FormInput onChange={(e) => setShippingCountry(e.target.value)} label='Country' />
+                                </div>
                             </div>
 
                             <div>
                                 <h3>Payment method</h3>
+                                <div className='my-2 space-y-2'>
+                                    <h6>{paymentMethod}</h6>
+                                </div>
                             </div>
                         </div>
 
