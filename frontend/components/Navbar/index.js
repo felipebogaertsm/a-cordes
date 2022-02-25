@@ -27,9 +27,10 @@ export default function Navbar() {
         <div className='w-screen'>
             <div
                 className='
-                    flex flex-row bg-stone-900 text-stone-100 w-full
-                    h-16 px-2 md:px-4 border-b-2 border-white select-none
-                    whitespace-nowrap overflow-x-scroll no-scrollbar
+                    flex md:flex-row flex-col bg-stone-900 text-stone-100 
+                    md:h-16 px-2 md:px-4 border-b-2 border-white select-none
+                    whitespace-nowrap overflow-x-scroll no-scrollbar w-full 
+                    pb-2 md:py-0
                 '
             >
                 <NavbarItem to='/'>
