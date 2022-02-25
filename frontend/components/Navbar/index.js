@@ -65,10 +65,27 @@ export default function Navbar() {
                     </div>
                 </NavbarItem>
 
+                {authenticated && (
+                    <NavbarItem to='/'>
+                        <div className="flex flex-row space-x-2">
+                            <img
+                                src='/icons/user.svg'
+                                className="
+                                invert opacity-80 h-4 my-auto
+                            "
+                            >
+                            </img>
+                            <p className="my-auto">
+                                User
+                            </p>
+                        </div>
+                    </NavbarItem>
+                )}
+
                 <NavbarItem to='/auth/login' onClick={logoutHandler}>
                     <div className="flex flex-row space-x-2">
                         <img
-                            src='/icons/user.svg'
+                            src={`/icons/${authenticated ? 'logout' : 'user'}.svg`}
                             className="
                                 invert opacity-80 h-4 my-auto
                             "
