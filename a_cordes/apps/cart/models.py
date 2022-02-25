@@ -9,6 +9,7 @@ import uuid
 from django.db import models
 
 from apps.accounts.models import User
+from apps.cart.managers import CartItemManager
 from apps.products.models import Product
 
 
@@ -24,3 +25,5 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
+    objects = CartItemManager()

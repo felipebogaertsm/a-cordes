@@ -20,7 +20,7 @@ export default function GriddedProductListing({ products }) {
     return (
         <div
             className="
-                w-full h-full m-4 border-2 border-stone-200 rounded-xl py-4 
+                w-full h-full m-4 rounded-xl py-4 
                 px-8 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5
                 grid-cols-1 space-x-4 space-y-4 place-items-stretch
             "
