@@ -8,7 +8,7 @@ from django.db import models
 
 
 class CartItemManager(models.Manager):
-    def create(self, user, product, quantity):
+    def create_item(self, user, product, quantity):
         existing_cart_item = self.model.objects.filter(user=user).filter(
             product=product
         )

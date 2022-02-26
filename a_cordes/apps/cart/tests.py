@@ -35,7 +35,7 @@ class CartTestCase(TestCase):
         Testing simple cart item creation.
         """
 
-        cart_item_1 = CartItem.objects.create(
+        cart_item_1 = CartItem.objects.create_item(
             user=self.user,
             product=self.product_1,
             quantity=1,
@@ -55,13 +55,13 @@ class CartTestCase(TestCase):
         quantity_cart_item_1 = 2
         quantity_cart_item_2 = 1
 
-        CartItem.objects.create(
+        CartItem.objects.create_item(
             user=self.user,
             product=self.product_1,
             quantity=1,
         )
 
-        CartItem.objects.create(
+        CartItem.objects.create_item(
             user=self.user,
             product=self.product_1,
             quantity=2,

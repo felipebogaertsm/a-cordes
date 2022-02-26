@@ -70,7 +70,7 @@ class CartItemAPI(APIView):
             cart_item.quantity += quantity
             cart_item.save()
         else:
-            cart_item = CartItem.objects.create(
+            cart_item = CartItem.objects.create_item(
                 user=user,
                 product=product,
                 quantity=quantity,
