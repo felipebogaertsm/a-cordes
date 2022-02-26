@@ -37,7 +37,7 @@ export const addToCart = (id, qty) => async (dispatch) => {
         }
 
         const { data } = await axios.post(
-            `${process.env.SERVER_URL}/api/cart/item/0/?product_id=${id}&qty=${qty}`,
+            `${process.env.SERVER_URL}/api/cart/item/0/?product_id=${encodeURIComponent(id)}&qty=${qty}`,
             {},
             config,
         )
@@ -73,7 +73,7 @@ export const removeFromCart = (id) => async (dispatch) => {
         }
 
         const { data } = await axios.delete(
-            `${process.env.SERVER_URL}/api/cart/item/${id}/`,
+            `${process.env.SERVER_URL}/api/cart/item/${encodeURIComponent(id)}/`,
             config,
         )
 

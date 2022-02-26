@@ -73,7 +73,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await axios.get(`${process.env.SERVER_URL}/api/products/${id}`)
+        const { data } = await axios.get(`${process.env.SERVER_URL}/api/products/${encodeURIComponent(id)}`)
 
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -107,7 +107,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.delete(
-            `/api/products/delete/${id}`,
+            `/api/products/delete/${encodeURIComponent(id)}`,
             config,
         )
 
