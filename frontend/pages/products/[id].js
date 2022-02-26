@@ -88,7 +88,7 @@ export default function ProductId() {
                             <div>
                                 <img
                                     className='
-                                        aspect-[4/3] mt-10
+                                        aspect-[4/3] mt-10 object-cover
                                         w-full rounded-xl shadow-xl
                                     '
                                     src={product.image}
