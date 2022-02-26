@@ -4,6 +4,8 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import uuid
+
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
@@ -11,7 +13,7 @@ from apps.accounts.managers import UserManager
 
 
 class User(AbstractBaseUser):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     email = models.EmailField(max_length=255, unique=True)
 
@@ -41,7 +43,7 @@ class User(AbstractBaseUser):
 
 
 class UserProfile(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -59,7 +61,7 @@ class UserProfile(models.Model):
 
 
 class SellerProfile(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 

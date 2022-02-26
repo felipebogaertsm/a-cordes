@@ -4,23 +4,35 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import uuid
+
 from django.db import models
 
 from apps.accounts.models import User
+from apps.orders.choices import PAYMENT_METHODS
 from apps.products.models import Product
 
 
 class Order(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
-    payment_method = models.CharField(max_length=200, null=True, blank=True)
+    payment_method = models.CharField(
+        max_length=200,
+        null=True,
+        blank=True,
+        choices=PAYMENT_METHODS,
+    )
+
     shipping_price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True
+        max_digits=7, decimal_places=2, default=0, blank=True
+    )
+    tax_price = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0, blank=True
     )
     total_price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True
+        max_digits=7, decimal_places=2, default=0, blank=True
     )
 
     is_paid = models.BooleanField(default=False)
@@ -38,7 +50,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -59,7 +71,7 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     order = models.OneToOneField(

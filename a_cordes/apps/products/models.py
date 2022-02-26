@@ -4,13 +4,15 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import uuid
+
 from django.db import models
 
 from apps.accounts.models import SellerProfile, User
 
 
 class Product(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     seller_profile = models.ForeignKey(SellerProfile, on_delete=models.CASCADE)
 
@@ -38,7 +40,7 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    _id = models.AutoField(primary_key=True, editable=False)
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     product = models.ForeignKey(
         Product,
