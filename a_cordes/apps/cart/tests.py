@@ -20,7 +20,7 @@ class CartTestCase(TestCase):
         self.seller_profile = SellerProfile.objects.create(
             user=self.user,
             name="Seller",
-            is_approved=True,
+            is_active=True,
         )
 
         self.product_1 = Product.objects.create(

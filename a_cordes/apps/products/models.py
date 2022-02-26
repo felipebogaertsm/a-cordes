@@ -7,12 +7,14 @@
 import uuid
 
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from apps.accounts.models import SellerProfile, User
 
 
 class Product(models.Model):
     _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     seller_profile = models.ForeignKey(SellerProfile, on_delete=models.CASCADE)
 
@@ -37,6 +39,10 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}_{self.seller_profile.name}"
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
 
 
 class Review(models.Model):

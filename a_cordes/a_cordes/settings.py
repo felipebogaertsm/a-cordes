@@ -199,7 +199,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "frontend/build/static",
 ]
 
-MEDIA_ROOT = BASE_DIR / "static/images"
+MEDIA_ROOT = BASE_DIR / "media"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Setting up Linode's Object Storage

@@ -8,6 +8,7 @@ import uuid
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
+from django.template.defaultfilters import slugify
 
 from apps.accounts.managers import UserManager
 
@@ -44,6 +45,7 @@ class User(AbstractBaseUser):
 
 class UserProfile(models.Model):
     _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -59,23 +61,32 @@ class UserProfile(models.Model):
     def __str__(self) -> str:
         return f"{self.user.email}_{self.full_name}_{self.city}_{self.country}"
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.email)
+        super(UserProfile, self).save(*args, **kwargs)
+
 
 class SellerProfile(models.Model):
     _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=100)
     picture = models.ImageField(blank=True, default="/seller_placeholder.jpeg")
-    city = models.CharField(max_length=255, blank=True, default="")
-    country = models.CharField(max_length=255, blank=True, default="")
+    city = models.CharField(max_length=100, blank=True, default="")
+    country = models.CharField(max_length=100, blank=True, default="")
     description = models.TextField(max_length=1000, blank=True, default="")
-    title = models.CharField(max_length=255, blank=True, default="")
+    title = models.CharField(max_length=100, blank=True, default="")
 
-    # In order for a seller to be listed, is_approved needs to be True:
-    is_approved = models.BooleanField(blank=True, default=False)
+    # In order for a seller to be listed, is_active needs to be True
+    is_active = models.BooleanField(blank=True, default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(SellerProfile, self).save(*args, **kwargs)

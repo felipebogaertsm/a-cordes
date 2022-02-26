@@ -25,7 +25,7 @@ class OrderTestCase(TestCase):
         self.seller_profile = SellerProfile.objects.create(
             user=self.user_1,
             name="Seller",
-            is_approved=True,
+            is_active=True,
         )
 
         self.product_1 = Product.objects.create(
