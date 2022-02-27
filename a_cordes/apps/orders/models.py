@@ -13,6 +13,22 @@ from apps.orders.choices import PAYMENT_METHODS
 from apps.products.models import Product
 
 
+class ShippingAddress(models.Model):
+    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    postal_code = models.CharField(max_length=200, null=True, blank=True)
+    country = models.CharField(max_length=200, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return f"{self.address}_{self.user.email}"
+
+
 class Order(models.Model):
     _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
@@ -26,10 +42,7 @@ class Order(models.Model):
     )
 
     shipping_price = models.DecimalField(
-        max_digits=7, decimal_places=2, default=0, blank=True
-    )
-    tax_price = models.DecimalField(
-        max_digits=7, decimal_places=2, default=0, blank=True
+        max_digits=7, decimal_places=2, null=True, blank=True
     )
     total_price = models.DecimalField(
         max_digits=7, decimal_places=2, default=0, blank=True
@@ -41,6 +54,10 @@ class Order(models.Model):
     is_delivered = models.BooleanField(default=False)
     delivered_at = models.DateTimeField(
         auto_now_add=False, null=True, blank=True
+    )
+
+    shipping_address = models.ForeignKey(
+        ShippingAddress, on_delete=models.SET_NULL, null=True, blank=True
     )
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
@@ -61,31 +78,13 @@ class OrderItem(models.Model):
     price = models.DecimalField(
         max_digits=7, decimal_places=2, null=True, blank=True
     )
+    tax_price = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0, blank=True
+    )
 
     image = models.CharField(max_length=200, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return f"{self.name}"
-
-
-class ShippingAddress(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    order = models.OneToOneField(
-        Order, on_delete=models.CASCADE, null=True, blank=True
-    )
-    address = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=200, null=True, blank=True)
-    postal_code = models.CharField(max_length=200, null=True, blank=True)
-    country = models.CharField(max_length=200, null=True, blank=True)
-    shipping_price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True
-    )
-
-    created_at = models.DateTimeField(auto_now_add=True, blank=True)
-
-    def __str__(self):
-        return f"{self.address}_{self.user.email}"
+        return f"{self.name}_{self.created_at}"
