@@ -35,7 +35,7 @@ class CartItemAPI(APIView):
         user = request.user
 
         try:
-            product_id = int(request.GET.get("product_id"))
+            product_id = request.GET.get("product_id")
             product = Product.objects.get(_id=product_id)
         except ValueError:
             return Response(
@@ -56,29 +56,14 @@ class CartItemAPI(APIView):
 
         try:
             quantity = int(request.GET.get("qty"))
-        except:
+        except (KeyError, ValueError):
             quantity = 1
 
-        if product.count_in_stock < quantity:
-            quantity = product.count_in_stock
-
-        # Verify if cart item already exists:
-        cart_item = CartItem.objects.filter(user=user).filter(product=product)
-
-        if cart_item.exists():
-            cart_item = cart_item[0]
-            cart_item.quantity += quantity
-            cart_item.save()
-        else:
-            cart_item = CartItem.objects.create_item(
-                user=user,
-                product=product,
-                quantity=quantity,
-            )
-
-        # Subtracting quantity from product count in stock:
-        product.count_in_stock += -quantity
-        product.save()
+        cart_item = CartItem.objects.create_item(
+            user=user,
+            product=product,
+            quantity=quantity,
+        )
 
         return Response(CartItemSerializer(cart_item, many=False).data)
 

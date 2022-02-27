@@ -79,3 +79,43 @@ class CartTestCase(TestCase):
             cart_item.quantity,
             quantity_cart_item_1 + quantity_cart_item_2,
         )
+
+    def test_cart_item_creation_count_in_stock(self):
+        """
+        Testing how the cart item creation behaves when over or under
+        quantifying in relation to the product's count in stock.
+        """
+        cart_item = CartItem.objects.create_item(
+            user=self.user,
+            product=self.product_1,
+            quantity=1,
+        )
+
+        self.assertEqual(
+            cart_item.quantity,
+            CartItem.objects.filter(user=self.user)
+            .filter(product=self.product_1)[0]
+            .quantity,
+        )
+
+        cart_item = CartItem.objects.create_item(
+            user=self.user,
+            product=self.product_1,
+            quantity=self.product_1.count_in_stock - 1,
+        )
+
+        self.assertEqual(
+            cart_item.quantity,
+            self.product_1.count_in_stock,
+        )
+
+        cart_item = CartItem.objects.create_item(
+            user=self.user,
+            product=self.product_1,
+            quantity=1,
+        )
+
+        self.assertEqual(
+            cart_item.quantity,
+            self.product_1.count_in_stock,
+        )

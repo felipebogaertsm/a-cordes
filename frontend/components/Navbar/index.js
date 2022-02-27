@@ -34,7 +34,7 @@ export default function Navbar() {
                 '
             >
                 <NavbarItem to='/'>
-                    <h3 className="lowercase text-white">à cordes</h3>
+                    <h3 className="lowercase text-white font-normal">à cordes</h3>
                 </NavbarItem>
 
                 <div className='grow'></div>
@@ -52,34 +52,35 @@ export default function Navbar() {
                     </div>
                 </NavbarItem>
 
-                <NavbarItem to='/cart'>
-                    <div className="flex flex-row space-x-2">
-                        <img
-                            src='/icons/cart.svg'
-                            className="
+                {authenticated && (
+                    <>
+                        <NavbarItem to='/cart'>
+                            <div className="flex flex-row space-x-2">
+                                <img
+                                    src='/icons/cart.svg'
+                                    className="
                                 invert h-6 my-auto
                             "
-                        >
-                        </img>
-                        <p className="my-auto">Cart</p>
-                    </div>
-                </NavbarItem>
-
-                {authenticated && (
-                    <NavbarItem to='/'>
-                        <div className="flex flex-row space-x-2">
-                            <img
-                                src='/icons/user.svg'
-                                className="
+                                >
+                                </img>
+                                <p className="my-auto">Cart</p>
+                            </div>
+                        </NavbarItem>
+                        <NavbarItem to='/'>
+                            <div className="flex flex-row space-x-2">
+                                <img
+                                    src='/icons/user.svg'
+                                    className="
                                 invert opacity-80 h-4 my-auto
                             "
-                            >
-                            </img>
-                            <p className="my-auto">
-                                User
-                            </p>
-                        </div>
-                    </NavbarItem>
+                                >
+                                </img>
+                                <p className="my-auto">
+                                    User
+                                </p>
+                            </div>
+                        </NavbarItem>
+                    </>
                 )}
 
                 <NavbarItem to='/auth/login' onClick={logoutHandler}>

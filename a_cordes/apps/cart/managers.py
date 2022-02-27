@@ -23,6 +23,9 @@ class CartItemManager(models.Manager):
                 quantity=quantity,
             )
 
+        if product.count_in_stock < cart_item.quantity:
+            cart_item.quantity = product.count_in_stock
+
         cart_item.save(using=self._db)
 
         return cart_item
