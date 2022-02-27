@@ -86,10 +86,6 @@ class CartItemAPI(APIView):
     def delete(self, request, pk):
         cart_item = CartItem.objects.get(_id=pk)
 
-        product = cart_item.product
-        product.count_in_stock += cart_item.quantity
-        product.save()
-
         if cart_item.user._id != request.user._id:
             return Response(
                 "You are not allowed to delete this item.",
@@ -113,13 +109,5 @@ class CartAPI(APIView):
 
     def delete(self, request):
         user = request.user
-
         cart_items = CartItem.objects.filter(user=user)
-
-        for item in cart_items:
-            product = item.product
-            product.count_in_stock += item.quantity
-            product.save()
-            item.delete()
-
         return Response("Cart cleared.")
