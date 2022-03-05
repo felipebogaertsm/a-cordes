@@ -4,9 +4,15 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import axios from 'axios'
-import { setCookie, parseCookies, destroyCookie } from 'nookies'
-import { createContext, useState, useEffect } from 'react'
+import cookie from 'js-cookie'
+import { useRouter } from 'next/router'
+import { createContext, useState } from 'react'
+
+// Constants:
+import { TOKEN_NAME, LOGIN_PATH, INDEX_PATH } from '../constants'
+
+// Services:
+import { getClient } from '../utils/axios'
 
 export const AuthContext = createContext({})
 
@@ -14,73 +20,66 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(undefined)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [authenticated, setAuthenticated] = useState(false)
 
-    const authenticated = Boolean(user)
+    const client = getClient()
 
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-
-    useEffect(() => {
-        if (user) {
-            setCookie(undefined, 'acordes.token', user.token, {
-                maxAge: 60 * 60 * 8, // 8 hours
-            })
-        } else if (user === null) {
-            setCookie(undefined, 'acordes.token', '', {
-                maxAge: 60 * 60 * 8, // 8 hours
-            })
-        }
-    }, [user])
-
-    useEffect(() => {
-        const { 'acordes.token': token } = parseCookies()
-
-        if (token) {
-            fetchMyUser(token)
-        }
-    }, [])
-
-    async function fetchMyUser(token) {
-        setLoading(true)
-        try {
-            const { data: user } = await axios.get(
-                `${process.env.SERVER_URL}/api/accounts/my-user/`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    }
-                },
-            )
-            setUser(user)
-        } catch (error) {
-            setError(error)
-            setUser(null)
-        }
-        setLoading(false)
-    }
+    const router = useRouter()
 
     async function login(email, password) {
         setLoading(true)
+
         try {
-            const { data: user } = await axios.post(
-                `${process.env.SERVER_URL}/api/accounts/login/`,
+            const { data: tokens } = await client.post(
+                `/api/accounts/token/obtain-pair/`,
                 { 'email': email, 'password': password },
-                config,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                },
             )
+
+            cookie.set(
+                TOKEN_NAME,
+                tokens.access,
+                {
+                    expires: 1 / 24, // 1 hour
+                }
+            )
+
+            const { data: user } = await client.get(
+                `/api/accounts/my-user/`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${tokens.access}`
+                    }
+                },
+            )
+
             setUser(user)
+            setAuthenticated(true)
         } catch (error) {
             setError(error.message)
+            setAuthenticated(false)
             setUser(null)
+
+            cookie.remove(TOKEN_NAME)
         }
+
         setLoading(false)
+
+        router.push(INDEX_PATH)
     }
 
     function logout() {
+        setAuthenticated(false)
         setUser(null)
+
+        cookie.remove(TOKEN_NAME)
+
+        router.push(LOGIN_PATH)
     }
 
     return (
