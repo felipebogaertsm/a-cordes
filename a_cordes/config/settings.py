@@ -105,7 +105,7 @@ CSRF_COOKIE_SECURE = False
 
 CSRF_TRUSTED_ORIGINS = ["*"]
 
-ROOT_URLCONF = "a_cordes.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -125,7 +125,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "a_cordes.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
