@@ -60,6 +60,8 @@ export function AuthProvider({ children }) {
 
             setUser(user)
             setAuthenticated(true)
+
+            router.push(INDEX_PATH)
         } catch (error) {
             setError(error.message)
             setAuthenticated(false)
@@ -69,8 +71,6 @@ export function AuthProvider({ children }) {
         }
 
         setLoading(false)
-
-        router.push(INDEX_PATH)
     }
 
     function logout() {

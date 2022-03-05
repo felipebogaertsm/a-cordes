@@ -17,6 +17,7 @@ import SearchInput from './SearchInput'
 import Navbar from './Navbar'
 import NavbarItem from './NavbarItem'
 import NavbarPage from './NavbarPage'
+import PrivatePage from './PrivatePage'
 import ProductListing from './ProductListing'
 
 export {
@@ -33,5 +34,6 @@ export {
     Navbar,
     NavbarItem,
     NavbarPage,
+    PrivatePage,
     ProductListing,
 }
