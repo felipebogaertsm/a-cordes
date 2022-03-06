@@ -14,9 +14,6 @@ COPY ./scripts /scripts
 
 RUN chmod +x /scripts/*
 
-RUN python3 manage.py collectstatic --noinput
-RUN python3 manage.py migrate --noinput
-
 EXPOSE 8080
 
 COPY ./scripts/entrypoint.sh /scripts
