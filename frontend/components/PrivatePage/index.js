@@ -8,7 +8,10 @@ import { useRouter } from "next/router"
 import { useContext } from "react"
 
 // Components:
-import { Button } from '../../components'
+import {
+    Button,
+    Loader,
+} from '../../components'
 
 // Constants:
 import { LOGIN_PATH } from "../../constants"
@@ -27,6 +30,10 @@ export default function PrivatePage({ children, ...props }) {
                 <div>
                     {children}
                 </div>
+            ) : loading ? (
+                <div>
+                    <Loader />
+                </div>
             ) : (
                 <div className="py-40 px-4 text-stone-600">
                     <div className="flex flex-col items-center space-y-4">
@@ -37,9 +44,10 @@ export default function PrivatePage({ children, ...props }) {
                                 Login
                             </Button>
                         </div>
-                    </div>
-                </div>
-            )}
-        </div>
+                    </div >
+                </div >
+            )
+            }
+        </div >
     )
 }

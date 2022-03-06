@@ -4,14 +4,17 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+
+// APIs:
+import { verifyToken } from '../services/apis/auth'
 
 // Constants:
 import { TOKEN_NAME, LOGIN_PATH, INDEX_PATH } from '../constants'
 
-// Services:
+// Utils:
 import { getClient } from '../utils/axios'
 
 export const AuthContext = createContext({})
@@ -22,9 +25,26 @@ export function AuthProvider({ children }) {
     const [error, setError] = useState(false)
     const [authenticated, setAuthenticated] = useState(false)
 
+    const router = useRouter()
+
     const client = getClient()
 
-    const router = useRouter()
+    const token = Cookies.get(TOKEN_NAME)
+
+    useEffect(() => {
+        if (token) {
+            setLoading(true)
+
+            try {
+                verifyToken(token)
+                setAuthenticated(true)
+            } catch (err) {
+                setError(err)
+            }
+
+            setLoading(false)
+        }
+    }, [token])
 
     async function login(email, password) {
         setLoading(true)
@@ -40,7 +60,7 @@ export function AuthProvider({ children }) {
                 },
             )
 
-            cookie.set(
+            Cookies.set(
                 TOKEN_NAME,
                 tokens.access,
                 {
@@ -67,7 +87,7 @@ export function AuthProvider({ children }) {
             setAuthenticated(false)
             setUser(null)
 
-            cookie.remove(TOKEN_NAME)
+            Cookies.remove(TOKEN_NAME)
         }
 
         setLoading(false)
@@ -77,7 +97,7 @@ export function AuthProvider({ children }) {
         setAuthenticated(false)
         setUser(null)
 
-        cookie.remove(TOKEN_NAME)
+        Cookies.remove(TOKEN_NAME)
 
         router.push(LOGIN_PATH)
     }

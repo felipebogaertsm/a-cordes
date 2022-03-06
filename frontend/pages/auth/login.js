@@ -55,7 +55,9 @@ export default function Login() {
 
                 <div className='pt-2 divide-y-2 w-min whitespace-nowrap mx-auto'>
                     <div className='mx-auto'>
-                        <Button onClick={(e) => router.push('/')} tertiary>Don't have an account yet? Sign up</Button>
+                        <Button onClick={(e) => router.push('/auth/signup')} tertiary>
+                            Don't have an account yet? Sign up
+                        </Button>
                     </div>
                     <div className='mx-auto'>
                         <Button onClick={(e) => router.push('/')} tertiary>Forgot your password?</Button>
