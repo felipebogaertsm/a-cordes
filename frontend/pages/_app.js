@@ -4,9 +4,9 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import '../styles/globals.css'
-import { AuthProvider } from '../contexts/auth';
-import { storeWrapper } from "../redux/store";
+import "../styles/globals.css"
+import { AuthProvider } from "../contexts/auth"
+import { storeWrapper } from "../redux/store"
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -16,4 +16,4 @@ function MyApp({ Component, pageProps }) {
     )
 }
 
-export default storeWrapper.withRedux(MyApp);
+export default storeWrapper.withRedux(MyApp)

@@ -6,7 +6,7 @@
 
 import { useEffect, useState, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router"
 
 // Components:
 import { NavbarItem } from ".."
@@ -24,82 +24,78 @@ export default function Navbar() {
     }
 
     return (
-        <div className='w-screen'>
+        <div className="w-screen">
             <div
-                className='
+                className="
                     flex md:flex-row flex-col bg-stone-900 text-stone-100 
                     md:h-16 px-2 md:px-4 border-b-2 border-white select-none
                     whitespace-nowrap overflow-x-scroll no-scrollbar w-full 
                     pb-2 md:py-0
-                '
+                "
             >
-                <NavbarItem to='/'>
-                    <h3 className="uppercase text-white font-bold font-serif">
+                <NavbarItem to="/">
+                    <h3 className="lowercase text-white font-semibold">
                         à cordes
                     </h3>
                 </NavbarItem>
 
-                <div className='grow'></div>
+                <div className="grow"></div>
 
-                <NavbarItem to='/makers'>
+                <NavbarItem to="/makers">
                     <div className="flex flex-row space-x-2">
                         <img
-                            src='/icons/violin.svg'
+                            src="/icons/violin.svg"
                             className="
                                 invert h-4 my-auto
                             "
-                        >
-                        </img>
+                        ></img>
                         <p className="my-auto">Makers</p>
                     </div>
                 </NavbarItem>
 
                 {authenticated && (
                     <>
-                        <NavbarItem to='/cart'>
+                        <NavbarItem to="/cart">
                             <div className="flex flex-row space-x-2">
                                 <img
-                                    src='/icons/cart.svg'
+                                    src="/icons/cart.svg"
                                     className="
                                 invert h-6 my-auto
                             "
-                                >
-                                </img>
+                                ></img>
                                 <p className="my-auto">Cart</p>
                             </div>
                         </NavbarItem>
-                        <NavbarItem to='/'>
+                        <NavbarItem to="/">
                             <div className="flex flex-row space-x-2">
                                 <img
-                                    src='/icons/user.svg'
+                                    src="/icons/user.svg"
                                     className="
                                 invert opacity-80 h-4 my-auto
                             "
-                                >
-                                </img>
-                                <p className="my-auto">
-                                    User
-                                </p>
+                                ></img>
+                                <p className="my-auto">User</p>
                             </div>
                         </NavbarItem>
                     </>
                 )}
 
-                <NavbarItem to='/auth/login' onClick={logoutHandler}>
+                <NavbarItem to="/auth/login" onClick={logoutHandler}>
                     <div className="flex flex-row space-x-2">
                         <img
-                            src={`/icons/${authenticated ? 'logout' : 'user'}.svg`}
+                            src={`/icons/${
+                                authenticated ? "logout" : "user"
+                            }.svg`}
                             className="
                                 invert opacity-80 h-4 my-auto
                             "
-                        >
-                        </img>
+                        ></img>
                         <p className="my-auto">
-                            {authenticated ? 'Logout' : 'Login'}
+                            {authenticated ? "Logout" : "Login"}
                         </p>
                     </div>
                 </NavbarItem>
             </div>
-        </div >
+        </div>
     )
 }

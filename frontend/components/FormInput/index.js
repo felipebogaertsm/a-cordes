@@ -4,12 +4,17 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from "react"
 
 // Components:
-import { ButtonIconBg } from '..'
+import { ButtonIconBg } from ".."
 
-export default function FormInput({ type = 'text', value = '', onChange, ...props }) {
+export default function FormInput({
+    type = "text",
+    value = "",
+    onChange,
+    ...props
+}) {
     const [isPasswordShown, setIsPasswordShown] = useState(false)
     const [typeInput, setTypeInput] = useState(type)
 
@@ -17,9 +22,9 @@ export default function FormInput({ type = 'text', value = '', onChange, ...prop
 
     function passwordShowHideHandler(e) {
         if (isPasswordShown) {
-            setTypeInput('password')
+            setTypeInput("password")
         } else {
-            setTypeInput('text')
+            setTypeInput("text")
         }
 
         setIsPasswordShown(!isPasswordShown)
@@ -30,33 +35,35 @@ export default function FormInput({ type = 'text', value = '', onChange, ...prop
     }, [])
 
     return (
-        <div className='w-full'>
+        <div className="w-full">
             {props.label && (
                 <div>
                     <label>{props.label}</label>
                     <div className="mb-2"></div>
                 </div>
             )}
-            <div className='flex flex-row space-x-2'>
+            <div className="flex flex-row space-x-2">
                 <input
-                    className='
+                    className="
                     py-2 px-4 rounded-lg bg-stone-200 w-full border-2
                     border-amber-900 border-opacity-0
                     focus:border-opacity-100 transition-all duration-200
-                '
+                "
                     placeholder={props.placeholder}
                     type={typeInput}
                     onChange={(e) => onChange(e)}
                     ref={inputElement}
-                >
-                </input>
-                {
-                    type !== 'password' ? '' :
-                        <ButtonIconBg
-                            iconPath={`/icons/${isPasswordShown ? "eye_slash" : "eye"}.svg`}
-                            onClick={(e) => passwordShowHideHandler(e)}
-                        />
-                }
+                ></input>
+                {type !== "password" ? (
+                    ""
+                ) : (
+                    <ButtonIconBg
+                        iconPath={`/icons/${
+                            isPasswordShown ? "eye_slash" : "eye"
+                        }.svg`}
+                        onClick={(e) => passwordShowHideHandler(e)}
+                    />
+                )}
             </div>
         </div>
     )

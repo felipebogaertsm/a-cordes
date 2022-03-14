@@ -7,7 +7,7 @@
 import { combineReducers } from "redux"
 
 // Reducers:
-import { cartReducer } from './cart'
+import { cartReducer } from "./cart"
 import {
     productListReducer,
     productDetailsReducer,
@@ -16,7 +16,7 @@ import {
     productUpdateReducer,
     productReviewCreateReducer,
     productTopRatedReducer,
-} from './product'
+} from "./product"
 import {
     userLoginReducer,
     userRegisterReducer,
@@ -26,7 +26,7 @@ import {
     userDeleteReducer,
     userUpdateReducer,
     allSellerProfilesReducer,
-} from './user'
+} from "./user"
 import {
     orderCreateReducer,
     orderDetailsReducer,
@@ -34,7 +34,7 @@ import {
     orderListMyReducer,
     orderListReducer,
     orderDeliverReducer,
-} from './order'
+} from "./order"
 
 const reducer = combineReducers({
     productList: productListReducer,

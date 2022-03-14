@@ -5,9 +5,9 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Paths:
-export const BACKEND_URL = 'http://localhost:8000'
-export const INDEX_PATH = '/'
-export const LOGIN_PATH = '/auth/login'
+export const BACKEND_URL = "http://localhost:8000"
+export const INDEX_PATH = "/"
+export const LOGIN_PATH = "/auth/login"
 
 // Misc:
-export const TOKEN_NAME = 'acordes.token'
+export const TOKEN_NAME = "acordes.token"

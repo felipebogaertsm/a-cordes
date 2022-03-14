@@ -6,12 +6,11 @@
 
 export default function Loader({ ...props }) {
     return (
-        <div {...props} className='h-full w-full'>
+        <div {...props} className="h-full w-full">
             <img
                 className="h-full w-full mx-auto max-w-[100px] animate-spin"
-                src='/icons/loader.svg'
-            >
-            </img>
+                src="/icons/loader.svg"
+            ></img>
         </div>
     )
 }

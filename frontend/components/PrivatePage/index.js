@@ -8,10 +8,7 @@ import { useRouter } from "next/router"
 import { useContext } from "react"
 
 // Components:
-import {
-    Button,
-    Loader,
-} from '../../components'
+import { Button, Loader } from "../../components"
 
 // Constants:
 import { LOGIN_PATH } from "../../constants"
@@ -26,10 +23,8 @@ export default function PrivatePage({ children, ...props }) {
 
     return (
         <div {...props}>
-            {(authenticated && !loading && !error) ? (
-                <div>
-                    {children}
-                </div>
+            {authenticated && !loading && !error ? (
+                <div>{children}</div>
             ) : loading ? (
                 <div>
                     <Loader />
@@ -39,15 +34,17 @@ export default function PrivatePage({ children, ...props }) {
                     <div className="flex flex-col items-center space-y-4">
                         <h3>Please login to access this page.</h3>
                         <div></div>
-                        <div className='w-min'>
-                            <Button primary onClick={(e) => router.push(LOGIN_PATH)}>
+                        <div className="w-min">
+                            <Button
+                                primary
+                                onClick={(e) => router.push(LOGIN_PATH)}
+                            >
                                 Login
                             </Button>
                         </div>
-                    </div >
-                </div >
-            )
-            }
-        </div >
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }

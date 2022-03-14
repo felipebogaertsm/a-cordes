@@ -5,12 +5,13 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // APIs:
-import { verifyToken } from './apis/auth'
+import { verifyToken } from "./apis/auth"
 
 // Constants:
-import { TOKEN_NAME, INDEX_PATH, LOGIN_PATH } from '../constants'
+import { TOKEN_NAME, INDEX_PATH, LOGIN_PATH } from "../constants"
 
-function verifyAuth(ctx) { // in common to both private and public routes
+function verifyAuth(ctx) {
+    // in common to both private and public routes
     const token = ctx.req.cookies[TOKEN_NAME]
 
     let authenticated = false
@@ -35,12 +36,12 @@ export async function privateRoute(ctx) {
             redirect: {
                 destination: LOGIN_PATH,
                 permanent: false,
-            }
+            },
         }
     }
 
     return {
-        props: {}
+        props: {},
     }
 }
 
@@ -53,11 +54,11 @@ export async function publicRoute(ctx) {
             redirect: {
                 destination: INDEX_PATH,
                 permanent: true,
-            }
+            },
         }
     }
 
     return {
-        props: {}
+        props: {},
     }
 }

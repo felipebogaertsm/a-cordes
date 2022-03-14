@@ -5,10 +5,10 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useEffect, useState } from "react"
-import Link from 'next/link'
+import Link from "next/link"
 
 // Components:
-import { Card } from '..'
+import { Card } from ".."
 
 export default function GriddedProductListing({ products }) {
     const [productList, setProductList] = useState(products)
@@ -37,15 +37,14 @@ export default function GriddedProductListing({ products }) {
                                     border-2 border-amber-900
                                 "
                                     src={product.image}
-                                >
-                                </img>
+                                ></img>
                                 <div className="flex flex-col space-y-1">
                                     <div className="flex-row flex">
-                                        <h4>
-                                            {product.name}
-                                        </h4>
+                                        <h4>{product.name}</h4>
                                         <div className="grow"></div>
-                                        <h4 className="text-stone-600">${Number(product.price)}</h4>
+                                        <h4 className="text-stone-600">
+                                            ${Number(product.price)}
+                                        </h4>
                                     </div>
                                     <div className="flex-row">
                                         <h6>{product.seller.name}</h6>

@@ -7,21 +7,20 @@
 export default function buttonIconBg({ iconPath, ...props }) {
     return (
         <div
-            className='
+            className="
                 bg-stone-200 rounded-lg w-14 h-10 mx-auto my-auto
                 flex content-center border-transparent border-2 group
                 active:border-amber-900 transition-all duration-100
-            '
+            "
             {...props}
         >
-            <button className='mx-auto'>
+            <button className="mx-auto">
                 <img
-                    className='
+                    className="
                         w-5 h-5 group-hover:scale-110 transition-all duration-100
-                    '
+                    "
                     src={iconPath}
-                >
-                </img>
+                ></img>
             </button>
         </div>
     )

@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
     :root {
         font-size: 16px;
         @apply bg-zinc-100 text-zinc-700;
@@ -14,9 +13,14 @@
         :root {
             font-size: 14px;
         }
-      }
+    }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         @apply select-none uppercase tracking-wider font-semibold;
     }
 
@@ -39,25 +43,24 @@
     h5 {
         @apply text-lg;
     }
-    
+
     h6 {
         @apply text-base;
     }
 
     a {
-        @apply text-amber-900 font-semibold hover:underline
+        @apply text-amber-900 font-semibold hover:underline;
     }
-
 }
 
 @layer utilities {
     /* Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
 
     .no-scrollbar {
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 }

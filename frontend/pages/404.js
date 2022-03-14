@@ -11,10 +11,8 @@ export default function Page() {
     const router = useRouter()
 
     useEffect(() => {
-        router.push('/')
+        router.push("/")
     }, [])
 
-    return (
-        <div>404 - Page not found</div>
-    )
+    return <div>404 - Page not found</div>
 }

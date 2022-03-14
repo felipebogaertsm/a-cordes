@@ -15,20 +15,25 @@ import {
     CART_GET_ALL_REQUEST,
     CART_GET_ALL_FAIL,
     CART_CLEAR_ITEMS,
-} from '../types/cart';
+} from "../types/cart"
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
     switch (action.type) {
         case CART_ADD_ITEM_REQUEST:
             return { loading: true, cartItems: [...state.cartItems] }
         case CART_ADD_ITEM_SUCCESS:
-            return { cartItems: [...state.cartItems, action.payload], success: true }
+            return {
+                cartItems: [...state.cartItems, action.payload],
+                success: true,
+            }
         case CART_ADD_ITEM_FAIL:
             return { error: action.payload, cartItems: [...state.cartItems] }
         case CART_DELETE_ITEM_REQUEST:
             return { loading: true, cartItems: [...state.cartItems] }
         case CART_DELETE_ITEM_SUCCESS:
-            const newCartItems = [...state.cartItems].filter(item => action.payload._id != item._id)
+            const newCartItems = [...state.cartItems].filter(
+                (item) => action.payload._id != item._id
+            )
             return { cartItems: [...newCartItems] }
         case CART_DELETE_ITEM_FAIL:
             return { error: action.payload, cartItems: [...state.cartItems] }
@@ -41,6 +46,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         case CART_CLEAR_ITEMS:
             return { cartItems: [] }
         default:
-            return state;
+            return state
     }
 }

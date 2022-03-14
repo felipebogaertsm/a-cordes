@@ -6,8 +6,8 @@
 
 export default function Heading(props) {
     return (
-        <div className='py-6 px-4'>
+        <div className="py-6 px-4">
             <h1>{props.children}</h1>
         </div>
     )
-} 
+}

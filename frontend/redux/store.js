@@ -4,16 +4,16 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { createStore, applyMiddleware, compose } from 'redux'
-import { createWrapper } from 'next-redux-wrapper'
-import thunk from 'redux-thunk'
-import reducer from './reducers'
+import { createStore, applyMiddleware, compose } from "redux"
+import { createWrapper } from "next-redux-wrapper"
+import thunk from "redux-thunk"
+import reducer from "./reducers"
 
 const middleware = [thunk]
 
 const bindMiddlware = (middleware) => {
-    if (process.env.NODE_ENV !== 'production') {
-        const { composeWithDevTools } = require('redux-devtools-extension')
+    if (process.env.NODE_ENV !== "production") {
+        const { composeWithDevTools } = require("redux-devtools-extension")
         return composeWithDevTools(applyMiddleware(...middleware))
     }
 
@@ -22,6 +22,7 @@ const bindMiddlware = (middleware) => {
 
 const initialState = {}
 
-const store = () => createStore(reducer, initialState, bindMiddlware([...middleware]))
+const store = () =>
+    createStore(reducer, initialState, bindMiddlware([...middleware]))
 
 export const storeWrapper = createWrapper(store, { debug: false })

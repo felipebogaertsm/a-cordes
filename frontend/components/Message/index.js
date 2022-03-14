@@ -5,9 +5,7 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Components:
-import {
-    Card,
-} from '../'
+import { Card } from "../"
 
 export default function Message({ children, ...props }) {
     return (
@@ -17,20 +15,17 @@ export default function Message({ children, ...props }) {
                 transition-all duration-100 hover:brightness-[105%]
             "
         >
-            <div className='flex flex-row space-x-4' {...props}>
+            <div className="flex flex-row space-x-4" {...props}>
                 <div>
                     <img
-                        className='
+                        className="
                             h-6 aspect-square object-cover 
                             group-hover:scale-110 transition-all duration-200
-                        '
-                        src='/icons/error.svg'
-                    >
-                    </img>
+                        "
+                        src="/icons/error.svg"
+                    ></img>
                 </div>
-                <div>
-                    {children}
-                </div>
+                <div>{children}</div>
             </div>
         </div>
     )

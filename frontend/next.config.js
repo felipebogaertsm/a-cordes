@@ -1,8 +1,8 @@
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === "production"
 
 module.exports = {
-  reactStrictMode: true,
-  env: {
-    SERVER_URL: process.env.SERVER_URL,
-  }
+    reactStrictMode: true,
+    env: {
+        SERVER_URL: process.env.SERVER_URL,
+    },
 }

@@ -4,21 +4,21 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import Button from './Button'
-import ButtonIconBg from './ButtonIconBg'
-import Card from './Card'
-import Footer from './Footer'
-import FormInput from './FormInput'
-import GriddedProductListing from './GriddedProductListing'
-import Heading from './Heading'
-import Loader from './Loader'
-import Message from './Message'
-import SearchInput from './SearchInput'
-import Navbar from './Navbar'
-import NavbarItem from './NavbarItem'
-import NavbarPage from './NavbarPage'
-import PrivatePage from './PrivatePage'
-import ProductListing from './ProductListing'
+import Button from "./Button"
+import ButtonIconBg from "./ButtonIconBg"
+import Card from "./Card"
+import Footer from "./Footer"
+import FormInput from "./FormInput"
+import GriddedProductListing from "./GriddedProductListing"
+import Heading from "./Heading"
+import Loader from "./Loader"
+import Message from "./Message"
+import SearchInput from "./SearchInput"
+import Navbar from "./Navbar"
+import NavbarItem from "./NavbarItem"
+import NavbarPage from "./NavbarPage"
+import PrivatePage from "./PrivatePage"
+import ProductListing from "./ProductListing"
 
 export {
     Button,

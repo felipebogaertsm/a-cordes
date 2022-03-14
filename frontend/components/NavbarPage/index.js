@@ -5,18 +5,13 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Components:
-import {
-    Navbar,
-    Footer,
-} from '..'
+import { Navbar, Footer } from ".."
 
 export default function NavbarPage(props) {
     return (
         <div>
             <Navbar />
-            <div className='w-full h-full'>
-                {props.children}
-            </div>
+            <div className="w-full h-full">{props.children}</div>
             <Footer />
         </div>
     )

@@ -4,9 +4,9 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect, useContext } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useState, useEffect, useContext } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
 // Components:
 import {
@@ -16,24 +16,22 @@ import {
     Message,
     NavbarPage,
     FormInput,
-} from '../../components'
+} from "../../components"
 
 // Contexts:
-import {
-    AuthContext
-} from '../../contexts/auth'
+import { AuthContext } from "../../contexts/auth"
 
 export default function Login() {
     const router = useRouter()
 
     const { login, authenticated, loading, error } = useContext(AuthContext)
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     useEffect(() => {
         if (authenticated) {
-            router.push('/')
+            router.push("/")
         }
     }, [authenticated])
 
@@ -43,37 +41,53 @@ export default function Login() {
 
     return (
         <NavbarPage>
-            <div className='px-6 py-14 flex flex-row'>
+            <div className="px-6 py-14 flex flex-row">
                 <Heading>Login</Heading>
             </div>
 
-            <div className='p-10 max-w-[500px] mx-auto flex flex-col space-y-4'>
-                <div className='space-y-4'>
-                    <FormInput label='Email' onChange={(e) => setEmail(e.target.value)} />
-                    <FormInput label='Password' type='password' onChange={(e) => setPassword(e.target.value)} />
+            <div className="p-10 max-w-[500px] mx-auto flex flex-col space-y-4">
+                <div className="space-y-4">
+                    <FormInput
+                        label="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <FormInput
+                        label="Password"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                 </div>
 
-                <div className='pt-2 divide-y-2 w-min whitespace-nowrap mx-auto'>
-                    <div className='mx-auto'>
-                        <Button onClick={(e) => router.push('/auth/signup')} tertiary>
+                <div className="pt-2 divide-y-2 w-min whitespace-nowrap mx-auto">
+                    <div className="mx-auto">
+                        <Button
+                            onClick={(e) => router.push("/auth/signup")}
+                            tertiary
+                        >
                             Don't have an account yet? Sign up
                         </Button>
                     </div>
-                    <div className='mx-auto'>
-                        <Button onClick={(e) => router.push('/')} tertiary>Forgot your password?</Button>
+                    <div className="mx-auto">
+                        <Button onClick={(e) => router.push("/")} tertiary>
+                            Forgot your password?
+                        </Button>
                     </div>
                 </div>
 
-                <div className='pt-2'>
+                <div className="pt-2">
                     <Button onClick={(e) => loginHandler(e)}>
-                        <div className='flex flex-row space-x-2'>
+                        <div className="flex flex-row space-x-2">
                             <p>Log in</p>
-                            {loading && <div className='invert'><Loader /></div>}
+                            {loading && (
+                                <div className="invert">
+                                    <Loader />
+                                </div>
+                            )}
                         </div>
                     </Button>
                 </div>
 
-                <div>{error ? (<Message>{error}</Message>) : ''}</div>
+                <div>{error ? <Message>{error}</Message> : ""}</div>
             </div>
         </NavbarPage>
     )

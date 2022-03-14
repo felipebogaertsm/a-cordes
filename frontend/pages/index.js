@@ -4,11 +4,11 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 
 // Actions:
-import { listProducts } from '../redux/actions/product'
+import { listProducts } from "../redux/actions/product"
 
 // Components:
 import {
@@ -18,12 +18,12 @@ import {
     Message,
     SearchInput,
     NavbarPage,
-} from '../components'
+} from "../components"
 
 export default function Home(history) {
     const dispatch = useDispatch()
 
-    const productList = useSelector(state => state.productList)
+    const productList = useSelector((state) => state.productList)
     const { error, loading, products, page, pages } = productList
 
     let keyword
@@ -34,18 +34,16 @@ export default function Home(history) {
 
     return (
         <NavbarPage>
-
-            <div className='px-6 py-14'>
-
-                <div className='flex flex-row'>
+            <div className="px-6 py-14">
+                <div className="flex flex-row">
                     <Heading>Latest products</Heading>
-                    <div className='grow'></div>
+                    <div className="grow"></div>
                     <SearchInput />
                 </div>
 
-                <div className='mt-20 px-6 w-full'>
+                <div className="mt-20 px-6 w-full">
                     {loading ? (
-                        <div className='w-full mx-auto'>
+                        <div className="w-full mx-auto">
                             <Loader />
                         </div>
                     ) : error ? (
@@ -56,9 +54,7 @@ export default function Home(history) {
                         )
                     )}
                 </div>
-
             </div>
-
         </NavbarPage>
     )
 }

@@ -5,19 +5,16 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Utils:
-import { getClient } from "../../utils/axios";
+import { getClient } from "../../utils/axios"
 
 export async function verifyToken(token) {
     const client = getClient()
 
-    return await client.post(
-        `/api/accounts/token/verify/`,
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            token: token,
+    return await client.post(`/api/accounts/token/verify/`, {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
-    )
+        token: token,
+    })
 }

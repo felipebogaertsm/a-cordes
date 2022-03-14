@@ -4,12 +4,12 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useContext, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
+import { useEffect, useContext, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/router"
 
 // Actions:
-import { clearCart, getCart, removeFromCart } from '../../redux/actions/cart'
+import { clearCart, getCart, removeFromCart } from "../../redux/actions/cart"
 
 // Components:
 import {
@@ -20,15 +20,13 @@ import {
     NavbarPage,
     ProductListing,
     PrivatePage,
-} from '../../components'
+} from "../../components"
 
 // Contexts:
-import {
-    AuthContext
-} from '../../contexts/auth'
+import { AuthContext } from "../../contexts/auth"
 
 // Utilities:
-import { stringToDate } from '../../utils/datetime'
+import { stringToDate } from "../../utils/datetime"
 
 export default function Cart() {
     const dispatch = useDispatch()
@@ -37,7 +35,7 @@ export default function Cart() {
 
     const router = useRouter()
 
-    const { loading, error, cartItems } = useSelector(state => state.cart)
+    const { loading, error, cartItems } = useSelector((state) => state.cart)
 
     useEffect(() => {
         dispatch(getCart())
@@ -49,7 +47,7 @@ export default function Cart() {
     }
 
     function checkoutHandler(e) {
-        router.push('/order')
+        router.push("/order")
     }
 
     function removeFromCartHandler(e, id) {
@@ -61,38 +59,64 @@ export default function Cart() {
     return (
         <NavbarPage>
             <PrivatePage>
-                <div className='px-6 py-14'>
-                    <div className='flex flex-row space-x-2'>
+                <div className="px-6 py-14">
+                    <div className="flex flex-row space-x-2">
                         <Heading>Cart</Heading>
-                        <div className='grow'></div>
-                        <div className='w-max my-auto'>
-                            <Button onClick={(e) => clearCartHandler(e)} secondary>Clear cart</Button>
+                        <div className="grow"></div>
+                        <div className="w-max my-auto">
+                            <Button
+                                onClick={(e) => clearCartHandler(e)}
+                                secondary
+                            >
+                                Clear cart
+                            </Button>
                         </div>
-                        <div className='w-max my-auto'>
-                            <Button onClick={(e) => checkoutHandler(e)}>Go to Checkout</Button>
+                        <div className="w-max my-auto">
+                            <Button onClick={(e) => checkoutHandler(e)}>
+                                Go to Checkout
+                            </Button>
                         </div>
                     </div>
 
-                    <div className='mt-10 px-6 w-full space-y-4'>
-                        {loading && <div className='mx-auto'><Loader /></div>}
+                    <div className="mt-10 px-6 w-full space-y-4">
+                        {loading && (
+                            <div className="mx-auto">
+                                <Loader />
+                            </div>
+                        )}
 
                         {error && <Message>{error}</Message>}
 
-                        {!(authenticated || loadingAuth) && <Message>You must be logged in to access this page.</Message>}
+                        {!(authenticated || loadingAuth) && (
+                            <Message>
+                                You must be logged in to access this page.
+                            </Message>
+                        )}
 
                         {Array.isArray(cartItems) ? (
                             cartItems.length === 0 ? (
-                                <div className='mx-auto w-max space-y-4 mt-20'>
-                                    <p className='text-xl'>No items in your cart.</p>
-                                    <Button onClick={(e) => router.push('/')}>Continue shopping</Button>
+                                <div className="mx-auto w-max space-y-4 mt-20">
+                                    <p className="text-xl">
+                                        No items in your cart.
+                                    </p>
+                                    <Button onClick={(e) => router.push("/")}>
+                                        Continue shopping
+                                    </Button>
                                 </div>
                             ) : (
-                                <ProductListing items={cartItems} removeHandler={(e, id) => removeFromCartHandler(e, id)} />
+                                <ProductListing
+                                    items={cartItems}
+                                    removeHandler={(e, id) =>
+                                        removeFromCartHandler(e, id)
+                                    }
+                                />
                             )
-                        ) : <div></div>}
+                        ) : (
+                            <div></div>
+                        )}
                     </div>
                 </div>
             </PrivatePage>
-        </NavbarPage >
+        </NavbarPage>
     )
 }
