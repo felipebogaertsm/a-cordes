@@ -39,7 +39,11 @@ export function AuthProvider({ children }) {
                 verifyToken(token)
                 setAuthenticated(true)
             } catch (err) {
-                setError(err)
+                setError(
+                    err.response && err.response.data.detail
+                        ? err.response.data.detail
+                        : err.message
+                )
             }
 
             setLoading(false)
@@ -75,8 +79,12 @@ export function AuthProvider({ children }) {
             setAuthenticated(true)
 
             router.push(INDEX_PATH)
-        } catch (error) {
-            setError(error.message)
+        } catch (err) {
+            setError(
+                err.response && err.response.data.detail
+                    ? err.response.data.detail
+                    : err.message
+            )
             setAuthenticated(false)
             setUser(null)
 

@@ -20,7 +20,7 @@ import {
     NavbarPage,
 } from "../components"
 
-export default function Home(history) {
+export default function Home() {
     const dispatch = useDispatch()
 
     const productList = useSelector((state) => state.productList)

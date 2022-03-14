@@ -5,7 +5,6 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useState, useEffect, useContext } from "react"
-import Link from "next/link"
 import { useRouter } from "next/router"
 
 // Components:
@@ -21,19 +20,20 @@ import {
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
 
+// Services:
+import { publicRoute } from "../../services/auth"
+
+export async function getServerSideProps(ctx) {
+    return await publicRoute(ctx)
+}
+
 export default function Login() {
     const router = useRouter()
 
-    const { login, authenticated, loading, error } = useContext(AuthContext)
+    const { login, loading, error } = useContext(AuthContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    useEffect(() => {
-        if (authenticated) {
-            router.push("/")
-        }
-    }, [authenticated])
 
     async function loginHandler(e) {
         await login(email, password)
