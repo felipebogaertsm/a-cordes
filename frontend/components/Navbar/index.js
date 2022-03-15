@@ -15,13 +15,7 @@ import { NavbarItem } from ".."
 import { AuthContext } from "../../contexts/auth"
 
 export default function Navbar() {
-    const dispatch = useDispatch()
-
     const { authenticated, logout } = useContext(AuthContext)
-
-    function logoutHandler() {
-        logout()
-    }
 
     return (
         <div className="w-screen">
@@ -80,7 +74,7 @@ export default function Navbar() {
                     </>
                 )}
 
-                <NavbarItem to="/auth/login" onClick={logoutHandler}>
+                <NavbarItem to="/auth/login" onClick={() => logout()}>
                     <div className="flex flex-row space-x-2">
                         <img
                             src={`/icons/${

@@ -7,10 +7,10 @@
 // Components:
 import { FormInput, ButtonIconBg } from "../../components"
 
-export default function searchInput(props) {
+export default function searchInput({ ...props }) {
     return (
         <div className="my-auto flex flex-row space-x-2">
-            <FormInput placeholder="Search products" />
+            <FormInput placeholder="Search products" {...props} />
             <ButtonIconBg iconPath="/icons/search.svg" />
         </div>
     )

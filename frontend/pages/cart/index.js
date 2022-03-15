@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useContext, useState } from "react"
+import { useEffect, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 
@@ -24,9 +24,6 @@ import {
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
-
-// Utilities:
-import { stringToDate } from "../../utils/datetime"
 
 export default function Cart() {
     const dispatch = useDispatch()

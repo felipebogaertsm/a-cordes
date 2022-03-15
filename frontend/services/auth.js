@@ -10,25 +10,23 @@ import { verifyToken } from "./apis/auth"
 // Constants:
 import { TOKEN_NAME, INDEX_PATH, LOGIN_PATH } from "../constants"
 
-function verifyAuth(ctx) {
+async function verifyAuth(ctx) {
     // in common to both private and public routes
     const token = ctx.req.cookies[TOKEN_NAME]
-
     let authenticated = false
 
     try {
-        verifyToken(token)
-
+        await verifyToken(token)
         authenticated = true
-    } catch (error) {
-        // pass, user not authenticated
+    } catch (err) {
+        // pass
     }
 
     return authenticated
 }
 
 export async function privateRoute(ctx) {
-    const authenticated = verifyAuth(ctx)
+    const authenticated = await verifyAuth(ctx)
 
     if (!authenticated) {
         return {
@@ -46,7 +44,7 @@ export async function privateRoute(ctx) {
 }
 
 export async function publicRoute(ctx) {
-    const authenticated = verifyAuth(ctx)
+    const authenticated = await verifyAuth(ctx)
 
     if (authenticated) {
         return {

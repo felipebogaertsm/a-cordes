@@ -23,10 +23,11 @@ import {
 export default function Home() {
     const dispatch = useDispatch()
 
-    const productList = useSelector((state) => state.productList)
-    const { error, loading, products, page, pages } = productList
+    const { error, loading, products, page, pages } = useSelector(
+        (state) => state.productList
+    )
 
-    let keyword
+    const [keyword, setKeyword] = useState("")
 
     useEffect(() => {
         dispatch(listProducts(keyword))
@@ -38,7 +39,7 @@ export default function Home() {
                 <div className="flex flex-row">
                     <Heading>Latest products</Heading>
                     <div className="grow"></div>
-                    <SearchInput />
+                    <SearchInput onChange={(e) => setKeyword(e.target.value)} />
                 </div>
 
                 <div className="mt-20 px-6 w-full">
