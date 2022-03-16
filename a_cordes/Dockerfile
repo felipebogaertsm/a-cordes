@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.9
 LABEL maintainer="Felipe Bogaerts de Mattos"
 
 ENV PYTHONUNBUFFERED 1

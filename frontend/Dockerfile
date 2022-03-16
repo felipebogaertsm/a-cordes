@@ -13,7 +13,7 @@ FROM node:17-alpine as builder
 WORKDIR /frontend
 COPY . .
 COPY --from=dependencies /frontend/node_modules ./node_modules
-RUN yarn build
+RUN npm run build
 
 # Entrypoint:
 FROM node:17-alpine as runner
