@@ -12,4 +12,4 @@ python3 manage.py migrate --noinput
 python3 manage.py collectstatic --noinput
 
 echo "STARTING GUNICORN SERVER..."
-gunicorn a_cordes.wsgi:application --bind :8080
+gunicorn config.wsgi:application --bind :8080

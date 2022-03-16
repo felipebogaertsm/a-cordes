@@ -6,8 +6,8 @@
 
 #!/bin/bash -v
 
-# Deactivating Nginx:
-sudo systemctl stop nginx
+# Services:
+sudo systemctl start docker
 sudo systemctl stop a_cordes.service
 
 # Moving important files to the user folder
@@ -26,20 +26,8 @@ set +a
 
 sudo chown -R admin:www-data /home/admin/projects/A-Cordes/
 
-# Installing requirements:
-pip3 install -r /home/admin/projects/A-Cordes/a_cordes/requirements.txt
-
-# Collecting static files for Django:
-cd /home/admin/projects/A-Cordes/a_cordes
-python3 /home/admin/projects/A-Cordes/a_cordes/manage.py collectstatic --noinput
-python3 /home/admin/projects/A-Cordes/a_cordes/manage.py migrate --noinput
-
 cd /home/admin
 
 # Starting Nginx server and Gunicorn service
-sudo systemctl start nginx
-sudo systemctl start a_cordes.service
-
-# Restarting and refreshing the server
-sudo systemctl restart nginx
+sudo systemctl restart docker
 sudo systemctl restart a_cordes.service
