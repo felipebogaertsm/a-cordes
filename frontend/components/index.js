@@ -8,6 +8,7 @@ import Button from "./Button"
 import ButtonIconBg from "./ButtonIconBg"
 import Card from "./Card"
 import Footer from "./Footer"
+import FormContainer from "./FormContainer"
 import FormInput from "./FormInput"
 import GriddedProductListing from "./GriddedProductListing"
 import Heading from "./Heading"
@@ -25,6 +26,7 @@ export {
     ButtonIconBg,
     Card,
     Footer,
+    FormContainer,
     FormInput,
     GriddedProductListing,
     Heading,
