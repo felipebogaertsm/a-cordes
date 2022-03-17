@@ -1,0 +1,43 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: ingress-hosts
+    namespace: a-cordes
+    annotations:
+        kubernetes.io/ingress.class: "nginx"
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        nginx.ingress.kubernetes.io/proxy-body-size: 25m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "36000"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "36000"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "36000"
+        nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: "36000"
+spec:
+    tls:
+        - hosts:
+              - "acordes.shop"
+          secretName: "a-cordes-tls"
+    rules:
+        - host: acordes.shop
+          http:
+              paths:
+                  - pathType: "Prefix"
+                    path: "/"
+                    backend:
+                        service:
+                            name: a-cordes-frontend
+                            port:
+                                number: 3000
+                  - pathType: "Prefix"
+                    path: /api
+                    backend:
+                        service:
+                            name: a-cordes-backend
+                            port:
+                                number: 8080
+                  - pathType: "Prefix"
+                    path: /admin
+                    backend:
+                        service:
+                            name: a-cordes-backend
+                            port:
+                                number: 8080

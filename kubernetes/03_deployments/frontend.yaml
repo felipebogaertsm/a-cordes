@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: a-cordes-frontend
+    namespace: a-cordes
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: a-cordes-frontend
+    strategy:
+        rollingUpdate:
+            maxSurge: 1
+            maxUnavailable: 0
+        type: RollingUpdate
+    template:
+        metadata:
+            labels:
+                app: a-cordes-frontend
+        spec:
+            containers:
+                - image: registry.gitlab.com/rvna_finlogic/finlogic-webapp/frontend@sha256:6a1d0d4a5f6ee2309c1d7b15618d13eabaed462776b7be7f0cd09bde3638c7fd
+                  imagePullPolicy: Always
+                  name: a-cordes-frontend
+                  ports:
+                      - containerPort: 80
+                        name: react
+            dnsPolicy: ClusterFirst
+            imagePullSecrets:
+                - name: registry-credentials
+            securityContext: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: a-cordes-frontend
+    namespace: a-cordes
+spec:
+    type: ClusterIP
+    selector:
+        app: a-cordes-frontend
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 80 # must match the deployment file's port

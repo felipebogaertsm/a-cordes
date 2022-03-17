@@ -40,3 +40,6 @@ media/
 # Builds
 build/
 dist/
+
+# Kubernetes
+kubeconfig.yaml
