@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: docker:latest
+    env:
+      BACKEND_IMAGE_NAME: a_cordes_backend
+      FRONTEND_IMAGE_NAME: a_cordes_frontend
+      TAG: latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Preparing environment
+      run: |
+        cd a_cordes
+    - name: Login to Docker registry
+      run: |
+        docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" $DOCKER_REGISTRY 
+    - name: Backend build and push
+      run: |
+        docker build --pull -t "${BACKEND_IMAGE_NAME}:${TAG}" .
+        docker push ${BACKEND_IMAGE_NAME}:${TAG}
+    - name: Frontend build and push
+      run: |
+        docker build --pull -t "${FRONTENT_IMAGE_NAME}:${TAG}" .
+        docker push ${FRONTENT_IMAGE_NAME}:${TAG}
+        
