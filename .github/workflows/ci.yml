@@ -23,7 +23,7 @@ jobs:
         cd a_cordes
     - name: Login to Docker registry
       run: |
-        docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" $DOCKER_REGISTRY 
+        docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" 
     - name: Backend build and push
       run: |
         docker build --pull -t "${BACKEND_IMAGE_NAME}:${TAG}" .
