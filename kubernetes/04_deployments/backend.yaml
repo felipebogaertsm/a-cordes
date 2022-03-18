@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: a-cordes-backend
+  namespace: a-cordes
+  annotations:
+    config.nsm.nginx.com/default-egress-allowed: "true"
+    config.nsm.nginx.com/enable-egress: "true"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: a-cordes-backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: a-cordes-backend
+    spec:
+      containers:
+        - image: felipebogaertsm/a_cordes_backend@sha256:e00c1c7e569d48444d1fcca1414da26bcec6aaf71a4458cea4c02f47b2f2ed5c
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: a-cordes-secrets
+          name: a-cordes-backend
+          ports:
+            - containerPort: 8080
+              name: gunicorn
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-credentials
+      securityContext: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: a-cordes-backend
+    namespace: a-cordes
+spec:
+    type: ClusterIP
+    selector:
+        app: a-cordes-backend
+    ports:
+        - protocol: TCP
+          port: 8080
+          targetPort: 8080 # must match the deployment's port
