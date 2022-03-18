@@ -22,7 +22,7 @@ spec:
                 app: a-cordes-backend
         spec:
             containers:
-                - image: registry.gitlab.com/rvna_finlogic/finlogic-webapp/backend@sha256:f602019768b7514030e63b5d9b3cd2afa46f5c45de76cf1b1e4e69bb1cd287b1
+                - image: felipebogaertsm/a_cordes_backend@sha256:e00c1c7e569d48444d1fcca1414da26bcec6aaf71a4458cea4c02f47b2f2ed5c
                   imagePullPolicy: Always
                   envFrom:
                       - secretRef:

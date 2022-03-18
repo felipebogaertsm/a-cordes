@@ -19,7 +19,7 @@ spec:
                 app: a-cordes-frontend
         spec:
             containers:
-                - image: registry.gitlab.com/rvna_finlogic/finlogic-webapp/frontend@sha256:6a1d0d4a5f6ee2309c1d7b15618d13eabaed462776b7be7f0cd09bde3638c7fd
+                - image: felipebogaertsm/a_cordes_frontend@sha256:3f81d109e58046ec35f70967308370087642a7d4de8e85ff51eb286fbbc09588
                   imagePullPolicy: Always
                   name: a-cordes-frontend
                   ports:

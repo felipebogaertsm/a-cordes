@@ -27,10 +27,10 @@ jobs:
         docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" 
     - name: Backend build and push
       run: |
-        docker build --pull -t "${BACKEND_IMAGE_NAME}:${TAG}" .
-        docker push ${BACKEND_IMAGE_NAME}:${TAG}
+        docker build --pull -t "${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}" .
+        docker push ${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}
     - name: Frontend build and push
       run: |
-        docker build --pull -t "${FRONTENT_IMAGE_NAME}:${TAG}" .
-        docker push ${FRONTENT_IMAGE_NAME}:${TAG}
+        docker build --pull -t "${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}" .
+        docker push ${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}
         
