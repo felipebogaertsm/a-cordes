@@ -23,6 +23,7 @@ jobs:
         cd a_cordes
     - name: Login to Docker registry
       run: |
+        echo "$DOCKER_USER"
         docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD" 
     - name: Backend build and push
       run: |
