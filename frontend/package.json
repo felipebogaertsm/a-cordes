@@ -1,6 +1,6 @@
 {
     "name": "frontend",
-    "proxy": "http://localhost:8000",
+    "proxy": "http://a-cordes-backend:8000",
     "private": true,
     "scripts": {
         "dev": "next dev",

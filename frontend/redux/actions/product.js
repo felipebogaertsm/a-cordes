@@ -1,4 +1,9 @@
 import axios from "axios"
+
+// Constants:
+import { getClient } from "../../utils/axios"
+
+// Types:
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -23,14 +28,16 @@ import {
     PRODUCT_TOP_FAIL,
 } from "../types/product"
 
+const client = getClient()
+
 export const listProducts =
     (keyword = "") =>
     async (dispatch) => {
         try {
             dispatch({ type: PRODUCT_LIST_REQUEST })
 
-            const { data } = await axios.get(
-                `${process.env.SERVER_URL}/api/products/all/?keyword=${keyword}`
+            const { data } = await client.get(
+                `/api/products/all/?keyword=${keyword}`
             )
 
             dispatch({
