@@ -14,7 +14,7 @@ COPY ./scripts /scripts
 
 RUN chmod +x /scripts/*
 
-EXPOSE 8080
+EXPOSE 8000
 
 COPY ./scripts/entrypoint.sh /scripts
 ENTRYPOINT ["sh", "/scripts/entrypoint.sh"]

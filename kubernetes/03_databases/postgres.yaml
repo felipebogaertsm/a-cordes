@@ -12,7 +12,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /data/a-cordes-postgres-pv
+    path: /data/postgres-pv
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
         - name: a-cordes-postgres-container
-          image: postgres:14
+          image: postgres:13-alpine
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -68,7 +68,7 @@ spec:
             - containerPort: 5432
           volumeMounts:
             - name: postgres-volume-mount
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgres/data
       volumes:
         - name: postgres-volume-mount
           persistentVolumeClaim:

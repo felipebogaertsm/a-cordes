@@ -23,7 +23,7 @@ spec:
                   imagePullPolicy: Always
                   name: a-cordes-frontend
                   ports:
-                      - containerPort: 80
+                      - containerPort: 3000
                         name: react
             dnsPolicy: ClusterFirst
             imagePullSecrets:
@@ -43,4 +43,4 @@ spec:
     ports:
         - protocol: TCP
           port: 3000
-          targetPort: 80 # must match the deployment file's port
+          targetPort: 3000 # must match the deployment file's port

@@ -1,15 +1,15 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-    name: a-cordes-letsencrypt
-    namespace: a-cordes
+  name: a-cordes-letsencrypt
+  namespace: a-cordes
 spec:
-    acme:
-        server: https://acme-v02.api.letsencrypt.org/directory
-        email: felipebogaerts@gmail.com
-        privateKeySecretRef:
-            name: a-cordes-letsencrypt
-        solvers:
-            - http01:
-                  ingress:
-                      class: nginx
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: felipebogaerts@gmail.com
+    privateKeySecretRef:
+      name: a-cordes-letsencrypt
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
