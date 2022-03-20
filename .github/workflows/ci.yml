@@ -29,6 +29,6 @@ jobs:
       run: |
         cd frontend
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTENT_IMAGE_NAME}:${TAG}" .
-        docker push ${{ secrets.DOCKER_USER }}/${FRONTENT_IMAGE_NAME}:${TAG}
+        docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" .
+        docker push ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}
         
