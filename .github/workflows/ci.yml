@@ -35,6 +35,7 @@ jobs:
         echo "${FRONTEND_REPO_DIGEST_NAME}=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" >> build.env
   deploy:
     runs-on: self-hosted
+    needs: build
     container: docker:latest
     env:
       NAMESPACE: a-cordes
