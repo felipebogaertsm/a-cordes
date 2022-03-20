@@ -23,12 +23,12 @@ jobs:
       run: |
         cd a_cordes
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}" .
-        docker push ${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}
+        docker build --pull -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}" .
+        docker push ${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}
     - name: Frontend build and push
       run: |
         cd frontend
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}" .
-        docker push ${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}
+        docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTENT_IMAGE_NAME}:${TAG}" .
+        docker push ${{ secrets.DOCKER_USER }}/${FRONTENT_IMAGE_NAME}:${TAG}
         
