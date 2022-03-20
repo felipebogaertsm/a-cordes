@@ -9,13 +9,11 @@ on:
       - master  
 
 jobs:
-  build:
+  build-backend:
     runs-on: self-hosted
     container: docker:latest
     env:
       BACKEND_IMAGE_NAME: a_cordes_backend
-      FRONTEND_IMAGE_NAME: a_cordes_frontend
-      DOCKER_USER: felipebogaertsm
       TAG: latest
     steps:
     - uses: actions/checkout@v2
@@ -26,12 +24,21 @@ jobs:
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}" \
           -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}
+
+  build-frontend:
+    runs-on: self-hosted
+    container: docker:latest
+    env:
+      FRONTEND_IMAGE_NAME: a_cordes_frontend
+      TAG: latest
+    steps:
+    - uses: actions/checkout@v2
     - name: Frontend build and push
       run: |
         cd frontend
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" \
-          -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${GITHUB_SHA::7}" .
+          -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}
   
   deploy-backend:
