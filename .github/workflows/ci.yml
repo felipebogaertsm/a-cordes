@@ -15,6 +15,7 @@ jobs:
     env:
       BACKEND_IMAGE_NAME: a_cordes_backend
       FRONTEND_IMAGE_NAME: a_cordes_frontend
+      DOCKER_USER: felipebogaertsm
       TAG: latest
     steps:
     - uses: actions/checkout@v2
