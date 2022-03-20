@@ -33,25 +33,36 @@ jobs:
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" \
           -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}
-  deploy:
+  
+  deploy-backend:
     runs-on: self-hosted
-    needs: build
+    needs: build-backend
     container: docker:latest
     env:
       NAMESPACE: a-cordes
       BACKEND_IMAGE_NAME: a_cordes_backend
-      FRONTEND_IMAGE_NAME: a_cordes_frontend
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
-      FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       BACKEND_CONTAINER_NAME: a-cordes-backend
-      FRONTEND_CONTAINER_NAME: a-cordes-frontend
     steps:
     - uses: actions/checkout@v2
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
           ${BACKEND_CONTAINER_NAME}=${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${GITHUB_SHA::7}
+        
+  deploy-frontend: 
+    runs-on: self-hosted
+    needs: build-frontend
+    container: docker:latest
+    env:
+      NAMESPACE: a-cordes
+      FRONTEND_IMAGE_NAME: a_cordes_frontend
+      FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
+      FRONTEND_CONTAINER_NAME: a-cordes-frontend
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deployment
+      run: |
         kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} \
           ${FRONTEND_CONTAINER_NAME}=${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}
-      
         
