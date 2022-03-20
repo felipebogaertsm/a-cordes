@@ -25,10 +25,31 @@ jobs:
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}" .
         docker push ${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}
+        echo "${BACKEND_REPO_DIGEST_NAME}=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}" >> /build.env
     - name: Frontend build and push
       run: |
         cd frontend
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" .
         docker push ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}
+        echo "${FRONTEND_REPO_DIGEST_NAME}=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" >> /build.env
+  deploy:
+    runs-on: self-hosted
+    container: docker:latest
+    env:
+      NAMESPACE: a-cordes
+      BACKEND_DEPLOYMENT_NAME: a-cordes-backend
+      FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
+      BACKEND_CONTAINER_NAME: a-cordes-backend
+      FRONTEND_CONTAINER_NAME: a-cordes-frontend
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        name: build.env
+        path: /
+    - name: Deployment
+      run: |
+        kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} ${BACKEND_CONTAINER_NAME}=${BACKEND_REPO_DIGEST_NAME}
+        kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} ${FRONTEND_CONTAINER_NAME}=${FRONTEND_REPO_DIGEST_NAME}
+      
         
