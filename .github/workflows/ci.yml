@@ -19,15 +19,14 @@ jobs:
       TAG: latest
     steps:
     - uses: actions/checkout@v2
-    - name: Preparing environment
-      run: |
-        cd a_cordes
     - name: Backend build and push
       run: |
+        cd a_cordes
         docker build --pull -t "${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}" .
         docker push ${DOCKER_USER}/${BACKEND_IMAGE_NAME}:${TAG}
     - name: Frontend build and push
       run: |
+        cd frontend
         docker build --pull -t "${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}" .
         docker push ${DOCKER_USER}/${FRONTENT_IMAGE_NAME}:${TAG}
         
