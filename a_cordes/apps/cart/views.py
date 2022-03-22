@@ -109,5 +109,8 @@ class CartAPI(APIView):
 
     def delete(self, request):
         user = request.user
+
         cart_items = CartItem.objects.filter(user=user)
+        cart_items.delete()
+
         return Response("Cart cleared.")
