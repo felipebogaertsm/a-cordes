@@ -25,7 +25,7 @@ import {
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
 
-export default function Cart() {
+export default function Cart({ user }) {
     const dispatch = useDispatch()
 
     const { authenticated, loading: loadingAuth } = useContext(AuthContext)

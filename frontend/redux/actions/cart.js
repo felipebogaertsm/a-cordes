@@ -4,9 +4,6 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import axios from "axios"
-import { parseCookies } from "nookies"
-
 // Constants:
 import {
     CART_ADD_ITEM_REQUEST,
@@ -21,27 +18,20 @@ import {
     CART_CLEAR_ITEMS,
 } from "../types/cart"
 
+// Utils:
+import { getClient } from "../../utils/axios"
+
+const client = getClient()
+
 export const addToCart = (id, qty) => async (dispatch) => {
     try {
         dispatch({
             type: CART_ADD_ITEM_REQUEST,
         })
 
-        const { "acordes.token": token } = parseCookies()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-
-        const { data } = await axios.post(
-            `${
-                process.env.SERVER_URL
-            }/api/cart/item/0/?product_id=${encodeURIComponent(id)}&qty=${qty}`,
-            {},
-            config
+        const { data } = await client.post(
+            `/api/cart/item/0/?product_id=${encodeURIComponent(id)}&qty=${qty}`,
+            {}
         )
 
         dispatch({
@@ -65,20 +55,8 @@ export const removeFromCart = (id) => async (dispatch) => {
             type: CART_DELETE_ITEM_REQUEST,
         })
 
-        const { "acordes.token": token } = parseCookies()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-
-        const { data } = await axios.delete(
-            `${process.env.SERVER_URL}/api/cart/item/${encodeURIComponent(
-                id
-            )}/`,
-            config
+        const { data } = await client.delete(
+            `/api/cart/item/${encodeURIComponent(id)}/`
         )
 
         dispatch({
@@ -102,19 +80,7 @@ export const getCart = () => async (dispatch) => {
             type: CART_GET_ALL_REQUEST,
         })
 
-        const { "acordes.token": token } = parseCookies()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        }
-
-        const { data } = await axios.get(
-            `${process.env.SERVER_URL}/api/cart/`,
-            config
-        )
+        const { data } = await client.get(`/api/cart/`)
 
         dispatch({
             type: CART_GET_ALL_SUCCESS,
@@ -132,19 +98,7 @@ export const getCart = () => async (dispatch) => {
 }
 
 export const clearCart = () => async (dispatch) => {
-    const { "acordes.token": token } = parseCookies()
-
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-    }
-
-    const { data } = await axios.delete(
-        `${process.env.SERVER_URL}/api/cart/`,
-        config
-    )
+    const { data } = await client.delete(`/api/cart/`)
 
     dispatch({
         type: CART_CLEAR_ITEMS,

@@ -4,25 +4,34 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-// APIs:
-import { verifyToken } from "./apis/auth"
-
 // Constants:
-import { TOKEN_NAME, INDEX_PATH, LOGIN_PATH } from "../constants"
+import { TOKEN_NAME } from "../constants"
+import {
+    ACCOUNTS_TOKEN_VERIFY_PATH,
+    ACCOUNTS_MY_USER_PATH,
+} from "../constants/apis"
+import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
+
+// Services:
+import { getClient } from "./axios"
 
 async function verifyAuth(ctx) {
-    // in common to both private and public routes
+    const client = getClient(ctx)
+
     const token = ctx.req.cookies[TOKEN_NAME]
-    let authenticated = false
 
     try {
-        await verifyToken(token)
-        authenticated = true
+        await client.post(ACCOUNTS_TOKEN_VERIFY_PATH, { token: token })
+        return true
     } catch (err) {
-        // pass
+        return false // user not authenticated
     }
+}
 
-    return authenticated
+async function getMyUser(ctx) {
+    const client = getClient(ctx)
+
+    return await client.get(ACCOUNTS_MY_USER_PATH)
 }
 
 export async function privateRoute(ctx) {
@@ -32,14 +41,16 @@ export async function privateRoute(ctx) {
         return {
             props: {},
             redirect: {
-                destination: LOGIN_PATH,
+                destination: LOGIN_PAGE_ROUTE,
                 permanent: false,
             },
         }
     }
 
+    const { data: user } = await getMyUser(ctx)
+
     return {
-        props: {},
+        props: { user: { ...user } },
     }
 }
 
@@ -50,7 +61,7 @@ export async function publicRoute(ctx) {
         return {
             props: {},
             redirect: {
-                destination: INDEX_PATH,
+                destination: HOME_PAGE_ROUTE,
                 permanent: true,
             },
         }

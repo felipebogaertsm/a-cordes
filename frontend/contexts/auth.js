@@ -4,18 +4,19 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import Cookies from "js-cookie"
+import cookie from "js-cookie"
 import { useRouter } from "next/router"
 import { createContext, useEffect, useState } from "react"
 
-// APIs:
-import { verifyToken } from "../services/apis/auth"
-
 // Constants:
-import { TOKEN_NAME, LOGIN_PATH, INDEX_PATH } from "../constants"
+import { TOKEN_NAME } from "../constants"
+import { ACCOUNTS_LOGIN_PATH, ACCOUNTS_MY_USER_PATH } from "../constants/apis"
+import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
 
-// Utils:
+// Services:
 import { getClient } from "../utils/axios"
+
+const client = getClient()
 
 export const AuthContext = createContext({})
 
@@ -27,58 +28,25 @@ export function AuthProvider({ children }) {
 
     const router = useRouter()
 
-    const client = getClient()
-
-    const token = Cookies.get(TOKEN_NAME)
-
-    useEffect(() => {
-        if (token) {
-            setLoading(true)
-
-            try {
-                verifyToken(token)
-                setAuthenticated(true)
-            } catch (err) {
-                setError(
-                    err.response && err.response.data.detail
-                        ? err.response.data.detail
-                        : err.message
-                )
-            }
-
-            setLoading(false)
-        }
-    }, [token])
-
     async function login(email, password) {
         setLoading(true)
 
         try {
-            const { data: tokens } = await client.post(
-                `/api/accounts/token/obtain-pair/`,
-                { email: email, password: password },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            )
-
-            Cookies.set(TOKEN_NAME, tokens.access, {
-                expires: 1 / 24, // 1 hour
+            const { data: tokens } = await client.post(ACCOUNTS_LOGIN_PATH, {
+                email: email,
+                password: password,
             })
 
-            const { data: user } = await client.get(`/api/accounts/my-user/`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${tokens.access}`,
-                },
+            const token = tokens.access
+
+            cookie.set(TOKEN_NAME, token, {
+                expires: 8 / 24, // 8 hours
             })
+
+            const { data: user } = await client.get(ACCOUNTS_MY_USER_PATH)
 
             setUser(user)
             setAuthenticated(true)
-
-            router.push(INDEX_PATH)
         } catch (err) {
             setError(
                 err.response && err.response.data.detail
@@ -88,19 +56,45 @@ export function AuthProvider({ children }) {
             setAuthenticated(false)
             setUser(null)
 
-            Cookies.remove(TOKEN_NAME)
+            cookie.remove(TOKEN_NAME)
         }
 
         setLoading(false)
+
+        router.push(HOME_PAGE_ROUTE)
     }
+
+    useEffect(() => {
+        const token = cookie.get(TOKEN_NAME)
+
+        if (token) {
+            setLoading(true)
+
+            client
+                .get(ACCOUNTS_MY_USER_PATH)
+                .then((res) => {
+                    setUser(res.data)
+                    setAuthenticated(true)
+                })
+                .catch((err) => {
+                    setError(
+                        err.response && err.response.data.detail
+                            ? err.response.data.detail
+                            : err.message
+                    )
+                })
+
+            setLoading(false)
+        }
+    }, [])
 
     function logout() {
         setAuthenticated(false)
         setUser(null)
 
-        Cookies.remove(TOKEN_NAME)
+        cookie.remove(TOKEN_NAME)
 
-        router.push(LOGIN_PATH)
+        router.push(LOGIN_PAGE_ROUTE)
     }
 
     return (

@@ -4,8 +4,6 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import axios from "axios"
-
 // Types:
 import {
     USER_LOGIN_REQUEST,
@@ -22,7 +20,6 @@ import {
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
-    USER_UPDATE_PROFILE_RESET,
     USER_LIST_REQUEST,
     USER_LIST_SUCCESS,
     USER_LIST_FAIL,
@@ -31,14 +28,17 @@ import {
     USER_DELETE_SUCCESS,
     USER_DELETE_FAIL,
     USER_UPDATE_REQUEST,
-    USER_UPDATE_SUCCESS,
     USER_UPDATE_FAIL,
-    USER_UPDATE_RESET,
     ALL_SELLER_PROFILES_REQUEST,
     ALL_SELLER_PROFILES_SUCCESS,
     ALL_SELLER_PROFILES_FAIL,
 } from "../types/user"
 import { ORDER_LIST_MY_RESET } from "../types/order"
+
+// Utils:
+import { getClient } from "../../utils/axios"
+
+const client = getClient()
 
 export const login = (email, password) => async (dispatch) => {
     try {
@@ -46,16 +46,9 @@ export const login = (email, password) => async (dispatch) => {
             type: USER_LOGIN_REQUEST,
         })
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-
-        const { data } = await axios.post(
+        const { data } = await client.post(
             `${process.env.SERVER_URL}/api/accounts/login/`,
-            { email: email, password: password },
-            config
+            { email: email, password: password }
         ) // send email and password and get back a token
 
         dispatch({
@@ -83,23 +76,16 @@ export const logout = () => (dispatch) => {
     dispatch({ type: USER_LIST_RESET })
 }
 
-export const register = (name, email, password) => async (dispatch) => {
+export const register = (email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
         })
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-
-        const { data } = await axios.post(
-            "/api/accounts/user/register/",
-            { email: email, password: password },
-            config
-        ) // send email and password and get back a token
+        const { data } = await client.post("/api/accounts/user/register/", {
+            email: email,
+            password: password,
+        }) // send email and password and get back a token
 
         dispatch({
             type: USER_REGISTER_SUCCESS,
@@ -129,18 +115,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             type: USER_DETAILS_REQUEST,
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        const { data } = await axios.get(`/api/accounts/user/${id}/`, config)
+        const { data } = await client.get(`/api/accounts/user/${id}/`)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -163,21 +138,9 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_REQUEST,
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        const { data } = await axios.put(
+        const { data } = await client.put(
             `/api/accounts/user/update/profile/`,
-            user,
-            config
+            user
         )
 
         dispatch({
@@ -208,18 +171,7 @@ export const listUsers = () => async (dispatch, getState) => {
             type: USER_LIST_REQUEST,
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        const { data } = await axios.get("/api/accounts/user/all/", config)
+        const { data } = await client.get("/api/accounts/user/all/")
 
         dispatch({
             type: USER_LIST_SUCCESS,
@@ -242,21 +194,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             type: USER_DELETE_REQUEST,
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        const { data } = await axios.delete(
-            `/api/accounts/user/delete/${id}/`,
-            config
-        )
+        const { data } = await client.delete(`/api/accounts/user/delete/${id}/`)
 
         dispatch({
             type: USER_DELETE_SUCCESS,
@@ -279,21 +217,9 @@ export const updateUser = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_REQUEST,
         })
 
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        const { data } = await axios.put(
+        const { data } = await client.put(
             `/api/accounts/user/update/${user._id}/`,
-            user,
-            config
+            user
         )
 
         dispatch({
@@ -317,15 +243,8 @@ export const allSellerProfiles = () => async (dispatch) => {
             type: ALL_SELLER_PROFILES_REQUEST,
         })
 
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-
-        const { data } = await axios.get(
-            `${process.env.SERVER_URL}/api/accounts/sellers/`,
-            config
+        const { data } = await client.get(
+            `${process.env.SERVER_URL}/api/accounts/sellers/`
         )
 
         dispatch({
