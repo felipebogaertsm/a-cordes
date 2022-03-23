@@ -46,10 +46,10 @@ export const login = (email, password) => async (dispatch) => {
             type: USER_LOGIN_REQUEST,
         })
 
-        const { data } = await client.post(
-            `${process.env.SERVER_URL}/api/accounts/login/`,
-            { email: email, password: password }
-        ) // send email and password and get back a token
+        const { data } = await client.post(`/api/accounts/login/`, {
+            email: email,
+            password: password,
+        }) // send email and password and get back a token
 
         dispatch({
             type: USER_LOGIN_SUCCESS,
@@ -243,9 +243,7 @@ export const allSellerProfiles = () => async (dispatch) => {
             type: ALL_SELLER_PROFILES_REQUEST,
         })
 
-        const { data } = await client.get(
-            `${process.env.SERVER_URL}/api/accounts/sellers/`
-        )
+        const { data } = await client.get(`/api/accounts/sellers/`)
 
         dispatch({
             type: ALL_SELLER_PROFILES_SUCCESS,

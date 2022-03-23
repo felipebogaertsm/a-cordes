@@ -79,7 +79,7 @@ export const listProductDetails = (id) => async (dispatch) => {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
         const { data } = await client.get(
-            `${process.env.SERVER_URL}/api/products/${encodeURIComponent(id)}`
+            `/api/products/${encodeURIComponent(id)}`
         )
 
         dispatch({

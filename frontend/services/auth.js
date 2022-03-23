@@ -13,7 +13,7 @@ import {
 import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
 
 // Services:
-import { getClient } from "./axios"
+import { getClient } from "../utils/axios"
 
 async function verifyAuth(ctx) {
     const client = getClient(ctx)

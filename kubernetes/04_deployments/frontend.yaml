@@ -19,7 +19,7 @@ spec:
                 app: a-cordes-frontend
         spec:
             containers:
-                - image: felipebogaertsm/a_cordes_frontend@sha256:2e24634e8d49ec9c8f19edae07382986625a3437d13ae9c65a96dff56701bae0
+                - image: felipebogaertsm/a_cordes_frontend@sha256:100d9590a81c1df82e16873857e13a089eddedc8704525c41f71595dd815b9b5
                   imagePullPolicy: Always
                   name: a-cordes-frontend
                   ports:
