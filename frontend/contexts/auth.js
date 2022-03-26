@@ -28,42 +28,6 @@ export function AuthProvider({ children }) {
 
     const router = useRouter()
 
-    async function login(email, password) {
-        setLoading(true)
-
-        try {
-            const { data: tokens } = await client.post(ACCOUNTS_LOGIN_PATH, {
-                email: email,
-                password: password,
-            })
-
-            const token = tokens.access
-
-            cookie.set(TOKEN_NAME, token, {
-                expires: 8 / 24, // 8 hours
-            })
-
-            const { data: user } = await client.get(ACCOUNTS_MY_USER_PATH)
-
-            setUser(user)
-            setAuthenticated(true)
-        } catch (err) {
-            setError(
-                err.response && err.response.data.detail
-                    ? err.response.data.detail
-                    : err.message
-            )
-            setAuthenticated(false)
-            setUser(null)
-
-            cookie.remove(TOKEN_NAME)
-        }
-
-        setLoading(false)
-
-        router.push(HOME_PAGE_ROUTE)
-    }
-
     useEffect(() => {
         const token = cookie.get(TOKEN_NAME)
 
@@ -87,6 +51,43 @@ export function AuthProvider({ children }) {
             setLoading(false)
         }
     }, [])
+
+    async function login(email, password) {
+        setLoading(true)
+
+        try {
+            const { data: tokens } = await client.post(ACCOUNTS_LOGIN_PATH, {
+                email: email,
+                password: password,
+            })
+
+            const token = tokens.access
+
+            cookie.set(TOKEN_NAME, token, {
+                expires: 8 / 24, // 8 hours
+            })
+
+            const { data: user } = await client.get(ACCOUNTS_MY_USER_PATH)
+
+            setUser(user)
+            setAuthenticated(true)
+        } catch (err) {
+            console.log(err)
+            setError(
+                err.response && err.response.data.detail
+                    ? err.response.data.detail
+                    : err.message
+            )
+            setAuthenticated(false)
+            setUser(null)
+
+            cookie.remove(TOKEN_NAME)
+        }
+
+        setLoading(false)
+
+        router.push(HOME_PAGE_ROUTE)
+    }
 
     function logout() {
         setAuthenticated(false)

@@ -4,15 +4,22 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import Head from "next/head"
+
 import "../styles/globals.css"
 import { AuthProvider } from "../contexts/auth"
 import { storeWrapper } from "../redux/store"
 
 function MyApp({ Component, pageProps }) {
     return (
-        <AuthProvider>
-            <Component {...pageProps} />
-        </AuthProvider>
+        <>
+            <Head>
+                <title>à cordes</title>
+            </Head>
+            <AuthProvider>
+                <Component {...pageProps} />
+            </AuthProvider>
+        </>
     )
 }
 
