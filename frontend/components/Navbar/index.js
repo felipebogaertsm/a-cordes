@@ -4,9 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useEffect, useState, useContext } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useRouter } from "next/router"
+import { useContext } from "react"
 
 // Components:
 import { NavbarItem } from ".."
@@ -15,7 +13,7 @@ import { NavbarItem } from ".."
 import { AuthContext } from "../../contexts/auth"
 
 export default function Navbar() {
-    const { authenticated, logout } = useContext(AuthContext)
+    const { user, logout } = useContext(AuthContext)
 
     return (
         <div className="w-screen">
@@ -47,7 +45,7 @@ export default function Navbar() {
                     </div>
                 </NavbarItem>
 
-                {authenticated && (
+                {user && (
                     <>
                         <NavbarItem to="/cart">
                             <div className="flex flex-row space-x-2">
@@ -77,16 +75,12 @@ export default function Navbar() {
                 <NavbarItem to="/auth/login" onClick={() => logout()}>
                     <div className="flex flex-row space-x-2">
                         <img
-                            src={`/icons/${
-                                authenticated ? "logout" : "user"
-                            }.svg`}
+                            src={`/icons/${user ? "logout" : "user"}.svg`}
                             className="
                                 invert opacity-80 h-4 my-auto
                             "
                         ></img>
-                        <p className="my-auto">
-                            {authenticated ? "Logout" : "Login"}
-                        </p>
+                        <p className="my-auto">{user ? "Logout" : "Login"}</p>
                     </div>
                 </NavbarItem>
             </div>

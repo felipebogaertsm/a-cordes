@@ -28,7 +28,7 @@ async function verifyAuth(ctx) {
     }
 }
 
-async function getMyUser(ctx) {
+export async function getMyUser(ctx) {
     const client = getClient(ctx)
 
     return await client.get(ACCOUNTS_MY_USER_PATH)

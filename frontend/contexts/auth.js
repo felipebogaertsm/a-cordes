@@ -15,6 +15,7 @@ import {
     ACCOUNTS_MY_USER_PATH,
 } from "../constants/apis"
 import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
+import { privateRoute } from "../services/auth"
 
 // Services:
 import { getClient } from "../utils/axios"
@@ -23,8 +24,12 @@ const client = getClient()
 
 export const AuthContext = createContext({})
 
-export function AuthProvider({ children }) {
-    const [user, setUser] = useState(undefined)
+export async function getServerSideProps(ctx) {
+    return await privateRoute(ctx)
+}
+
+export function AuthProvider({ children, user: userInfo }) {
+    const [user, setUser] = useState(userInfo)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [authenticated, setAuthenticated] = useState(false)
