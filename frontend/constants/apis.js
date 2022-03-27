@@ -4,5 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+export const ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH =
+    "/api/accounts/token/obtain-pair/"
 export const ACCOUNTS_TOKEN_VERIFY_PATH = "/api/accounts/token/verify/"
 export const ACCOUNTS_MY_USER_PATH = "/api/accounts/my-user/"

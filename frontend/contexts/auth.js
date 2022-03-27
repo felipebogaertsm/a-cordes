@@ -10,7 +10,10 @@ import { createContext, useEffect, useState } from "react"
 
 // Constants:
 import { TOKEN_NAME } from "../constants"
-import { ACCOUNTS_LOGIN_PATH, ACCOUNTS_MY_USER_PATH } from "../constants/apis"
+import {
+    ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH,
+    ACCOUNTS_MY_USER_PATH,
+} from "../constants/apis"
 import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
 
 // Services:
@@ -52,14 +55,21 @@ export function AuthProvider({ children }) {
         }
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(user))
+    }, [user])
+
     async function login(email, password) {
         setLoading(true)
 
         try {
-            const { data: tokens } = await client.post(ACCOUNTS_LOGIN_PATH, {
-                email: email,
-                password: password,
-            })
+            const { data: tokens } = await client.post(
+                ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH,
+                {
+                    email: email,
+                    password: password,
+                }
+            )
 
             const token = tokens.access
 
@@ -67,12 +77,10 @@ export function AuthProvider({ children }) {
                 expires: 8 / 24, // 8 hours
             })
 
-            const { data: user } = await client.get(ACCOUNTS_MY_USER_PATH)
-
-            setUser(user)
             setAuthenticated(true)
+
+            router.push(HOME_PAGE_ROUTE)
         } catch (err) {
-            console.log(err)
             setError(
                 err.response && err.response.data.detail
                     ? err.response.data.detail
@@ -85,8 +93,6 @@ export function AuthProvider({ children }) {
         }
 
         setLoading(false)
-
-        router.push(HOME_PAGE_ROUTE)
     }
 
     function logout() {

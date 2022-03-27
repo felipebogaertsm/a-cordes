@@ -49,11 +49,13 @@ export default function Login() {
                 <div className="space-y-4">
                     <FormInput
                         label="Email"
+                        placeholder="email@domain.com"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormInput
                         label="Password"
                         type="password"
+                        placeholder="••••••••"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
