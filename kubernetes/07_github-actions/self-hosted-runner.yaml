@@ -16,8 +16,8 @@ metadata:
 spec:
   scaleTargetRef:
     name: runner-deployment
-  minReplicas: 5
-  maxReplicas: 10
+  minReplicas: 10
+  maxReplicas: 15
   metrics:
   - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
     repositoryNames:
