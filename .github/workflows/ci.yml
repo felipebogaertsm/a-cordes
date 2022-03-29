@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: à cordes CI/CD Pipeline
 
 on:
   push:
@@ -12,6 +12,7 @@ env:
   BACKEND_IMAGE_NAME: a_cordes_backend
   FRONTEND_IMAGE_NAME: a_cordes_frontend
   TAG: latest
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
 
 jobs:
   build-backend:
@@ -42,7 +43,7 @@ jobs:
 
   test:
     runs-on: self-hosted
-    container: ${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
+    container: ${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
     steps:
     - uses: actions/checkout@v2
     - name: Testing
