@@ -47,7 +47,7 @@ jobs:
     - build-backend
     - build-frontend
     container: 
-      image: "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}"
+      image: "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}"
       credentials:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
