@@ -41,18 +41,21 @@ jobs:
           -t "${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}
 
-  # test:
-  #   runs-on: self-hosted
-  #   container: ${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Testing
-  #     run: |
-  #       python manage.py test
+  test:
+    runs-on: self-hosted
+    needs: 
+    - build-backend
+    - build-frontend
+    container: ${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Testing
+      run: |
+        python manage.py test
   
   deploy-backend:
     runs-on: self-hosted
-    needs: build-backend
+    needs: test
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
@@ -68,7 +71,7 @@ jobs:
         
   deploy-frontend: 
     runs-on: self-hosted
-    needs: build-frontend
+    needs: test
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
