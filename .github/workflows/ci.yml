@@ -6,15 +6,17 @@ on:
       - master
   pull_request:
     branches: 
-      - master  
+      - master
+
+env:
+  BACKEND_IMAGE_NAME: a_cordes_backend
+  FRONTEND_IMAGE_NAME: a_cordes_frontend
+  TAG: latest
 
 jobs:
   build-backend:
     runs-on: self-hosted
     container: docker:latest
-    env:
-      BACKEND_IMAGE_NAME: a_cordes_backend
-      TAG: latest
     steps:
     - uses: actions/checkout@v2
     - name: Backend build and push
@@ -28,9 +30,6 @@ jobs:
   build-frontend:
     runs-on: self-hosted
     container: docker:latest
-    env:
-      FRONTEND_IMAGE_NAME: a_cordes_frontend
-      TAG: latest
     steps:
     - uses: actions/checkout@v2
     - name: Frontend build and push
@@ -40,6 +39,15 @@ jobs:
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}" \
           -t "${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${TAG}
+
+  test:
+    runs-on: self-hosted
+    container: ${{ secrets.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${TAG}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Testing
+      run: |
+        python manage.py test
   
   deploy-backend:
     runs-on: self-hosted
