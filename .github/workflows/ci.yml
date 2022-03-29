@@ -46,7 +46,11 @@ jobs:
     needs: 
     - build-backend
     - build-frontend
-    container: ${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
+    container: 
+      image: "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}"
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
     - name: Testing
