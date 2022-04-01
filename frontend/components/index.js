@@ -13,6 +13,7 @@ import FormInput from "./FormInput"
 import GriddedProductListing from "./GriddedProductListing"
 import Heading from "./Heading"
 import Loader from "./Loader"
+import MakerItem from "./MakerItem"
 import Message from "./Message"
 import SearchInput from "./SearchInput"
 import Navbar from "./Navbar"
@@ -31,6 +32,7 @@ export {
     GriddedProductListing,
     Heading,
     Loader,
+    MakerItem,
     Message,
     SearchInput,
     Navbar,
