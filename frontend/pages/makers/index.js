@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 // Actions:
@@ -12,11 +12,10 @@ import { allSellerProfiles } from "../../redux/actions/user"
 
 // Components:
 import {
-    GriddedProductListing,
     Heading,
     Loader,
+    MakerItem,
     Message,
-    SearchInput,
     NavbarPage,
 } from "../../components"
 
@@ -48,29 +47,9 @@ export default function Makers() {
                     ) : (
                         makers &&
                         makers.map((maker, index) => (
-                            <div
-                                key={index}
-                                className="
-                                        bg-stone-200 rounded-lg px-6 py-4
-                                        hover:brightness-[102%] transition-all duration-200
-                                    "
-                            >
-                                <div className="flex md:flex-row flex-col space-x-4">
-                                    <h5 className="my-auto text-stone-500">
-                                        {index + 1}
-                                    </h5>
-                                    <div className="my-auto">
-                                        <h5 className="my-auto">
-                                            {maker.name}
-                                        </h5>
-                                        <p className="my-auto text-sm">
-                                            <strong>
-                                                {maker.city}, {maker.country}
-                                            </strong>
-                                        </p>
-                                    </div>
-                                    <div className="grow"></div>
-                                </div>
+                            <div key={index} className="flex flex-row w-full ">
+                                <h5 className="my-auto mr-2">{index}</h5>
+                                <MakerItem maker={maker} />
                             </div>
                         ))
                     )}

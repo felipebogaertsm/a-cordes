@@ -4,10 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { Image } from "next/image"
-
 export default function MakerItem({ maker }) {
-    console.log(maker)
     return (
         <div
             className="
@@ -16,7 +13,7 @@ export default function MakerItem({ maker }) {
             "
         >
             <div className="flex md:flex-row flex-col space-x-4">
-                <Image src={maker.picture} />
+                <img src={maker.picture} />
                 <div className="my-auto">
                     <h5 className="my-auto">{maker.name}</h5>
                     <p className="my-auto text-sm">
