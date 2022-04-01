@@ -22,7 +22,7 @@ spec:
         app: a-cordes-backend
     spec:
       containers:
-        - image: felipebogaertsm/a_cordes_backend@sha256:789547ef2b42de63cc30ea1621e87887d008db1a96b7856f2d0a0134510ea5dd
+        - image: felipebogaertsm/a_cordes_backend@sha256:f3dbd046f8a0689107809b0252b90e270a4297bd3c534484ffc725f2ad48e04a
           imagePullPolicy: Always
           envFrom:
             - secretRef:
