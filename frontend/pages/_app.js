@@ -36,7 +36,7 @@ MyApp.getInitialProps = async (ctx) => {
         const { data: user } = await getMyUser(ctx.ctx)
         return { user: { ...user }, ...pageProps }
     } catch (err) {
-        return { user: {}, ...pageProps }
+        return { user: null, ...pageProps }
     }
 }
 

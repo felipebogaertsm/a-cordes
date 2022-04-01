@@ -36,8 +36,10 @@ export function AuthProvider({ children, user: userInfo }) {
 
     const router = useRouter()
 
-    useEffect(() => {
-        const token = cookie.get(TOKEN_NAME)
+    async function refreshMyUser(token) {
+        if (!token) {
+            token = cookie.get(TOKEN_NAME)
+        }
 
         if (token) {
             setLoading(true)
@@ -55,9 +57,13 @@ export function AuthProvider({ children, user: userInfo }) {
                             : err.message
                     )
                 })
-
-            setLoading(false)
         }
+
+        setLoading(false)
+    }
+
+    useEffect(() => {
+        refreshMyUser()
     }, [])
 
     useEffect(() => {
@@ -82,6 +88,7 @@ export function AuthProvider({ children, user: userInfo }) {
                 expires: 8 / 24, // 8 hours
             })
 
+            await refreshMyUser()
             setAuthenticated(true)
 
             router.push(HOME_PAGE_ROUTE)

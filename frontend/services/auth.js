@@ -30,7 +30,6 @@ async function verifyAuth(ctx) {
 
 export async function getMyUser(ctx) {
     const client = getClient(ctx)
-
     return await client.get(ACCOUNTS_MY_USER_PATH)
 }
 

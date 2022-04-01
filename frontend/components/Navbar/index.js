@@ -45,7 +45,7 @@ export default function Navbar() {
                     </div>
                 </NavbarItem>
 
-                {user && (
+                {user && user !== {} && (
                     <>
                         <NavbarItem to="/cart">
                             <div className="flex flex-row space-x-2">
