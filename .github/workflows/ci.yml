@@ -40,7 +40,7 @@ jobs:
         cd a_cordes
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" \
-          -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}" .
+          -t "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}" .
         docker push ${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}
 
   build-frontend:
@@ -62,7 +62,7 @@ jobs:
     - build-backend
     - build-frontend
     container: 
-      image: "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}"
+      image: "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}"
       credentials:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
