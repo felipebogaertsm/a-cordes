@@ -19,6 +19,7 @@ import SearchInput from "./SearchInput"
 import Navbar from "./Navbar"
 import NavbarItem from "./NavbarItem"
 import NavbarPage from "./NavbarPage"
+import NavbarUserDropdown from "./NavbarUserDropdown"
 import PrivatePage from "./PrivatePage"
 import ProductListing from "./ProductListing"
 
@@ -38,6 +39,7 @@ export {
     Navbar,
     NavbarItem,
     NavbarPage,
+    NavbarUserDropdown,
     PrivatePage,
     ProductListing,
 }
