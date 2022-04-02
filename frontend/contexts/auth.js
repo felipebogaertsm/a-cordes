@@ -20,13 +20,12 @@ import { privateRoute } from "../services/auth"
 // Services:
 import { getClient } from "../utils/axios"
 
+// Utils:
+import { getDetailFromResponseError } from "../utils/errors"
+
 const client = getClient()
 
 export const AuthContext = createContext({})
-
-export async function getServerSideProps(ctx) {
-    return await privateRoute(ctx)
-}
 
 export function AuthProvider({ children, user: userInfo }) {
     const [user, setUser] = useState(userInfo)
@@ -36,26 +35,35 @@ export function AuthProvider({ children, user: userInfo }) {
 
     const router = useRouter()
 
-    async function refreshMyUser(token) {
-        if (!token) {
+    function setToken(token) {
+        cookie.set(TOKEN_NAME, token, {
+            expires: 8 / 24, // 8 hours
+        })
+    }
+
+    function removeToken() {
+        cookie.remove(TOKEN_NAME)
+    }
+
+    async function refreshUser(token) {
+        if (token) {
+            setToken(token)
+        } else {
             token = cookie.get(TOKEN_NAME)
         }
 
         if (token) {
             setLoading(true)
 
-            client
+            getClient()
                 .get(ACCOUNTS_MY_USER_PATH)
                 .then((res) => {
                     setUser(res.data)
                     setAuthenticated(true)
                 })
                 .catch((err) => {
-                    setError(
-                        err.response && err.response.data.detail
-                            ? err.response.data.detail
-                            : err.message
-                    )
+                    removeToken()
+                    setError(getDetailFromResponseError(err))
                 })
         }
 
@@ -63,7 +71,7 @@ export function AuthProvider({ children, user: userInfo }) {
     }
 
     useEffect(() => {
-        refreshMyUser()
+        refreshUser()
     }, [])
 
     useEffect(() => {
@@ -84,24 +92,18 @@ export function AuthProvider({ children, user: userInfo }) {
 
             const token = tokens.access
 
-            cookie.set(TOKEN_NAME, token, {
-                expires: 8 / 24, // 8 hours
-            })
+            setToken(token)
 
-            await refreshMyUser()
+            await refreshUser()
             setAuthenticated(true)
 
             router.push(HOME_PAGE_ROUTE)
         } catch (err) {
-            setError(
-                err.response && err.response.data.detail
-                    ? err.response.data.detail
-                    : err.message
-            )
+            setError(getDetailFromResponseError(err))
             setAuthenticated(false)
             setUser(null)
 
-            cookie.remove(TOKEN_NAME)
+            removeToken()
         }
 
         setLoading(false)
@@ -111,14 +113,23 @@ export function AuthProvider({ children, user: userInfo }) {
         setAuthenticated(false)
         setUser(null)
 
-        cookie.remove(TOKEN_NAME)
+        removeToken()
 
         router.push(LOGIN_PAGE_ROUTE)
     }
 
     return (
         <AuthContext.Provider
-            value={{ authenticated, user, loading, error, login, logout }}
+            value={{
+                authenticated,
+                user,
+                refreshUser,
+                setUser,
+                loading,
+                error,
+                login,
+                logout,
+            }}
         >
             {children}
         </AuthContext.Provider>

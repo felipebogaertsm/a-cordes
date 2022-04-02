@@ -5,17 +5,25 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 export function getDetailFromResponseError(err) {
-    try {
-        return String(
-            err.response
-                ? err.response.data
-                    ? err.response.data.messages
-                        ? err.response.data.messages[0].message
-                        : err.response.data.detail
-                    : err.response.data
-                : err.message
-        )
-    } catch (err) {
-        return err.message
+    if (err.response.data) {
+        if (
+            typeof err.response.data === "string" &&
+            err.response.data.length < 1000
+        ) {
+            return err.response.data
+        }
+
+        if (
+            Array.isArray(err.response.data.messages) &&
+            err.response.data.messages.length > 0
+        ) {
+            return err.response.data.messages[0].message
+        }
+
+        if (err.response.data.detail) {
+            return err.response.data.detail
+        }
     }
+
+    return err.message
 }

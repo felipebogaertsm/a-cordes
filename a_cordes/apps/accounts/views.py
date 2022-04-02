@@ -4,6 +4,7 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+from math import perm
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -64,6 +65,26 @@ class MyUserAPI(APIView):
         user = request.user
         user.delete()
         return Response("User deleted.")
+
+
+class UserAPI(APIView):
+    def post(self, request, pk=None):
+        data = request.data
+
+        if data["password1"] != data["password2"]:
+            return Response(
+                "Passwords do not match", status=status.HTTP_400_BAD_REQUEST
+            )
+
+        new_user = User.objects.create_user(
+            email=data["email"],
+            password=data["password1"],
+        )
+        new_user_serializer = UserSerializerWithToken(
+            instance=new_user, many=False
+        )
+
+        return Response(new_user_serializer.data, status=status.HTTP_200_OK)
 
 
 class SellerProfileAPI(APIView):

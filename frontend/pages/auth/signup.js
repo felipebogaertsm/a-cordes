@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState } from "react"
+import { useEffect, useState, useContext } from "react"
 
 // Components:
 import {
@@ -12,13 +12,43 @@ import {
     FormInput,
     Heading,
     Loader,
+    Message,
     NavbarPage,
 } from "../../components"
 
+// Constants:
+import { ACCOUNTS_USER_PATH } from "../../constants/apis"
+
+// Contexts:
+import { AuthContext } from "../../contexts/auth"
+
+// Hooks:
+import { useFetch } from "../../hooks"
+
+// Utils:
+import { getClient } from "../../utils/axios"
+
+const client = getClient()
+
 export default function SignUp() {
+    const { refreshUser } = useContext(AuthContext)
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+
+    const [registerUser, doFetch] = useFetch({
+        client,
+        method: "post",
+        url: ACCOUNTS_USER_PATH.replace("[id]", 0),
+        payload: { email, password1: password, password2: confirmPassword },
+    })
+
+    useEffect(() => {
+        if (registerUser.data) {
+            refreshUser(registerUser.data.token)
+        }
+    }, [registerUser.data])
 
     return (
         <NavbarPage>
@@ -48,15 +78,25 @@ export default function SignUp() {
                 </div>
 
                 <div className="pt-2">
-                    <Button onClick={(e) => loginHandler(e)}>
+                    <Button onClick={() => doFetch()}>
                         <div className="flex flex-row space-x-2">
                             <p>Sign up</p>
-                            {/* {loading && <div className='invert'><Loader /></div>} */}
+                            {registerUser.loading && (
+                                <div className="invert">
+                                    <Loader />
+                                </div>
+                            )}
                         </div>
                     </Button>
                 </div>
 
-                {/* <div>{error ? (<Message>{error}</Message>) : ''}</div> */}
+                <div>
+                    {registerUser.error ? (
+                        <Message>{registerUser.error}</Message>
+                    ) : (
+                        ""
+                    )}
+                </div>
             </div>
         </NavbarPage>
     )

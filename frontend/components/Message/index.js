@@ -25,7 +25,7 @@ export default function Message({ children, ...props }) {
                         src="/icons/error.svg"
                     ></img>
                 </div>
-                <div>{children}</div>
+                <div className="my-auto">{children}</div>
             </div>
         </div>
     )

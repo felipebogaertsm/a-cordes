@@ -12,6 +12,7 @@ import apps.accounts.views as views
 urlpatterns = [
     path("token/obtain-pair/", views.MyTokenObtainPairView.as_view()),
     path("my-user/", views.MyUserAPI.as_view()),
+    path("user/<str:pk>/", views.UserAPI.as_view(), name="user"),
     path("seller/<str:pk>/", views.SellerProfileAPI.as_view()),
     path("sellers/", views.SellerProfilesAPI.as_view()),
     path("token/verify/", TokenVerifyView.as_view()),
