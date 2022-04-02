@@ -21,15 +21,13 @@ import {
 // Utils:
 import { getClient } from "../../utils/axios"
 
-const client = getClient()
-
 export const addToCart = (id, qty) => async (dispatch) => {
     try {
         dispatch({
             type: CART_ADD_ITEM_REQUEST,
         })
 
-        const { data } = await client.post(
+        const { data } = await getClient().post(
             `/api/cart/item/0/?product_id=${encodeURIComponent(id)}&qty=${qty}`,
             {}
         )
@@ -55,7 +53,7 @@ export const removeFromCart = (id) => async (dispatch) => {
             type: CART_DELETE_ITEM_REQUEST,
         })
 
-        const { data } = await client.delete(
+        const { data } = await getClient().delete(
             `/api/cart/item/${encodeURIComponent(id)}/`
         )
 
@@ -80,7 +78,7 @@ export const getCart = () => async (dispatch) => {
             type: CART_GET_ALL_REQUEST,
         })
 
-        const { data } = await client.get(`/api/cart/`)
+        const { data } = await getClient().get(`/api/cart/`)
 
         dispatch({
             type: CART_GET_ALL_SUCCESS,
@@ -98,7 +96,7 @@ export const getCart = () => async (dispatch) => {
 }
 
 export const clearCart = () => async (dispatch) => {
-    const { data } = await client.delete(`/api/cart/`)
+    const { data } = await getClient().delete(`/api/cart/`)
 
     dispatch({
         type: CART_CLEAR_ITEMS,

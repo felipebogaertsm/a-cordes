@@ -30,15 +30,13 @@ import { CART_CLEAR_ITEMS } from "../types/cart"
 // Utils:
 import { getClient } from "../../utils/axios"
 
-const client = getClient()
-
 export const createOrder = (order) => async (dispatch) => {
     try {
         dispatch({
             type: ORDER_CREATE_REQUEST,
         })
 
-        const { data } = await client.post(`/api/orders/item/`, order)
+        const { data } = await getClient().post(`/api/orders/item/`, order)
 
         dispatch({
             type: ORDER_CREATE_SUCCESS,
@@ -66,7 +64,7 @@ export const getOrderDetails = (id) => async (dispatch) => {
             type: ORDER_DETAILS_REQUEST,
         })
 
-        const { data } = await client.get(`/api/orders/${id}/`)
+        const { data } = await getClient().get(`/api/orders/${id}/`)
 
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
@@ -89,7 +87,7 @@ export const payOrder = (id, paymentResult) => async (dispatch) => {
             type: ORDER_PAY_REQUEST,
         })
 
-        const { data } = await client.put(
+        const { data } = await getClient().put(
             `/api/orders/${id}/pay/`,
             paymentResult
         )
@@ -115,7 +113,7 @@ export const deliverOrder = (order) => async (dispatch) => {
             type: ORDER_DELIVER_REQUEST,
         })
 
-        const { data } = await client.put(
+        const { data } = await getClient().put(
             `/api/orders/${order._id}/deliver/`,
             {}
         )
@@ -141,7 +139,7 @@ export const listMyOrders = () => async (dispatch) => {
             type: ORDER_LIST_MY_REQUEST,
         })
 
-        const { data } = await client.get(`/api/orders/my-orders/`)
+        const { data } = await getClient().get(`/api/orders/my-orders/`)
 
         dispatch({
             type: ORDER_LIST_MY_SUCCESS,
@@ -164,7 +162,7 @@ export const listOrders = () => async (dispatch) => {
             type: ORDER_LIST_REQUEST,
         })
 
-        const { data } = await client.get(`/api/orders/all/`)
+        const { data } = await getClient().get(`/api/orders/all/`)
 
         dispatch({
             type: ORDER_LIST_SUCCESS,

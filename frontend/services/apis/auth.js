@@ -8,6 +8,7 @@
 import { getClient } from "../../utils/axios"
 
 export async function verifyToken(token) {
-    const client = getClient()
-    return await client.post(`/api/accounts/token/verify/`, { token: token })
+    return await getClient().post(`/api/accounts/token/verify/`, {
+        token: token,
+    })
 }

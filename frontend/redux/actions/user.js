@@ -38,15 +38,13 @@ import { ORDER_LIST_MY_RESET } from "../types/order"
 // Utils:
 import { getClient } from "../../utils/axios"
 
-const client = getClient()
-
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({
             type: USER_LOGIN_REQUEST,
         })
 
-        const { data } = await client.post(`/api/accounts/login/`, {
+        const { data } = await getClient().post(`/api/accounts/login/`, {
             email: email,
             password: password,
         }) // send email and password and get back a token
@@ -82,10 +80,13 @@ export const register = (email, password) => async (dispatch) => {
             type: USER_REGISTER_REQUEST,
         })
 
-        const { data } = await client.post("/api/accounts/user/register/", {
-            email: email,
-            password: password,
-        }) // send email and password and get back a token
+        const { data } = await getClient().post(
+            "/api/accounts/user/register/",
+            {
+                email: email,
+                password: password,
+            }
+        ) // send email and password and get back a token
 
         dispatch({
             type: USER_REGISTER_SUCCESS,
@@ -115,7 +116,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
             type: USER_DETAILS_REQUEST,
         })
 
-        const { data } = await client.get(`/api/accounts/user/${id}/`)
+        const { data } = await getClient().get(`/api/accounts/user/${id}/`)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -138,7 +139,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_REQUEST,
         })
 
-        const { data } = await client.put(
+        const { data } = await getClient().put(
             `/api/accounts/user/update/profile/`,
             user
         )
@@ -171,7 +172,7 @@ export const listUsers = () => async (dispatch, getState) => {
             type: USER_LIST_REQUEST,
         })
 
-        const { data } = await client.get("/api/accounts/user/all/")
+        const { data } = await getClient().get("/api/accounts/user/all/")
 
         dispatch({
             type: USER_LIST_SUCCESS,
@@ -194,7 +195,9 @@ export const deleteUser = (id) => async (dispatch, getState) => {
             type: USER_DELETE_REQUEST,
         })
 
-        const { data } = await client.delete(`/api/accounts/user/delete/${id}/`)
+        const { data } = await getClient().delete(
+            `/api/accounts/user/delete/${id}/`
+        )
 
         dispatch({
             type: USER_DELETE_SUCCESS,
@@ -217,7 +220,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_REQUEST,
         })
 
-        const { data } = await client.put(
+        const { data } = await getClient().put(
             `/api/accounts/user/update/${user._id}/`,
             user
         )
@@ -243,7 +246,7 @@ export const allSellerProfiles = () => async (dispatch) => {
             type: ALL_SELLER_PROFILES_REQUEST,
         })
 
-        const { data } = await client.get(`/api/accounts/sellers/`)
+        const { data } = await getClient().get(`/api/accounts/sellers/`)
 
         dispatch({
             type: ALL_SELLER_PROFILES_SUCCESS,

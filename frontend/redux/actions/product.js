@@ -26,15 +26,13 @@ import {
 // Utils:
 import { getClient } from "../../utils/axios"
 
-const client = getClient()
-
 export const listProducts =
     (keyword = "") =>
     async (dispatch) => {
         try {
             dispatch({ type: PRODUCT_LIST_REQUEST })
 
-            const { data } = await client.get(
+            const { data } = await getClient().get(
                 `/api/products/all/?keyword=${keyword}`
             )
 
@@ -57,7 +55,7 @@ export const listTopProducts = () => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_TOP_REQUEST })
 
-        const { data } = await client.get(`/api/products/top/`)
+        const { data } = await getClient().get(`/api/products/top/`)
 
         dispatch({
             type: PRODUCT_TOP_SUCCESS,
@@ -78,7 +76,7 @@ export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
 
-        const { data } = await client.get(
+        const { data } = await getClient().get(
             `/api/products/${encodeURIComponent(id)}`
         )
 
@@ -114,7 +112,7 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await client.delete(
+        const { data } = await getClient().delete(
             `/api/products/delete/${encodeURIComponent(id)}`,
             config
         )
@@ -150,7 +148,11 @@ export const createProduct = () => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await client.post(`/api/products/create/`, {}, config)
+        const { data } = await getClient().post(
+            `/api/products/create/`,
+            {},
+            config
+        )
 
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
@@ -184,7 +186,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
             },
         }
 
-        const { data } = await client.put(
+        const { data } = await getClient().put(
             `/api/products/update/${product._id}/`,
             product,
             config
@@ -228,7 +230,7 @@ export const createProductReview =
                 },
             }
 
-            const { data } = await client.post(
+            const { data } = await getClient().post(
                 `/api/products/${productId}/reviews/`,
                 review,
                 config

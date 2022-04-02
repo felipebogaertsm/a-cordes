@@ -4,6 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import { useRouter } from "next/router"
 import { useEffect, useState, useContext } from "react"
 
 // Components:
@@ -18,6 +19,7 @@ import {
 
 // Constants:
 import { ACCOUNTS_USER_PATH } from "../../constants/apis"
+import { HOME_PAGE_ROUTE } from "../../constants/routes"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
@@ -28,21 +30,27 @@ import { useFetch } from "../../hooks"
 // Utils:
 import { getClient } from "../../utils/axios"
 
-const client = getClient()
-
 export default function SignUp() {
-    const { refreshUser } = useContext(AuthContext)
+    const { refreshUser, user } = useContext(AuthContext)
+
+    const router = useRouter()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const [registerUser, doFetch] = useFetch({
-        client,
+        client: getClient(),
         method: "post",
         url: ACCOUNTS_USER_PATH.replace("[id]", 0),
         payload: { email, password1: password, password2: confirmPassword },
     })
+
+    useEffect(() => {
+        if (user) {
+            router.push(HOME_PAGE_ROUTE)
+        }
+    }, [user])
 
     useEffect(() => {
         if (registerUser.data) {

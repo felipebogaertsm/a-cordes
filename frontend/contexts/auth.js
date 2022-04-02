@@ -15,15 +15,12 @@ import {
     ACCOUNTS_MY_USER_PATH,
 } from "../constants/apis"
 import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
-import { privateRoute } from "../services/auth"
 
 // Services:
 import { getClient } from "../utils/axios"
 
 // Utils:
 import { getDetailFromResponseError } from "../utils/errors"
-
-const client = getClient()
 
 export const AuthContext = createContext({})
 
@@ -82,7 +79,7 @@ export function AuthProvider({ children, user: userInfo }) {
         setLoading(true)
 
         try {
-            const { data: tokens } = await client.post(
+            const { data: tokens } = await getClient().post(
                 ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH,
                 {
                     email: email,
