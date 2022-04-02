@@ -15,11 +15,26 @@ env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
 
 jobs:
+  super-lint:
+    name: Lint entire codebase
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Linting
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build-backend:
     runs-on: self-hosted
     container: docker:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Backend build and push
       run: |
         cd a_cordes
@@ -32,7 +47,7 @@ jobs:
     runs-on: self-hosted
     container: docker:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Frontend build and push
       run: |
         cd frontend
@@ -52,7 +67,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Testing
       run: |
         python manage.py test
@@ -67,7 +82,7 @@ jobs:
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
       BACKEND_CONTAINER_NAME: a-cordes-backend
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
@@ -83,7 +98,7 @@ jobs:
       FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       FRONTEND_CONTAINER_NAME: a-cordes-frontend
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} \
