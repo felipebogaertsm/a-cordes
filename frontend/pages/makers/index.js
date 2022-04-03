@@ -48,7 +48,7 @@ export default function Makers() {
                         makers &&
                         makers.map((maker, index) => (
                             <div key={index} className="flex flex-row w-full ">
-                                <h5 className="my-auto mr-2">{index}</h5>
+                                <h5 className="my-auto mr-2">{index + 1}</h5>
                                 <MakerItem maker={maker} />
                             </div>
                         ))
