@@ -4,7 +4,10 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-export const LOGIN_PAGE_ROUTE = "/auth/login"
-export const HOME_PAGE_ROUTE = "/"
-
-export const USER_SETTINGS_PAGE_ROUTE = "/user/settings"
+export default function SubHeading({ children, ...props }) {
+    return (
+        <div className="w-full mt-4 mb-2">
+            <h3 {...props}>{children}</h3>
+        </div>
+    )
+}

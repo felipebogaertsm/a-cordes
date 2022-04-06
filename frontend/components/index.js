@@ -16,6 +16,7 @@ import Loader from "./Loader"
 import MakerItem from "./MakerItem"
 import Message from "./Message"
 import SearchInput from "./SearchInput"
+import SubHeading from "./SubHeading"
 import Navbar from "./Navbar"
 import NavbarItem from "./NavbarItem"
 import NavbarPage from "./NavbarPage"
@@ -36,6 +37,7 @@ export {
     MakerItem,
     Message,
     SearchInput,
+    SubHeading,
     Navbar,
     NavbarItem,
     NavbarPage,

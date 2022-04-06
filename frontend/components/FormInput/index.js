@@ -4,17 +4,12 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useRef, useEffect, useState } from "react"
+import { useRef, useState } from "react"
 
 // Components:
 import { ButtonIconBg } from ".."
 
-export default function FormInput({
-    type = "text",
-    value = "",
-    onChange,
-    ...props
-}) {
+export default function FormInput({ label, type = "text", ...props }) {
     const [isPasswordShown, setIsPasswordShown] = useState(false)
     const [typeInput, setTypeInput] = useState(type)
 
@@ -30,15 +25,11 @@ export default function FormInput({
         setIsPasswordShown(!isPasswordShown)
     }
 
-    useEffect(() => {
-        inputElement.current.value = value
-    }, [])
-
     return (
         <div className="w-full">
-            {props.label && (
+            {label && (
                 <div>
-                    <label>{props.label}</label>
+                    <label>{label}</label>
                     <div className="mb-2"></div>
                 </div>
             )}
@@ -49,10 +40,9 @@ export default function FormInput({
                     border-amber-900 border-opacity-0
                     focus:border-opacity-100 transition-all duration-200
                 "
-                    placeholder={props.placeholder}
                     type={typeInput}
-                    onChange={(e) => onChange(e)}
                     ref={inputElement}
+                    {...props}
                 ></input>
                 {type !== "password" ? (
                     ""

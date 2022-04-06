@@ -4,10 +4,14 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import Link from "next/link"
 import { useContext } from "react"
 
 // Components:
 import { NavbarItem } from "../"
+
+// Constants:
+import { USER_SETTINGS_PAGE_ROUTE } from "../../constants/routes"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
@@ -30,9 +34,11 @@ export default function NavbarUserDropdown() {
                 <div className="hidden md:group-hover:block absolute top-10 right-0 fade-in-out">
                     <div className="bg-stone-800 p-4 rounded-b-lg shadow-xl mt-2">
                         <div className="flex flex-col space-y-2 text-center">
-                            <div className="hover:bg-stone-700 p-2 rounded-lg transition-all duration-100">
-                                Settings
-                            </div>
+                            <Link href={USER_SETTINGS_PAGE_ROUTE}>
+                                <div className="hover:bg-stone-700 p-2 rounded-lg transition-all duration-100">
+                                    Settings
+                                </div>
+                            </Link>
                             <div
                                 className="hover:bg-stone-700 p-2 rounded-lg transition-all duration-100"
                                 onClick={() => logout()}
