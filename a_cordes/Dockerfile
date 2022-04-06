@@ -7,14 +7,11 @@ RUN pip3 install --upgrade pip setuptools wheel
 COPY ./requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
 
-RUN mkdir /app
-COPY . /app
-WORKDIR /app
-COPY ./scripts /scripts
+WORKDIR /usr/app
+COPY ./ ./
 
-RUN chmod +x /scripts/*
+RUN chmod +x ./scripts/*
 
 EXPOSE 8000
 
-COPY ./scripts/entrypoint.sh /scripts
-ENTRYPOINT ["sh", "/scripts/entrypoint.sh"]
+ENTRYPOINT ["sh", "./scripts/entrypoint.sh"]
