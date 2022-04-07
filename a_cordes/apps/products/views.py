@@ -13,14 +13,14 @@ from rest_framework.permissions import IsAdminUser
 
 from apps.accounts.models import SellerProfile
 from apps.products.models import Product, Review
-from apps.products.permissions import ReadOnly
 from apps.products.serializers import ProductSerializer
 
 from utils.mixins.views import SearchableModelViewSet
+from utils.permissions import ReadOnly
 
 
 class ProductViewSet(SearchableModelViewSet):
-    permission_classes = (ReadOnly,)
+    permission_classes = (IsAdminUser | ReadOnly,)
     model = Product
     serializer_class = ProductSerializer
     filterset_fields = ("name",)

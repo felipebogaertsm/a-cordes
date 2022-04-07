@@ -9,7 +9,4 @@ from rest_framework.permissions import BasePermission
 
 class ReadOnly(BasePermission):
     def has_permission(self, request, view):
-        if request.auth:
-            return True
-        else:
-            return request.method.lower() in ["get"]
+        return request.method.lower() in ["get"]
