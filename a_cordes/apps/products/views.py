@@ -13,7 +13,17 @@ from rest_framework.permissions import IsAdminUser
 
 from apps.accounts.models import SellerProfile
 from apps.products.models import Product, Review
+from apps.products.permissions import ReadOnly
 from apps.products.serializers import ProductSerializer
+
+from utils.mixins.views import SearchableModelViewSet
+
+
+class ProductViewSet(SearchableModelViewSet):
+    permission_classes = (ReadOnly,)
+    model = Product
+    serializer_class = ProductSerializer
+    filterset_fields = ("name",)
 
 
 @api_view(["GET"])
@@ -55,13 +65,6 @@ def get_top_products(request):
     products = Product.objects.filter(rating__gte=4).order_by("-rating")[0:5]
 
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
-
-
-@api_view(["GET"])
-def get_product(request, pk):
-    product = Product.objects.get(_id=pk)
-    serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
 

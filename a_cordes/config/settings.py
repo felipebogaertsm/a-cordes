@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "rest_framework",
     # cors
     "corsheaders",
+    # filters
+    "django_filters",
     # internal apps
     "apps.accounts.apps.AccountsConfig",
     "apps.cart.apps.CartConfig",
