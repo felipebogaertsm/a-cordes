@@ -50,7 +50,7 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
         serializer = self.serializer_class(product, many=False)
         return Response(serializer.data)
 
-    @action(detail=True, methods=["get", "post", "put", "patch"])
+    @action(detail=True, methods=["get", "post"])
     def review(self, request, pk):
         user = request.user
         product = self.model.objects.get(_id=pk)
@@ -77,11 +77,3 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
 
             serializer = ReviewSerializer(review, many=False)
             return Response(serializer.data)
-
-        elif request.method in ["patch", "put"]:
-            serializer = ReviewSerializer(request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors)
