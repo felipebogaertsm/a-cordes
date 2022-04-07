@@ -41,6 +41,15 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
+    @action(detail=True, methods=["patch"], url_path="set-image")
+    def set_image(self, request, pk):
+        product = Product.objects.get(_id=pk)
+        product.image = request.data["image"]
+        product.save()
+
+        serializer = self.serializer_class(product, many=False)
+        return Response(serializer.data)
+
 
 @api_view(["GET"])
 def get_products(request):
