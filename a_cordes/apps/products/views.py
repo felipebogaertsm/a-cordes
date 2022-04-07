@@ -27,7 +27,17 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def recent(self, request):
-        queryset = self.get_queryset()[0:5]  # get first 5 items
+        queryset = self.get_queryset().order_by("-created_at")[
+            0:5
+        ]  # get first 5 items
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["get"])
+    def top(self, request):
+        queryset = (
+            self.get_queryset().filter(rating__gte=4).order_by("-rating")[0:5]
+        )
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
