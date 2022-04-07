@@ -15,10 +15,4 @@ router.register("", views.ProductViewSet, basename="products")
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("all/", views.get_products),
-    path("create/", views.create_product),
-    path("upload-image/", views.upload_image),
-    path("top/", views.get_top_products),
-    path("update/<str:pk>/", views.update_product),
-    path("delete/<str:pk>/", views.delete_product),
 ]
