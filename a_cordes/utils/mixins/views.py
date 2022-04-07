@@ -5,10 +5,9 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.viewsets import ModelViewSet
 
 
-class SearchableModelViewSet(ModelViewSet):
+class SearchableModelViewSet:
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = "__all__"
 

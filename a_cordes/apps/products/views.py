@@ -5,11 +5,11 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser
+from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import SellerProfile
 from apps.products.models import Product, Review
@@ -19,7 +19,7 @@ from utils.mixins.views import SearchableModelViewSet
 from utils.permissions import ReadOnly
 
 
-class ProductViewSet(SearchableModelViewSet):
+class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     permission_classes = (IsAdminUser | ReadOnly,)
     model = Product
     serializer_class = ProductSerializer
