@@ -4,11 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-
-// Actions:
-import { listProducts } from "../redux/actions/product"
+import { useEffect, useState } from "react"
 
 // Components:
 import {
@@ -20,18 +16,27 @@ import {
     NavbarPage,
 } from "../components"
 
+// Constants:
+import { PRODUCTS_PATH } from "../constants/apis"
+
+// Hooks:
+import { useFetch } from "../hooks"
+
+// Utils:
+import { getClient } from "../utils/axios"
+
 export default function Home() {
-    const dispatch = useDispatch()
-
-    const { error, loading, products, page, pages } = useSelector(
-        (state) => state.productList
-    )
-
     const [keyword, setKeyword] = useState("")
 
+    const [products, doFetch] = useFetch({
+        client: getClient(),
+        method: "get",
+        url: PRODUCTS_PATH,
+    })
+
     useEffect(() => {
-        dispatch(listProducts(keyword))
-    }, [dispatch, keyword])
+        doFetch()
+    }, [keyword])
 
     return (
         <NavbarPage>
@@ -43,15 +48,15 @@ export default function Home() {
                 </div>
 
                 <div className="mt-20 px-6 w-full">
-                    {loading ? (
+                    {products.loading ? (
                         <div className="w-full mx-auto">
                             <Loader />
                         </div>
-                    ) : error ? (
-                        <Message>{error}</Message>
+                    ) : products.error ? (
+                        <Message>{products.error}</Message>
                     ) : (
-                        products && (
-                            <GriddedProductListing products={products} />
+                        products.data && (
+                            <GriddedProductListing products={products.data} />
                         )
                     )}
                 </div>

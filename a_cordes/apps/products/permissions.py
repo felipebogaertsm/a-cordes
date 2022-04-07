@@ -13,6 +13,3 @@ class ReadOnly(BasePermission):
             return True
         else:
             return request.method.lower() in ["get"]
-
-    def has_object_permission(self, request, view, obj):
-        self.has_permission(self, request, view)

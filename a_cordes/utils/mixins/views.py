@@ -12,5 +12,7 @@ class SearchableModelViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = "__all__"
 
+    lookup_field = "_id"
+
     def get_queryset(self):
         return self.model.objects.all()
