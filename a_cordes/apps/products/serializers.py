@@ -6,7 +6,6 @@
 
 from rest_framework import serializers
 
-from apps.accounts.models import SellerProfile
 from apps.accounts.serializers import SellerProfileSerializer
 from apps.products.models import Product, Review
 
@@ -19,7 +18,6 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
-
     seller = SellerProfileSerializer(many=False, source="seller_profile")
 
     class Meta:

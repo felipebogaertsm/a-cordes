@@ -4,14 +4,12 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, action
-from rest_framework.permissions import IsAdminUser
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from apps.accounts.models import SellerProfile
 from apps.products.models import Product, Review
 from apps.products.serializers import ProductSerializer, ReviewSerializer
 
@@ -77,3 +75,10 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
 
             serializer = ReviewSerializer(review, many=False)
             return Response(serializer.data)
+
+
+class ReviewViewSet(SearchableModelViewSet, ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    filterset_fields = ("product",)
+    model = Review
+    serializer_class = ReviewSerializer

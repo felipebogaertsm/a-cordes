@@ -12,6 +12,7 @@ import apps.products.views as views
 router = DefaultRouter()
 
 router.register("", views.ProductViewSet, basename="products")
+router.register("reviews", views.ReviewViewSet, basename="reviews")
 
 urlpatterns = [
     path("", include(router.urls)),
