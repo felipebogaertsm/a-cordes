@@ -7,7 +7,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 
@@ -24,6 +24,12 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     model = Product
     serializer_class = ProductSerializer
     filterset_fields = ("name",)
+
+    @action(detail=False, methods=["get"])
+    def recent(self, request):
+        queryset = self.get_queryset()[0:5]  # get first 5 items
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
 
 
 @api_view(["GET"])
