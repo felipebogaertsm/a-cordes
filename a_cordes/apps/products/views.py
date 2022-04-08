@@ -26,7 +26,7 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
 
     @action(detail=False, methods=["get"])
     def recent(self, request):
-        queryset = self.get_queryset()
+        queryset = self.get_queryset().filter(count_in_stock__gte=1)
 
         try:
             keyword = request.query_params["keyword"]
@@ -40,7 +40,9 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     @action(detail=False, methods=["get"])
     def top(self, request):
         queryset = (
-            self.get_queryset().filter(rating__gte=4).order_by("-rating")[0:10]
+            self.get_queryset()
+            .filter(rating__gte=4, count_in_stock__gte=1)
+            .order_by("-rating")[0:10]
         )
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
