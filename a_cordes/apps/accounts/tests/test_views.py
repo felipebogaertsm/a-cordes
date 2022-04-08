@@ -84,7 +84,7 @@ class TestViews(TestCase):
 
         # List mode:
         response = client.get(reverse("users-list"))
-        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.status_code, 200)
 
         # Detail mode with other user's id:
         response = client.get(
@@ -94,7 +94,7 @@ class TestViews(TestCase):
 
         # Detail mode with same user id:
         response = client.get(reverse("users-detail", args=[self.user._id]))
-        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.status_code, 200)
 
         # Detail mode with same user id:
         response = client.get(reverse("users-me"))
