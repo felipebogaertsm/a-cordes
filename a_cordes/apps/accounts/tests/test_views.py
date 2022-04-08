@@ -104,7 +104,7 @@ class TestViews(TestCase):
         wrong_password = USER_PASSWORD + "1"
 
         response = self.client.post(
-            reverse("user", kwargs={"pk": "0"}),
+            reverse("users-list"),
             {
                 "email": USER_1_EMAIL,
                 "password1": USER_PASSWORD,
@@ -116,7 +116,7 @@ class TestViews(TestCase):
 
     def test_user_signin_not_authenticated_client(self):
         response = self.client.post(
-            reverse("user", kwargs={"pk": "0"}),
+            reverse("users-list"),
             {
                 "email": USER_1_EMAIL,
                 "password1": USER_PASSWORD,
@@ -126,7 +126,7 @@ class TestViews(TestCase):
 
         new_user = response.data
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
         self.assertEqual(
             User.objects.get(_id=new_user["_id"]).email, new_user["email"]
         )

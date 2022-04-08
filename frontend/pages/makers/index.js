@@ -7,9 +7,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-// Actions:
-import { allSellerProfiles } from "../../redux/actions/user"
-
 // Components:
 import {
     Heading,
@@ -19,16 +16,21 @@ import {
     NavbarPage,
 } from "../../components"
 
-export default function Makers() {
-    const dispatch = useDispatch()
+// Constants:
+import { ACCOUNTS_SELLERS_PATH } from "../../constants/apis"
 
-    const { error, loading, makers } = useSelector(
-        (state) => state.sellerProfiles
-    )
+// Hooks:
+import { useFetch } from "../../hooks"
+
+export default function Makers() {
+    const [sellers, doFetch] = useFetch({
+        method: "get",
+        url: ACCOUNTS_SELLERS_PATH,
+    })
 
     useEffect(() => {
-        dispatch(allSellerProfiles())
-    }, [dispatch])
+        doFetch()
+    }, [])
 
     return (
         <NavbarPage>
@@ -38,15 +40,15 @@ export default function Makers() {
                 </div>
 
                 <div className="mt-20 px-6 w-full flex flex-col space-y-2">
-                    {loading ? (
+                    {sellers.loading ? (
                         <div className="w-full mx-auto">
                             <Loader />
                         </div>
-                    ) : error ? (
-                        <Message>{error}</Message>
+                    ) : sellers.error ? (
+                        <Message>{sellers.error}</Message>
                     ) : (
-                        makers &&
-                        makers.map((maker, index) => (
+                        sellers.data &&
+                        sellers.data.map((maker, index) => (
                             <div key={index} className="flex flex-row w-full ">
                                 <h5 className="my-auto mr-2">{index + 1}</h5>
                                 <MakerItem maker={maker} />

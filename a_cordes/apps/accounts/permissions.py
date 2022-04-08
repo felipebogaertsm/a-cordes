@@ -4,16 +4,16 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from rest_framework.permissions import BasePermission, SAFE_METHODS
+from rest_framework.permissions import BasePermission
 
 
 class UsersAPIPermissions(BasePermission):
     def has_permission(self, request, view):
+        if request.method.lower() in ["post"]:  # user creation
+            return True
+
         if request.auth and request.user.is_admin:
             return True  # admins have permission over all
-
-        if request.method in ["post"]:  # user creation
-            return True
 
         return False
 

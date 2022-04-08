@@ -23,12 +23,4 @@ urlpatterns = [
         name="token-obtain-pair",
     ),
     path("token/verify/", TokenVerifyView.as_view(), name="token-verify"),
-    path("my-user/", views.MyUserAPI.as_view()),
-    path("user/<str:pk>/", views.UserAPI.as_view(), name="user"),
-    path("user/all/", views.get_users),
-    path("user/register/", views.register_user),
-    path("user/profile/", views.get_user_profile),
-    path("user/update/<str:pk>/", views.update_user),
-    path("user/update/profile/", views.update_user_profile),
-    path("user/delete/<str:pk>/", views.delete_user),
 ]

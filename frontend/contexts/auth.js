@@ -28,7 +28,6 @@ export function AuthProvider({ children, user: userInfo }) {
     const [user, setUser] = useState(userInfo)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [authenticated, setAuthenticated] = useState(false)
 
     const router = useRouter()
 
@@ -56,7 +55,6 @@ export function AuthProvider({ children, user: userInfo }) {
                 .get(ACCOUNTS_MY_USER_PATH)
                 .then((res) => {
                     setUser(res.data)
-                    setAuthenticated(true)
                 })
                 .catch((err) => {
                     removeToken()
@@ -91,15 +89,12 @@ export function AuthProvider({ children, user: userInfo }) {
 
             setToken(token)
 
-            await refreshUser()
-            setAuthenticated(true)
+            await refreshUser(token)
 
             router.push(HOME_PAGE_ROUTE)
         } catch (err) {
             setError(getDetailFromResponseError(err))
-            setAuthenticated(false)
             setUser(null)
-
             removeToken()
         }
 
@@ -107,18 +102,14 @@ export function AuthProvider({ children, user: userInfo }) {
     }
 
     function logout() {
-        setAuthenticated(false)
         setUser(null)
-
         removeToken()
-
         router.push(LOGIN_PAGE_ROUTE)
     }
 
     return (
         <AuthContext.Provider
             value={{
-                authenticated,
                 user,
                 refreshUser,
                 setUser,
