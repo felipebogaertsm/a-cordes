@@ -18,23 +18,29 @@ from utils.permissions import ReadOnly
 
 
 class ProductViewSet(SearchableModelViewSet, ModelViewSet):
-    permission_classes = (IsAdminUser | ReadOnly,)
     model = Product
     serializer_class = ProductSerializer
+
+    permission_classes = (IsAdminUser | ReadOnly,)
     filterset_fields = ("name",)
 
     @action(detail=False, methods=["get"])
     def recent(self, request):
-        queryset = self.get_queryset().order_by("-created_at")[
-            0:5
-        ]  # get first 5 items
-        serializer = self.serializer_class(queryset, many=True)
+        queryset = self.get_queryset()
+
+        try:
+            keyword = request.query_params["keyword"]
+            queryset = queryset.filter(name__icontains=keyword)
+        except KeyError:
+            pass
+
+        serializer = self.serializer_class(queryset[0:10], many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=["get"])
     def top(self, request):
         queryset = (
-            self.get_queryset().filter(rating__gte=4).order_by("-rating")[0:5]
+            self.get_queryset().filter(rating__gte=4).order_by("-rating")[0:10]
         )
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)

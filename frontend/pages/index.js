@@ -31,11 +31,12 @@ export default function Home() {
     const [products, doFetch] = useFetch({
         client: getClient(),
         method: "get",
-        url: PRODUCTS_RECENT_PATH,
+        url: `${PRODUCTS_RECENT_PATH}?keyword=${keyword}`,
+        // url: PRODUCTS_RECENT_PATH,
     })
 
     useEffect(() => {
-        doFetch()
+        doFetch({ keyword: keyword })
     }, [keyword])
 
     return (
