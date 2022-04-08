@@ -14,7 +14,9 @@ from apps.products.models import Product
 
 
 class ShippingAddress(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
@@ -30,7 +32,9 @@ class ShippingAddress(models.Model):
 
 
 class Order(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
@@ -67,7 +71,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)

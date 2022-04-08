@@ -14,7 +14,9 @@ from apps.accounts.managers import UserManager
 
 
 class User(AbstractBaseUser):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
 
     email = models.EmailField(max_length=255, unique=True)
 
@@ -44,7 +46,9 @@ class User(AbstractBaseUser):
 
 
 class UserProfile(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
     slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -67,7 +71,9 @@ class UserProfile(models.Model):
 
 
 class SellerProfile(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
     slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)

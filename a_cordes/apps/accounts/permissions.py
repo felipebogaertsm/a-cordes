@@ -18,7 +18,7 @@ class UsersAPIPermissions(BasePermission):
         return False
 
     def has_object_permission(self, request, view, obj):
-        if request.auth and request.user.is_admin:
+        if request.auth:
             if obj._id == request.user._id or request.user.is_admin:
                 return True
 

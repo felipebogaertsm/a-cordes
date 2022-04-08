@@ -60,6 +60,22 @@ class UsersAPI(ModelViewSet):
         user = request.user
         return Response(UserSerializerWithToken(user, many=False).data)
 
+    @action(
+        detail=True,
+        url_path="set-password",
+        permission_classes=[IsAuthenticated],
+    )
+    def set_password(self, request, pk=None):
+        if request.user._id == pk or request.user.is_admin:
+            user = self.model.objects.get(_id=pk)
+            user.set_password(request.data["password"])
+            user.save()
+            return Response(UserSerializerWithToken(user, many=False))
+
+        return Response(
+            {"message": "Not allowed"}, status=status.HTTP_401_UNAUTHORIZED
+        )
+
 
 class MyUserAPI(APIView):
     permission_classes = [IsAuthenticated]

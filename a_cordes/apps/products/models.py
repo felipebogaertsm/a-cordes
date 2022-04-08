@@ -13,7 +13,9 @@ from apps.accounts.models import SellerProfile, User
 
 
 class Product(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
     slug = models.SlugField(max_length=50, unique=True, blank=True)
 
     seller_profile = models.ForeignKey(SellerProfile, on_delete=models.CASCADE)
@@ -49,7 +51,9 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    _id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
 
     product = models.ForeignKey(
         Product,
