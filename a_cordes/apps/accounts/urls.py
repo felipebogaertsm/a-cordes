@@ -13,6 +13,7 @@ import apps.accounts.views as views
 router = DefaultRouter()
 
 router.register("users", views.UsersAPI, basename="users")
+router.register("sellers", views.SellerProfilesAPI, basename="sellers")
 
 urlpatterns = [
     path("", include(router.urls)),
@@ -24,11 +25,8 @@ urlpatterns = [
     path("token/verify/", TokenVerifyView.as_view(), name="token-verify"),
     path("my-user/", views.MyUserAPI.as_view()),
     path("user/<str:pk>/", views.UserAPI.as_view(), name="user"),
-    path("seller/<str:pk>/", views.SellerProfileAPI.as_view()),
-    path("sellers/", views.SellerProfilesAPI.as_view()),
     path("user/all/", views.get_users),
     path("user/register/", views.register_user),
-    path("user/<str:pk>/", views.get_user_by_id),
     path("user/profile/", views.get_user_profile),
     path("user/update/<str:pk>/", views.update_user),
     path("user/update/profile/", views.update_user_profile),

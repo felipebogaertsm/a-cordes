@@ -51,6 +51,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 class UsersAPI(ModelViewSet):
     model = User
     serializer_class = UserSerializerWithToken
+
     permission_classes = (UsersAPIPermissions,)
     lookup_field = "_id"
     queryset = model.objects.all()
@@ -75,6 +76,14 @@ class UsersAPI(ModelViewSet):
         return Response(
             {"message": "Not allowed"}, status=status.HTTP_401_UNAUTHORIZED
         )
+
+
+class SellerProfilesAPI(ModelViewSet):
+    model = SellerProfile
+    serializer_class = SellerProfileSerializer
+
+    lookup_field = "_id"
+    queryset = model.objects.all()
 
 
 class MyUserAPI(APIView):
