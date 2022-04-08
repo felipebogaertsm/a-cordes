@@ -9,11 +9,11 @@ export default function Card(props) {
         <div {...props}>
             <div
                 className="
-                    w-full m-2 shadow-xl p-4 rounded-xl bg-stone-100
-                    hover:bg-stone-200 hover:bg-opacity-50 transition-all 
-                    duration-100 border-b-4 border-opacity-60
-                    hover:border-opacity-80
-                "
+                w-full p-4 shadow-xl rounded-xl bg-stone-100
+                hover:bg-stone-200 hover:bg-opacity-50 transition-all
+                duration-100 border-b-4 border-opacity-60
+                hover:border-opacity-80
+            "
             >
                 {props.children}
             </div>
