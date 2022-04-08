@@ -20,7 +20,10 @@ export default function NavbarUserDropdown() {
     const { logout } = useContext(AuthContext)
 
     return (
-        <NavbarItem to="/" className="group my-auto relative">
+        <NavbarItem
+            to={USER_SETTINGS_PAGE_ROUTE}
+            className="group my-auto relative"
+        >
             <div className="flex flex-row space-x-2">
                 <img
                     src="/icons/user.svg"

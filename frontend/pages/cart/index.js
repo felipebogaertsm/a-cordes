@@ -25,10 +25,10 @@ import {
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
 
-export default function Cart({ user }) {
+export default function Cart() {
     const dispatch = useDispatch()
 
-    const { authenticated, loading: loadingAuth } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const router = useRouter()
 
@@ -43,7 +43,7 @@ export default function Cart({ user }) {
         dispatch(clearCart())
     }
 
-    function checkoutHandler(e) {
+    function checkoutHandler() {
         router.push("/order")
     }
 
@@ -84,7 +84,7 @@ export default function Cart({ user }) {
 
                         {error && <Message>{error}</Message>}
 
-                        {!(authenticated || loadingAuth) && (
+                        {!user && (
                             <Message>
                                 You must be logged in to access this page.
                             </Message>

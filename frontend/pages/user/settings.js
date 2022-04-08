@@ -32,12 +32,18 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function Settings() {
-    const { user } = useContext(AuthContext)
+    const { user, setUser } = useContext(AuthContext)
 
     const [userInfo, doFetch] = useFetch({
         method: "patch",
         url: ACCOUNTS_MY_USER_PATH,
     })
+
+    useEffect(() => {
+        if (userInfo.data) {
+            setUser(userInfo.data)
+        }
+    }, [userInfo.data])
 
     return (
         <NavbarPage>

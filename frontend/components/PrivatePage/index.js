@@ -17,13 +17,13 @@ import { LOGIN_PATH } from "../../constants"
 import { AuthContext } from "../../contexts/auth"
 
 export default function PrivatePage({ children, ...props }) {
-    const { authenticated, loading, error } = useContext(AuthContext)
+    const { user, loading, error } = useContext(AuthContext)
 
     const router = useRouter()
 
     return (
         <div {...props}>
-            {authenticated && !loading && !error ? (
+            {user && !loading && !error ? (
                 <div>{children}</div>
             ) : loading ? (
                 <div>
