@@ -4,17 +4,18 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from math import perm
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.accounts.models import User, SellerProfile
+from apps.accounts.permissions import UsersAPIPermissions
 from apps.accounts.serializers import (
     UserSerializer,
     UserSerializerWithToken,
@@ -45,6 +46,19 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class UsersAPI(ModelViewSet):
+    model = User
+    serializer_class = UserSerializerWithToken
+    permission_classes = (UsersAPIPermissions,)
+    lookup_field = "_id"
+    queryset = model.objects.all()
+
+    @action(detail=False, url_path="me", permission_classes=[IsAuthenticated])
+    def me(self, request):
+        user = request.user
+        return Response(UserSerializerWithToken(user, many=False).data)
 
 
 class MyUserAPI(APIView):

@@ -10,4 +10,5 @@ export const ACCOUNTS_TOKEN_VERIFY_PATH = "/api/accounts/token/verify/"
 export const ACCOUNTS_MY_USER_PATH = "/api/accounts/my-user/"
 export const ACCOUNTS_USER_PATH = "/api/accounts/user/[id]/"
 
-export const PRODUCTS_PATH = "/api/products/"
+export const PRODUCTS_RECENT_PATH = "/api/products/recent/"
+export const PRODUCT_DETAIL_PATH = "/api/products/[id]/"

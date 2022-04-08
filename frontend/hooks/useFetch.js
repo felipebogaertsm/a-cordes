@@ -7,14 +7,19 @@
 import { useState } from "react"
 
 // Utils:
+import { getClient } from "../utils/axios"
 import { getDetailFromResponseError } from "../utils/errors"
 
-export default function useFetch({ client, method, url, payload }) {
+export default function useFetch({ client, method, url }) {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
 
-    const doFetch = async () => {
+    if (!client) {
+        client = getClient()
+    }
+
+    const doFetch = async (payload) => {
         setLoading(true)
         setData(null)
         setError(null)

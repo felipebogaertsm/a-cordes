@@ -9,14 +9,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 
 // Actions:
-import { listProductDetails } from "../../redux/actions/product"
 import { addToCart } from "../../redux/actions/cart"
 
 // Components:
 import { Button, Heading, Loader, NavbarPage } from "../../components"
 
+// Constants:
+import { PRODUCT_DETAIL_PATH } from "../../constants/apis"
+
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
+
+// Hooks:
+import { useFetch } from "../../hooks"
 
 // Utilities:
 import { stringToDate } from "../../utils/datetime"
@@ -26,25 +31,20 @@ export default function ProductId() {
 
     const { authenticated } = useContext(AuthContext)
 
-    const productDetails = useSelector((state) => state.productDetails)
-    const { loading, error, product } = productDetails
-
-    const cartSelector = useSelector((state) => state.cart)
-    const {
-        loading: loadingCart,
-        error: errorCart,
-        cartItems,
-        success: successCart,
-    } = cartSelector
-
     const router = useRouter()
     const id = router.query.id
 
+    const [product, doFetchProduct] = useFetch({
+        method: "get",
+        url: PRODUCT_DETAIL_PATH.replace("[id]", id),
+    })
+
     useEffect(() => {
-        if (id != undefined) {
-            dispatch(listProductDetails(id))
-        }
-    }, [dispatch, id])
+        doFetchProduct()
+    }, [])
+
+    const cartSelector = useSelector((state) => state.cart)
+    const { cartItems, success: successCart } = cartSelector
 
     useEffect(() => {
         if (cartItems && successCart) {
@@ -63,14 +63,14 @@ export default function ProductId() {
     return (
         <NavbarPage>
             <div className="px-6 py-14">
-                {loading ? (
+                {product.loading ? (
                     <Loader />
-                ) : error ? (
-                    <div>Error</div>
+                ) : product.error ? (
+                    <div>product.error</div>
                 ) : (
-                    product && (
+                    product.data && (
                         <div className="flex flex-col">
-                            <Heading>{product.name}</Heading>
+                            <Heading>{product.data.name}</Heading>
                             <div
                                 className="
                                 mt-10 lg:m-0 space-x-10 space-y-10
@@ -83,53 +83,57 @@ export default function ProductId() {
                                         aspect-[4/3] mt-10 object-cover
                                         w-full rounded-xl shadow-xl
                                     "
-                                        src={product.image}
+                                        src={product.data.image}
                                     ></img>
                                 </div>
                                 <div className="flex flex-col">
                                     <div className="my-2">
                                         <h5>Description</h5>
-                                        <p>{product.description}</p>
+                                        <p>{product.data.description}</p>
                                     </div>
                                     <div className="my-2">
                                         <h5>Category</h5>
-                                        <p>{product.category}</p>
+                                        <p>{product.data.category}</p>
                                     </div>
                                     <div className="my-2">
                                         <h5>Crafted by</h5>
-                                        <h6>{product.seller.name}</h6>
+                                        <h6>{product.data.seller.name}</h6>
                                         <p>
-                                            {product.seller.city},{" "}
-                                            {product.seller.country}
+                                            {product.data.seller.city},{" "}
+                                            {product.data.seller.country}
                                         </p>
                                     </div>
                                     <div className="my-2">
                                         <h5>Created at</h5>
                                         <p>
-                                            {stringToDate(product.created_at)}
+                                            {stringToDate(
+                                                product.data.created_at
+                                            )}
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex flex-col space-y-8">
                                     <div>
                                         <h5>Price</h5>
-                                        <h2>${Number(product.price)}</h2>
+                                        <h2>${Number(product.data.price)}</h2>
                                     </div>
                                     <div>
                                         <h5>Availability</h5>
                                         <div className="flex flex-row">
                                             <h3>
                                                 {Number(
-                                                    product.count_in_stock
+                                                    product.data.count_in_stock
                                                 ) > 0
                                                     ? "In Stock"
                                                     : "Out of Stock"}
                                             </h3>
                                             <div className="grow"></div>
                                             <h3>
-                                                {Number(product.count_in_stock)}
                                                 {Number(
-                                                    product.count_in_stock
+                                                    product.data.count_in_stock
+                                                )}
+                                                {Number(
+                                                    product.data.count_in_stock
                                                 ) === 1
                                                     ? " unit"
                                                     : " units"}
@@ -138,7 +142,9 @@ export default function ProductId() {
                                     </div>
                                     <div className="flex flex-col space-y-2">
                                         <Button
-                                            disabled={!product.count_in_stock}
+                                            disabled={
+                                                !product.data.count_in_stock
+                                            }
                                             onClick={(e) => addToCartHandler(e)}
                                             primary
                                         >

@@ -17,7 +17,7 @@ import {
 } from "../components"
 
 // Constants:
-import { PRODUCTS_PATH } from "../constants/apis"
+import { PRODUCTS_RECENT_PATH } from "../constants/apis"
 
 // Hooks:
 import { useFetch } from "../hooks"
@@ -31,7 +31,7 @@ export default function Home() {
     const [products, doFetch] = useFetch({
         client: getClient(),
         method: "get",
-        url: PRODUCTS_PATH,
+        url: PRODUCTS_RECENT_PATH,
     })
 
     useEffect(() => {

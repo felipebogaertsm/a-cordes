@@ -43,7 +43,6 @@ export default function SignUp() {
         client: getClient(),
         method: "post",
         url: ACCOUNTS_USER_PATH.replace("[id]", 0),
-        payload: { email, password1: password, password2: confirmPassword },
     })
 
     useEffect(() => {
@@ -86,7 +85,15 @@ export default function SignUp() {
                 </div>
 
                 <div className="pt-2">
-                    <Button onClick={() => doFetch()}>
+                    <Button
+                        onClick={() =>
+                            doFetch({
+                                email,
+                                password1: password,
+                                password2: confirmPassword,
+                            })
+                        }
+                    >
                         <div className="flex flex-row space-x-2">
                             <p>Sign up</p>
                             {registerUser.loading && (
