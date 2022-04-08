@@ -32,7 +32,6 @@ export default function Home() {
         client: getClient(),
         method: "get",
         url: `${PRODUCTS_RECENT_PATH}?keyword=${keyword}`,
-        // url: PRODUCTS_RECENT_PATH,
     })
 
     useEffect(() => {

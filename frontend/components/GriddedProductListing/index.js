@@ -26,8 +26,8 @@ export default function GriddedProductListing({ products }) {
                 "
             >
                 {productList.map((product, index) => (
-                    <div>
-                        <Link href={`products/${product._id}`} key={index}>
+                    <div key={index}>
+                        <Link href={`products/${product._id}`}>
                             <div className="cursor-pointer">
                                 <Card>
                                     <div className="flex flex-col">

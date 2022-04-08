@@ -14,7 +14,7 @@ export default function buttonIconBg({ iconPath, ...props }) {
             "
             {...props}
         >
-            <button className="mx-auto">
+            <button className="mx-auto" type="button">
                 <img
                     className="
                         w-5 h-5 group-hover:scale-110 transition-all duration-100
