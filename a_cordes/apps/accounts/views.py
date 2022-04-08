@@ -60,11 +60,29 @@ class UsersAPI(ModelViewSet):
         detail=False,
         url_path="me",
         permission_classes=[IsAuthenticated],
-        methods=("GET",),
+        methods=("GET", "PATCH", "PUT", "DELETE"),
     )
     def me(self, request):
         user = request.user
-        return Response(UserSerializerWithToken(user, many=False).data)
+
+        if request.method.lower() == "get":
+            return Response(UserSerializerWithToken(user, many=False).data)
+        elif request.method.lower() in ["patch", "put"]:
+            serializer = UserSerializerWithToken(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            else:
+                return Response(
+                    serializer.errors, status=status.HTTP_400_BAD_REQUEST
+                )
+        elif request.method.lower() == "delete":
+            pass
+
+        return Response(
+            {"message": "Method not allowed"},
+            status=status.HTTP_405_METHOD_NOT_ALLOWED,
+        )
 
     @action(
         detail=True,

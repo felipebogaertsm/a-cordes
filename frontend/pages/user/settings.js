@@ -4,6 +4,8 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import { useContext, useEffect } from "react"
+
 // Components:
 import {
     FormContainer,
@@ -14,8 +16,29 @@ import {
     SubHeading,
     NavbarPage,
 } from "../../components"
+import { ACCOUNTS_MY_USER_PATH } from "../../constants/apis"
+
+// Contexts:
+import { AuthContext } from "../../contexts/auth"
+
+// Hooks:
+import { useFetch } from "../../hooks"
+
+// Services:
+import { privateRoute } from "../../services/auth"
+
+export async function getServerSideProps(ctx) {
+    return await privateRoute(ctx)
+}
 
 export default function Settings() {
+    const { user } = useContext(AuthContext)
+
+    const [userInfo, doFetch] = useFetch({
+        method: "patch",
+        url: ACCOUNTS_MY_USER_PATH,
+    })
+
     return (
         <NavbarPage>
             <div className="px-6 py-14">
@@ -27,7 +50,13 @@ export default function Settings() {
                     <div>
                         <SubHeading>Account info</SubHeading>
                         <FormContainer className="flex flex-col space-y-2">
-                            <FormInput label="Email" />
+                            <FormInput
+                                label="Email"
+                                defaultValue={user.email}
+                                onChange={(e) =>
+                                    doFetch({ email: e.target.value })
+                                }
+                            />
                         </FormContainer>
                     </div>
 

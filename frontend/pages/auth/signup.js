@@ -18,7 +18,7 @@ import {
 } from "../../components"
 
 // Constants:
-import { ACCOUNTS_USER_PATH } from "../../constants/apis"
+import { ACCOUNTS_USERS_PATH } from "../../constants/apis"
 import { HOME_PAGE_ROUTE } from "../../constants/routes"
 
 // Contexts:
@@ -42,7 +42,7 @@ export default function SignUp() {
     const [registerUser, doFetch] = useFetch({
         client: getClient(),
         method: "post",
-        url: ACCOUNTS_USER_PATH.replace("[id]", 0),
+        url: ACCOUNTS_USERS_PATH,
     })
 
     useEffect(() => {

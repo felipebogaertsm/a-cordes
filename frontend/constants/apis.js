@@ -8,6 +8,8 @@ export const ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH =
     "/api/accounts/token/obtain-pair/"
 export const ACCOUNTS_TOKEN_VERIFY_PATH = "/api/accounts/token/verify/"
 export const ACCOUNTS_MY_USER_PATH = "/api/accounts/users/me/"
+export const ACCOUNTS_USER_PATH = "/api/accounts/users/[id]/"
+export const ACCOUNTS_USERS_PATH = "/api/accounts/users/"
 export const ACCOUNTS_SELLERS_PATH = "/api/accounts/sellers/"
 export const ACCOUNTS_SELLER_PATH = "/api/accounts/sellers/[id]/"
 

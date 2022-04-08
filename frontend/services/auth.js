@@ -15,28 +15,26 @@ import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "../constants/routes"
 // Services:
 import { getClient } from "../utils/axios"
 
-async function verifyAuth(ctx) {
-    const client = getClient(ctx)
-
-    const token = ctx.req.cookies[TOKEN_NAME]
-
-    try {
-        await client.post(ACCOUNTS_TOKEN_VERIFY_PATH, { token: token })
-        return true
-    } catch (err) {
-        return false // user not authenticated
-    }
-}
-
 export async function getMyUser(ctx) {
     const client = getClient(ctx)
     return await client.get(ACCOUNTS_MY_USER_PATH)
 }
 
-export async function privateRoute(ctx) {
-    const authenticated = await verifyAuth(ctx)
+export async function verifyAuth(ctx) {
+    const client = getClient(ctx)
+    return await client.post(ACCOUNTS_TOKEN_VERIFY_PATH, {
+        token: ctx.req.cookies[TOKEN_NAME],
+    })
+}
 
-    if (!authenticated) {
+export async function privateRoute(ctx) {
+    try {
+        await verifyAuth(ctx)
+
+        return {
+            props: {},
+        }
+    } catch (err) {
         return {
             props: {},
             redirect: {
@@ -45,28 +43,22 @@ export async function privateRoute(ctx) {
             },
         }
     }
-
-    const { data: user } = await getMyUser(ctx)
-
-    return {
-        props: { user: { ...user } },
-    }
 }
 
 export async function publicRoute(ctx) {
-    const authenticated = await verifyAuth(ctx)
+    try {
+        await verifyAuth(ctx)
 
-    if (authenticated) {
         return {
             props: {},
             redirect: {
                 destination: HOME_PAGE_ROUTE,
-                permanent: true,
+                permanent: false,
             },
         }
-    }
-
-    return {
-        props: {},
+    } catch (err) {
+        return {
+            props: {},
+        }
     }
 }
