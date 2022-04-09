@@ -4,10 +4,11 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+from crypt import methods
 from datetime import datetime
 
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -15,7 +16,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.orders.models import Order, OrderItem, ShippingAddress
 from apps.orders.serializers import (
-    OrderItem,
+    OrderSerializer,
     OrderItemSerializer,
     ShippingAddressSerializer,
 )
@@ -31,6 +32,11 @@ class ShippingAddressViewSet(ModelViewSet):
 
     lookup_field = "_id"
     queryset = model.objects.all()
+
+    @action(detail=False, methods=("GET",))
+    def my(self, request):
+        queryset = self.get_queryset().filter(user=request.user)
+        return Response(self.serializer_class(queryset, many=True).data)
 
 
 class OrderItemAPI(APIView):

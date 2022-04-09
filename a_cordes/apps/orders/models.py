@@ -18,12 +18,12 @@ class ShippingAddress(models.Model):
         default=uuid.uuid4, editable=False, unique=True, primary_key=True
     )
 
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
-    address = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=200, null=True, blank=True)
-    postal_code = models.CharField(max_length=200, null=True, blank=True)
-    country = models.CharField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, default="", blank=True)
+    city = models.CharField(max_length=200, default="", blank=True)
+    postal_code = models.CharField(max_length=200, default="", blank=True)
+    country = models.CharField(max_length=200, default="", blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 

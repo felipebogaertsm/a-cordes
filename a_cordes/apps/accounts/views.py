@@ -77,7 +77,8 @@ class UsersAPI(ModelViewSet):
                     serializer.errors, status=status.HTTP_400_BAD_REQUEST
                 )
         elif request.method.lower() == "delete":
-            pass
+            user.delete()
+            return Response({"message": "User deleted."})
 
         return Response(
             {"message": "Method not allowed"},

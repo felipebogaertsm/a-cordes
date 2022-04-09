@@ -4,10 +4,20 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+
+// Actions:
+import {
+    createShippingAddress,
+    deleteShippingAddress,
+    listShippingAddresses,
+    updateShippingAddress,
+} from "../../redux/actions/order"
 
 // Components:
 import {
+    Button,
     Accordion,
     FormContainer,
     FormInput,
@@ -36,14 +46,20 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function Settings() {
+    const dispatch = useDispatch()
+
     const { user, setUser } = useContext(AuthContext)
 
-    const [shippingAddresses] = useState([]) // only for tests!
+    const shippingAddresses = useSelector((state) => state.shippingAddresses)
 
     const [userInfo, doFetch] = useFetch({
         method: "patch",
         url: ACCOUNTS_MY_USER_PATH,
     })
+
+    useEffect(() => {
+        dispatch(listShippingAddresses())
+    }, [])
 
     useEffect(() => {
         if (userInfo.data) {
@@ -74,13 +90,24 @@ export default function Settings() {
 
                     <div className="pt-6">
                         <SubHeading>Shipping address</SubHeading>
-                        {shippingAddresses &&
-                            shippingAddresses.map((sa, item) => (
+                        {shippingAddresses.data &&
+                            shippingAddresses.data.map((sa, item) => (
                                 <div key={item}>
                                     <div className="pt-3"></div>
                                     <Accordion
+                                        expanded={sa.expanded}
                                         title={
-                                            <div className="py-2">
+                                            <div className="py-2 flex flex-row">
+                                                <img
+                                                    src="/icons/close.svg"
+                                                    onClick={() => {
+                                                        dispatch(
+                                                            deleteShippingAddress(
+                                                                sa._id
+                                                            )
+                                                        )
+                                                    }}
+                                                ></img>
                                                 <h6>
                                                     {truncateString(
                                                         sa.address,
@@ -94,23 +121,88 @@ export default function Settings() {
                                             <FormInput
                                                 label="Address"
                                                 defaultValue={sa.address}
+                                                onChange={(e) =>
+                                                    dispatch(
+                                                        updateShippingAddress(
+                                                            sa._id,
+                                                            {
+                                                                address:
+                                                                    e.target
+                                                                        .value,
+                                                            }
+                                                        )
+                                                    )
+                                                }
                                             />
                                             <FormInput
                                                 label="City"
                                                 defaultValue={sa.city}
+                                                onChange={(e) =>
+                                                    dispatch(
+                                                        updateShippingAddress(
+                                                            sa._id,
+                                                            {
+                                                                city: e.target
+                                                                    .value,
+                                                            }
+                                                        )
+                                                    )
+                                                }
                                             />
                                             <FormInput
                                                 label="Postal Code"
                                                 defaultValue={sa.postal_code}
+                                                onChange={(e) =>
+                                                    dispatch(
+                                                        updateShippingAddress(
+                                                            sa._id,
+                                                            {
+                                                                postal_code:
+                                                                    e.target
+                                                                        .value,
+                                                            }
+                                                        )
+                                                    )
+                                                }
                                             />
                                             <FormInput
                                                 label="Country"
                                                 defaultValue={sa.country}
+                                                onChange={(e) =>
+                                                    dispatch(
+                                                        updateShippingAddress(
+                                                            sa._id,
+                                                            {
+                                                                country:
+                                                                    e.target
+                                                                        .value,
+                                                            }
+                                                        )
+                                                    )
+                                                }
                                             />
                                         </FormContainer>
                                     </Accordion>
                                 </div>
                             ))}
+
+                        <div className="pt-4">
+                            <Button
+                                secondary
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    dispatch(createShippingAddress(user._id))
+                                }}
+                            >
+                                <div className="flex flex-row">
+                                    <img
+                                        src="/icons/close.svg"
+                                        className="rotate-45"
+                                    ></img>
+                                    <p className="pl-2">New shipping address</p>
+                                </div>
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>

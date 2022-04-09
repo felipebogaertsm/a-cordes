@@ -13,5 +13,11 @@ export const ACCOUNTS_USERS_PATH = "/api/accounts/users/"
 export const ACCOUNTS_SELLERS_PATH = "/api/accounts/sellers/"
 export const ACCOUNTS_SELLER_PATH = "/api/accounts/sellers/[id]/"
 
+export const ORDERS_SHIPPING_ADDRESSES_PATH = "/api/orders/shipping-addresses/"
+export const ORDERS_SHIPPING_ADDRESS_PATH =
+    "/api/orders/shipping-addresses/[id]/"
+export const ORDERS_MY_SHIPPING_ADDRESSES_PATH =
+    "/api/orders/shipping-addresses/my/"
+
 export const PRODUCTS_RECENT_PATH = "/api/products/recent/"
 export const PRODUCT_DETAIL_PATH = "/api/products/[id]/"
