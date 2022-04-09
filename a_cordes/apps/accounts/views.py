@@ -58,11 +58,11 @@ class UsersAPI(ModelViewSet):
 
     @action(
         detail=False,
-        url_path="me",
+        url_path="my",
         permission_classes=[IsAuthenticated],
         methods=("GET", "PATCH", "PUT", "DELETE"),
     )
-    def me(self, request):
+    def my(self, request):
         user = request.user
 
         if request.method.lower() == "get":

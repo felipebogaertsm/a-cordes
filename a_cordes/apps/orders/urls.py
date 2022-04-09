@@ -4,11 +4,21 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 import apps.orders.views as views
 
+router = DefaultRouter()
+
+router.register(
+    "shipping-addresses",
+    views.ShippingAddressViewSet,
+    basename="shipping-addresses",
+)
+
 urlpatterns = [
+    path("", include(router.urls)),
     path("items/", views.OrderItemAPI.as_view()),
     path("all/", views.get_orders),
     path("my/", views.get_my_orders),
