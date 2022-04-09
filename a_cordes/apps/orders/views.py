@@ -4,7 +4,6 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from crypt import methods
 from datetime import datetime
 
 from rest_framework import status
@@ -14,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
+from apps.products.models import Product
 from apps.orders.models import Order, OrderItem, ShippingAddress
 from apps.orders.serializers import (
     OrderSerializer,
@@ -31,7 +31,7 @@ class ShippingAddressViewSet(ModelViewSet):
     permission_classes = (IsAdminUser | ReadOnly | EditIfObjectIsMine,)
 
     lookup_field = "_id"
-    queryset = model.objects.all()
+    queryset = model.objects.all().order_by("-created_at")
 
     @action(detail=False, methods=("GET",))
     def my(self, request):

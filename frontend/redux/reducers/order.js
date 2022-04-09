@@ -24,13 +24,17 @@ export const shippingAddressesReducer = (state = { data: [] }, action) => {
                 data: [...state.data, action.payload],
             }
         case ORDER_SHIPPING_ADDRESSES_UPDATE:
+            let oldIndex
+            state.data.forEach((item, index) => {
+                if (item._id === action.payload._id) {
+                    oldIndex = index
+                }
+            })
+
+            let newData = [...state.data]
+            newData[oldIndex] = action.payload
             return {
-                data: [
-                    ...state.data.filter(
-                        (item) => action.payload._id != item._id
-                    ),
-                    action.payload,
-                ],
+                data: [...newData],
             }
         case ORDER_SHIPPING_ADDRESSES_DELETE:
             return {
