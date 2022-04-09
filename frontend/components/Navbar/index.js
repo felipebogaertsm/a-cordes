@@ -20,13 +20,13 @@ export default function Navbar() {
             <div
                 className="
                     bg-stone-900 text-stone-100 md:py-0 whitespace-nowrap
-                    md:h-16 px-2 md:px-4 border-b-2 border-white select-none
+                    px-2 md:px-4 border-b-2 border-white select-none
                     no-scrollbar w-full
                 "
             >
                 <div
                     className="
-                    flex md:flex-row flex-col h-full
+                    flex md:flex-row flex-col h-full py-3
                 "
                 >
                     <NavbarItem to="/">
