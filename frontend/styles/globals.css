@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+@layer base {
     :root {
         font-size: 16px;
         @apply bg-zinc-100 text-zinc-700;
@@ -53,6 +53,13 @@
     }
 }
 
+@layer components {
+    .accordion-content {
+        overflow: hidden;
+        animation: translateYTransition 200ms ease-out;
+    }
+}
+
 @layer utilities {
     /* Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
@@ -71,5 +78,15 @@
     @keyframes fadeInOut {
         0% {opacity: 0;}
         100% {opacity: 1;}
-    } 
+    }
+
+    @keyframes translateYTransition {
+        0% {
+            transform: translateY(-100px);
+        }
+    
+        100% {
+            transform: translateY(0);
+        }
+    }
 }

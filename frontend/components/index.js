@@ -4,6 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import Accordion from "./Accordion"
 import Button from "./Button"
 import ButtonIconBg from "./ButtonIconBg"
 import Card from "./Card"
@@ -25,6 +26,7 @@ import PrivatePage from "./PrivatePage"
 import ProductListing from "./ProductListing"
 
 export {
+    Accordion,
     Button,
     ButtonIconBg,
     Card,

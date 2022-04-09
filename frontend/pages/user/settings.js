@@ -4,10 +4,11 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 
 // Components:
 import {
+    Accordion,
     FormContainer,
     FormInput,
     Heading,
@@ -27,12 +28,17 @@ import { useFetch } from "../../hooks"
 // Services:
 import { privateRoute } from "../../services/auth"
 
+// Utils:
+import { truncateString } from "../../utils/strings"
+
 export async function getServerSideProps(ctx) {
     return await privateRoute(ctx)
 }
 
 export default function Settings() {
     const { user, setUser } = useContext(AuthContext)
+
+    const [shippingAddresses] = useState([]) // only for tests!
 
     const [userInfo, doFetch] = useFetch({
         method: "patch",
@@ -66,14 +72,45 @@ export default function Settings() {
                         </FormContainer>
                     </div>
 
-                    <div>
+                    <div className="pt-6">
                         <SubHeading>Shipping address</SubHeading>
-                        <FormContainer className="flex flex-col space-y-2">
-                            <FormInput label="Address" />
-                            <FormInput label="City" />
-                            <FormInput label="Postal Code" />
-                            <FormInput label="Country" />
-                        </FormContainer>
+                        {shippingAddresses &&
+                            shippingAddresses.map((sa, item) => (
+                                <div key={item}>
+                                    <div className="pt-3"></div>
+                                    <Accordion
+                                        title={
+                                            <div className="py-2">
+                                                <h6>
+                                                    {truncateString(
+                                                        sa.address,
+                                                        50
+                                                    )}
+                                                </h6>
+                                            </div>
+                                        }
+                                    >
+                                        <FormContainer className="flex flex-col space-y-2">
+                                            <FormInput
+                                                label="Address"
+                                                defaultValue={sa.address}
+                                            />
+                                            <FormInput
+                                                label="City"
+                                                defaultValue={sa.city}
+                                            />
+                                            <FormInput
+                                                label="Postal Code"
+                                                defaultValue={sa.postal_code}
+                                            />
+                                            <FormInput
+                                                label="Country"
+                                                defaultValue={sa.country}
+                                            />
+                                        </FormContainer>
+                                    </Accordion>
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>
