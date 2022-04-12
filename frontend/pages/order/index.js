@@ -33,7 +33,7 @@ export default function OrderPage() {
     const [paymentMethod, setPaymentMethod] = useState("Cash")
 
     const [itemsPrice, setItemsPrice] = useState(0)
-    const [shippingPrice, setShippingPrice] = useState(50)
+    const [shippingPrice, setShippingPrice] = useState(0)
     const [taxPrice, setTaxPrice] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
 
@@ -60,8 +60,16 @@ export default function OrderPage() {
     }, [cartItems])
 
     useEffect(() => {
+        const itemsPrice = 0
+
+        if (Array.isArray(cartItems)) {
+            for (let item of cartItems) {
+                itemsPrice += Number(item.product.price)
+            }
+        }
+
         setTotalPrice(itemsPrice + shippingPrice + taxPrice)
-    }, [itemsPrice, shippingPrice, taxPrice])
+    }, [itemsPrice, shippingPrice, taxPrice, cartItems])
 
     function orderItemsHandler(e) {
         e.preventDefault()
