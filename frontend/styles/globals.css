@@ -29,23 +29,23 @@
     }
 
     h2 {
-        @apply text-4xl;
+        @apply text-5xl;
     }
 
     h3 {
-        @apply text-2xl;
+        @apply text-3xl;
     }
 
     h4 {
-        @apply text-xl;
+        @apply text-2xl;
     }
 
     h5 {
-        @apply text-lg;
+        @apply text-xl;
     }
 
     h6 {
-        @apply text-base;
+        @apply text-lg;
     }
 
     a {

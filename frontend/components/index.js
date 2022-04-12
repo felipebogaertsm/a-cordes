@@ -26,6 +26,7 @@ import NavbarPage from "./NavbarPage"
 import NavbarUserDropdown from "./NavbarUserDropdown"
 import PrivatePage from "./PrivatePage"
 import ProductListing from "./ProductListing"
+import TotalPriceOrder from "./TotalPriceOrder"
 
 export {
     Accordion,
@@ -50,4 +51,5 @@ export {
     NavbarUserDropdown,
     PrivatePage,
     ProductListing,
+    TotalPriceOrder,
 }

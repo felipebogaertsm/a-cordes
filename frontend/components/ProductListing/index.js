@@ -5,13 +5,11 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useRouter } from "next/router"
-import { useDispatch } from "react-redux"
 
 // Components:
 import { Button } from "../"
 
 export default function ProductListing({ items, removeHandler, ...props }) {
-    const dispatch = useDispatch()
     const router = useRouter()
 
     return (

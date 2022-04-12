@@ -32,18 +32,17 @@ import { AuthContext } from "../../contexts/auth"
 // Utils:
 import { truncateString } from "../../utils/strings"
 
-export default function ShippingAddressForm({ select, onSelect }) {
+export default function ShippingAddressForm({ defaultChecked, onCheck }) {
     const { user } = useContext(AuthContext)
 
     const dispatch = useDispatch()
     const shippingAddresses = useSelector((state) => state.shippingAddresses)
 
-    const [selectedId, setSelectedId] = useState(select)
+    const [selectedId, setSelectedId] = useState(defaultChecked)
     const [firstLoad, setFirstLoad] = useState(true)
 
     useEffect(() => {
         if (shippingAddresses.data.length > 0 && firstLoad && !selectedId) {
-            console.log(shippingAddresses.data)
             setSelectedId(shippingAddresses.data[0]._id)
             setFirstLoad(false)
         }
@@ -56,7 +55,6 @@ export default function ShippingAddressForm({ select, onSelect }) {
     return (
         <div>
             <SubHeading>Shipping address</SubHeading>
-            {shippingAddresses.loading && <Loader />}
             {shippingAddresses.data &&
                 shippingAddresses.data.map((sa, item) => (
                     <div key={item}>
@@ -75,16 +73,25 @@ export default function ShippingAddressForm({ select, onSelect }) {
                                     ></img>
                                     <h6>{truncateString(sa.address, 50)}</h6>
                                     <div className="grow"></div>
-                                    <div className="mx-2 pointer-events-auto relative">
-                                        <FormCheckbox
-                                            value={sa._id}
-                                            className="pointer-events-auto"
-                                            checked={sa._id === selectedId}
-                                            onChange={(e) =>
-                                                setSelectedId(e.target.value)
-                                            }
-                                        />
-                                    </div>
+                                    {onCheck && (
+                                        <div className="mx-2 pointer-events-auto relative">
+                                            <FormCheckbox
+                                                value={sa._id}
+                                                className="pointer-events-auto"
+                                                checked={
+                                                    defaultChecked
+                                                        ? defaultChecked
+                                                        : sa._id === selectedId
+                                                }
+                                                onChange={(e) => {
+                                                    setSelectedId(
+                                                        e.target.value
+                                                    )
+                                                    onCheck(e.target.value)
+                                                }}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             }
                         >

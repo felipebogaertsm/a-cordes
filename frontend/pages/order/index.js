@@ -15,17 +15,19 @@ import { createOrder } from "../../redux/actions/order"
 // Components:
 import {
     Button,
-    FormInput,
     Heading,
     NavbarPage,
     ProductListing,
     ShippingAddressForm,
+    TotalPriceOrder,
 } from "../../components"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
 
-export default function Cart() {
+export default function OrderPage() {
+    const { user } = useContext(AuthContext)
+
     const dispatch = useDispatch()
 
     const [paymentMethod, setPaymentMethod] = useState("Cash")
@@ -103,7 +105,7 @@ export default function Cart() {
                     <div className="w-full flex flex-col lg:flex-row">
                         <div className="w-full lg:mr-10 mb-10 space-y-10">
                             <ShippingAddressForm
-                                onSelect={(id) => setShippingAddress(id)}
+                                onCheck={(id) => setShippingAddress(id)}
                             />
 
                             <div>
@@ -114,7 +116,7 @@ export default function Cart() {
                             </div>
                         </div>
 
-                        <div className="w-full">
+                        <div className="w-full mt-16">
                             {Array.isArray(cartItems) &&
                                 (cartItems.length === 0 ? (
                                     <div className="mx-auto w-max space-y-4">
@@ -130,6 +132,11 @@ export default function Cart() {
                                 ) : (
                                     <ProductListing items={cartItems} />
                                 ))}
+                            <div className="mt-10">
+                                <TotalPriceOrder
+                                    total={totalPrice}
+                                ></TotalPriceOrder>
+                            </div>
                         </div>
                     </div>
                 </div>

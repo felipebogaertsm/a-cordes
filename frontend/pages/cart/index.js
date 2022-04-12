@@ -96,7 +96,7 @@ export default function Cart() {
                                     <p className="text-xl">
                                         No items in your cart.
                                     </p>
-                                    <Button onClick={(e) => router.push("/")}>
+                                    <Button onClick={() => router.push("/")}>
                                         Continue shopping
                                     </Button>
                                 </div>

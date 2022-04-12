@@ -41,14 +41,16 @@ export default function GriddedProductListing({ products }) {
                                         ></img>
                                         <div className="flex flex-col mt-2">
                                             <div className="flex-row flex">
-                                                <h4>{product.name}</h4>
+                                                <h5>{product.name}</h5>
                                                 <div className="grow"></div>
                                                 <h4 className="text-stone-600">
                                                     ${Number(product.price)}
                                                 </h4>
                                             </div>
-                                            <div className="flex-row mt-1">
-                                                <h6>{product.seller.name}</h6>
+                                            <div className="flex flex-row">
+                                                <h6 className="text-base">
+                                                    {product.seller.name}
+                                                </h6>
                                                 <div className="grow"></div>
                                             </div>
                                         </div>
