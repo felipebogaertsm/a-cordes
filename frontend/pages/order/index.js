@@ -19,13 +19,11 @@ import {
     Heading,
     NavbarPage,
     ProductListing,
+    ShippingAddressForm,
 } from "../../components"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
-
-// Utilities:
-import { stringToDate } from "../../utils/datetime"
 
 export default function Cart() {
     const dispatch = useDispatch()
@@ -37,10 +35,7 @@ export default function Cart() {
     const [taxPrice, setTaxPrice] = useState(0)
     const [totalPrice, setTotalPrice] = useState(0)
 
-    const [shippingAddress, setShippingAddress] = useState("")
-    const [shippingCity, setShippingCity] = useState("")
-    const [shippingPostalCode, setShippingPostalCode] = useState("")
-    const [shippingCountry, setShippingCountry] = useState("")
+    const [shippingAddress, setShippingAddress] = useState()
 
     const { loading, error, cartItems } = useSelector((state) => state.cart)
 
@@ -107,37 +102,9 @@ export default function Cart() {
 
                     <div className="w-full flex flex-col lg:flex-row">
                         <div className="w-full lg:mr-10 mb-10 space-y-10">
-                            <div>
-                                <h3>Ship to</h3>
-                                <div className="my-2 space-y-2">
-                                    <FormInput
-                                        onChange={(e) =>
-                                            setShippingAddress(e.target.value)
-                                        }
-                                        label="Address"
-                                    />
-                                    <FormInput
-                                        onChange={(e) =>
-                                            setShippingCity(e.target.value)
-                                        }
-                                        label="City"
-                                    />
-                                    <FormInput
-                                        onChange={(e) =>
-                                            setShippingPostalCode(
-                                                e.target.value
-                                            )
-                                        }
-                                        label="Postal Code"
-                                    />
-                                    <FormInput
-                                        onChange={(e) =>
-                                            setShippingCountry(e.target.value)
-                                        }
-                                        label="Country"
-                                    />
-                                </div>
-                            </div>
+                            <ShippingAddressForm
+                                onSelect={(id) => setShippingAddress(id)}
+                            />
 
                             <div>
                                 <h3>Payment method</h3>

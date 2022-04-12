@@ -17,7 +17,7 @@ export default function Accordion({ children, title, expanded, ...props }) {
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
                     <div className="flex flex-row">
-                        <div className="my-auto">{title}</div>
+                        <div className="w-full my-auto">{title}</div>
                         <div className="grow"></div>
                         <div className="my-auto w-6 h-6">
                             <img
