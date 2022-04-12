@@ -29,7 +29,7 @@ import { stringToDate } from "../../utils/datetime"
 export default function ProductId() {
     const dispatch = useDispatch()
 
-    const { authenticated } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     const router = useRouter()
     const id = router.query.id
@@ -53,7 +53,7 @@ export default function ProductId() {
     }, [cartItems])
 
     const addToCartHandler = () => {
-        if (authenticated) {
+        if (user) {
             dispatch(addToCart(id, 1))
         } else {
             router.push("/auth/login")
