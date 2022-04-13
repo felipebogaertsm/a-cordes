@@ -6,5 +6,5 @@
 
 export const LOGIN_PAGE_ROUTE = "/auth/login"
 export const HOME_PAGE_ROUTE = "/"
-
+export const MAKER_PAGE_ROUTE = "/makers/[id]"
 export const USER_SETTINGS_PAGE_ROUTE = "/user/settings"

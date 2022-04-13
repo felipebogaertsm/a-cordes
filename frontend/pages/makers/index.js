@@ -4,6 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import { useRouter } from "next/router"
 import { useEffect } from "react"
 
 // Components:
@@ -18,11 +19,14 @@ import {
 
 // Constants:
 import { ACCOUNTS_SELLERS_PATH } from "../../constants/apis"
+import { MAKER_PAGE_ROUTE } from "../../constants/routes"
 
 // Hooks:
 import { useFetch } from "../../hooks"
 
 export default function Makers() {
+    const router = useRouter()
+
     const [sellers, doFetch] = useFetch({
         method: "get",
         url: ACCOUNTS_SELLERS_PATH,
@@ -49,7 +53,19 @@ export default function Makers() {
                     ) : (
                         sellers.data &&
                         sellers.data.map((maker, index) => (
-                            <ListItem key={index} number={index + 1}>
+                            <ListItem
+                                key={index}
+                                number={index + 1}
+                                className="cursor-pointer"
+                                onClick={() =>
+                                    router.push(
+                                        MAKER_PAGE_ROUTE.replace(
+                                            "[id]",
+                                            maker._id
+                                        )
+                                    )
+                                }
+                            >
                                 <MakerItem maker={maker} />
                             </ListItem>
                         ))
