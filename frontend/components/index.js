@@ -14,6 +14,7 @@ import FormCheckbox from "./FormCheckbox"
 import FormInput from "./FormInput"
 import GriddedProductListing from "./GriddedProductListing"
 import Heading from "./Heading"
+import ListItem from "./ListItem"
 import Loader from "./Loader"
 import MakerItem from "./MakerItem"
 import Message from "./Message"
@@ -39,6 +40,7 @@ export {
     FormInput,
     GriddedProductListing,
     Heading,
+    ListItem,
     Loader,
     MakerItem,
     Message,

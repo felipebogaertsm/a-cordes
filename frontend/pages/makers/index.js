@@ -5,11 +5,11 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
 // Components:
 import {
     Heading,
+    ListItem,
     Loader,
     MakerItem,
     Message,
@@ -49,10 +49,9 @@ export default function Makers() {
                     ) : (
                         sellers.data &&
                         sellers.data.map((maker, index) => (
-                            <div key={index} className="flex flex-row w-full ">
-                                <h5 className="my-auto mr-2">{index + 1}</h5>
+                            <ListItem key={index} number={index + 1}>
                                 <MakerItem maker={maker} />
-                            </div>
+                            </ListItem>
                         ))
                     )}
                 </div>

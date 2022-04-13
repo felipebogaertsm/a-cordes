@@ -6,12 +6,7 @@
 
 export default function MakerItem({ maker }) {
     return (
-        <div
-            className="
-                bg-stone-200 rounded-lg px-6 py-4 hover:brightness-[102%]
-                transition-all duration-200 w-full h-full
-            "
-        >
+        <div>
             <div className="flex md:flex-row flex-col space-x-4">
                 <img src={maker.picture} />
                 <div className="my-auto">

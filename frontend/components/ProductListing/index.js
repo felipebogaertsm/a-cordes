@@ -7,7 +7,7 @@
 import { useRouter } from "next/router"
 
 // Components:
-import { Button } from "../"
+import { Button, ListItem } from "../"
 
 export default function ProductListing({ items, removeHandler, ...props }) {
     const router = useRouter()
@@ -15,15 +15,8 @@ export default function ProductListing({ items, removeHandler, ...props }) {
     return (
         <div className="flex flex-col space-y-4">
             {items.map((item, index) => (
-                <div
-                    key={index}
-                    className="
-                        bg-stone-200 rounded-lg px-6 py-4
-                        hover:brightness-[102%] transition-all duration-200
-                    "
-                >
+                <ListItem key={index} number={index + 1}>
                     <div className="flex md:flex-row flex-col space-x-4">
-                        <h5 className="my-auto text-stone-500">{index + 1}</h5>
                         <img
                             className="
                                 aspect-[4/3] object-cover md:h-12 md:w-min
@@ -59,7 +52,7 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                             </div>
                         )}
                     </div>
-                </div>
+                </ListItem>
             ))}
         </div>
     )
