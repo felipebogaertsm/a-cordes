@@ -64,6 +64,7 @@ export default function ShippingAddressForm({ defaultChecked, onCheck }) {
                             title={
                                 <div className="py-2 flex flex-row w-full">
                                     <img
+                                        className="mr-3"
                                         src="/icons/close.svg"
                                         onClick={() => {
                                             dispatch(
