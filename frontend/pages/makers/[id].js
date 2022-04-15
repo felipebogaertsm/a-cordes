@@ -9,16 +9,16 @@ import { useRouter } from "next/router"
 
 // Components:
 import {
+    GriddedProductListing,
     Heading,
     ListItem,
     Loader,
     MakerItem,
-    Message,
     NavbarPage,
 } from "../../components"
 
 // Constants:
-import { ACCOUNTS_SELLER_PATH } from "../../constants/apis"
+import { ACCOUNTS_SELLER_PATH, PRODUCT_LIST_PATH } from "../../constants/apis"
 
 // Hooks:
 import { useFetch } from "../../hooks"
@@ -33,9 +33,20 @@ export default function MakerId() {
         url: ACCOUNTS_SELLER_PATH.replace("[id]", makerId),
     })
 
+    const [products, doFetchProducts] = useFetch({
+        method: "get",
+        url: PRODUCT_LIST_PATH,
+    })
+
     useEffect(() => {
         doFetch()
     }, [])
+
+    useEffect(() => {
+        if (seller.data) {
+            doFetchProducts({ params: { seller: seller.data.id } })
+        }
+    }, [seller.data])
 
     return (
         <NavbarPage>
@@ -52,6 +63,14 @@ export default function MakerId() {
                                 <MakerItem maker={seller.data} />
                             </ListItem>
                         </div>
+                    </div>
+                )}
+
+                <h2 className="mt-10 mb-6 ml-6">Products</h2>
+
+                {products.data && (
+                    <div>
+                        <GriddedProductListing products={products.data} />
                     </div>
                 )}
             </div>
