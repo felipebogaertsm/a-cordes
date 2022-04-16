@@ -44,7 +44,7 @@ export default function MakerId() {
 
     useEffect(() => {
         if (seller.data) {
-            doFetchProducts({ params: { seller: seller.data.id } })
+            doFetchProducts({ params: { seller_profile: seller.data.id } })
         }
     }, [seller.data])
 
