@@ -30,15 +30,30 @@ export default function GriddedProductListing({ products }) {
                         <Link href={`products/${product._id}`}>
                             <div className="cursor-pointer">
                                 <Card>
-                                    <div className="flex flex-col">
-                                        <img
-                                            className="
+                                    <div className="flex flex-col group">
+                                        <div className="relative">
+                                            <img
+                                                className="
                                                 rounded-xl w-full h-full object-cover
                                                 aspect-[4/3] border-opacity-10
                                                 border-2 border-amber-900
                                             "
-                                            src={product.image}
-                                        ></img>
+                                                src={product.image}
+                                            ></img>
+                                            {product.count_in_stock === 0 && (
+                                                <div
+                                                    className="
+                                                        absolute top-0 left-0 bg-zinc-200 h-full 
+                                                        w-full px-auto group-hover:opacity-40 
+                                                        opacity-20 p-2 transition-all duration-200
+                                                    "
+                                                >
+                                                    <h4 className="text-center my-auto">
+                                                        Product not available
+                                                    </h4>
+                                                </div>
+                                            )}
+                                        </div>
                                         <div className="flex flex-col mt-2">
                                             <div className="flex-row flex">
                                                 <h5>{product.name}</h5>
