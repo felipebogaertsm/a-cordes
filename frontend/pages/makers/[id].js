@@ -58,15 +58,28 @@ export default function MakerId() {
                             <Heading>{seller.data.name}</Heading>
                         </div>
 
-                        <div className="mt-20 px-6 w-full flex flex-col space-y-2">
-                            <ListItem number={1}>
-                                <MakerItem maker={seller.data} />
-                            </ListItem>
+                        <div className="mt-12 px-6 w-full flex flex-col space-y-2">
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3">
+                                <div className="mt-8">
+                                    <h6>Description</h6>
+                                    <p>{seller.data.description}</p>
+                                </div>
+                                <div className="mt-8">
+                                    <h6>Location</h6>
+                                    <p>
+                                        {seller.data.city},{" "}
+                                        {seller.data.country}
+                                    </p>
+                                </div>
+                                <div className="mt-8">
+                                    <h6>Recent reviews</h6>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}
 
-                <h2 className="mt-10 mb-6 ml-6">Products</h2>
+                <h2 className="mt-20 mb-6 ml-6">Products</h2>
 
                 {products.data && (
                     <div>

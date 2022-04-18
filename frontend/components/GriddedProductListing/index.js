@@ -22,11 +22,11 @@ export default function GriddedProductListing({ products }) {
             <div
                 className="
                     grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5
-                    grid-cols-1 md:space-x-4 space-y-4 place-items-stretch md:space-y-0
+                    grid-cols-1 place-items-stretch
                 "
             >
                 {productList.map((product, index) => (
-                    <div key={index}>
+                    <div key={index} className="mt-6 mr-4">
                         <Link href={`products/${product._id}`}>
                             <div className="cursor-pointer">
                                 <Card>
@@ -44,8 +44,8 @@ export default function GriddedProductListing({ products }) {
                                                 <div
                                                     className="
                                                         absolute top-0 left-0 bg-zinc-200 h-full 
-                                                        w-full px-auto group-hover:opacity-40 
-                                                        opacity-20 p-2 transition-all duration-200
+                                                        w-full px-auto group-hover:opacity-60 
+                                                        opacity-40 p-2 transition-all duration-200
                                                     "
                                                 >
                                                     <h4 className="text-center my-auto">
