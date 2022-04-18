@@ -22,7 +22,8 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     serializer_class = ProductSerializer
 
     permission_classes = (IsAdminUser | ReadOnly,)
-    filterset_fields = ("name", "seller_profile")
+    filterset_fields = ("name", "seller_profile", "count_in_stock")
+    ordering = ("-count_in_stock", "-created_at")
 
     @action(detail=False, methods=["get"])
     def recent(self, request):

@@ -6,9 +6,11 @@
 
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.filters import OrderingFilter
+
 
 class SearchableModelViewSet:
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (DjangoFilterBackend, OrderingFilter)
     filterset_fields = "__all__"
 
     lookup_field = "_id"
