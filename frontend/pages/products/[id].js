@@ -16,6 +16,7 @@ import { Button, Heading, Loader, NavbarPage } from "../../components"
 
 // Constants:
 import { PRODUCT_DETAIL_PATH } from "../../constants/apis"
+import { MAKER_PAGE_ROUTE } from "../../constants/routes"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"
@@ -97,7 +98,14 @@ export default function ProductId() {
                                     </div>
                                     <div className="my-2">
                                         <h5>Crafted by</h5>
-                                        <h6>{product.data.seller.name}</h6>
+                                        <a
+                                            href={MAKER_PAGE_ROUTE.replace(
+                                                "[id]",
+                                                product.data.seller._id
+                                            )}
+                                        >
+                                            <h6>{product.data.seller.name}</h6>
+                                        </a>
                                         <p>
                                             {product.data.seller.city},{" "}
                                             {product.data.seller.country}
