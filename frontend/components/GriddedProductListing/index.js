@@ -10,6 +10,9 @@ import Link from "next/link"
 // Components:
 import { Card } from ".."
 
+// Constants:
+import { PRODUCT_DETAIL_PAGE_ROUTE } from "../../constants/routes"
+
 export default function GriddedProductListing({ products }) {
     const [productList, setProductList] = useState(products)
 
@@ -27,7 +30,12 @@ export default function GriddedProductListing({ products }) {
             >
                 {productList.map((product, index) => (
                     <div key={index} className="mt-6 mr-4">
-                        <Link href={`products/${product._id}`}>
+                        <Link
+                            href={PRODUCT_DETAIL_PAGE_ROUTE.replace(
+                                "[id]",
+                                product._id
+                            )}
+                        >
                             <div className="cursor-pointer">
                                 <Card>
                                     <div className="flex flex-col group">
