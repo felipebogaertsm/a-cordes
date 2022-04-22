@@ -21,10 +21,10 @@ export default function GriddedProductListing({ products }) {
     }, [products])
 
     return (
-        <div className="w-full h-full rounded-xl py-4 px-8">
+        <div className="w-full h-full rounded-xl py-4 px-0">
             <div
                 className="
-                    grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+                    grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4
                     grid-cols-1 place-items-stretch
                 "
             >
