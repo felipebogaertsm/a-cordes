@@ -34,7 +34,7 @@ export default function Navbar() {
                             <h3 className="lowercase text-white font-semibold">
                                 à cordes
                             </h3>
-                            <p className="pl-3 lowercase my-auto">
+                            <p className="pl-3 lowercase mt-auto font-serif tracking-widest">
                                 fine instruments shop
                             </p>
                         </div>

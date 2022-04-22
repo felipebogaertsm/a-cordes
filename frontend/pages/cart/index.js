@@ -57,10 +57,10 @@ export default function Cart() {
         <NavbarPage>
             <PrivatePage>
                 <div className="px-6 py-14">
-                    <div className="flex flex-row space-x-2">
-                        <Heading>Cart</Heading>
+                    <Heading>
+                        <h1>Cart</h1>
                         <div className="grow"></div>
-                        <div className="w-max my-auto">
+                        <div className="w-max my-auto mr-2">
                             <Button
                                 onClick={(e) => clearCartHandler(e)}
                                 secondary
@@ -73,7 +73,7 @@ export default function Cart() {
                                 Go to Checkout
                             </Button>
                         </div>
-                    </div>
+                    </Heading>
 
                     <div className="mt-10 px-6 w-full space-y-4">
                         {loading && (

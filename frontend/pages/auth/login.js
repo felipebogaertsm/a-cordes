@@ -38,8 +38,10 @@ export default function Login() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14 flex flex-row">
-                <Heading>Login</Heading>
+            <div className="px-6 py-14">
+                <Heading>
+                    <h1>Login</h1>
+                </Heading>
             </div>
 
             <FormContainer

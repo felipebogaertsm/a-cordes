@@ -39,9 +39,9 @@ export default function Makers() {
     return (
         <NavbarPage>
             <div className="px-6 py-14">
-                <div className="flex flex-row">
-                    <Heading>Makers</Heading>
-                </div>
+                <Heading>
+                    <h1>Makers</h1>
+                </Heading>
 
                 <div className="mt-20 px-6 w-full flex flex-col space-y-2">
                     {sellers.loading ? (

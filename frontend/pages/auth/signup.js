@@ -59,8 +59,10 @@ export default function SignUp() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14 flex flex-row">
-                <Heading>signup</Heading>
+            <div className="px-6 py-14">
+                <Heading>
+                    <h1>Sign up</h1>
+                </Heading>
             </div>
 
             <div className="p-10 max-w-[500px] mx-auto flex flex-col space-y-4">

@@ -41,10 +41,16 @@ export default function Home() {
     return (
         <NavbarPage>
             <div className="px-6 py-14">
-                <div className="flex flex-row">
-                    <Heading>Latest products</Heading>
-                    <div className="grow"></div>
-                    <SearchInput onChange={(e) => setKeyword(e.target.value)} />
+                <div className="w-full">
+                    <Heading>
+                        <h1>Latest products</h1>
+                        <div className="grow"></div>
+                        <div className="font-sans font-base my-auto">
+                            <SearchInput
+                                onChange={(e) => setKeyword(e.target.value)}
+                            />
+                        </div>
+                    </Heading>
                 </div>
 
                 <div className="mt-20 px-6 w-full">

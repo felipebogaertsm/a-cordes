@@ -54,9 +54,9 @@ export default function MakerId() {
                 {seller.loading && <Loader />}
                 {seller.data && (
                     <div>
-                        <div className="flex flex-row">
-                            <Heading>{seller.data.name}</Heading>
-                        </div>
+                        <Heading>
+                            <h1>{seller.data.name}</h1>
+                        </Heading>
 
                         <div className="mt-12 px-6 w-full flex flex-col space-y-2">
                             <div className="grid md:grid-cols-2 lg:grid-cols-3">

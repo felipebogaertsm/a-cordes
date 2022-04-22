@@ -71,7 +71,9 @@ export default function ProductId() {
                 ) : (
                     product.data && (
                         <div className="flex flex-col">
-                            <Heading>{product.data.name}</Heading>
+                            <Heading>
+                                <h1>{product.data.name}</h1>
+                            </Heading>
                             <div
                                 className="
                                 mt-10 lg:m-0 space-x-10 space-y-10

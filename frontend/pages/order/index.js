@@ -95,15 +95,15 @@ export default function OrderPage() {
     return (
         <NavbarPage>
             <div className="px-6 py-14">
-                <div className="flex flex-row space-x-2">
-                    <Heading>Order</Heading>
+                <Heading>
+                    <h1>Order</h1>
                     <div className="grow"></div>
                     <div className="w-max my-auto">
                         <Button onClick={(e) => orderItemsHandler(e)}>
                             Confirm order
                         </Button>
                     </div>
-                </div>
+                </Heading>
 
                 <div className="mt-10 px-6 w-full">
                     {loading && <p>...</p>}

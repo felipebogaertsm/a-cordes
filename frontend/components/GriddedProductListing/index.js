@@ -24,7 +24,7 @@ export default function GriddedProductListing({ products }) {
         <div className="w-full h-full rounded-xl py-4 px-8">
             <div
                 className="
-                    grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5
+                    grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
                     grid-cols-1 place-items-stretch
                 "
             >
@@ -63,15 +63,17 @@ export default function GriddedProductListing({ products }) {
                                             )}
                                         </div>
                                         <div className="flex flex-col mt-2">
-                                            <div className="flex-row flex">
-                                                <h5>{product.name}</h5>
+                                            <div className="flex-row flex mb-4">
+                                                <h4 className="font-bold">
+                                                    {product.name}
+                                                </h4>
                                                 <div className="grow"></div>
                                                 <h4 className="text-stone-600">
                                                     ${Number(product.price)}
                                                 </h4>
                                             </div>
-                                            <div className="flex flex-row">
-                                                <h6 className="text-base">
+                                            <div className="flex flex-row font-serif">
+                                                <h6 className="normal-case text-zinc-500 font-bold">
                                                     {product.seller.name}
                                                 </h6>
                                                 <div className="grow"></div>
