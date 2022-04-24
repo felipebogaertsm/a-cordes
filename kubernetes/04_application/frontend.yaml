@@ -19,7 +19,7 @@ spec:
         app: a-cordes-frontend
     spec:
       containers:
-        - image: felipebogaertsm/a_cordes_frontend@sha256:80651b0a56bca4021fa7730c18ca8ab1678a8c85a04bd073a878b80ae5ed357f
+        - image: felipebogaertsm/a_cordes_frontend@sha256:ba7805905e96717d6ad61bd9e3922e90527e643c472c4b2f0f9dbfbdd9e712c5
           imagePullPolicy: Always
           name: a-cordes-frontend
           ports:
@@ -28,6 +28,10 @@ spec:
           env:
             - name: NODE_ENV
               value: production
+            - name: SERVER_BACKEND_URL
+              value: http://a-cordes-backend:8000
+            - name: CLIENT_BACKEND_URL
+              value: https://acordes.shop
       dnsPolicy: ClusterFirst
       imagePullSecrets:
         - name: registry-credentials
