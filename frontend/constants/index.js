@@ -6,10 +6,12 @@
 
 import getConfig from "next/config"
 
-const { publicRuntimeConfig } = getConfig()
+const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
 
 // Paths:
-export const BACKEND_URL = publicRuntimeConfig.BACKEND_URL
+export const BACKEND_URL = serverRuntimeConfig.BACKEND_URL
+    ? serverRuntimeConfig.BACKEND_URL
+    : publicRuntimeConfig.BACKEND_URL
 export const MEDIA_URL = publicRuntimeConfig.MEDIA_URL
 export const INDEX_PATH = "/"
 export const LOGIN_PATH = "/auth/login"
