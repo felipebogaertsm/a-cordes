@@ -23,7 +23,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossorigin
+                        crossOrigin="true"
                     ></link>
                     <link
                         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Raleway:wght@100;300;400;600;700&display=swap"

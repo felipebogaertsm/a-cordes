@@ -1,34 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: a-cordes-frontend
-    namespace: a-cordes
+  name: a-cordes-frontend
+  namespace: a-cordes
 spec:
-    replicas: 3
-    selector:
-        matchLabels:
-            app: a-cordes-frontend
-    strategy:
-        rollingUpdate:
-            maxSurge: 1
-            maxUnavailable: 0
-        type: RollingUpdate
-    template:
-        metadata:
-            labels:
-                app: a-cordes-frontend
-        spec:
-            containers:
-                - image: felipebogaertsm/a_cordes_frontend@sha256:9ce5614935046601149c2a7b0dc863e6ff6b543548f2aec25476b501871bbcc5
-                  imagePullPolicy: Always
-                  name: a-cordes-frontend
-                  ports:
-                      - containerPort: 3000
-                        name: react
-            dnsPolicy: ClusterFirst
-            imagePullSecrets:
-                - name: registry-credentials
-            securityContext: {}
+  replicas: 3
+  selector:
+    matchLabels:
+      app: a-cordes-frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: a-cordes-frontend
+    spec:
+      containers:
+        - image: felipebogaertsm/a_cordes_frontend@sha256:614c2ff99066d62a8f99587ea61f194d20dfcf077b31f0e360adddbffc4695f3
+          imagePullPolicy: Always
+          name: a-cordes-frontend
+          ports:
+            - containerPort: 3000
+              name: react
+          env:
+            - name: NODE_ENV
+              value: production
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+        - name: registry-credentials
+      securityContext: {}
 status: {}
 ---
 apiVersion: v1

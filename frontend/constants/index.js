@@ -4,11 +4,13 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import getConfig from "next/config"
+
+const { publicRuntimeConfig } = getConfig()
+
 // Paths:
-export const BACKEND_URL =
-    process.env.NODE_ENV === "production"
-        ? "https://acordes.shop"
-        : "http://127.0.0.1:8000"
+export const BACKEND_URL = publicRuntimeConfig.BACKEND_URL
+export const MEDIA_URL = publicRuntimeConfig.MEDIA_URL
 export const INDEX_PATH = "/"
 export const LOGIN_PATH = "/auth/login"
 

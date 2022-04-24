@@ -1,0 +1,12 @@
+FROM node:17-alpine as dependencies
+LABEL maintainer="Felipe Bogaerts de Mattos"
+
+WORKDIR /frontend
+
+COPY . .
+RUN npm install --frozen-lockfile
+
+ENV NODE_ENV=development
+
+EXPOSE 3000
+ENTRYPOINT ["yarn", "dev"]

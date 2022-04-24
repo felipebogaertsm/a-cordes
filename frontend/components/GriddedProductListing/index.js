@@ -11,6 +11,7 @@ import Link from "next/link"
 import { Card } from ".."
 
 // Constants:
+import { MEDIA_URL } from "../../constants"
 import { PRODUCT_DETAIL_PAGE_ROUTE } from "../../constants/routes"
 
 export default function GriddedProductListing({ products }) {
@@ -46,7 +47,7 @@ export default function GriddedProductListing({ products }) {
                                                 aspect-[4/3] border-opacity-10
                                                 border-2 border-amber-900
                                             "
-                                                src={product.image}
+                                                src={`${MEDIA_URL}${product.image}`}
                                             ></img>
                                             {product.count_in_stock === 0 && (
                                                 <div

@@ -201,32 +201,33 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 MEDIA_ROOT = BASE_DIR / "media"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Setting up Linode's Object Storage
+if not DEBUG:
+    # Setting up Linode's Object Storage
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-LINODE_BUCKET = os.environ.get(
-    "A_CORDES_LINODE_BUCKET", "a-cordes-static-staging"
-)
-LINODE_BUCKET_REGION = os.environ.get(
-    "A_CORDES_LINODE_BUCKET_REGION", "us-southeast-1"
-)
-LINODE_BUCKET_ACCESS_KEY = os.environ.get(
-    "A_CORDES_LINODE_BUCKET_ACCESS_KEY", "VDE5YGMVPFZ8KW0D6BNA"
-)
-LINODE_BUCKET_SECRET_KEY = os.environ.get(
-    "A_CORDES_LINODE_BUCKET_SECRET_KEY",
-    "CNsikEtGBN3dkhOICy8N41DTPH3VOnMpRqtg1XO0",
-)
+    LINODE_BUCKET = os.environ.get(
+        "A_CORDES_LINODE_BUCKET", "a-cordes-static-staging"
+    )
+    LINODE_BUCKET_REGION = os.environ.get(
+        "A_CORDES_LINODE_BUCKET_REGION", "us-southeast-1"
+    )
+    LINODE_BUCKET_ACCESS_KEY = os.environ.get(
+        "A_CORDES_LINODE_BUCKET_ACCESS_KEY", "VDE5YGMVPFZ8KW0D6BNA"
+    )
+    LINODE_BUCKET_SECRET_KEY = os.environ.get(
+        "A_CORDES_LINODE_BUCKET_SECRET_KEY",
+        "CNsikEtGBN3dkhOICy8N41DTPH3VOnMpRqtg1XO0",
+    )
 
-AWS_S3_ENDPOINT_URL = f"https://{LINODE_BUCKET_REGION}.linodeobjects.com"
-AWS_ACCESS_KEY_ID = LINODE_BUCKET_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY = LINODE_BUCKET_SECRET_KEY
-AWS_S3_REGION_NAME = LINODE_BUCKET_REGION
-AWS_S3_USE_SSL = True
-AWS_STORAGE_BUCKET_NAME = LINODE_BUCKET
-AWS_DEFAULT_ACL = "authenticated-read"
+    AWS_S3_ENDPOINT_URL = f"https://{LINODE_BUCKET_REGION}.linodeobjects.com"
+    AWS_ACCESS_KEY_ID = LINODE_BUCKET_ACCESS_KEY
+    AWS_SECRET_ACCESS_KEY = LINODE_BUCKET_SECRET_KEY
+    AWS_S3_REGION_NAME = LINODE_BUCKET_REGION
+    AWS_S3_USE_SSL = True
+    AWS_STORAGE_BUCKET_NAME = LINODE_BUCKET
+    AWS_DEFAULT_ACL = "authenticated-read"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -4,11 +4,14 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+// Constants:
+import { MEDIA_URL } from "../../constants"
+
 export default function MakerItem({ maker }) {
     return (
         <div>
             <div className="flex md:flex-row flex-col space-x-4">
-                <img src={maker.picture} />
+                <img src={`${MEDIA_URL}${maker.picture}`} />
                 <div className="my-auto">
                     <h5 className="my-auto">{maker.name}</h5>
                     <p className="my-auto text-sm">

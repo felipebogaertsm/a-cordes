@@ -13,13 +13,13 @@ FROM node:17-alpine as builder
 WORKDIR /frontend
 COPY . .
 COPY --from=dependencies /frontend/node_modules ./node_modules
-RUN npm run build
+RUN yarn build
 
 # Entrypoint:
 FROM node:17-alpine as runner
 
 WORKDIR /frontend
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 COPY --from=builder /frontend/next.config.js ./
 COPY --from=builder /frontend/public ./public

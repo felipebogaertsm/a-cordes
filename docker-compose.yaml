@@ -1,18 +1,22 @@
 version: "3"
 
 services:
-  a-cordes-backend:
-    build: a_cordes/
+  backend:
+    build: 
+      context: a_cordes/
+      dockerfile: Dockerfile
     container_name: a_cordes
+    volumes:
+      - ./a_cordes/:/usr/app/
     ports:
       - "8000:8000"
     
-  a-cordes-frontend:
-    build: frontend/
+  frontend:
+    build: 
+      context: frontend/
+      dockerfile: Dockerfile.dev
     container_name: frontend
     ports:
       - "3000:3000"
-
-networks:
-  nginx:
-    external: true
+    volumes:
+      - ./frontend:/frontend
