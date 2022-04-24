@@ -7,22 +7,17 @@
 export function getDetailFromResponseError(err) {
     if (err.response) {
         if (err.response.data) {
-            if (
-                typeof err.response.data === "string" &&
-                err.response.data.length < 1000
-            ) {
-                return err.response.data
-            }
+            try {
+                let errorString = ""
 
-            if (
-                Array.isArray(err.response.data.messages) &&
-                err.response.data.messages.length > 0
-            ) {
-                return err.response.data.messages[0].message
-            }
+                for (const field in err.response.data) {
+                    errorString +=
+                        `${field}: ${err.response.data[field].join(" ")}` + " "
+                }
 
-            if (err.response.data.detail) {
-                return err.response.data.detail
+                return errorString
+            } catch (err) {
+                // pass
             }
         }
     }

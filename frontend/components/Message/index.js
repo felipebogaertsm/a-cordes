@@ -4,9 +4,6 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-// Components:
-import { Card } from "../"
-
 export default function Message({ children, ...props }) {
     return (
         <div
