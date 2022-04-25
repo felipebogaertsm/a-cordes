@@ -67,9 +67,14 @@ export default function ShippingAddressForm({ defaultChecked, onCheck }) {
                                         className="mr-3"
                                         src="/icons/close.svg"
                                         onClick={() => {
-                                            dispatch(
-                                                deleteShippingAddress(sa._id)
-                                            )
+                                            confirm(
+                                                "Do you wish to delete this shipping address form the list?"
+                                            ) &&
+                                                dispatch(
+                                                    deleteShippingAddress(
+                                                        sa._id
+                                                    )
+                                                )
                                         }}
                                     ></img>
                                     <h6>{truncateString(sa.address, 50)}</h6>

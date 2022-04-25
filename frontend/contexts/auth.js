@@ -33,7 +33,7 @@ export function AuthProvider({ children, user: userInfo }) {
 
     function setToken(token) {
         cookie.set(TOKEN_NAME, token, {
-            expires: 8 / 24, // 8 hours
+            expires: 20, // 20 days
         })
     }
 
