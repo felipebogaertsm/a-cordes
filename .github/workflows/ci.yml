@@ -20,7 +20,7 @@ jobs:
     runs-on: self-hosted
     container: docker:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Backend build and push
       run: |
         cd a_cordes
@@ -34,7 +34,7 @@ jobs:
     runs-on: self-hosted
     container: docker:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Frontend build and push
       run: |
         cd frontend
@@ -55,7 +55,7 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Testing
       run: |
         python manage.py test
@@ -71,7 +71,7 @@ jobs:
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
       BACKEND_CONTAINER_NAME: a-cordes-backend
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
@@ -88,7 +88,7 @@ jobs:
       FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       FRONTEND_CONTAINER_NAME: a-cordes-frontend
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} \
