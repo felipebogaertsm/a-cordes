@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-runner
+  namespace: github-actions
+  labels:
+    app: github-runner
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: github-runner
+  template:
+    metadata:
+      labels:
+        app: github-runner
+    spec:
+      containers:
+        - name: github-runner
+          image: felipebogaertsm/github-actions-runner@sha256:1a09fcb8f2e77ef18d9fd2b172220d32a5da22a6d9af6bf713bc690feca81467
+          env:
+            - name: GITHUB_OWNER
+              valueFrom:
+                secretKeyRef:
+                  name: github-actions-secrets
+                  key: owner
+            - name: GITHUB_REPOSITORY
+              valueFrom:
+                secretKeyRef:
+                  name: github-actions-secrets
+                  key: repo
+            - name: GITHUB_PAT
+              valueFrom:
+                secretKeyRef:
+                  name: github-actions-secrets
+                  key: pat
+            - name: RUNNER_WORKDIR
+              valueFrom:
+                secretKeyRef:
+                  name: github-actions-secrets
+                  key: work_dir
