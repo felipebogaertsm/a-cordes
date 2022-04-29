@@ -10,6 +10,7 @@ services:
       - ./a_cordes/:/usr/app/
     ports:
       - "8000:8000"
+    entrypoint: python manage.py runserver 0.0.0.0:8000
     
   frontend:
     build: 

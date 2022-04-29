@@ -23,7 +23,7 @@ function MyApp({ Component, ...pageProps }) {
                 <title>à cordes</title>
             </Head>
             <AuthProvider user={user}>
-                <Component user={user} />
+                <Component />
             </AuthProvider>
         </>
     )
