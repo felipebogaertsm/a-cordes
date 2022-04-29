@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: github-runner
-          image: felipebogaertsm/github-actions-runner@sha256:1a09fcb8f2e77ef18d9fd2b172220d32a5da22a6d9af6bf713bc690feca81467
+          image: felipebogaertsm/github-actions-runner@sha256:cc547f72a8826bfb0dbb0da214104e5d923904a1d59211890be4e511b6e3f657
           env:
             - name: GITHUB_OWNER
               valueFrom:
