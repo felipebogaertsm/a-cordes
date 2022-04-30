@@ -18,7 +18,7 @@ jobs:
   build-backend:
     name: Build backend
     runs-on: self-hosted
-    container: docker:latest
+    # container: docker:latest
     steps:
     - uses: actions/checkout@v3
     - name: Backend build and push
