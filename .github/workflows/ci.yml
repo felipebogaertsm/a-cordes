@@ -23,7 +23,7 @@ jobs:
     - name: Backend build and push
       run: |
         cd a_cordes
-        apt-get install docker
+        sudo apt-get install docker
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
         docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" \
           -t "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}" .
