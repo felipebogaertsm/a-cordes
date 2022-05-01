@@ -11,7 +11,7 @@ on:
 env:
   BACKEND_IMAGE_NAME: a_cordes_backend
   FRONTEND_IMAGE_NAME: a_cordes_frontend
-  TAG: latest
+  TAG: ${GITHUB_SHA::7}
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
 
 jobs:
@@ -24,8 +24,7 @@ jobs:
       run: |
         cd a_cordes
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" \
-          -t "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}" .
+        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" .
         docker push ${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}
 
   build-frontend:
@@ -37,8 +36,7 @@ jobs:
       run: |
         cd frontend
         docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}" \
-          -t "${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${GITHUB_SHA::7}" .
+        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}" .
         docker push ${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}
 
   test:
@@ -46,7 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
     - build-backend
-    - build-frontend
     container: 
       image: "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}"
       credentials:
