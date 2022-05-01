@@ -59,6 +59,7 @@ class UsersAPI(ModelViewSet):
     @action(
         detail=False,
         url_path="my",
+        url_name="me",
         permission_classes=[IsAuthenticated],
         methods=("GET", "PATCH", "PUT", "DELETE"),
     )

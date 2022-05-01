@@ -23,6 +23,15 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend/:/frontend/
+  
+  backend-tests:
+    build: 
+      context: a_cordes/
+      dockerfile: Dockerfile
+    container_name: a_cordes_test
+    volumes:
+      - ./a_cordes/:/usr/app/
+    entrypoint: ['python3', 'manage.py', 'test']
 
 networks:
   nginx:
