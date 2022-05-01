@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: github-runner
-          image: felipebogaertsm/github-actions-runner@sha256:c8d555bddef32c44d256328c802f02a90bdefd5f6b752da6284a4561c12be223
+          image: felipebogaertsm/github-actions-runner@sha256:118fffb33626a0364c4183a406f732a66a27d2dce67f38da51cb01ba7d12914c
           imagePullPolicy: Always
           env:
             - name: GITHUB_OWNER
