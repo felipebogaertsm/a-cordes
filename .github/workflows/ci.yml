@@ -45,7 +45,7 @@ jobs:
     needs: 
     - build-backend
     container: 
-      image: "felipebogaertsm/a_cordes_backend:${GITHUB_SHA::7}"
+      image: "felipebogaertsm/a_cordes_backend:${{ env.TAG }}"
       credentials:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
