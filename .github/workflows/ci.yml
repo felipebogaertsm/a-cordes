@@ -46,9 +46,6 @@ jobs:
     - build-backend
     container: 
       image: felipebogaertsm/a_cordes_backend:latest
-      credentials:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - uses: actions/checkout@v2
     - name: Testing
