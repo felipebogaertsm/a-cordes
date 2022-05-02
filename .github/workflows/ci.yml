@@ -41,13 +41,16 @@ jobs:
 
   test:
     name: Testing the backend
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: 
     - build-backend
     container: 
       image: felipebogaertsm/a_cordes_backend:latest
+      credentials:
+        username: ${{ secrets.DOCKER_USER }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Testing
       run: |
         python manage.py test
