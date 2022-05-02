@@ -41,7 +41,7 @@ jobs:
 
   test:
     name: Testing the backend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: 
     - build-backend
     container: 
