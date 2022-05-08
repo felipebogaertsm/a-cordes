@@ -50,10 +50,10 @@ jobs:
         username: ${{ secrets.DOCKER_USER }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
-    - uses: actions/checkout@v3
     - name: Deps
       run: |
-        sudo chown -R rosbuild:rosbuild "$HOME" . 
+        sudo chown -R admin:admin "$HOME" . 
+    - uses: actions/checkout@v3
     - name: Testing
       run: |
         python manage.py test
