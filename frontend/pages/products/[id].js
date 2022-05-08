@@ -15,6 +15,7 @@ import { addToCart } from "../../redux/actions/cart"
 import { Button, Heading, Loader, NavbarPage } from "../../components"
 
 // Constants:
+import { MEDIA_URL } from "../../constants"
 import { PRODUCT_DETAIL_PATH } from "../../constants/apis"
 import { MAKER_PAGE_ROUTE } from "../../constants/routes"
 
@@ -86,7 +87,7 @@ export default function ProductId() {
                                         aspect-[4/3] mt-10 object-cover
                                         w-full rounded-xl shadow-xl
                                     "
-                                        src={product.data.image}
+                                        src={`${MEDIA_URL}${product.data.image}`}
                                     ></img>
                                 </div>
                                 <div className="flex flex-col">

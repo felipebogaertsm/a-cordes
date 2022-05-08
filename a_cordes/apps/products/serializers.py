@@ -28,3 +28,9 @@ class ProductSerializer(serializers.ModelSerializer):
         reviews = obj.review_set.all()  # get all reviews
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if instance.image:
+            ret['image'] = instance.image.url
+        return ret
