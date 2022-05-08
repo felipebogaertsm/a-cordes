@@ -17,7 +17,7 @@ env:
 jobs:
   build-backend:
     name: Build backend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Backend build and push
@@ -29,7 +29,7 @@ jobs:
 
   build-frontend:
     name: Build frontend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Frontend build and push
@@ -57,7 +57,7 @@ jobs:
   
   deploy-backend:
     name: Deploy backend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: test
     container: bitnami/kubectl:latest
     env:
@@ -74,7 +74,7 @@ jobs:
         
   deploy-frontend: 
     name: Deploy frontend
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: test
     container: bitnami/kubectl:latest
     env:
