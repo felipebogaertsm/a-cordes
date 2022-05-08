@@ -23,17 +23,22 @@ import { ACCOUNTS_SELLER_PATH, PRODUCT_LIST_PATH } from "../../constants/apis"
 // Hooks:
 import { useFetch } from "../../hooks"
 
+// Utils:
+import { getClient } from "../../utils/axios"
+
 export default function MakerId() {
     const router = useRouter()
 
     const [makerId] = useState(router.query.id)
 
     const [seller, doFetch] = useFetch({
+        client: getClient(),
         method: "get",
         url: ACCOUNTS_SELLER_PATH.replace("[id]", makerId),
     })
 
     const [products, doFetchProducts] = useFetch({
+        client: getClient(),
         method: "get",
         url: PRODUCT_LIST_PATH,
     })
