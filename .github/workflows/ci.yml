@@ -51,8 +51,6 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - name: Deps
-      run: |
-        chown -R $USER:$USER /_w/
     - uses: actions/checkout@v3
     - name: Testing
       run: |
