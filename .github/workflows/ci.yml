@@ -65,7 +65,7 @@ jobs:
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      IMAGE_NAME: a-cordes-backend
+      IMAGE_NAME: a_cordes_backend
       DEPLOYMENT_NAME: a-cordes-backend
       CONTAINER_NAME: a-cordes-backend
     steps:
@@ -87,7 +87,7 @@ jobs:
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      IMAGE_NAME: a-cordes-frontend
+      IMAGE_NAME: a_cordes_frontend
       DEPLOYMENT_NAME: a-cordes-frontend
       CONTAINER_NAME: a-cordes-frontend
     steps:
