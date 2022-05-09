@@ -78,7 +78,9 @@ jobs:
   deploy-frontend: 
     name: Deploy frontend
     runs-on: ubuntu-latest
-    needs: test
+    needs: 
+      - test
+      - build-frontend
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
