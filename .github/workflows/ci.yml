@@ -70,6 +70,7 @@ jobs:
       BACKEND_IMAGE_NAME: a_cordes_backend
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
       BACKEND_CONTAINER_NAME: a-cordes-backend
+      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
@@ -88,11 +89,10 @@ jobs:
       FRONTEND_IMAGE_NAME: a_cordes_frontend
       FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       FRONTEND_CONTAINER_NAME: a-cordes-frontend
+      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
       run: |
-        export KUBECONFIG=${{ env.KUBECONFIG }}
-        kubectl get pods -n ${NAMESPACE}
-        
+        echo Hi
         
