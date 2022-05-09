@@ -11,7 +11,7 @@ on:
 env:
   BACKEND_IMAGE_NAME: a_cordes_backend
   FRONTEND_IMAGE_NAME: a_cordes_frontend
-  TAG: ${{ github.sha::7 }}
+  TAG: ${{ github.sha }}
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
