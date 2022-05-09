@@ -22,7 +22,7 @@ export default function NavbarUserDropdown() {
     return (
         <NavbarItem
             to={USER_SETTINGS_PAGE_ROUTE}
-            className="group my-auto relative"
+            className="group my-auto relative z-10"
         >
             <div className="flex flex-row space-x-2">
                 <img
