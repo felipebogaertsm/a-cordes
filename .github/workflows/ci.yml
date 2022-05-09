@@ -64,7 +64,8 @@ jobs:
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      IMAGE_NAME: ${{ env.BACKEND_IMAGE_NAME }}
+      DOCKER_USER: ${DOCKER_USER}
+      IMAGE_NAME: ${BACKEND_IMAGE_NAME}
       DEPLOYMENT_NAME: a-cordes-backend
       CONTAINER_NAME: a-cordes-backend
     steps:
@@ -73,7 +74,7 @@ jobs:
       run: |
         export KUBECONFIG=${{ env.KUBECONFIG }}
         kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
-          ${CONTAINER_NAME}=${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${GITHUB_SHA::7}
         
   deploy-frontend: 
     name: Deploy frontend
@@ -83,7 +84,8 @@ jobs:
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      IMAGE_NAME: ${{ env.FRONTEND_IMAGE_NAME }}
+      DOCKER_USER: ${DOCKER_USER}
+      IMAGE_NAME: ${FRONTEND_IMAGE_NAME}
       DEPLOYMENT_NAME: a-cordes-frontend
       CONTAINER_NAME: a-cordes-frontend
     steps:
@@ -92,5 +94,5 @@ jobs:
       run: |
         export KUBECONFIG=${{ env.KUBECONFIG }}
         kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
-          ${CONTAINER_NAME}=${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${GITHUB_SHA::7}
         
