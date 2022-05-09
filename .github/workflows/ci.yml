@@ -70,11 +70,11 @@ jobs:
       BACKEND_IMAGE_NAME: a_cordes_backend
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
       BACKEND_CONTAINER_NAME: a-cordes-backend
-      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
       run: |
+        export KUBECONFIG=${{ env.KUBECONFIG }}
         kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
           ${BACKEND_CONTAINER_NAME}=${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
         
@@ -89,11 +89,11 @@ jobs:
       FRONTEND_IMAGE_NAME: a_cordes_frontend
       FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       FRONTEND_CONTAINER_NAME: a-cordes-frontend
-      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
       run: |
+        export KUBECONFIG=${{ env.KUBECONFIG }}
         kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} \
           ${FRONTEND_CONTAINER_NAME}=${{ env.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}
         
