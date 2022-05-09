@@ -76,7 +76,7 @@ jobs:
         kubeconfig: ${{ env.KUBECONFIG }}
     - name: Deployment
       run: |
-        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:latest"
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}"
         
   deploy-frontend: 
     name: Deploy frontend
@@ -98,5 +98,5 @@ jobs:
         kubeconfig: ${{ env.KUBECONFIG }}
     - name: Deployment
       run: |
-        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:latest"
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}"
         
