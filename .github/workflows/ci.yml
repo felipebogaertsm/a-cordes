@@ -44,11 +44,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
     - build-backend
-    # container: 
-    #   image: felipebogaertsm/a_cordes_backend:latest
-    #   credentials:
-    #     username: ${{ secrets.DOCKER_USER }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    container: 
+      image: felipebogaertsm/a_cordes_backend:latest
+      # credentials:
+      #   username: ${{ secrets.DOCKER_USER }}
+      #   password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - uses: actions/checkout@v3
     - name: Test
