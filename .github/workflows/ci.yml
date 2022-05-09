@@ -13,6 +13,7 @@ env:
   FRONTEND_IMAGE_NAME: a_cordes_frontend
   TAG: ${GITHUB_SHA::7}
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
   build-backend:
@@ -68,7 +69,6 @@ jobs:
       BACKEND_IMAGE_NAME: a_cordes_backend
       BACKEND_DEPLOYMENT_NAME: a-cordes-backend
       BACKEND_CONTAINER_NAME: a-cordes-backend
-      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
@@ -87,7 +87,6 @@ jobs:
       FRONTEND_IMAGE_NAME: a_cordes_frontend
       FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
       FRONTEND_CONTAINER_NAME: a-cordes-frontend
-      KUBECONFIG: ${{ env.KUBECONFIG }}
     steps:
     - uses: actions/checkout@v3
     - name: Deployment

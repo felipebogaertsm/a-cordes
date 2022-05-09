@@ -12,9 +12,9 @@ COPY ./ ./
 
 RUN chmod +x ./scripts/*
 
-# RUN useradd admin
-# RUN chown -R admin:admin /usr/app
-# USER admin
+RUN useradd admin
+RUN chown -R admin:admin /usr/app
+USER admin
 
 EXPOSE 8000
 
