@@ -57,20 +57,22 @@ jobs:
   deploy-backend:
     name: Deploy backend
     runs-on: ubuntu-latest
-    needs: test
+    needs:
+      - test
+      - build-backend
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      BACKEND_IMAGE_NAME: a_cordes_backend
-      BACKEND_DEPLOYMENT_NAME: a-cordes-backend
-      BACKEND_CONTAINER_NAME: a-cordes-backend
+      IMAGE_NAME: ${{ env.BACKEND_IMAGE_NAME }}
+      DEPLOYMENT_NAME: a-cordes-backend
+      CONTAINER_NAME: a-cordes-backend
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
       run: |
         export KUBECONFIG=${{ env.KUBECONFIG }}
-        kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
-          ${BACKEND_CONTAINER_NAME}=${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
+          ${CONTAINER_NAME}=${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}
         
   deploy-frontend: 
     name: Deploy frontend
@@ -80,13 +82,14 @@ jobs:
     container: bitnami/kubectl:latest
     env:
       NAMESPACE: a-cordes
-      FRONTEND_IMAGE_NAME: a_cordes_frontend
-      FRONTEND_DEPLOYMENT_NAME: a-cordes-frontend
-      FRONTEND_CONTAINER_NAME: a-cordes-frontend
+      IMAGE_NAME: ${{ env.FRONTEND_IMAGE_NAME }}
+      DEPLOYMENT_NAME: a-cordes-frontend
+      CONTAINER_NAME: a-cordes-frontend
     steps:
     - uses: actions/checkout@v3
     - name: Deployment
       run: |
         export KUBECONFIG=${{ env.KUBECONFIG }}
-        
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
+          ${CONTAINER_NAME}=${{ env.DOCKER_USER }}/${IMAGE_NAME}:${GITHUB_SHA::7}
         
