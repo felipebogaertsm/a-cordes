@@ -74,7 +74,7 @@ jobs:
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
-          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${GITHUB_SHA::7}
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
         
   deploy-frontend: 
     name: Deploy frontend
@@ -93,5 +93,5 @@ jobs:
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
-          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${GITHUB_SHA::7}
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
         
