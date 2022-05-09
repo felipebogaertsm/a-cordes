@@ -71,11 +71,14 @@ jobs:
       CONTAINER_NAME: a-cordes-backend
     steps:
     - uses: actions/checkout@v3
-    - name: Deploy
-      uses: nickgronow/kubectl@master
+    - uses: azure/k8s-set-context@v2
       with:
-        config_data: ${{ secrets.KUBECONFIG }}
-        args: set image -n ${NAMESPACE} --record deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
+    - name: Deployment
+      run: |
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
         
   deploy-frontend: 
     name: Deploy frontend
@@ -92,9 +95,12 @@ jobs:
       CONTAINER_NAME: a-cordes-frontend
     steps:
     - uses: actions/checkout@v3
-    - name: Deploy
-      uses: nickgronow/kubectl@master
+    - uses: azure/k8s-set-context@v2
       with:
-        config_data: ${{ secrets.KUBECONFIG }}
-        args: set image -n ${NAMESPACE} --record deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
+    - name: Deployment
+      run: |
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} \
+          ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:latest
         
