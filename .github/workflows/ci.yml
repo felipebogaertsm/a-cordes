@@ -49,13 +49,7 @@ jobs:
     container: 
       image: felipebogaertsm/a_cordes_backend:latest
     steps:
-    - name: Deps
-      run: |
-        chown -R github:github /__w/
     - uses: actions/checkout@v3
-    - name: Test
-      run: |
-        echo Test
     - name: Testing
       run: |
         python manage.py test
