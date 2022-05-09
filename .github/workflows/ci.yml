@@ -13,6 +13,7 @@ env:
   FRONTEND_IMAGE_NAME: a_cordes_frontend
   TAG: ${GITHUB_SHA::7}
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
 jobs:
@@ -24,9 +25,9 @@ jobs:
     - name: Backend build and push
       run: |
         cd a_cordes
-        docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" .
-        docker push ${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}
+        docker login -u "${{ env.DOCKER_USER }}" -p "${{ env.DOCKER_PASSWORD }}"
+        docker build --pull -t "${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}" .
+        docker push ${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${{ env.TAG }}
 
   build-frontend:
     name: Build frontend
@@ -36,9 +37,9 @@ jobs:
     - name: Frontend build and push
       run: |
         cd frontend
-        docker login -u "${{ secrets.DOCKER_USER }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-        docker build --pull -t "${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}" .
-        docker push ${{ secrets.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}
+        docker login -u "${{ env.DOCKER_USER }}" -p "${{ env.DOCKER_PASSWORD }}"
+        docker build --pull -t "${{ env.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}" .
+        docker push ${{ env.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}
 
   test:
     name: Testing the backend
@@ -47,9 +48,6 @@ jobs:
     - build-backend
     container: 
       image: felipebogaertsm/a_cordes_backend:latest
-      # credentials:
-      #   username: ${{ secrets.DOCKER_USER }}
-      #   password: ${{ secrets.DOCKER_PASSWORD }}
     steps:
     - uses: actions/checkout@v3
     - name: Test
@@ -74,7 +72,7 @@ jobs:
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${BACKEND_DEPLOYMENT_NAME} \
-          ${BACKEND_CONTAINER_NAME}=${{ secrets.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
+          ${BACKEND_CONTAINER_NAME}=${{ env.DOCKER_USER }}/${{ env.BACKEND_IMAGE_NAME }}:${GITHUB_SHA::7}
         
   deploy-frontend: 
     name: Deploy frontend
@@ -92,5 +90,5 @@ jobs:
     - name: Deployment
       run: |
         kubectl -n ${NAMESPACE} set image deployment/${FRONTEND_DEPLOYMENT_NAME} \
-          ${FRONTEND_CONTAINER_NAME}=${{ secrets.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}
+          ${FRONTEND_CONTAINER_NAME}=${{ env.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${GITHUB_SHA::7}
         
