@@ -77,7 +77,7 @@ jobs:
         kubeconfig: ${{ env.KUBECONFIG }}
     - name: Deployment
       run: |
-        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${{ env.TAG }}
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_NAME}:${{ env.TAG }}
         
   deploy-frontend: 
     name: Deploy frontend
@@ -100,5 +100,5 @@ jobs:
         kubeconfig: ${{ env.KUBECONFIG }}
     - name: Deployment
       run: |
-        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${DOCKER_USER}/${IMAGE_NAME}:${{ env.TAG }}
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_NAME}:${{ env.TAG }}
         
