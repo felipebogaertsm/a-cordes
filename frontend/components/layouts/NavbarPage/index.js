@@ -5,7 +5,7 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Components:
-import { Navbar, Footer } from ".."
+import { Navbar, Footer } from "../../modules"
 
 export default function NavbarPage(props) {
     return (

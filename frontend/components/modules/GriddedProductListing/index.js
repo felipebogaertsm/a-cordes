@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 
 // Components:
-import { Card } from ".."
+import { Card } from "../../elements"
 
 // Constants:
 import { MEDIA_URL } from "../../../constants"

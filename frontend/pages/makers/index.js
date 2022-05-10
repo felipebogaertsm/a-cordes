@@ -8,14 +8,6 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 
 // Components:
-import {
-    Heading,
-    ListItem,
-    Loader,
-    MakerItem,
-    Message,
-    NavbarPage,
-} from "../../components"
 import { Heading, Loader, Message } from "../../components/elements"
 import { NavbarPage } from "../../components/layouts"
 import { ListItem, MakerItem } from "../../components/modules"
