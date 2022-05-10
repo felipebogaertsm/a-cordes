@@ -11,10 +11,10 @@ import { useContext } from "react"
 import { NavbarItem } from "../"
 
 // Constants:
-import { USER_SETTINGS_PAGE_ROUTE } from "../../constants/routes"
+import { USER_SETTINGS_PAGE_ROUTE } from "../../../constants/routes"
 
 // Contexts:
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "../../../contexts/auth"
 
 export default function NavbarUserDropdown() {
     const { logout } = useContext(AuthContext)

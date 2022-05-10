@@ -15,8 +15,8 @@ import {
     Heading,
     Loader,
     Message,
-    NavbarPage,
-} from "../../components"
+} from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"

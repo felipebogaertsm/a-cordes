@@ -12,7 +12,8 @@ import { useRouter } from "next/router"
 import { addToCart } from "../../redux/actions/cart"
 
 // Components:
-import { Button, Heading, Loader, NavbarPage } from "../../components"
+import { Button, Heading, Loader } from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
 
 // Constants:
 import { MEDIA_URL } from "../../constants"

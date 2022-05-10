@@ -13,14 +13,13 @@ import { getCart } from "../../redux/actions/cart"
 import { createOrder } from "../../redux/actions/order"
 
 // Components:
+import { Button, Heading } from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
 import {
-    Button,
-    Heading,
-    NavbarPage,
     ProductListing,
     ShippingAddressForm,
     TotalPriceOrder,
-} from "../../components"
+} from "../../components/modules"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"

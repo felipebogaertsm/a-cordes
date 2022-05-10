@@ -14,8 +14,8 @@ import {
     Heading,
     Loader,
     Message,
-    NavbarPage,
-} from "../../components"
+} from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
 
 // Constants:
 import { ACCOUNTS_USERS_PATH } from "../../constants/apis"

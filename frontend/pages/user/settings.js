@@ -5,27 +5,22 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 import { useContext, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 
 // Actions:
-import {
-    createShippingAddress,
-    deleteShippingAddress,
-    listShippingAddresses,
-    updateShippingAddress,
-} from "../../redux/actions/order"
+import { listShippingAddresses } from "../../redux/actions/order"
 
 // Components:
 import {
-    Button,
-    Accordion,
     FormContainer,
     FormInput,
     Heading,
-    ShippingAddressForm,
     SubHeading,
-    NavbarPage,
-} from "../../components"
+} from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
+import { ShippingAddressForm } from "../../components/modules"
+
+// Constants:
 import { ACCOUNTS_MY_USER_PATH } from "../../constants/apis"
 
 // Contexts:
@@ -36,9 +31,6 @@ import { useFetch } from "../../hooks"
 
 // Services:
 import { privateRoute } from "../../services/auth"
-
-// Utils:
-import { truncateString } from "../../utils/strings"
 
 export async function getServerSideProps(ctx) {
     return await privateRoute(ctx)
