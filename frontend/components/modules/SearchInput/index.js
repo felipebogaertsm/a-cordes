@@ -5,7 +5,7 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Components:
-import { FormInput } from "../../components"
+import { FormInput } from "../../../components/elements"
 
 export default function searchInput({ ...props }) {
     return (

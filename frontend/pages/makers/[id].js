@@ -8,14 +8,9 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 
 // Components:
-import {
-    GriddedProductListing,
-    Heading,
-    ListItem,
-    Loader,
-    MakerItem,
-    NavbarPage,
-} from "../../components"
+import { Heading, Loader } from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
+import { GriddedProductListing } from "../../components/modules"
 
 // Constants:
 import { ACCOUNTS_SELLER_PATH, PRODUCT_LIST_PATH } from "../../constants/apis"

@@ -12,15 +12,9 @@ import { useRouter } from "next/router"
 import { clearCart, getCart, removeFromCart } from "../../redux/actions/cart"
 
 // Components:
-import {
-    Button,
-    Heading,
-    Loader,
-    Message,
-    NavbarPage,
-    ProductListing,
-    PrivatePage,
-} from "../../components"
+import { Button, Heading, Loader, Message } from "../../components/elements"
+import { NavbarPage, PrivatePage } from "../../components/layouts"
+import { ProductListing } from "../../components/modules"
 
 // Contexts:
 import { AuthContext } from "../../contexts/auth"

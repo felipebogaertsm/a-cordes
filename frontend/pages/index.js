@@ -7,14 +7,9 @@
 import { useEffect, useState } from "react"
 
 // Components:
-import {
-    GriddedProductListing,
-    Heading,
-    Loader,
-    Message,
-    SearchInput,
-    NavbarPage,
-} from "../components"
+import { Heading, Loader, Message } from "../components/elements"
+import { NavbarPage } from "../components/layouts"
+import { GriddedProductListing, SearchInput } from "../components/modules"
 
 // Constants:
 import { PRODUCTS_RECENT_PATH } from "../constants/apis"

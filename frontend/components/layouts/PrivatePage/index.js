@@ -8,13 +8,13 @@ import { useRouter } from "next/router"
 import { useContext } from "react"
 
 // Components:
-import { Button, Loader } from "../../components"
+import { Button, Loader } from "../../elements"
 
 // Constants:
-import { LOGIN_PATH } from "../../constants"
+import { LOGIN_PATH } from "../../../constants"
 
 // Contexts:
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "../../../contexts/auth"
 
 export default function PrivatePage({ children, ...props }) {
     const { user, loading, error } = useContext(AuthContext)

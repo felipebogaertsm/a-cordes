@@ -14,8 +14,8 @@ import {
     FormInput,
     Heading,
     Message,
-    NavbarPage,
-} from "../../components"
+} from "../../components/elements"
+import { NavbarPage } from "../../components/layouts"
 
 // Constants:
 import { ACCOUNTS_SELLERS_PATH } from "../../constants/apis"

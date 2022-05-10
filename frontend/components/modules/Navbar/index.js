@@ -10,7 +10,7 @@ import { useContext } from "react"
 import { NavbarItem, NavbarUserDropdown } from ".."
 
 // Contexts:
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "../../../contexts/auth"
 
 export default function Navbar() {
     const { user } = useContext(AuthContext)

@@ -5,7 +5,7 @@
 // Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 // Constants:
-import { MEDIA_URL } from "../../constants"
+import { MEDIA_URL } from "../../../constants"
 
 export default function MakerItem({ maker }) {
     return (

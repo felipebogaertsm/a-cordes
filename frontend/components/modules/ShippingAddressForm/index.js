@@ -13,7 +13,7 @@ import {
     deleteShippingAddress,
     listShippingAddresses,
     updateShippingAddress,
-} from "../../redux/actions/order"
+} from "../../../redux/actions/order"
 
 // Components:
 import {
@@ -22,15 +22,14 @@ import {
     FormCheckbox,
     FormContainer,
     FormInput,
-    Loader,
     SubHeading,
-} from "../../components"
+} from "../../../components/elements"
 
 // Contexts:
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "../../../contexts/auth"
 
 // Utils:
-import { truncateString } from "../../utils/strings"
+import { truncateString } from "../../../utils/strings"
 
 export default function ShippingAddressForm({ defaultChecked, onCheck }) {
     const { user } = useContext(AuthContext)
