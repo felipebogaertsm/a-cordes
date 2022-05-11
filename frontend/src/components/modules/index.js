@@ -6,6 +6,7 @@ import MoreProducts from "./MoreProducts"
 import Navbar from "./Navbar"
 import NavbarItem from "./NavbarItem"
 import NavbarUserDropdown from "./NavbarUserDropdown"
+import ProductItem from "./ProductItem"
 import ProductListing from "./ProductListing"
 import SearchInput from "./SearchInput"
 import ShippingAddressForm from "./ShippingAddressForm"
@@ -20,6 +21,7 @@ export {
     Navbar,
     NavbarItem,
     NavbarUserDropdown,
+    ProductItem,
     ProductListing,
     SearchInput,
     ShippingAddressForm,
