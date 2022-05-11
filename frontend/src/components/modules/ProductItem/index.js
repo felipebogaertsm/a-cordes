@@ -23,8 +23,8 @@ export default function ProductItem({ product }) {
                             <div className="relative">
                                 <img
                                     className="
-                                                rounded-xl w-full h-full object-cover
-                                                aspect-[4/3] border-opacity-10
+                                                rounded-t-3xl w-full h-full object-cover
+                                                aspect-[5/3] border-opacity-10
                                                 border-2 border-amber-900
                                             "
                                     src={`${MEDIA_URL}${product.image}`}
@@ -43,8 +43,8 @@ export default function ProductItem({ product }) {
                                     </div>
                                 )}
                             </div>
-                            <div className="flex flex-col mt-2">
-                                <div className="flex-row flex mb-4">
+                            <div className="flex flex-col mt-2 px-4 py-2">
+                                <div className="flex-row flex mb-2">
                                     <h4 className="font-bold">
                                         {product.name}
                                     </h4>
@@ -53,7 +53,7 @@ export default function ProductItem({ product }) {
                                         ${Number(product.price)}
                                     </h4>
                                 </div>
-                                <div className="flex flex-row font-serif">
+                                <div className="flex flex-row">
                                     <h6 className="normal-case text-zinc-500 font-bold">
                                         {product.seller.name}
                                     </h6>

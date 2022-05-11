@@ -20,12 +20,12 @@ export default function GriddedProductListing({ products }) {
         <div className="w-full h-full rounded-xl py-4 px-0">
             <div
                 className="
-                    grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4
-                    grid-cols-1 place-items-stretch
+                    grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3
+                    grid-cols-1 place-items-stretch gap-8
                 "
             >
                 {productList.map((product, index) => (
-                    <div key={index} className="mt-6 mr-4">
+                    <div key={index}>
                         <ProductItem product={product} />
                     </div>
                 ))}
