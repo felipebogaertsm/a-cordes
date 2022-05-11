@@ -59,11 +59,9 @@ export default function Settings() {
     return (
         <NavbarPage>
             <div className="px-6 py-14">
-                <div className="flex flex-row">
-                    <Heading>
-                        <h1>User settings</h1>
-                    </Heading>
-                </div>
+                <Heading>
+                    <h1>User settings</h1>
+                </Heading>
 
                 <div className="mt-20 px-6 mx-auto max-w-[600px] flex flex-col space-y-4">
                     <div>

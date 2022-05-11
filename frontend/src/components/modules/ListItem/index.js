@@ -9,7 +9,7 @@ export default function ListItem({ number, children, ...props }) {
         <div {...props}>
             <div
                 className="
-                bg-stone-200 rounded-lg px-6 py-4 hover:brightness-[102%]
+                bg-stone-100 rounded-lg px-6 py-4 hover:brightness-[102%]
                 transition-all duration-200 w-full h-full flex flex-row hover:scale-[100.2%]
             "
             >

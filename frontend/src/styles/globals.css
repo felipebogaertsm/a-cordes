@@ -5,7 +5,7 @@
 @layer base {
     :root {
         font-size: 16px;
-        @apply bg-zinc-100 text-zinc-700;
+        @apply bg-zinc-200 text-zinc-700;
     }
 
     @media only screen and (max-width: 480px) {

@@ -11,9 +11,9 @@ export default function Accordion({ children, title, expanded, ...props }) {
 
     return (
         <div {...props}>
-            <div className="bg-zinc-200 bg-opacity-20 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-100">
+            <div className="bg-zinc-100 bg-opacity-100 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-100">
                 <div
-                    className="py-2 px-4 bg-zinc-200"
+                    className="py-2 px-4"
                     onClick={() => setIsExpanded(!isExpanded)}
                 >
                     <div className="flex flex-row">
