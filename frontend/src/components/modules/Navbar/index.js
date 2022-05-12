@@ -16,7 +16,7 @@ export default function Navbar() {
     const { user } = useContext(AuthContext)
 
     return (
-        <div className="w-screen">
+        <div className="w-full">
             <div
                 className="
                     bg-stone-900 text-stone-100 md:py-0 whitespace-nowrap

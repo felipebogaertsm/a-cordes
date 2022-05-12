@@ -7,7 +7,11 @@
 import { useRouter } from "next/router"
 
 // Components:
-import { Button, ListItem } from "../"
+import { Button } from "../../elements"
+import { ListItem } from "../../modules"
+
+// Constants:
+import { MEDIA_URL } from "../../../constants"
 
 export default function ProductListing({ items, removeHandler, ...props }) {
     const router = useRouter()
@@ -22,7 +26,7 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                                 aspect-[4/3] object-cover md:h-12 md:w-min
                                 rounded-xl shadow-xl my-auto cursor-pointer
                             "
-                            src={item.product.image}
+                            src={`${MEDIA_URL}${item.product.image}`}
                             onClick={(e) =>
                                 router.push(`/products/${item.product._id}`)
                             }
