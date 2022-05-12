@@ -5,9 +5,30 @@
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.accounts.models import User, SellerProfile
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        serializer = UserSerializerWithToken(self.user).data
+
+        for key, value in serializer.items():
+            data[key] = value
+
+        return data
+
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["email"] = user.email
+        token["is_superuser"] = user.is_superuser
+        token["is_admin"] = user.is_admin
+        token["is_staff"] = user.is_staff
+        return token
 
 
 class SellerProfileSerializer(ModelSerializer):

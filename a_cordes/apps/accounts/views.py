@@ -11,7 +11,6 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from apps.accounts.models import User, SellerProfile
@@ -20,28 +19,8 @@ from apps.accounts.serializers import (
     UserSerializer,
     UserSerializerWithToken,
     SellerProfileSerializer,
+    MyTokenObtainPairSerializer
 )
-
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-
-        serializer = UserSerializerWithToken(self.user).data
-
-        for key, value in serializer.items():
-            data[key] = value
-
-        return data
-
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        token["email"] = user.email
-        token["is_superuser"] = user.is_superuser
-        token["is_admin"] = user.is_admin
-        token["is_staff"] = user.is_staff
-        return token
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -50,7 +29,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 class UsersAPI(ModelViewSet):
     model = User
-    serializer_class = UserSerializerWithToken
+    serializer_class = UserSerializer
 
     permission_classes = (UsersAPIPermissions,)
     lookup_field = "_id"
@@ -65,11 +44,12 @@ class UsersAPI(ModelViewSet):
     )
     def my(self, request):
         user = request.user
+        serializer_class = UserSerializerWithToken
 
         if request.method.lower() == "get":
-            return Response(UserSerializerWithToken(user, many=False).data)
+            return Response(serializer_class(user, many=False).data)
         elif request.method.lower() in ["patch", "put"]:
-            serializer = UserSerializerWithToken(user, data=request.data)
+            serializer = serializer_class(user, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
