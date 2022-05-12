@@ -47,7 +47,7 @@ jobs:
     needs: 
     - build-backend
     container: 
-      image: felipebogaertsm/a_cordes_backend:${TAG}
+      image: felipebogaertsm/a_cordes_backend:${{ github.sha }}
       options: --user root
     steps:
     - uses: actions/checkout@v3
