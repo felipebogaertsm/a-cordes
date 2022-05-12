@@ -15,6 +15,12 @@ class SellerProfileSerializer(ModelSerializer):
         model = SellerProfile
         fields = "__all__"
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if instance.picture:
+            ret['picture'] = instance.picture.url
+        return ret
+
 
 class UserSerializer(ModelSerializer):
     class Meta:

@@ -78,9 +78,8 @@ export default function ProductId() {
                             </Heading>
                             <div
                                 className="
-                                mt-10 lg:m-0 space-x-10 space-y-10
-                                grid grid-cold-1 lg:grid-cols-3
-                            "
+                                    grid grid-cold-1 lg:grid-cols-3 mt-10 lg:m-0 gap-10
+                                "
                             >
                                 <div>
                                     <img
@@ -91,7 +90,7 @@ export default function ProductId() {
                                         src={`${MEDIA_URL}${product.data.image}`}
                                     ></img>
                                 </div>
-                                <div className="flex flex-col">
+                                <div className="flex flex-col mt-10">
                                     <div className="my-2">
                                         <h5>Description</h5>
                                         <p>{product.data.description}</p>
@@ -124,7 +123,7 @@ export default function ProductId() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col space-y-8">
+                                <div className="flex flex-col gap-8 mt-10">
                                     <div>
                                         <h5>Price</h5>
                                         <h2>${Number(product.data.price)}</h2>

@@ -11,7 +11,7 @@ export default function NavbarPage(props) {
     return (
         <div>
             <Navbar />
-            <div className="w-full h-full">{props.children}</div>
+            <div className="w-full h-full mb-10">{props.children}</div>
             <Footer />
         </div>
     )

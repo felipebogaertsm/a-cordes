@@ -79,7 +79,7 @@ class SellerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=100)
-    picture = models.ImageField(blank=True, default="/seller_placeholder.jpeg")
+    picture = models.ImageField(blank=True, null=True)
     city = models.CharField(max_length=100, blank=True, default="")
     country = models.CharField(max_length=100, blank=True, default="")
     description = models.TextField(max_length=1000, blank=True, default="")
