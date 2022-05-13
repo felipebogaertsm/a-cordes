@@ -8,17 +8,8 @@ import pytest
 
 from django.db.utils import IntegrityError
 from django.template.defaultfilters import slugify
-from django.test import TransactionTestCase
 
-from apps.accounts.models import User, SellerProfile
 from apps.products.models import Product
-
-USER_1_EMAIL = "john@email.com"
-USER_2_EMAIL = "jane@email.com"
-
-USER_PASS = "VerySecurePass@!123"
-
-SELLER_NAME = "Seller 1"
 
 
 @pytest.mark.django_db
