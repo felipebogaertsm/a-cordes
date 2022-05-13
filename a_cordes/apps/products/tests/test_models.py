@@ -4,13 +4,14 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
+import pytest
+
 from django.db.utils import IntegrityError
 from django.template.defaultfilters import slugify
 from django.test import TransactionTestCase
 
 from apps.accounts.models import User, SellerProfile
 from apps.products.models import Product
-
 
 USER_1_EMAIL = "john@email.com"
 USER_2_EMAIL = "jane@email.com"
@@ -20,54 +21,55 @@ USER_PASS = "VerySecurePass@!123"
 SELLER_NAME = "Seller 1"
 
 
-class TestProduct(TransactionTestCase):
-    def setUp(self):
-        self.user_1 = User.objects.create_user(
-            email=USER_1_EMAIL, password=USER_PASS
-        )
-        self.seller_profile = SellerProfile.objects.create(
-            user=self.user_1, name=SELLER_NAME
-        )
+@pytest.mark.django_db
+def test_product_crud(seller_1):
+    product_name = "Product 1"
+    product_count_in_stock = 3
 
-    def test_product_crud(self):
-        product_name = "Product 1"
-        product_count_in_stock = 3
+    product = Product.objects.create(
+        name=product_name,
+        seller_profile=seller_1,
+        price=1000,
+        count_in_stock=product_count_in_stock,
+    )
 
-        product = Product.objects.create(
-            name=product_name,
-            seller_profile=self.seller_profile,
-            price=1000,
-            count_in_stock=product_count_in_stock,
-        )
+    assert product.slug is not None  # make sure slug is created
+    assert product.slug == slugify(product_name)
+    assert product == Product.objects.get(_id=product._id)
 
-        self.assertIsNotNone(product.slug)  # make sure slug is created
-        self.assertEqual(product.slug, slugify(product_name))
-        self.assertEqual(product, Product.objects.get(_id=product._id))
+    product_count_in_stock -= 1
+    product.count_in_stock = product_count_in_stock
+    product.save()
 
-        product_count_in_stock -= 1
-        product.count_in_stock = product_count_in_stock
-        product.save()
+    assert product.count_in_stock == product_count_in_stock
 
-        self.assertEqual(product.count_in_stock, product_count_in_stock)
+    product.delete()
 
-        product.delete()
-        with self.assertRaises(Product.DoesNotExist):
-            Product.objects.get(_id=product._id)
+    try:
+        Product.objects.get(_id=product._id)
+        assert False
+    except Product.DoesNotExist:
+        assert True
 
-    def test_product_count_in_stock_validation(self):
-        product_name = "Product 1"
 
-        with self.assertRaises(IntegrityError):
-            Product.objects.create(
-                name=product_name,
-                seller_profile=self.seller_profile,
-                price=1000,
-                count_in_stock=-1,
-            )
+@pytest.mark.django_db(transaction=True)
+def test_product_count_in_stock_validation(seller_1):
+    product_name = "Product 1"
 
+    try:
         Product.objects.create(
             name=product_name,
-            seller_profile=self.seller_profile,
+            seller_profile=seller_1,
             price=1000,
-            count_in_stock=3,
+            count_in_stock=-1,
         )
+        assert False
+    except IntegrityError:
+        assert True
+
+    Product.objects.create(
+        name=product_name,
+        seller_profile=seller_1,
+        price=1000,
+        count_in_stock=3,
+    )
