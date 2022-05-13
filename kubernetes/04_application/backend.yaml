@@ -1,52 +1,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: a-cordes-backend
-    namespace: a-cordes
-    annotations:
-        config.nsm.nginx.com/default-egress-allowed: "true"
-        config.nsm.nginx.com/enable-egress: "true"
+  name: a-cordes-backend
+  namespace: a-cordes
+  annotations:
+    config.nsm.nginx.com/default-egress-allowed: "true"
+    config.nsm.nginx.com/enable-egress: "true"
 spec:
-    replicas: 3
-    selector:
-        matchLabels:
-            app: a-cordes-backend
-    strategy:
-        rollingUpdate:
-            maxSurge: 1
-            maxUnavailable: 0
-        type: RollingUpdate
-    template:
-        metadata:
-            labels:
-                app: a-cordes-backend
-        spec:
-            containers:
-                - image: felipebogaertsm/a_cordes_backend@sha256:335dc66efd599d678bfc2ca21acb8b5b94a48800bc68994a6053bcfac79b60c4
-                  imagePullPolicy: Always
-                  envFrom:
-                      - secretRef:
-                            name: a-cordes-secrets
-                  name: a-cordes-backend
-                  ports:
-                      - containerPort: 8000
-                        name: gunicorn
-            dnsPolicy: ClusterFirst
-            imagePullSecrets:
-                - name: registry-credentials
-            securityContext: {}
-status: {}
+  replicas: 3
+  selector:
+    matchLabels:
+      app: a-cordes
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: a-cordes
+        tier: backend
+    spec:
+      containers:
+        - name: a-cordes-backend
+          image: felipebogaertsm/a_cordes_backend:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: a-cordes-secrets
+          ports:
+            - containerPort: 8000
+              name: gunicorn
+      dnsPolicy: ClusterFirst
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: a-cordes-backend
-    namespace: a-cordes
+  name: a-cordes-backend
+  namespace: a-cordes
 spec:
-    type: ClusterIP
-    selector:
-        app: a-cordes-backend
-    ports:
-        - protocol: TCP
-          port: 8000
-          targetPort: 8000 # must match the deployment's port
+  type: ClusterIP
+  selector:
+    app: a-cordes
+    tier: backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000 # must match the deployment's port

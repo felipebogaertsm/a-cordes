@@ -7,21 +7,18 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: a-cordes-frontend
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
-    type: RollingUpdate
+      app: a-cordes
+      tier: frontend
   template:
     metadata:
       labels:
-        app: a-cordes-frontend
+        app: a-cordes
+        tier: frontend
     spec:
       containers:
-        - image: felipebogaertsm/a_cordes_frontend@sha256:0cdb44c4103ec19f088797c94190881214de22f7d5c49cae2406f614824ac090
+        - name: a-cordes-frontend
+          image: felipebogaertsm/a_cordes_frontend:latest
           imagePullPolicy: Always
-          name: a-cordes-frontend
           ports:
             - containerPort: 3000
               name: react
@@ -33,10 +30,6 @@ spec:
             - name: CLIENT_BACKEND_URL
               value: https://acordes.shop
       dnsPolicy: ClusterFirst
-      imagePullSecrets:
-        - name: registry-credentials
-      securityContext: {}
-status: {}
 ---
 apiVersion: v1
 kind: Service
@@ -46,8 +39,9 @@ metadata:
 spec:
     type: ClusterIP
     selector:
-        app: a-cordes-frontend
+        app: a-cordes
+        tier: frontend
     ports:
         - protocol: TCP
           port: 3000
-          targetPort: 3000 # must match the deployment file's port
+          targetPort: 3000 # must match the deployment's port
