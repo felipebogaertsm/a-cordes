@@ -4,129 +4,107 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.test import TestCase
-from django.urls import reverse
-from rest_framework.test import APIClient
+import pytest
 
+from django.urls import reverse
+
+from .conftest import USER_PASSWORD
 from apps.accounts.models import User
 
-USER_1_EMAIL = "john@email.com"
-USER_EMAIL = "jane@email.com"
-ADMIN_USER_EMAIL = "admin@email.com"
 
-USER_PASSWORD = "RandomPass123!"
+@pytest.mark.django_db
+def test_user_login_fail(client):
+    response = client.post(
+        reverse("token-obtain-pair"),
+        {"email": "notanuser@email.com", "password": "wrongPass123!"},
+    )
+
+    assert int(response.status_code / 100) != 2  # not in 200 range
 
 
-class TestViews(TestCase):
-    def setUp(self):
-        self.client = APIClient()
+@pytest.mark.django_db
+def test_user_login(client, user_superuser):
+    # Getting JWT from credentials:
+    response = client.post(
+        reverse("token-obtain-pair"),
+        {"email": user_superuser.email, "password": USER_PASSWORD},
+    )
 
-        self.admin_user = User.objects.create_superuser(
-            email=ADMIN_USER_EMAIL, password=USER_PASSWORD
-        )
-        self.user = User.objects.create_user(
-            email=USER_EMAIL, password=USER_PASSWORD
-        )
+    assert response.status_code == 200
 
-    def test_user_login_fail(self):
-        client = APIClient()
+    access_token = response.data["access"]
 
-        # Wrong user and password:
-        response = client.post(
-            reverse("token-obtain-pair"),
-            {"email": "nouser@email.com", "password": "WrongPass123@"},
-        )
-        self.assertNotEqual(int(response.status_code / 100), 2)
+    # Verifying token validity:
+    response = client.post(reverse("token-verify"), {"token": access_token})
+    assert response.status_code == 200
 
-        # Wrong password:
-        response = client.post(
-            reverse("token-obtain-pair"),
-            {"email": USER_EMAIL, "password": "WrongPass123@"},
-        )
-        self.assertNotEqual(int(response.status_code / 100), 2)
 
-    def test_user_login(self):
-        client = APIClient()
+@pytest.mark.django_db
+def test_get_user_not_authenticated_client(
+    client, user_superuser, user_common
+):
+    # List mode:
+    response = client.get(reverse("users-list"))
+    assert response.status_code != 200
 
-        # Getting JWT from credentials:
-        response = client.post(
-            reverse("token-obtain-pair"),
-            {"email": USER_EMAIL, "password": USER_PASSWORD},
-        )
-        self.assertEqual(response.status_code, 200)
+    # Detail mode:
+    response = client.get(reverse("users-detail", args=[1]))
+    assert response.status_code != 200
 
-        access_token = response.data["access"]
+    # Action mode:
+    response = client.get(reverse("users-me"))
+    assert response.status_code != 200
 
-        # Verifying token validity:
-        response = client.post(
-            reverse("token-verify"), {"token": access_token}
-        )
-        self.assertEqual(response.status_code, 200)
 
-    def test_get_user_not_authenticated_client(self):
-        client = APIClient()
+@pytest.mark.django_db
+def test_get_user_authenticated_non_admin(client, user_common, user_superuser):
+    client.force_authenticate(user=user_common)
 
-        # List mode:
-        response = client.get(reverse("users-list"))
-        self.assertNotEqual(response.status_code, 200)
+    # List mode:
+    response = client.get(reverse("users-list"))
+    assert response.status_code != 200
 
-        # Detail mode:
-        response = client.get(reverse("users-detail", args=[1]))
-        self.assertNotEqual(response.status_code, 200)
+    # Detail mode with other user's id:
+    response = client.get(reverse("users-detail", args=[user_superuser._id]))
+    assert response.status_code != 200
 
-        # Action mode:
-        response = client.get(reverse("users-me"))
-        self.assertNotEqual(response.status_code, 200)
+    # Detail mode with same user id:
+    response = client.get(reverse("users-detail", args=[user_common._id]))
+    assert response.status_code != 200
 
-    def test_get_user_authenticated_non_admin(self):
-        client = APIClient()
-        client.force_authenticate(user=self.user)
+    # Detail mode with same user id:
+    response = client.get(reverse("users-me"))
+    assert response.status_code == 200
 
-        # List mode:
-        response = client.get(reverse("users-list"))
-        self.assertNotEqual(response.status_code, 200)
 
-        # Detail mode with other user's id:
-        response = client.get(
-            reverse("users-detail", args=[self.admin_user._id])
-        )
-        self.assertNotEqual(response.status_code, 200)
+@pytest.mark.django_db
+def test_user_signin_different_passwords(client):
+    wrong_password = USER_PASSWORD + "1"
 
-        # Detail mode with same user id:
-        response = client.get(reverse("users-detail", args=[self.user._id]))
-        self.assertNotEqual(response.status_code, 200)
+    response = client.post(
+        reverse("users-list"),
+        {
+            "email": "sample@email.com",
+            "password1": USER_PASSWORD,
+            "password2": wrong_password,
+        },
+    )
 
-        # Detail mode with same user id:
-        response = client.get(reverse("users-me"))
-        self.assertEqual(response.status_code, 200)
+    assert response.status_code != 200
 
-    def test_user_signin_different_passwords(self):
-        wrong_password = USER_PASSWORD + "1"
 
-        response = self.client.post(
-            reverse("users-list"),
-            {
-                "email": USER_1_EMAIL,
-                "password1": USER_PASSWORD,
-                "password2": wrong_password,
-            },
-        )
+@pytest.mark.django_db
+def test_user_signin_not_authenticated_client(client):
+    response = client.post(
+        reverse("users-list"),
+        {
+            "email": "sample@email.com",
+            "password1": USER_PASSWORD,
+            "password2": USER_PASSWORD,
+        },
+    )
 
-        self.assertNotEqual(response.status_code, 200)
+    new_user = response.data
 
-    def test_user_signin_not_authenticated_client(self):
-        response = self.client.post(
-            reverse("users-list"),
-            {
-                "email": USER_1_EMAIL,
-                "password1": USER_PASSWORD,
-                "password2": USER_PASSWORD,
-            },
-        )
-
-        new_user = response.data
-
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(
-            User.objects.get(_id=new_user["_id"]).email, new_user["email"]
-        )
+    assert response.status_code == 201
+    assert User.objects.get(_id=new_user["_id"]).email == new_user["email"]
