@@ -1,29 +1,32 @@
 version: "3.9"
 
 services:
+  nginx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile.dev
+    restart: always
+    container_name: a-cordes-nginx
+    ports:
+      - "8000:80"
+    depends_on:
+      - backend
+      - frontend
   backend:
     build: 
-      context: a_cordes/
+      context: ./a_cordes/
       dockerfile: Dockerfile
-    container_name: a_cordes
+    container_name: a-cordes-backend
     volumes:
       - ./a_cordes/:/usr/app/
-    ports:
-      - "8000:8000"
     entrypoint: >
       bash -c "python3 manage.py migrate --no-input && 
       python3 manage.py runserver 0.0.0.0:8000"
     
   frontend:
     build: 
-      context: frontend/
+      context: ./frontend/
       dockerfile: Dockerfile.dev
-    container_name: frontend
-    ports:
-      - "3000:3000"
+    container_name: a-cordes-frontend
     volumes:
       - ./frontend/:/frontend/
-
-networks:
-  nginx:
-    external: true
