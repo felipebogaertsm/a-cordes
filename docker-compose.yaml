@@ -28,5 +28,7 @@ services:
       context: ./frontend/
       dockerfile: Dockerfile.dev
     container_name: a-cordes-frontend
+    environment:
+      - WDS_SOCKET_PORT=0
     volumes:
       - ./frontend/:/frontend/
