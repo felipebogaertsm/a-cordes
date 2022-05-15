@@ -1,23 +1,27 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: a-cordes-postgres
   namespace: a-cordes
 spec:
-  serviceName: a-cordes-postgres-service
+  replicas: 1
   selector:
     matchLabels:
-      app: a-cordes-postgres
-  replicas: 1
+      app: a-cordes
+      component: postgres
   template:
     metadata:
       labels:
-        app: a-cordes-postgres
+        app: a-cordes
+        component: postgres
     spec:
+      volumes:
+      - name: postgres-volume
+        persistentVolumeClaim:
+          claimName: a-cordes-postgres-pvc
       containers:
         - name: postgres
           image: postgres:13
-          imagePullPolicy: "IfNotPresent"
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -37,21 +41,19 @@ spec:
           ports:
           - containerPort: 5432
           volumeMounts:
-          - name: a-cordes-postgres-vm
+          - name: postgres-volume
             mountPath: /var/lib/postgresql/data
-      volumes:
-      - name: a-cordes-postgres-vm
-        persistentVolumeClaim:
-          claimName: a-cordes-postgres-pvc
+            subPath: a-cordes-postgres
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: a-cordes-postgres-service
   namespace: a-cordes
 spec:
   selector:
-    app: a-cordes-postgres
+    app: a-cordes
+    component: postgres
   ports:
     - protocol: TCP
       port: 5432

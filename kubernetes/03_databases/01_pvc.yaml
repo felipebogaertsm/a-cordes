@@ -4,10 +4,9 @@ metadata:
   name: a-cordes-postgres-pvc
   namespace: a-cordes
 spec:
-  storageClassName: hostpath
+  storageClassName: linode-block-storage-retain
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
-  volumeName: a-cordes-postgres-pv
+      storage: 10Gi
