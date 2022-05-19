@@ -35,11 +35,11 @@ export default function ProductId() {
     const { user } = useContext(AuthContext)
 
     const router = useRouter()
-    const id = router.query.id
+    const slug = router.query.slug
 
     const [product, doFetchProduct] = useFetch({
         method: "get",
-        url: PRODUCT_DETAIL_PATH.replace("[id]", id),
+        url: PRODUCT_DETAIL_PATH.replace("[slug]", slug),
     })
 
     useEffect(() => {
@@ -57,7 +57,7 @@ export default function ProductId() {
 
     const addToCartHandler = () => {
         if (user) {
-            dispatch(addToCart(id, 1))
+            dispatch(addToCart(slug, 1))
         } else {
             router.push("/auth/login")
         }
@@ -69,7 +69,7 @@ export default function ProductId() {
                 {product.loading ? (
                     <Loader />
                 ) : product.error ? (
-                    <div>product.error</div>
+                    <div>{product.error}</div>
                 ) : (
                     product.data && (
                         <div className="flex flex-col">

@@ -16,7 +16,9 @@ import { PRODUCT_DETAIL_PAGE_ROUTE } from "../../../constants/routes"
 export default function ProductItem({ product }) {
     return (
         <div>
-            <Link href={PRODUCT_DETAIL_PAGE_ROUTE.replace("[id]", product._id)}>
+            <Link
+                href={PRODUCT_DETAIL_PAGE_ROUTE.replace("[slug]", product.slug)}
+            >
                 <div className="cursor-pointer">
                     <Card>
                         <div className="flex flex-col group">

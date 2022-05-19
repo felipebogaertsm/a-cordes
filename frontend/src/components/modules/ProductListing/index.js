@@ -28,7 +28,7 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                             "
                             src={`${MEDIA_URL}${item.product.image}`}
                             onClick={(e) =>
-                                router.push(`/products/${item.product._id}`)
+                                router.push(`/products/${item.product.slug}`)
                             }
                         ></img>
                         <div className="my-auto">

@@ -20,5 +20,5 @@ export const ORDERS_MY_SHIPPING_ADDRESSES_PATH =
     "/api/orders/shipping-addresses/my/"
 
 export const PRODUCTS_RECENT_PATH = "/api/products/recent/"
-export const PRODUCT_DETAIL_PATH = "/api/products/[id]/"
+export const PRODUCT_DETAIL_PATH = "/api/products/[slug]/"
 export const PRODUCT_LIST_PATH = "/api/products/"

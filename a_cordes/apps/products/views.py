@@ -21,6 +21,8 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     model = Product
     serializer_class = ProductSerializer
 
+    lookup_field = "slug"
+
     permission_classes = (IsAdminUser | ReadOnly,)
     filterset_fields = ("name", "seller_profile", "count_in_stock")
     ordering = ("-count_in_stock", "-created_at")
