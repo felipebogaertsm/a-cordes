@@ -50,6 +50,20 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
 
+class ProductImage(models.Model):
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(
+        blank=True, default="products/placeholder.jpeg", upload_to="products/"
+    )
+
+    def __str__(self):
+        return f"{self.product.__str__()}_{self._id}"
+
+
 class Review(models.Model):
     _id = models.UUIDField(
         default=uuid.uuid4, editable=False, unique=True, primary_key=True
