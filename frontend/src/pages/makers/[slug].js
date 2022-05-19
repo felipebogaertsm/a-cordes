@@ -24,12 +24,12 @@ import { getClient } from "../../utils/axios"
 export default function MakerId() {
     const router = useRouter()
 
-    const [makerId] = useState(router.query.id)
+    const [makerSlug] = useState(router.query.slug)
 
     const [seller, doFetch] = useFetch({
         client: getClient(),
         method: "get",
-        url: ACCOUNTS_SELLER_PATH.replace("[id]", makerId),
+        url: ACCOUNTS_SELLER_PATH.replace("[slug]", makerSlug),
     })
 
     const [products, doFetchProducts] = useFetch({
@@ -44,7 +44,7 @@ export default function MakerId() {
 
     useEffect(() => {
         if (seller.data) {
-            doFetchProducts({ params: { seller_profile: seller.data.id } })
+            doFetchProducts({ params: { seller_profile: seller.data._id } })
         }
     }, [seller.data])
 

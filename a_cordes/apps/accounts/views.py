@@ -19,7 +19,7 @@ from apps.accounts.serializers import (
     UserSerializer,
     UserSerializerWithToken,
     SellerProfileSerializer,
-    MyTokenObtainPairSerializer
+    MyTokenObtainPairSerializer,
 )
 
 
@@ -88,5 +88,5 @@ class SellerProfilesAPI(ModelViewSet):
     model = SellerProfile
     serializer_class = SellerProfileSerializer
 
-    lookup_field = "_id"
+    lookup_field = "slug"
     queryset = model.objects.all()

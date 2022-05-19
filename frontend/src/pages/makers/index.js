@@ -55,8 +55,8 @@ export default function Makers() {
                                 onClick={() =>
                                     router.push(
                                         MAKER_PAGE_ROUTE.replace(
-                                            "[id]",
-                                            maker._id
+                                            "[slug]",
+                                            maker.slug
                                         )
                                     )
                                 }

@@ -103,8 +103,8 @@ export default function ProductId() {
                                         <h5>Crafted by</h5>
                                         <a
                                             href={MAKER_PAGE_ROUTE.replace(
-                                                "[id]",
-                                                product.data.seller._id
+                                                "[slug]",
+                                                product.data.seller.slug
                                             )}
                                         >
                                             <h6>{product.data.seller.name}</h6>
