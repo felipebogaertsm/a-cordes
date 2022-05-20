@@ -26,7 +26,7 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                                 aspect-[4/3] object-cover md:h-12 md:w-min
                                 rounded-xl shadow-xl my-auto cursor-pointer
                             "
-                            src={`${MEDIA_URL}${item.product.image}`}
+                            src={`${MEDIA_URL}${item.product.images[0].src}`}
                             onClick={(e) =>
                                 router.push(`/products/${item.product.slug}`)
                             }

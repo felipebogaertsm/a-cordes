@@ -6,10 +6,14 @@
 
 from django.contrib import admin
 
-from apps.products.models import Product, Review
+from apps.products.models import Product, ProductImage, Review
 
 
 class ProductAdmin(admin.ModelAdmin):
+    readonly_fields = ("created_at",)
+
+
+class ProductImageAdmin(admin.ModelAdmin):
     readonly_fields = ("created_at",)
 
 
@@ -18,4 +22,5 @@ class ReviewAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Product, ProductAdmin)
+admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Review, ReviewAdmin)

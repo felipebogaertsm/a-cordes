@@ -96,7 +96,6 @@ class OrderItemAPI(APIView):
                 name=product.name,
                 quantity=item["qty"],
                 price=item["price"],
-                image=product.image.url,
             )
 
             # Update stock of the sold items:

@@ -29,7 +29,7 @@ export default function ProductItem({ product }) {
                                                 aspect-[5/3] border-opacity-10
                                                 border-2 border-amber-900
                                             "
-                                    src={`${MEDIA_URL}${product.image}`}
+                                    src={`${MEDIA_URL}${product.images[0].src}`}
                                 ></img>
                                 {product.count_in_stock === 0 && (
                                     <div

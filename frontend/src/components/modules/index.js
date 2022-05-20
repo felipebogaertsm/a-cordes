@@ -1,5 +1,6 @@
 import Footer from "./Footer"
 import GriddedProductListing from "./GriddedProductListing"
+import ImageCarroussel from "./ImageCarroussel"
 import ListItem from "./ListItem"
 import MakerItem from "./MakerItem"
 import MoreProducts from "./MoreProducts"
@@ -15,6 +16,7 @@ import TotalPriceOrder from "./TotalPriceOrder"
 export {
     Footer,
     GriddedProductListing,
+    ImageCarroussel,
     ListItem,
     MakerItem,
     MoreProducts,

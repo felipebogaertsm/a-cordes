@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
-from apps.products.models import Product, Review
+from apps.products.models import Product, ProductImage, Review
 from apps.products.serializers import ProductSerializer, ReviewSerializer
 
 from utils.mixins.views import SearchableModelViewSet
@@ -50,11 +50,12 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=["patch"], url_path="set-image")
-    def set_image(self, request, pk):
+    @action(detail=True, methods=["patch"], url_path="add-image")
+    def add_image(self, request, pk):
         product = self.model.objects.get(_id=pk)
-        product.image = request.data["image"]
-        product.save()
+        ProductImage.objects.create(
+            product=product, src=request.data["image"], alt=""
+        )
 
         serializer = self.serializer_class(product, many=False)
         return Response(serializer.data)

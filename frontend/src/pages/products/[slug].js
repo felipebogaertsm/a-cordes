@@ -14,6 +14,7 @@ import { addToCart } from "../../redux/actions/cart"
 // Components:
 import { Button, Heading, Loader } from "../../components/elements"
 import { NavbarPage } from "../../components/layouts"
+import { ImageCarroussel } from "../../components/modules"
 
 // Constants:
 import { MEDIA_URL } from "../../constants"
@@ -82,13 +83,9 @@ export default function ProductId() {
                                 "
                             >
                                 <div>
-                                    <img
-                                        className="
-                                        aspect-[4/3] mt-10 object-cover
-                                        w-full rounded-xl shadow-xl
-                                    "
-                                        src={`${MEDIA_URL}${product.data.image}`}
-                                    ></img>
+                                    <ImageCarroussel
+                                        images={product.data.images}
+                                    />
                                 </div>
                                 <div className="flex flex-col mt-10">
                                     <div className="my-2">

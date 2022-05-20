@@ -7,7 +7,7 @@
 from rest_framework import serializers
 
 from apps.accounts.serializers import SellerProfileSerializer
-from apps.products.models import Product, Review
+from apps.products.models import Product, ProductImage, Review
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -16,7 +16,20 @@ class ReviewSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        if instance.src:
+            ret["src"] = instance.src.url
+        return ret
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    images = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
     seller = SellerProfileSerializer(many=False, source="seller_profile")
 
@@ -24,13 +37,12 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         exclude = ("seller_profile",)
 
+    def get_images(self, obj):
+        images = ProductImage.objects.filter(product___id=obj._id)
+        serializer = ProductImageSerializer(images, many=True)
+        return serializer.data
+
     def get_reviews(self, obj):
         reviews = obj.review_set.all()  # get all reviews
         serializer = ReviewSerializer(reviews, many=True)
         return serializer.data
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        if instance.image:
-            ret['image'] = instance.image.url
-        return ret

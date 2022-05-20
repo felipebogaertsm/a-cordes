@@ -31,12 +31,6 @@ class Product(models.Model):
     rating = models.FloatField(blank=True, null=True)
     review_count = models.PositiveIntegerField(blank=True, default=0)
 
-    image = models.ImageField(
-        blank=True,
-        default="products/placeholder.jpeg",
-        upload_to="products/",
-    )
-
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     class Meta:
@@ -56,9 +50,12 @@ class ProductImage(models.Model):
     )
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(
+    src = models.ImageField(
         blank=True, default="products/placeholder.jpeg", upload_to="products/"
     )
+    alt = models.CharField(max_length=1000, blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return f"{self.product.__str__()}_{self._id}"
