@@ -7,6 +7,10 @@
 export function getDetailFromResponseError(err) {
     if (err.response) {
         if (err.response.data) {
+            if (err.response.data.detail) {
+                return err.response.data.detail
+            }
+
             try {
                 let errorString = ""
 

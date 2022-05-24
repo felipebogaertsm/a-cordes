@@ -90,6 +90,7 @@ export function AuthProvider({ children, user: userInfo }) {
             setToken(token)
 
             await refreshUser(token)
+            setError(null)
 
             router.push(HOME_PAGE_ROUTE)
         } catch (err) {
