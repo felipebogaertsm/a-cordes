@@ -35,8 +35,8 @@ class UsersAPI(ModelViewSet):
     lookup_field = "_id"
     queryset = model.objects.all()
 
-    def perform_create(self, serializer):
-        data = self.request.data
+    def create(self, request):
+        data = request.data
 
         if data["password1"] != data["password2"]:
             return Response(
@@ -47,7 +47,7 @@ class UsersAPI(ModelViewSet):
         user = User.objects.create_user(
             email=data["email"], password=data["password1"]
         )
-        serializer = self.get_serializer(user)
+        serializer = self.serializer_class(user, many=False)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
