@@ -20,7 +20,7 @@ export default function Button({
         <button
             className={`
                 mx-auto w-full py-3 overflow-hidden
-                rounded-lg my-auto flex
+                rounded-md my-auto flex
                 border-transparent border-2 
                 transition-all duration-200 px-6
                 text-center font-semibold relative

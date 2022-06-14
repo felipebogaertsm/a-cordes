@@ -36,7 +36,7 @@ export default function FormInput({ label, type = "text", ...props }) {
             <div className="flex flex-row space-x-2">
                 <input
                     className="
-                    py-2 px-4 rounded-lg bg-stone-200 w-full border-[1px]
+                    py-2 px-4 rounded-md bg-stone-200 w-full border-[1px]
                     border-amber-900 border-opacity-50 hover:border-opacity-100
                     focus:border-black transition-all duration-200
                 "

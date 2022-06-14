@@ -9,7 +9,7 @@ export default function Card(props) {
         <div {...props}>
             <div
                 className="
-                w-full shadow-xl rounded-3xl bg-stone-200
+                w-full shadow-xl rounded-md bg-stone-200
                 hover:brightness-105 hover:bg-opacity-50 transition-all
                 duration-100 border-b-4 border-opacity-60
                 hover:border-opacity-80

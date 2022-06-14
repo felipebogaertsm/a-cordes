@@ -25,7 +25,7 @@ export default function ProductItem({ product }) {
                             <div className="relative">
                                 <img
                                     className="
-                                                rounded-t-3xl w-full h-full object-cover
+                                                rounded-t-md w-full h-full object-cover
                                                 aspect-[5/3] border-opacity-10
                                                 border-2 border-amber-900
                                             "

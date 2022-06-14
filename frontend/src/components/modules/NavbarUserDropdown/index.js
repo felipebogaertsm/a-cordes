@@ -38,12 +38,12 @@ export default function NavbarUserDropdown() {
                     <div className="bg-stone-800 p-4 rounded-b-lg shadow-xl mt-4">
                         <div className="flex flex-col space-y-2 text-center">
                             <Link href={USER_SETTINGS_PAGE_ROUTE}>
-                                <div className="hover:bg-stone-700 p-2 rounded-lg transition-all duration-100">
+                                <div className="hover:bg-stone-700 p-2 rounded-md transition-all duration-100">
                                     Settings
                                 </div>
                             </Link>
                             <div
-                                className="hover:bg-stone-700 p-2 rounded-lg transition-all duration-100"
+                                className="hover:bg-stone-700 p-2 rounded-md transition-all duration-100"
                                 onClick={() => logout()}
                             >
                                 Logout

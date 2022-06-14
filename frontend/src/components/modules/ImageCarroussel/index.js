@@ -20,7 +20,7 @@ export default function ImageCarroussel({ images }) {
                 <img
                     className="
                         aspect-[4/3] mt-10 object-cover
-                        w-full rounded-xl shadow-xl
+                        w-full rounded-md shadow-xl
                     "
                     src={`${MEDIA_URL}${image.src}`}
                     alt={image.alt ? image.alt : ""}
@@ -40,7 +40,7 @@ export default function ImageCarroussel({ images }) {
                         }
                         className="cursor-pointer opacity-80 hover:opacity-100 transition-all duration-100"
                     >
-                        <img className="rounded-xl w-20" src={image.src}></img>
+                        <img className="rounded-md w-20" src={image.src}></img>
                     </div>
                 ))}
             </div>

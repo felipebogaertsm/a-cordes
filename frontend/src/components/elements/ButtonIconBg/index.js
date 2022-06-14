@@ -8,7 +8,7 @@ export default function buttonIconBg({ iconPath, ...props }) {
     return (
         <div
             className="
-                bg-stone-300 rounded-lg w-14 h-10 mx-auto my-auto
+                bg-stone-300 rounded-md w-14 h-10 mx-auto my-auto
                 flex content-center border-transparent border-2 group
                 active:border-amber-900 transition-all duration-100
             "

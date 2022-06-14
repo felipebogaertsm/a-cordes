@@ -8,7 +8,7 @@ export default function Message({ children, ...props }) {
     return (
         <div
             className="
-                bg-red-200 py-4 px-6 text-red-900 font-bold rounded-lg group
+                bg-red-200 py-4 px-6 text-red-900 font-bold rounded-md group
                 transition-all duration-100 hover:brightness-[102%]
             "
         >
