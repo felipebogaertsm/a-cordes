@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.accounts.models import User, SellerProfile
 
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -39,7 +40,7 @@ class SellerProfileSerializer(ModelSerializer):
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         if instance.picture:
-            ret['picture'] = instance.picture.url
+            ret["picture"] = instance.picture.url
         return ret
 
 
