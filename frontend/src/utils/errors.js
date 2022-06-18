@@ -11,6 +11,10 @@ export function getDetailFromResponseError(err) {
                 return err.response.data.detail
             }
 
+            if (err.response.data.message) {
+                return err.response.data.message
+            }
+
             try {
                 let errorString = ""
 

@@ -1,5 +1,5 @@
 # Dependencies:
-FROM node:17-alpine as dependencies
+FROM node:18-alpine as dependencies
 LABEL maintainer="Felipe Bogaerts de Mattos"
 
 WORKDIR /frontend
@@ -8,7 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm install --frozen-lockfile
 
 # Build:
-FROM node:17-alpine as builder
+FROM node:18-alpine as builder
 
 WORKDIR /frontend
 COPY . .
@@ -16,7 +16,7 @@ COPY --from=dependencies /frontend/node_modules ./node_modules
 RUN yarn build
 
 # Entrypoint:
-FROM node:17-alpine as runner
+FROM node:18-alpine as runner
 
 WORKDIR /frontend
 ENV NODE_ENV=production

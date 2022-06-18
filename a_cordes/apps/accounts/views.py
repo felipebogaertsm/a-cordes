@@ -4,12 +4,11 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at felipe.bogaerts@engenharia.ufjf.br
 
-from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes, action
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -44,9 +43,16 @@ class UsersAPI(ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        user = User.objects.create_user(
-            email=data["email"], password=data["password1"]
-        )
+        try:
+            user = User.objects.create_user(
+                email=data["email"], password=data["password1"]
+            )
+        except IntegrityError:
+            return Response(
+                {"message": "Email already registered"},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+
         serializer = self.serializer_class(user, many=False)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)

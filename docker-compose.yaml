@@ -31,4 +31,5 @@ services:
     environment:
       - WDS_SOCKET_PORT=0
     volumes:
-      - ./frontend/:/frontend/
+      - ./frontend/src/:/frontend/src/
+      - ./frontend/public/:/frontend/public/
