@@ -33,6 +33,11 @@ export default function Button({
                     "border-2 border-amber-900 bg-stone-100 hover:brightness-[105%] uppercase content-center"
                 }
                 ${tertiary && "hover:underline text-amber-900"}
+                ${
+                    tertiary &&
+                    disabled &&
+                    "opacity-60 cursor-default hover:no-underline"
+                }
                 ${disabled ? "" : "active:border-stone-800"}
             `}
             {...props}
@@ -43,7 +48,11 @@ export default function Button({
             <div
                 className={`
                     bg-white absolute top-0 left-0 w-full h-full bg-opacity-60
-                    ${disabled ? "visible" : "invisible"}
+                    ${
+                        disabled && (primary || secondary)
+                            ? "visible"
+                            : "invisible"
+                    }
                 `}
             ></div>
         </button>

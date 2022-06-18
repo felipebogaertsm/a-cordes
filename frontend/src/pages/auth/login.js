@@ -76,12 +76,8 @@ export default function Login() {
                             </Button>
                         </div>
                         <div className="mx-auto">
-                            <Button
-                                type="button"
-                                onClick={() => router.push("/")}
-                                tertiary
-                            >
-                                Forgot your password?
+                            <Button type="button" tertiary disabled>
+                                Forgot your password? (coming soon)
                             </Button>
                         </div>
                     </div>
