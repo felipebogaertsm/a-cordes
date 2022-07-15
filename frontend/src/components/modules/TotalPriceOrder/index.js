@@ -12,7 +12,7 @@ export default function TotalPriceOrder({ total }) {
             </div>
             <div className="grow"></div>
             <div>
-                <h2 className="font-sans">${total}</h2>
+                <h2 className="font-sans">${Number(total).toFixed(2)}</h2>
             </div>
         </div>
     )
