@@ -2,7 +2,7 @@
 // Licensed as the GNU General Public License as published by the Free Software
 // Foundation, version 3.
 // Author: Felipe Bogaerts de Mattos
-// Contact me at felipe.bogaerts@engenharia.ufjf.br
+// Contact me at me@felipebm.com
 
 export const ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH =
     "/api/accounts/token/obtain-pair/"

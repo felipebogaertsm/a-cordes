@@ -2,7 +2,7 @@
 // Licensed as the GNU General Public License as published by the Free Software
 // Foundation, version 3.
 // Author: Felipe Bogaerts de Mattos
-// Contact me at felipe.bogaerts@engenharia.ufjf.br
+// Contact me at me@felipebm.com
 
 export default function Button({
     children,
@@ -20,7 +20,7 @@ export default function Button({
         <button
             className={`
                 mx-auto w-full py-3 overflow-hidden
-                rounded-md my-auto flex
+                rounded-md my-auto flex tracking-wider
                 border-transparent border-2 
                 transition-all duration-200 px-6
                 text-center font-semibold relative
