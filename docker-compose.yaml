@@ -33,3 +33,4 @@ services:
     volumes:
       - ./frontend/src/:/frontend/src/
       - ./frontend/public/:/frontend/public/
+      - ./frontend/tailwind.config.js:/frontend/tailwind.config.js

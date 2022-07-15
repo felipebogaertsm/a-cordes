@@ -97,8 +97,11 @@ export default function OrderPage() {
                 <Heading>
                     <h1>Order</h1>
                     <div className="grow"></div>
-                    <div className="w-max my-auto">
-                        <Button onClick={(e) => orderItemsHandler(e)}>
+                    <div className="w-max my-auto flex justify-center">
+                        <Button
+                            onClick={(e) => orderItemsHandler(e)}
+                            className="button button-primary"
+                        >
                             Confirm order
                         </Button>
                     </div>
@@ -132,6 +135,7 @@ export default function OrderPage() {
                                         </p>
                                         <Button
                                             onClick={(e) => router.push("/")}
+                                            className="button button-primary"
                                         >
                                             Continue shopping
                                         </Button>

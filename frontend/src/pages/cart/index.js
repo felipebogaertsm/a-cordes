@@ -54,16 +54,19 @@ export default function Cart() {
                     <Heading>
                         <h1>Cart</h1>
                         <div className="grow"></div>
-                        <div className="w-max my-auto mr-2">
+                        <div className="w-max my-auto mr-2 flex justify-center">
                             <Button
+                                className="button button-secondary"
                                 onClick={(e) => clearCartHandler(e)}
-                                secondary
                             >
                                 Clear cart
                             </Button>
                         </div>
-                        <div className="w-max my-auto">
-                            <Button onClick={(e) => checkoutHandler(e)}>
+                        <div className="w-max my-auto flex justify-center">
+                            <Button
+                                onClick={(e) => checkoutHandler(e)}
+                                className="button button-primary"
+                            >
                                 Go to Checkout
                             </Button>
                         </div>
@@ -90,7 +93,10 @@ export default function Cart() {
                                     <p className="text-xl">
                                         No items in your cart.
                                     </p>
-                                    <Button onClick={() => router.push("/")}>
+                                    <Button
+                                        onClick={() => router.push("/")}
+                                        className="button button-primary"
+                                    >
                                         Continue shopping
                                     </Button>
                                 </div>

@@ -49,6 +49,7 @@ export default function ProductListing({ items, removeHandler, ...props }) {
                         {removeHandler && (
                             <div className="my-auto text-sm">
                                 <Button
+                                    className="button button-secondary"
                                     onClick={(e) => removeHandler(e, item._id)}
                                 >
                                     Remove
