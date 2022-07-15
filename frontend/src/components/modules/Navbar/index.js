@@ -19,8 +19,8 @@ export default function Navbar() {
         <div className="w-full">
             <div
                 className="
-                    bg-stone-900 text-stone-100 md:py-0 whitespace-nowrap
-                    px-2 md:px-4 border-b-2 border-white select-none
+                    bg-dark text-light md:py-0 whitespace-nowrap
+                    px-2 md:px-4 border-b-2 border-light select-none
                     no-scrollbar w-full
                 "
             >

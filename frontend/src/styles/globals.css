@@ -67,7 +67,7 @@
     }
 
     .button-secondary {
-        @apply border-2 border-wood bg-stone-100 hover:brightness-[105%] uppercase content-center;
+        @apply border-2 border-darkred bg-stone-100 hover:brightness-[105%] uppercase content-center;
     }
 
     .button-tertiary {
@@ -104,15 +104,19 @@
     }
 
     @keyframes fadeInOut {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     @keyframes translateYTransition {
         0% {
             transform: translateY(-100px);
         }
-    
+
         100% {
             transform: translateY(0);
         }
