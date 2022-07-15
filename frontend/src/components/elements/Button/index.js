@@ -23,7 +23,7 @@ export default function Button({
             </div>
             <div
                 className={`
-                    bg-white absolute top-0 left-0 w-full h-full bg-opacity-60
+                    bglight absolute top-0 left-0 w-full h-full bg-opacity-60
                     ${
                         disabled && (primary || secondary)
                             ? "visible"

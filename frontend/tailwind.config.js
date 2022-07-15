@@ -8,11 +8,11 @@ module.exports = {
                 serif: ["Playfair Display", "serif"],
             },
             colors: {
+                red: "#F05454",
                 darkred: "#7D1F1F",
                 wood: "#781900",
                 dark: "#181818",
-                light: "#E0EDEB",
-                leaf: "#AAD8B2",
+                light: "#F4F4F4",
             },
         },
     },

@@ -58,7 +58,7 @@ export default function Settings() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14">
+            <div className="px-6 py-2">
                 <Heading>
                     <h1>User settings</h1>
                 </Heading>

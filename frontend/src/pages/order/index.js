@@ -93,7 +93,7 @@ export default function OrderPage() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14">
+            <div className="px-6 py-2">
                 <Heading>
                     <h1>Order</h1>
                     <div className="grow"></div>

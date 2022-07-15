@@ -66,7 +66,7 @@ export default function ProductId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14">
+            <div className="px-6 py-2">
                 {product.loading ? (
                     <Loader />
                 ) : product.error ? (

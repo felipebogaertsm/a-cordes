@@ -12,7 +12,7 @@ export default function FormCheckbox({ ...props }) {
                 type="checkbox"
                 className="
                     form-check-input appearance-none h-4 w-4 p-2 border border-stone-300 rounded-sm
-                    bg-white checked:bg-amber-900 checked:border-amber-900 focus:outline-none
+                    bglight checked:bg-amber-900 checked:border-amber-900 focus:outline-none
                     transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain
                     float-left mr-2 cursor-pointer pointer-events-auto
                 "

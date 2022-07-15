@@ -50,7 +50,7 @@ export default function MakerId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14">
+            <div className="px-6 py-2">
                 {seller.loading && <Loader />}
                 {seller.data && (
                     <div>

@@ -61,9 +61,9 @@
     }
 
     .button-primary {
-        @apply bg-stone-800 text-white uppercase content-center 
-               hover:bg-stone-200 hover:text-black hover:border-2 
-               border-stone-700;
+        @apply bg-dark text-light uppercase content-center 
+               hover:bg-light hover:text-dark hover:border-2 
+               hover:border-darkred;
     }
 
     .button-secondary {

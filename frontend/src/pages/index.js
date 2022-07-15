@@ -35,7 +35,7 @@ export default function Home() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-14">
+            <div className="px-6 py-2">
                 <div className="w-full">
                     <Heading>
                         <h1>Latest products</h1>
@@ -48,7 +48,7 @@ export default function Home() {
                     </Heading>
                 </div>
 
-                <div className="mt-20 px-6 w-full">
+                <div className="mt-10 px-6 w-full">
                     {products.loading ? (
                         <div className="w-full mx-auto">
                             <Loader />
