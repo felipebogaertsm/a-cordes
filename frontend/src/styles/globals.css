@@ -54,6 +54,34 @@
 }
 
 @layer components {
+    .button {
+        @apply mx-auto w-full py-3 overflow-hidden rounded-md my-auto 
+               flex tracking-wider border-transparent border-2 transition-all 
+               duration-200 px-6 text-center font-semibold relative;
+    }
+
+    .button-primary {
+        @apply bg-stone-800 text-white uppercase content-center 
+               hover:bg-stone-200 hover:text-black hover:border-2 
+               border-stone-700;
+    }
+
+    .button-secondary {
+        @apply border-2 border-wood bg-stone-100 hover:brightness-[105%] uppercase content-center;
+    }
+
+    .button-tertiary {
+        @apply hover:underline text-amber-900;
+    }
+
+    .button-tertiary.disabled {
+        @apply opacity-60 cursor-default hover:no-underline;
+    }
+
+    .disabled {
+        @apply active:border-stone-800;
+    }
+
     .accordion-content {
         overflow: hidden;
         animation: translateYTransition 200ms ease-out;
