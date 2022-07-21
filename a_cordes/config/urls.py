@@ -9,6 +9,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import path, include
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -17,6 +19,16 @@ urlpatterns = [
     path("api/cart/", include("apps.cart.urls")),
     path("api/orders/", include("apps.orders.urls")),
     path("api/products/", include("apps.products.urls")),
+    path("docs/", include_docs_urls(title="à cordes APIs")),
+    path(
+        "schema/",
+        get_schema_view(
+            title="à cordes APIs",
+            description="Fine instruments ecommerce shop API schema",
+            version="1.0.0",
+        ),
+        name="openapi-schema",
+    ),
 ]
 
 if settings.DEBUG:
