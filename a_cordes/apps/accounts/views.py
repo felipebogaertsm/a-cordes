@@ -4,7 +4,6 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at me@felipebm.com
 
-from django.db import IntegrityError
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
