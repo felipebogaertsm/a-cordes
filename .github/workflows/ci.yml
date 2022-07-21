@@ -56,7 +56,21 @@ jobs:
         ls -la
         cd a_cordes
         python3 -m pytest
-  
+
+  deploy-manifests:
+    name: Deploy manifests
+    runs-on: ubuntu-latest
+    container: bitnami/kubectl:latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
+    - name: Deployment
+      run: |
+        kubectl apply -f ./kubernetes/ --recursive
+        
   deploy-backend:
     name: Deploy backend
     runs-on: ubuntu-latest
