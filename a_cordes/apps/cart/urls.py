@@ -4,11 +4,15 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at me@felipebm.com
 
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 import apps.cart.views as views
 
+router = DefaultRouter()
+
+router.register("items", views.CartItemsAPI, basename="cart")
+
 urlpatterns = [
-    path("item/<str:pk>/", views.CartItemAPI.as_view()),
-    path("", views.CartAPI.as_view()),
+    path("", include(router.urls)),
 ]

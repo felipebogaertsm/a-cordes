@@ -16,3 +16,6 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = "__all__"
+
+    def create(self, validated_data):
+        return CartItem.objects.create_item(**validated_data)
