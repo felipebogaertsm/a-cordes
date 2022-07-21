@@ -16,7 +16,6 @@ class CartItemSerializer(serializers.ModelSerializer):
         depth = 2
 
     def create(self, validated_data):
-        print(validated_data)
         return CartItem.objects.create_item(
             user=validated_data["user"],
             product=validated_data["product"],
