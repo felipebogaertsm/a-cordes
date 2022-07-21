@@ -34,29 +34,6 @@ class UsersAPI(ModelViewSet):
     lookup_field = "_id"
     queryset = model.objects.all()
 
-    def create(self, request):
-        data = request.data
-
-        if data["password1"] != data["password2"]:
-            return Response(
-                {"message": "Passwords do not match"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        try:
-            user = User.objects.create_user(
-                email=data["email"], password=data["password1"]
-            )
-        except IntegrityError:
-            return Response(
-                {"message": "Email already registered"},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
-
-        serializer = self.serializer_class(user, many=False)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
     @action(
         detail=False,
         url_path="my",

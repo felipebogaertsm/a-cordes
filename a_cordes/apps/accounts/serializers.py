@@ -4,7 +4,13 @@
 # Author: Felipe Bogaerts de Mattos
 # Contact me at me@felipebm.com
 
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
+from rest_framework.serializers import (
+    CharField,
+    DateTimeField,
+    ModelSerializer,
+    SerializerMethodField,
+    ValidationError,
+)
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -45,17 +51,36 @@ class SellerProfileSerializer(ModelSerializer):
 
 
 class UserSerializer(ModelSerializer):
+    password = CharField(write_only=True, source="password1", required=False)
+
+    # Only used when creationg a new user:
+    password1 = CharField(write_only=True, required=False)
+    password2 = CharField(write_only=True, required=False)
+
+    last_login = DateTimeField(required=False)
+
     class Meta:
         model = User
-        exclude = ("password",)
+        fields = "__all__"
+
+    def validate(self, attrs):
+        validated_attrs = super().validate(attrs)
+
+        try:
+            if attrs["password1"] != attrs["password2"]:
+                raise ValidationError("Passwords must be equal")
+
+            validated_attrs["password"] = validated_attrs["password1"]
+            del validated_attrs["password1"]
+            del validated_attrs["password2"]
+        except KeyError:
+            pass
+
+        return validated_attrs
 
 
 class UserSerializerWithToken(UserSerializer):
     token = SerializerMethodField(read_only=True)
-
-    class Meta:
-        model = User
-        exclude = ("password",)
 
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
