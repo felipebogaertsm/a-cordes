@@ -31,11 +31,15 @@ class ProductImageSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     images = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
-    seller = SellerProfileSerializer(many=False, source="seller_profile")
+    seller = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         exclude = ("seller_profile",)
+
+    def get_seller(self, obj):
+        serializer = SellerProfileSerializer(obj.seller_profile)
+        return serializer.data
 
     def get_images(self, obj):
         images = ProductImage.objects.filter(product___id=obj._id)

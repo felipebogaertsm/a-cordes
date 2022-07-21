@@ -58,7 +58,13 @@ export default function ProductId() {
 
     const addToCartHandler = () => {
         if (user) {
-            dispatch(addToCart(product.data._id, 1))
+            dispatch(
+                addToCart({
+                    product: product.data._id,
+                    quantity: 1,
+                    user: user._id,
+                })
+            )
         } else {
             router.push("/auth/login")
         }

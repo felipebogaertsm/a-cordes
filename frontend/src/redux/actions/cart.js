@@ -6,6 +6,13 @@
 
 // Constants:
 import {
+    CART_ITEMS_PATH,
+    CART_ITEM_PATH,
+    CART_ITEMS_CLEAR_PATH,
+} from "../../constants/apis"
+
+// Types:
+import {
     CART_ADD_ITEM_REQUEST,
     CART_ADD_ITEM_SUCCESS,
     CART_ADD_ITEM_FAIL,
@@ -21,16 +28,13 @@ import {
 // Utils:
 import { getClient } from "../../utils/axios"
 
-export const addToCart = (id, qty) => async (dispatch) => {
+export const addToCart = (payload) => async (dispatch) => {
     try {
         dispatch({
             type: CART_ADD_ITEM_REQUEST,
         })
 
-        const { data } = await getClient().post(
-            `/api/cart/item/0/?product_id=${encodeURIComponent(id)}&qty=${qty}`,
-            {}
-        )
+        const { data } = await getClient().post(CART_ITEMS_PATH, payload)
 
         dispatch({
             type: CART_ADD_ITEM_SUCCESS,
@@ -54,7 +58,7 @@ export const removeFromCart = (id) => async (dispatch) => {
         })
 
         const { data } = await getClient().delete(
-            `/api/cart/item/${encodeURIComponent(id)}/`
+            CART_ITEM_PATH.replace("[id]", id)
         )
 
         dispatch({
@@ -78,7 +82,7 @@ export const getCart = () => async (dispatch) => {
             type: CART_GET_ALL_REQUEST,
         })
 
-        const { data } = await getClient().get(`/api/cart/`)
+        const { data } = await getClient().get(CART_ITEMS_PATH)
 
         dispatch({
             type: CART_GET_ALL_SUCCESS,
@@ -96,7 +100,7 @@ export const getCart = () => async (dispatch) => {
 }
 
 export const clearCart = () => async (dispatch) => {
-    const { data } = await getClient().delete(`/api/cart/`)
+    const { data } = await getClient().delete(CART_ITEMS_CLEAR_PATH)
 
     dispatch({
         type: CART_CLEAR_ITEMS,
