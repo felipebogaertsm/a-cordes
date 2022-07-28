@@ -1,0 +1,7 @@
+backend:
+  image: felipebogaertsm/a_cordes_backend:latest
+frontend:
+  image: felipebogaertsm/a_cordes_frontend:latest
+  nodeEnv: production
+
+domain: acordes.shop

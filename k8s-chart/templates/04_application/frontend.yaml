@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: a-cordes-frontend
-          image: felipebogaertsm/a_cordes_frontend:latest
+          image: {{ .Values.frontend.image }}
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -28,7 +28,7 @@ spec:
             - name: SERVER_BACKEND_URL
               value: http://a-cordes-backend:8000
             - name: CLIENT_BACKEND_URL
-              value: https://acordes.shop
+              value: https://{{ .Values.domain }}
       dnsPolicy: ClusterFirst
 ---
 apiVersion: v1

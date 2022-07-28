@@ -14,10 +14,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - "acordes.shop"
+      - {{ .Values.domain }}
       secretName: "a-cordes-tls"
   rules:
-    - host: acordes.shop
+    - host: {{ .Values.domain }}
       http:
         paths:
           - pathType: "Prefix"

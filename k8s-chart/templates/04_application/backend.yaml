@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: a-cordes-backend
-          image: felipebogaertsm/a_cordes_backend:latest
+          image: {{ .Values.backend.image }}
           imagePullPolicy: Always
           envFrom:
             - secretRef:
