@@ -75,6 +75,6 @@ jobs:
         ./get_helm.sh
     - name: Upgrade chart
       run: |
-        helm upgrade --install -f ./k8s-chart/values.yaml \
+        helm upgrade --install -f ./k8s-chart/values.yaml -n a-cordes \
           --set backend.image="${{ env.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${{ env.TAG }}",frontend.image="${{ env.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${{ env.TAG }}" \
           --atomic a-cordes-k8s ./k8s-chart
