@@ -8,7 +8,7 @@ import pytest
 
 from django.urls import reverse
 
-from .conftest import USER_PASSWORD
+from .conftest import USER_PASSWORD, USER_EMAIL
 from apps.accounts.models import User
 
 
@@ -20,6 +20,27 @@ def test_user_login_fail(client):
     )
 
     assert int(response.status_code / 100) != 2  # not in 200 range
+
+
+@pytest.mark.django_db
+def test_user_creation(client):
+    response = client.post(
+        reverse("users-list"),
+        {
+            "email": USER_EMAIL,
+            "password1": USER_PASSWORD,
+            "password2": USER_PASSWORD,
+        },
+    )
+
+    assert response.status_code == 201
+
+    # Verify that the user was created:
+    new_user_query = User.objects.filter(_id=response.data["_id"])
+    assert new_user_query.exists()
+    new_user = new_user_query.first()
+    assert new_user.email == USER_EMAIL
+    assert new_user.check_password(USER_PASSWORD)
 
 
 @pytest.mark.django_db

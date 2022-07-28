@@ -12,10 +12,10 @@ export default function NavbarItem(props) {
             <Link href={props.to}>
                 <div
                     className="
-                    bg-opacity-0 cursor-pointer bg-stone-200
-                    hover:bg-opacity-10 uppercase tracking-wider
-                    font-light px-5 py-3 rounded-none hover:rounded-2xl
-                    transition-all duration-100 ease-out
+                        bg-opacity-0 cursor-pointer bg-stone-200
+                        hover:bg-opacity-10 uppercase tracking-wider
+                        font-light px-5 py-3 rounded-none hover:rounded-2xl
+                        transition-all duration-100 ease-out bg-translate-y-2
                 "
                     onClick={props.onClick}
                 >

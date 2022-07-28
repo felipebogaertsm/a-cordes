@@ -8,13 +8,9 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    def create_user(
-        self,
-        email,
-        password,
-    ):
-
+    def create_user(self, email, password, is_admin=False):
         user = self.model(email=self.normalize_email(email))
+        user.is_admin = is_admin
         user.set_password(password)
         user.save(using=self._db)
 

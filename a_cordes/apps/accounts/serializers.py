@@ -5,6 +5,7 @@
 # Contact me at me@felipebm.com
 
 from rest_framework.serializers import (
+    BooleanField,
     CharField,
     DateTimeField,
     ModelSerializer,
@@ -51,9 +52,11 @@ class SellerProfileSerializer(ModelSerializer):
 
 
 class UserSerializer(ModelSerializer):
-    password = CharField(write_only=True, source="password1", required=False)
+    is_active = BooleanField(read_only=True, required=False)
+    is_staff = BooleanField(read_only=True, required=False)
 
     # Only used when creationg a new user:
+    password = CharField(write_only=True, source="password1", required=False)
     password1 = CharField(write_only=True, required=False)
     password2 = CharField(write_only=True, required=False)
 
@@ -62,6 +65,7 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
+        depth = 1
 
     def validate(self, attrs):
         validated_attrs = super().validate(attrs)
@@ -77,6 +81,9 @@ class UserSerializer(ModelSerializer):
             pass
 
         return validated_attrs
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
 
 
 class UserSerializerWithToken(UserSerializer):
