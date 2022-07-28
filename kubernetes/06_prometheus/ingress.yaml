@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
     - hosts:
-      - monitoring.{{ .Values.domain }}
+      - "monitoring.acordes.shop"
       secretName: "a-cordes-monitoring-tls"
   rules:
-    - host: monitoring.{{ .Values.domain }}
+    - host: monitoring.acordes.shop
       http:
         paths:
           - pathType: "Prefix"

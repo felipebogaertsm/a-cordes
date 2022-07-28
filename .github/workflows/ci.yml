@@ -57,8 +57,8 @@ jobs:
         cd a_cordes
         python3 -m pytest
 
-  deploy:
-    name: Deployment using Helm chart
+  deploy-manifests:
+    name: Deploy manifests
     runs-on: ubuntu-latest
     container: bitnami/kubectl:latest
     steps:
@@ -67,14 +67,51 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ env.KUBECONFIG }}
-    - name: Install helm
+    - name: Deployment
       run: |
-        apt-get install curl
-        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-        chmod 700 get_helm.sh
-        ./get_helm.sh
-    - name: Upgrade chart
+        kubectl apply -f ./kubernetes/ --recursive
+        
+  deploy-backend:
+    name: Deploy backend
+    runs-on: ubuntu-latest
+    needs:
+      - test
+      - build-backend
+    container: bitnami/kubectl:latest
+    env:
+      NAMESPACE: a-cordes
+      IMAGE_NAME: a_cordes_backend
+      DEPLOYMENT_NAME: a-cordes-backend
+      CONTAINER_NAME: a-cordes-backend
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
+    - name: Deployment
       run: |
-        helm upgrade --install -f ./k8s-chart/values.yaml \
-          --set backend.image="${{ env.DOCKER_USER }}/${BACKEND_IMAGE_NAME}:${{ env.TAG }}",frontend.image="${{ env.DOCKER_USER }}/${FRONTEND_IMAGE_NAME}:${{ env.TAG }}" \
-          --atomic a-cordes-k8s ./k8s-chart
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:${{ env.TAG }}"
+        
+  deploy-frontend: 
+    name: Deploy frontend
+    runs-on: ubuntu-latest
+    needs: 
+      - test
+      - build-frontend
+    container: bitnami/kubectl:latest
+    env:
+      NAMESPACE: a-cordes
+      IMAGE_NAME: a_cordes_frontend
+      DEPLOYMENT_NAME: a-cordes-frontend
+      CONTAINER_NAME: a-cordes-frontend
+    steps:
+    - uses: actions/checkout@v3
+    - uses: azure/k8s-set-context@v2
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ env.KUBECONFIG }}
+    - name: Deployment
+      run: |
+        kubectl -n ${NAMESPACE} set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}="${{ env.DOCKER_USER }}/${IMAGE_NAME}:${{ env.TAG }}"
+        
