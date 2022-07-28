@@ -160,7 +160,7 @@ export default function ProductId() {
                                                 !product.data.count_in_stock
                                             }
                                             onClick={(e) => addToCartHandler(e)}
-                                            className="button button-primary"
+                                            primary
                                         >
                                             Add to cart
                                         </Button>
@@ -168,7 +168,7 @@ export default function ProductId() {
                                             onClick={(e) =>
                                                 router.push("/cart")
                                             }
-                                            className="button button-secondary"
+                                            secondary
                                         >
                                             Go to cart
                                         </Button>

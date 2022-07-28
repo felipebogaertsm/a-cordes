@@ -62,7 +62,7 @@ export default function BecomeSeller() {
                             </Message>
                             <div className="mt-6">
                                 <Button
-                                    className="button button-primary"
+                                    primary
                                     onClick={() =>
                                         router.push(LOGIN_PAGE_ROUTE)
                                     }
@@ -112,9 +112,7 @@ export default function BecomeSeller() {
                             />
 
                             <div className="pt-2">
-                                <Button className="button button-primary">
-                                    Request approval
-                                </Button>
+                                <Button primary>Request approval</Button>
                             </div>
                         </FormContainer>
                     )}

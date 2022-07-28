@@ -98,10 +98,7 @@ export default function OrderPage() {
                     <h1>Order</h1>
                     <div className="grow"></div>
                     <div className="w-max my-auto flex justify-center">
-                        <Button
-                            onClick={(e) => orderItemsHandler(e)}
-                            className="button button-primary"
-                        >
+                        <Button onClick={(e) => orderItemsHandler(e)} primary>
                             Confirm order
                         </Button>
                     </div>
@@ -135,7 +132,7 @@ export default function OrderPage() {
                                         </p>
                                         <Button
                                             onClick={(e) => router.push("/")}
-                                            className="button button-primary"
+                                            primary
                                         >
                                             Continue shopping
                                         </Button>

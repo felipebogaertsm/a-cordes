@@ -98,7 +98,7 @@ export default function SignUp() {
                     </div>
 
                     <div className="pt-2">
-                        <Button className="button button-primary">
+                        <Button primary>
                             <div className="flex flex-row space-x-2">
                                 <p>Sign up</p>
                                 {registerUser.loading && (

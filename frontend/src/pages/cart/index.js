@@ -56,17 +56,14 @@ export default function Cart() {
                         <div className="grow"></div>
                         <div className="w-max my-auto mr-2 flex justify-center">
                             <Button
-                                className="button button-secondary"
+                                secondary
                                 onClick={(e) => clearCartHandler(e)}
                             >
                                 Clear cart
                             </Button>
                         </div>
                         <div className="w-max my-auto flex justify-center">
-                            <Button
-                                onClick={(e) => checkoutHandler(e)}
-                                className="button button-primary"
-                            >
+                            <Button onClick={(e) => checkoutHandler(e)} primary>
                                 Go to Checkout
                             </Button>
                         </div>
@@ -95,7 +92,7 @@ export default function Cart() {
                                     </p>
                                     <Button
                                         onClick={() => router.push("/")}
-                                        className="button button-primary"
+                                        primary
                                     >
                                         Continue shopping
                                     </Button>

@@ -36,7 +36,7 @@ export default function PrivatePage({ children, ...props }) {
                         <div></div>
                         <div className="w-min">
                             <Button
-                                className="button button-primary"
+                                primary
                                 onClick={(e) => router.push(LOGIN_PATH)}
                             >
                                 Login

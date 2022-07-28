@@ -4,6 +4,9 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at me@felipebm.com
 
+// Styles:
+import styles from "./Button.module.css"
+
 export default function Button({
     children,
     primary = false,
@@ -12,12 +15,17 @@ export default function Button({
     disabled = false,
     ...props
 }) {
-    if (!(primary || secondary || tertiary)) {
-        primary = true
-    }
-
     return (
-        <button {...props}>
+        <button
+            {...props}
+            className={[
+                styles.button,
+                primary && styles.buttonPrimary,
+                secondary && styles.buttonSecondary,
+                tertiary && styles.buttonTertiary,
+                disabled && styles.disabled,
+            ].join(" ")}
+        >
             <div className="w-full h-full my-auto grid place-items-center">
                 {children}
             </div>

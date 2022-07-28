@@ -1,0 +1,31 @@
+@tailwind components;
+
+@layer components {
+    .button {
+        @apply mx-auto w-full py-3 overflow-hidden rounded-md my-auto flex 
+               tracking-wider border-transparent border-2 transition-all 
+               duration-200 px-6 text-center font-semibold relative;
+    }
+
+    .buttonPrimary {
+        @apply bg-dark text-light uppercase content-center hover:bg-light 
+               hover:text-dark hover:border-2 hover:border-dark;
+    }
+
+    .buttonSecondary {
+        @apply border-2 border-darkred bg-stone-100 hover:brightness-[105%] 
+               uppercase content-center;
+    }
+
+    .buttonTertiary {
+        @apply hover:underline text-amber-900;
+    }
+
+    .buttonTertiary.disabled {
+        @apply opacity-60 cursor-default hover:no-underline;
+    }
+
+    .disabled {
+        @apply active:border-stone-800;
+    }
+}

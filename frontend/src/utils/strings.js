@@ -10,3 +10,10 @@ export function truncateString(string, maxLength) {
     }
     return string
 }
+
+export function capitalizeString(string) {
+    const arr = string.split(" ")
+    return arr
+        .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+        .join(" ")
+}

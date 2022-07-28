@@ -69,28 +69,21 @@ export default function Login() {
                         <div className="mx-auto">
                             <Button
                                 type="button"
-                                className="button button-tertiary"
+                                tertiary
                                 onClick={() => router.push("/auth/signup")}
                             >
                                 Don't have an account yet? Sign up
                             </Button>
                         </div>
                         <div className="mx-auto">
-                            <Button
-                                type="button"
-                                className={
-                                    "button button-tertiary" + disabled
-                                        ? " disabled"
-                                        : ""
-                                }
-                            >
+                            <Button type="button" disabled={true}>
                                 Forgot your password? (coming soon)
                             </Button>
                         </div>
                     </div>
 
                     <div className="pt-2">
-                        <Button className="button button-primary">
+                        <Button primary>
                             <div className="flex flex-row space-x-2">
                                 <p>Log in</p>
                                 {loading && (

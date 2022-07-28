@@ -152,7 +152,7 @@ export default function ShippingAddressForm({ defaultChecked, onCheck }) {
 
             <div className="pt-4">
                 <Button
-                    className="button button-secondary"
+                    secondary
                     onClick={(e) => {
                         e.preventDefault()
                         dispatch(createShippingAddress(user._id))
