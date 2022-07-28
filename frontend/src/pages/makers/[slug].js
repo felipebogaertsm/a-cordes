@@ -50,42 +50,52 @@ export default function MakerId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="px-6 py-2 flex flex-col gap-10">
                 {seller.loading && <Loader />}
                 {seller.data && (
-                    <div>
-                        <Heading>
+                    <>
+                        <Heading className="item-stretch">
                             <h1>{seller.data.name}</h1>
                         </Heading>
-
-                        <div className="mt-12 px-6 w-full flex flex-col space-y-2">
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3">
-                                <div className="mt-8">
-                                    <h6>Description</h6>
-                                    <p>{seller.data.description}</p>
-                                </div>
-                                <div className="mt-8">
-                                    <h6>Location</h6>
-                                    <p>
-                                        {seller.data.city},{" "}
-                                        {seller.data.country}
-                                    </p>
-                                </div>
-                                <div className="mt-8">
-                                    <h6>Recent reviews</h6>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                            <div>
+                                {seller.data.picture && (
+                                    <img
+                                        className="aspect-square object-cover rounded-3xl"
+                                        src={seller.data.picture}
+                                    ></img>
+                                )}
+                            </div>
+                            <div>
+                                <div className="flex flex-col gap-6">
+                                    <div>
+                                        <h6>Description</h6>
+                                        <p>{seller.data.description}</p>
+                                    </div>
+                                    <div>
+                                        <h6>Location</h6>
+                                        <p>
+                                            {seller.data.city},{" "}
+                                            {seller.data.country}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h6>Recent reviews</h6>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )}
 
-                <h2 className="mt-20 mb-6 ml-6">Products</h2>
-
-                {products.data && (
-                    <div>
-                        <GriddedProductListing products={products.data} />
-                    </div>
-                )}
+                <div>
+                    <h2 className="mb-6">Products</h2>
+                    {products.data && (
+                        <div>
+                            <GriddedProductListing products={products.data} />
+                        </div>
+                    )}
+                </div>
             </div>
         </NavbarPage>
     )
