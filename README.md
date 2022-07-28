@@ -5,6 +5,12 @@
 
 The site is available at **[acordes.shop](http://acordes.shop)**.
 
+### Kubernetes setup
+
+```
+kubectl create secret generic -n a-cordes a-cordes-secrets --from-env-file=.envs/.env_prod
+```
+
 ### Tech stack
 
 #### Front and back end
