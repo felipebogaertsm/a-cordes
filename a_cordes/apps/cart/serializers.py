@@ -6,18 +6,26 @@
 
 from rest_framework import serializers
 
+from apps.accounts.models import User
 from apps.cart.models import CartItem
+from apps.products.models import Product
 
 
 class CartItemSerializer(serializers.ModelSerializer):
+    product = serializers.CharField()
+    user = serializers.CharField()
+
     class Meta:
         model = CartItem
         fields = "__all__"
         depth = 2
 
     def create(self, validated_data):
+        user = User.objects.get(_id=validated_data["user"])
+        product = Product.objects.get(_id=validated_data["product"])
+
         return CartItem.objects.create_item(
-            user=validated_data["user"],
-            product=validated_data["product"],
+            user=user,
+            product=product,
             quantity=validated_data["quantity"],
         )

@@ -22,11 +22,7 @@ class CartItemsAPI(ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-
-        if user.is_admin:
-            return CartItem.objects.all()
-        else:
-            return CartItem.objects.filter(user=user)
+        return CartItem.objects.filter(user=user)
 
     @action(methods=("DELETE",), detail=False, url_name="clear")
     def clear(self, request):
