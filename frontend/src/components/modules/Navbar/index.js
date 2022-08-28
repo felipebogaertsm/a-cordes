@@ -40,6 +40,8 @@ export default function Navbar() {
                     </div>
 
                     <div className="flex md:flex-row flex-col mx-auto col-span-6 gap-2">
+                        <NavbarItem to="/">Home</NavbarItem>
+
                         <NavbarItem to="/makers">Makers</NavbarItem>
 
                         <NavbarItem to="/makers">Bows</NavbarItem>
