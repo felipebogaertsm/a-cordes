@@ -30,8 +30,8 @@ export default function Navbar() {
                         <Link href="/">
                             <h3
                                 className="
-                                    lowercase text-primary cursor-pointer brightness-150
-                                    w-min transition-all duration-200 hue-rotate-180 invert
+                                    lowercase text-light cursor-pointer w-min 
+                                    transition-all duration-200
                                 "
                             >
                                 à cordes
