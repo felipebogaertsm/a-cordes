@@ -94,10 +94,12 @@ export default function ProductId() {
                                     />
                                 </div>
                                 <div className="flex flex-col mt-10">
-                                    <div className="my-2">
-                                        <h5>Description</h5>
-                                        <p>{product.data.description}</p>
-                                    </div>
+                                    {product.data.description && (
+                                        <div className="my-2">
+                                            <h5>Description</h5>
+                                            <p>{product.data.description}</p>
+                                        </div>
+                                    )}
                                     <div className="my-2">
                                         <h5>Category</h5>
                                         <p>{product.data.category}</p>
@@ -115,14 +117,6 @@ export default function ProductId() {
                                         <p>
                                             {product.data.seller.city},{" "}
                                             {product.data.seller.country}
-                                        </p>
-                                    </div>
-                                    <div className="my-2">
-                                        <h5>Created at</h5>
-                                        <p>
-                                            {stringToDate(
-                                                product.data.created_at
-                                            )}
                                         </p>
                                     </div>
                                 </div>
