@@ -16,7 +16,7 @@ export default function NavbarItem(props) {
                 <div
                     className="
                         bg-transparent cursor-pointer uppercase tracking-wider
-                        font-light px-5 py-3 rounded-none hover:rounded-2xl
+                        font-light py-3 rounded-none hover:rounded-2xl
                         transition-all duration-100 ease-out bg-translate-y-2
                 "
                     onClick={props.onClick}

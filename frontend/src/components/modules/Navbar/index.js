@@ -24,42 +24,40 @@ export default function Navbar() {
                     no-scrollbar w-full
                 "
             >
-                <div className="flex md:flex-row flex-col h-full">
-                    <NavbarItem to="/">
-                        <div className="flex flex-row justify-end">
-                            <h3 className="lowercase textlight font-semibold">
-                                à
-                            </h3>
-                        </div>
-                    </NavbarItem>
-
-                    <div className="grow"></div>
-
-                    <NavbarItem to="/makers">Makers</NavbarItem>
-
-                    <NavbarItem to="/makers">Bows</NavbarItem>
-
-                    <NavbarItem to="/makers">Instruments</NavbarItem>
-
-                    <NavbarItem to="/makers">Accessories</NavbarItem>
-
-                    {user && user !== {} && (
-                        <>
-                            <NavbarItem to="/cart">Cart</NavbarItem>
-
-                            <NavbarUserDropdown />
-                        </>
-                    )}
-
-                    <div className="grow"></div>
-
-                    {!user && (
-                        <NavbarItem to="/auth/login">
-                            <div className="flex flex-row space-x-2">
-                                <p className="my-auto">Login</p>
+                <div className="h-full grid grid-cols-8 md:grid-flow-col grid-flow-row">
+                    {/* <div className="flex md:flex-row flex-col h-full"> */}
+                    <div>
+                        <NavbarItem to="/">
+                            <div className="flex flex-row justify-end">
+                                <h3 className="lowercase textlight font-semibold">
+                                    à
+                                </h3>
                             </div>
                         </NavbarItem>
-                    )}
+                    </div>
+
+                    <div className="flex md:flex-row flex-col mx-auto col-span-6 gap-1">
+                        <NavbarItem to="/makers">Makers</NavbarItem>
+
+                        <NavbarItem to="/makers">Bows</NavbarItem>
+
+                        <NavbarItem to="/makers">Instruments</NavbarItem>
+
+                        <NavbarItem to="/makers">Accessories</NavbarItem>
+                    </div>
+
+                    <div className="flex md:flex-row flex-col ml-auto">
+                        {user && user !== {} && (
+                            <>
+                                <NavbarItem to="/cart">Cart</NavbarItem>
+                                <NavbarUserDropdown />
+                            </>
+                        )}
+
+                        {!user && (
+                            <NavbarItem to="/auth/login">Login</NavbarItem>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
