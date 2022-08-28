@@ -24,63 +24,38 @@ export default function Navbar() {
                     no-scrollbar w-full
                 "
             >
-                <div
-                    className="
-                    flex md:flex-row flex-col h-full py-3
-                "
-                >
+                <div className="flex md:flex-row flex-col h-full">
                     <NavbarItem to="/">
                         <div className="flex flex-row justify-end">
                             <h3 className="lowercase textlight font-semibold">
-                                à cordes
+                                à
                             </h3>
-                            <p className="pl-3 lowercase mt-auto tracking-wider">
-                                fine instruments shop
-                            </p>
                         </div>
                     </NavbarItem>
 
                     <div className="grow"></div>
 
-                    <NavbarItem to="/makers">
-                        <div className="flex flex-row space-x-2">
-                            <img
-                                src="/icons/violin.svg"
-                                className="
-                                invert h-4 my-auto
-                            "
-                            ></img>
-                            <p className="my-auto">Makers</p>
-                        </div>
-                    </NavbarItem>
+                    <NavbarItem to="/makers">Makers</NavbarItem>
+
+                    <NavbarItem to="/makers">Bows</NavbarItem>
+
+                    <NavbarItem to="/makers">Instruments</NavbarItem>
+
+                    <NavbarItem to="/makers">Accessories</NavbarItem>
 
                     {user && user !== {} && (
                         <>
-                            <NavbarItem to="/cart">
-                                <div className="flex flex-row space-x-2">
-                                    <img
-                                        src="/icons/cart.svg"
-                                        className="
-                                            invert h-6 my-auto
-                                        "
-                                    ></img>
-                                    <p className="my-auto">Cart</p>
-                                </div>
-                            </NavbarItem>
+                            <NavbarItem to="/cart">Cart</NavbarItem>
 
                             <NavbarUserDropdown />
                         </>
                     )}
 
+                    <div className="grow"></div>
+
                     {!user && (
                         <NavbarItem to="/auth/login">
                             <div className="flex flex-row space-x-2">
-                                <img
-                                    src="/icons/user.svg"
-                                    className="
-                                        invert opacity-80 h-4 my-auto
-                                    "
-                                ></img>
                                 <p className="my-auto">Login</p>
                             </div>
                         </NavbarItem>

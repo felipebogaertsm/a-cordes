@@ -1,0 +1,27 @@
+@tailwind components;
+
+@layer components {
+    .content {
+        @apply hover:text-white transition-all duration-100 hover:font-medium p-2;
+
+        display: inline-block;
+        position: relative;
+    }
+
+    .content:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        transform: scaleX(0);
+        transition: transform 300ms ease-out;
+    }
+
+    .content:hover:after {
+        transform: scaleX(1);
+    }
+}

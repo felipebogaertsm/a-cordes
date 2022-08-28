@@ -6,20 +6,22 @@
 
 import Link from "next/link"
 
+// Styles:
+import styles from "./NavbarItem.module.css"
+
 export default function NavbarItem(props) {
     return (
         <div className="my-auto" {...props}>
             <Link href={props.to}>
                 <div
                     className="
-                        bg-opacity-0 cursor-pointer bg-stone-200
-                        hover:bg-opacity-10 uppercase tracking-wider
+                        bg-transparent cursor-pointer uppercase tracking-wider
                         font-light px-5 py-3 rounded-none hover:rounded-2xl
                         transition-all duration-100 ease-out bg-translate-y-2
                 "
                     onClick={props.onClick}
                 >
-                    <div className="">{props.children}</div>
+                    <p className={styles.content}>{props.children}</p>
                 </div>
             </Link>
         </div>
