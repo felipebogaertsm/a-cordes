@@ -5,6 +5,7 @@
 // Contact me at me@felipebm.com
 
 import { useContext } from "react"
+import Link from "next/link"
 
 // Components:
 import { NavbarItem, NavbarUserDropdown } from ".."
@@ -24,19 +25,21 @@ export default function Navbar() {
                     no-scrollbar w-full
                 "
             >
-                <div className="h-full grid grid-cols-8 md:grid-flow-col grid-flow-row">
-                    {/* <div className="flex md:flex-row flex-col h-full"> */}
-                    <div>
-                        <NavbarItem to="/">
-                            <div className="flex flex-row justify-end">
-                                <h3 className="lowercase textlight font-semibold">
-                                    à
-                                </h3>
-                            </div>
-                        </NavbarItem>
+                <div className="h-full grid grid-cols-8 md:grid-flow-col grid-flow-row py-2">
+                    <div className="my-auto">
+                        <Link href="/">
+                            <h3
+                                className="
+                                    lowercase text-primary cursor-pointer brightness-150
+                                    w-min transition-all duration-200 hue-rotate-180 invert
+                                "
+                            >
+                                à cordes
+                            </h3>
+                        </Link>
                     </div>
 
-                    <div className="flex md:flex-row flex-col mx-auto col-span-6 gap-1">
+                    <div className="flex md:flex-row flex-col mx-auto col-span-6 gap-2">
                         <NavbarItem to="/makers">Makers</NavbarItem>
 
                         <NavbarItem to="/makers">Bows</NavbarItem>
@@ -46,7 +49,7 @@ export default function Navbar() {
                         <NavbarItem to="/makers">Accessories</NavbarItem>
                     </div>
 
-                    <div className="flex md:flex-row flex-col ml-auto">
+                    <div className="flex md:flex-row flex-col ml-auto gap-2">
                         {user && user !== {} && (
                             <>
                                 <NavbarItem to="/cart">Cart</NavbarItem>

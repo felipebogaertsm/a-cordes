@@ -13,7 +13,7 @@
     }
 
     .buttonSecondary {
-        @apply border-2 border-darkred bg-stone-100 hover:brightness-[105%] 
+        @apply border-2 border-primary bg-stone-100 hover:brightness-[105%] 
                uppercase content-center;
     }
 

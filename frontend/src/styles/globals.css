@@ -49,7 +49,7 @@
     }
 
     a {
-        @apply text-amber-900 font-semibold hover:underline;
+        @apply text-primary font-semibold hover:underline;
     }
 }
 
