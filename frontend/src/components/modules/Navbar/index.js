@@ -30,11 +30,11 @@ export default function Navbar() {
                 "
                 >
                     <NavbarItem to="/">
-                        <div className="flex flex-row">
+                        <div className="flex flex-row justify-end">
                             <h3 className="lowercase textlight font-semibold">
                                 à cordes
                             </h3>
-                            <p className="pl-3 lowercase mt-auto font-serif tracking-widest mb-1">
+                            <p className="pl-3 lowercase mt-auto tracking-wider">
                                 fine instruments shop
                             </p>
                         </div>

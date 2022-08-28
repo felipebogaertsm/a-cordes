@@ -4,8 +4,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Raleway", "sans"],
-                serif: ["Playfair Display", "serif"],
+                sans: ["Lato", "sans"],
             },
             colors: {
                 red: "#F05454",

@@ -21,11 +21,11 @@
     h4,
     h5,
     h6 {
-        @apply select-none uppercase tracking-wider font-semibold;
+        @apply select-none uppercase tracking-wider font-light;
     }
 
     h1 {
-        @apply text-6xl text-black font-serif;
+        @apply text-6xl text-black;
     }
 
     h2 {
