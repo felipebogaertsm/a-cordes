@@ -13,7 +13,7 @@ from apps.products.serializers import ProductSerializer
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
+    product = serializers.CharField()
     user = serializers.CharField()
 
     class Meta:
@@ -30,3 +30,8 @@ class CartItemSerializer(serializers.ModelSerializer):
             product=product,
             quantity=validated_data["quantity"],
         )
+
+    def to_representation(self, instance):
+        repr = super().to_representation(instance)
+        repr["product"] = ProductSerializer(instance.product).data
+        return repr
