@@ -65,6 +65,7 @@ jobs:
     name: Deploy manifests
     runs-on: ubuntu-latest
     container: bitnami/kubectl:latest
+    environment: manual
     steps:
     - uses: actions/checkout@v3
     - uses: azure/k8s-set-context@v2
