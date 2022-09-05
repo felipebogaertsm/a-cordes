@@ -57,15 +57,13 @@ export default function MakerId() {
                         <Heading className="item-stretch">
                             <h1>{seller.data.name}</h1>
                         </Heading>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                            <div>
-                                {seller.data.picture && (
-                                    <img
-                                        className="aspect-square object-cover rounded-3xl"
-                                        src={seller.data.picture}
-                                    ></img>
-                                )}
-                            </div>
+                        <div className="flex flex-col md:flex-row gap-10 justify-center content-center align-center">
+                            {seller.data.picture && (
+                                <img
+                                    className="aspect-square object-cover rounded-md w-96 mx-auto"
+                                    src={seller.data.picture}
+                                ></img>
+                            )}
                             <div>
                                 <div className="flex flex-col gap-6">
                                     <div>

@@ -14,7 +14,7 @@ export default function MakerItem({ maker }) {
                 {maker.picture && (
                     <img
                         src={`${MEDIA_URL}${maker.picture}`}
-                        className="h-20 aspect-square object-cover"
+                        className="h-20 aspect-square object-cover rounded-full"
                     />
                 )}
                 <div className="my-auto">
