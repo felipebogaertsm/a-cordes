@@ -9,10 +9,11 @@ from rest_framework import serializers
 from apps.accounts.models import User
 from apps.cart.models import CartItem
 from apps.products.models import Product
+from apps.products.serializers import ProductSerializer
 
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product = serializers.CharField()
+    product = ProductSerializer()
     user = serializers.CharField()
 
     class Meta:
