@@ -20,16 +20,18 @@ export default function ProductListing({ items, removeHandler, ...props }) {
         <div className="flex flex-col space-y-4">
             {items.map((item, index) => (
                 <ListItem key={index} number={index + 1}>
-                    <div className="flex md:flex-row flex-col space-x-4">
+                    <div
+                        className="flex md:flex-row flex-col space-x-4 cursor-pointer"
+                        onClick={(e) =>
+                            router.push(`/products/${item.product.slug}`)
+                        }
+                    >
                         <img
                             className="
                                 aspect-[4/3] object-cover md:h-12 md:w-min
-                                rounded-md shadow-xl my-auto cursor-pointer
+                                rounded-md shadow-xl my-auto
                             "
                             src={`${MEDIA_URL}${item.product.images[0].src}`}
-                            onClick={(e) =>
-                                router.push(`/products/${item.product.slug}`)
-                            }
                         ></img>
                         <div className="my-auto">
                             <h5 className="my-auto">{item.product.name}</h5>
