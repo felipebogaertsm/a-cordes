@@ -12,6 +12,27 @@ from django.template.defaultfilters import slugify
 from apps.accounts.models import SellerProfile, User
 
 
+class Category(models.Model):
+    _id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True, primary_key=True
+    )
+    slug = models.SlugField(max_length=50, unique=True, blank=True)
+
+    name = models.CharField(max_length=50, unique=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
+    class Meta:
+        ordering = ("name",)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
+
+
 class Product(models.Model):
     _id = models.UUIDField(
         default=uuid.uuid4, editable=False, unique=True, primary_key=True
@@ -22,14 +43,16 @@ class Product(models.Model):
 
     name = models.CharField(max_length=255, blank=True, default="")
     description = models.TextField(max_length=10000, blank=True, default="")
-    category = models.CharField(max_length=255, blank=True, default="")
+
+    category = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, null=True
+    )
 
     price = models.DecimalField(
         max_digits=7, decimal_places=2, blank=True, default=0.00
     )
     count_in_stock = models.PositiveIntegerField(blank=True, default=0)
     rating = models.FloatField(blank=True, null=True)
-    review_count = models.PositiveIntegerField(blank=True, default=0)
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
 
