@@ -1,0 +1,34 @@
+// -*- coding: utf-8 -*-
+// Licensed as the GNU General Public License as published by the Free Software
+// Foundation, version 3.
+// Author: Felipe Bogaerts de Mattos
+// Contact me at me@felipebm.com
+
+import Link from "next/link"
+
+// Components:
+import { Heading } from "../../../components/elements"
+import { NavbarPage } from "../../../components/layouts"
+
+export default function ProductId() {
+    return (
+        <NavbarPage>
+            <div className="px-6 py-2">
+                <Heading>
+                    <h1>
+                        <Link href="/">
+                            <span className="text-zinc-600 hover:text-primary">
+                                Products
+                            </span>
+                        </Link>{" "}
+                        | <span className="font-bold">Accessories</span>
+                    </h1>
+                </Heading>
+
+                <div className="my-20 text-center font-bold text-3xl">
+                    Coming soon!
+                </div>
+            </div>
+        </NavbarPage>
+    )
+}

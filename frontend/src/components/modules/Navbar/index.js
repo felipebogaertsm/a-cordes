@@ -62,8 +62,12 @@ export default function Navbar() {
                             <NavbarItem to="/products/categories/bows">
                                 Bows
                             </NavbarItem>
-                            <NavbarItem to="/makers">Instruments</NavbarItem>
-                            <NavbarItem to="/makers">Accessories</NavbarItem>
+                            <NavbarItem to="/products/categories/instruments">
+                                Instruments
+                            </NavbarItem>
+                            <NavbarItem to="/products/categories/accessories">
+                                Accessories
+                            </NavbarItem>
                         </div>
                     </div>
 
