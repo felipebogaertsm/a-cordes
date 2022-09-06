@@ -1,5 +1,6 @@
 import Accordion from "./Accordion"
 import Button from "./Button"
+import ButtonIcon1 from "./ButtonIcon/ButtonIcon1"
 import ButtonIconBg from "./ButtonIconBg"
 import Card from "./Card"
 import FormCheckbox from "./FormCheckbox"
@@ -13,6 +14,7 @@ import SubHeading from "./SubHeading"
 export {
     Accordion,
     Button,
+    ButtonIcon1,
     ButtonIconBg,
     Card,
     FormCheckbox,

@@ -4,7 +4,7 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at me@felipebm.com
 
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import Link from "next/link"
 
 // Components:
@@ -12,8 +12,14 @@ import { NavbarItem, NavbarUserDropdown } from ".."
 
 // Contexts:
 import { AuthContext } from "../../../contexts/auth"
+import { ButtonIcon1 } from "../../elements"
+
+// Styles:
+import styles from "./Navbar.module.css"
 
 export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false)
+
     const { user } = useContext(AuthContext)
 
     return (
@@ -21,11 +27,10 @@ export default function Navbar() {
             <div
                 className="
                     bg-dark text-light md:py-0 whitespace-nowrap
-                    px-2 md:px-4 border-b-2 border-light select-none
-                    no-scrollbar w-full
+                    px-2 md:px-4 select-none no-scrollbar w-full
                 "
             >
-                <div className="h-full grid grid-cols-8 md:grid-flow-col grid-flow-row py-2">
+                <div className="py-4 flex flex-row">
                     <div className="my-auto">
                         <Link href="/">
                             <h3
@@ -39,32 +44,60 @@ export default function Navbar() {
                         </Link>
                     </div>
 
-                    <div className="flex md:flex-row flex-col mx-auto col-span-6 gap-2">
-                        <NavbarItem to="/">Home</NavbarItem>
-
-                        <NavbarItem to="/makers">Makers</NavbarItem>
-
-                        <NavbarItem to="/makers">Bows</NavbarItem>
-
-                        <NavbarItem to="/makers">Instruments</NavbarItem>
-
-                        <NavbarItem to="/makers">Accessories</NavbarItem>
+                    <div
+                        className={`my-auto ml-auto transition-all duration-200 ease-out lg:hidden invert ${
+                            isOpen && "rotate-90"
+                        }`}
+                    >
+                        <ButtonIcon1
+                            src="/icons/menu-list.svg"
+                            onClick={(e) => setIsOpen(!isOpen)}
+                        />
                     </div>
 
-                    <div className="flex md:flex-row flex-col ml-auto gap-2">
-                        {user && user !== {} && (
-                            <>
-                                <NavbarItem to="/cart">Cart</NavbarItem>
-                                <NavbarUserDropdown />
-                            </>
-                        )}
+                    <div className="hidden lg:inline mx-auto">
+                        <div className="flex md:flex-row flex-col col-span-6 gap-2">
+                            <NavbarItem to="/">Home</NavbarItem>
+                            <NavbarItem to="/makers">Makers</NavbarItem>
+                            <NavbarItem to="/makers">Bows</NavbarItem>
+                            <NavbarItem to="/makers">Instruments</NavbarItem>
+                            <NavbarItem to="/makers">Accessories</NavbarItem>
+                        </div>
+                    </div>
 
-                        {!user && (
-                            <NavbarItem to="/auth/login">Login</NavbarItem>
-                        )}
+                    <div className="hidden lg:inline">
+                        <div className="flex md:flex-row flex-col ml-auto gap-2">
+                            {user && user !== {} && (
+                                <>
+                                    <NavbarItem to="/cart">Cart</NavbarItem>
+                                    <NavbarUserDropdown />
+                                </>
+                            )}
+
+                            {!user && (
+                                <NavbarItem to="/auth/login">Login</NavbarItem>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
+
+            {isOpen && (
+                <div
+                    className={[
+                        styles.dropdownContainer,
+                        "lg:hidden bg-zinc-800 w-full",
+                    ].join(" ")}
+                >
+                    <div className="flex flex-col col-span-6 gap-2 text-white p-8">
+                        <NavbarItem to="/">Home</NavbarItem>
+                        <NavbarItem to="/makers">Makers</NavbarItem>
+                        <NavbarItem to="/makers">Bows</NavbarItem>
+                        <NavbarItem to="/makers">Instruments</NavbarItem>
+                        <NavbarItem to="/makers">Accessories</NavbarItem>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
