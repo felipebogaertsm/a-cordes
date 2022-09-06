@@ -93,7 +93,7 @@ export default function ProductId() {
                                         images={product.data.images}
                                     />
                                 </div>
-                                <div className="flex flex-col mt-10">
+                                <div className="flex flex-col">
                                     {product.data.description && (
                                         <div className="my-2">
                                             <h5>Description</h5>
@@ -120,7 +120,7 @@ export default function ProductId() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-8 mt-10">
+                                <div className="flex flex-col gap-8">
                                     <div>
                                         <h5>Price</h5>
                                         <h2>${Number(product.data.price)}</h2>

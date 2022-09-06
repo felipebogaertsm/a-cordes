@@ -6,7 +6,7 @@
 
 export default function Heading(props) {
     return (
-        <div className="py-6 px-4 flex lg:flex-row flex-col space-y-4 lg:space-y-0">
+        <div className="py-6 px-4 flex lg:flex-row flex-col">
             {props.children}
         </div>
     )

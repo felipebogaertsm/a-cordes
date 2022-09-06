@@ -19,7 +19,7 @@ export default function ImageCarroussel({ images }) {
             <div>
                 <img
                     className="
-                        aspect-[4/3] mt-10 object-cover
+                        aspect-[4/3] object-cover
                         w-full rounded-sm shadow-xl
                     "
                     src={`${MEDIA_URL}${image.src}`}
