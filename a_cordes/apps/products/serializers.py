@@ -32,6 +32,7 @@ class ProductSerializer(serializers.ModelSerializer):
     images = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
     seller = serializers.SerializerMethodField()
+    category = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
@@ -45,6 +46,9 @@ class ProductSerializer(serializers.ModelSerializer):
         images = ProductImage.objects.filter(product___id=obj._id)
         serializer = ProductImageSerializer(images, many=True)
         return serializer.data
+
+    def get_category(self, obj):
+        return obj.category.name
 
     def get_reviews(self, obj):
         reviews = obj.review_set.all()  # get all reviews
