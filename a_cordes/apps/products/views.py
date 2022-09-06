@@ -10,9 +10,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
+from apps.products.filters import ProductFilterSet
 from apps.products.models import Product, ProductImage, Review
 from apps.products.serializers import ProductSerializer, ReviewSerializer
-
 from utils.mixins.views import SearchableModelViewSet
 from utils.permissions import ReadOnly
 
@@ -24,7 +24,9 @@ class ProductViewSet(SearchableModelViewSet, ModelViewSet):
     lookup_field = "slug"
 
     permission_classes = (IsAdminUser | ReadOnly,)
-    filterset_fields = ("name", "seller_profile", "count_in_stock")
+
+    filterset_class = ProductFilterSet
+
     ordering = ("-count_in_stock", "-created_at")
 
     @action(detail=False, methods=["get"])
