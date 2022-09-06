@@ -16,5 +16,6 @@ class ProductFilterSet(FilterSet):
             "seller_profile": ["exact"],
             "count_in_stock": ["exact"],
             "name": ["icontains"],
+            "count_in_stock": ["gte", "lte"],
             "category__name": ["icontains", "in"],
         }

@@ -17,7 +17,6 @@ import { NavbarPage } from "../../components/layouts"
 import { ImageCarroussel } from "../../components/modules"
 
 // Constants:
-import { MEDIA_URL } from "../../constants"
 import { PRODUCT_DETAIL_PATH } from "../../constants/apis"
 import { MAKER_PAGE_ROUTE } from "../../constants/routes"
 
@@ -26,9 +25,6 @@ import { AuthContext } from "../../contexts/auth"
 
 // Hooks:
 import { useFetch } from "../../hooks"
-
-// Utilities:
-import { stringToDate } from "../../utils/datetime"
 
 export default function ProductId() {
     const dispatch = useDispatch()

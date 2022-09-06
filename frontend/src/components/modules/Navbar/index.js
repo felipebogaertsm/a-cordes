@@ -59,7 +59,9 @@ export default function Navbar() {
                         <div className="flex md:flex-row flex-col col-span-6 gap-2">
                             <NavbarItem to="/">Home</NavbarItem>
                             <NavbarItem to="/makers">Makers</NavbarItem>
-                            <NavbarItem to="/makers">Bows</NavbarItem>
+                            <NavbarItem to="/products/categories/bows">
+                                Bows
+                            </NavbarItem>
                             <NavbarItem to="/makers">Instruments</NavbarItem>
                             <NavbarItem to="/makers">Accessories</NavbarItem>
                         </div>

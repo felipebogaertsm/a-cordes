@@ -10,7 +10,12 @@ import { useState } from "react"
 import { getClient } from "../utils/axios"
 import { getDetailFromResponseError } from "../utils/errors"
 
-export default function useFetch({ client, method, url }) {
+export default function useFetch({
+    client,
+    method,
+    url,
+    payload: presetPayload,
+}) {
     const [data, setData] = useState(null)
     const [loading, setLoading] = useState(null)
     const [error, setError] = useState(null)
@@ -25,7 +30,10 @@ export default function useFetch({ client, method, url }) {
         setError(null)
 
         try {
-            const { data } = await client[method](url, payload)
+            const { data } = await client[method](
+                url,
+                payload ? payload : presetPayload
+            )
             setData(data)
         } catch (err) {
             setError(getDetailFromResponseError(err))
