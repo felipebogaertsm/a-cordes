@@ -8,17 +8,17 @@ import { useContext, useState } from "react"
 import Link from "next/link"
 
 // Components:
-import { NavbarItem } from "components/modules/navbar/NavbarItem"
-import { NavbarUserDropdown } from "components/modules/navbar/NavbarUserDropdown"
+import NavbarItem from "components/modules/navbar/NavbarItem"
+import NavbarUserDropdown from "components/modules/navbar/NavbarUserDropdown"
 
 // Contexts:
 import { AuthContext } from "contexts/auth"
-import { ButtonIcon1 } from "components/elements"
+import { ButtonIcon1 } from "components/elements/buttons"
 
 // Styles:
 import styles from "./Navbar.module.css"
 
-export default function Navbar() {
+export function Navbar() {
     const { user } = useContext(AuthContext)
 
     const [isOpen, setIsOpen] = useState(false)
