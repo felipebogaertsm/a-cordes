@@ -18,7 +18,7 @@ import { ButtonIcon1 } from "components/elements/buttons"
 // Styles:
 import styles from "./Navbar.module.css"
 
-export function Navbar() {
+export default function Navbar() {
     const { user } = useContext(AuthContext)
 
     const [isOpen, setIsOpen] = useState(false)

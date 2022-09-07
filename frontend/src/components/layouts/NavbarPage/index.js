@@ -5,16 +5,14 @@
 // Contact me at me@felipebm.com
 
 // Components:
-import { Footer } from "components/modules/footer"
-import { Navbar } from "components/modules/navbar"
+import Footer from "components/modules/footer/index"
+import Navbar from "components/modules/navbar/index"
 
-export default function NavbarPage(props) {
+export default function NavbarPage({ children }) {
     return (
         <div>
             <Navbar />
-            <div className="w-full h-full mb-10 px-6 py-2">
-                {props.children}
-            </div>
+            <div className="w-full h-full mb-10 px-6 py-2">{children}</div>
             <Footer />
         </div>
     )

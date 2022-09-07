@@ -9,7 +9,7 @@ import Link from "next/link"
 // Constants:
 import { BECOME_A_SELLER_PAGE_ROUTE } from "constants/routes"
 
-export function Footer() {
+export default function Footer() {
     return (
         <div
             className="
