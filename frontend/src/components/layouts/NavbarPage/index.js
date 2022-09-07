@@ -5,8 +5,8 @@
 // Contact me at me@felipebm.com
 
 // Components:
-import { Footer } from "components/modules/footer"
-import { Navbar } from "components/modules/navbar"
+import Footer from "components/modules/footer"
+import Navbar from "components/modules/navbar"
 
 export default function NavbarPage(props) {
     return (

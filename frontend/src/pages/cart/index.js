@@ -14,9 +14,9 @@ import { clearCart, getCart, removeFromCart } from "redux/actions/cart"
 // Components:
 import { Button } from "components/elements/buttons"
 import { Heading, Message } from "components/elements/text"
-import { Loader } from "components/misc"
+import { Loader } from "components/elements/misc"
 import { NavbarPage, PrivatePage } from "components/layouts"
-import { ProductListing } from "components/modules"
+import { ProductListing } from "components/modules/products"
 
 // Contexts:
 import { AuthContext } from "contexts/auth"
