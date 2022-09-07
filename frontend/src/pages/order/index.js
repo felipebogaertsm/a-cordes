@@ -93,7 +93,7 @@ export default function OrderPage() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>Order</h1>
                     <div className="grow"></div>
@@ -103,48 +103,48 @@ export default function OrderPage() {
                         </Button>
                     </div>
                 </Heading>
+            </div>
 
-                <div className="mt-10 px-6 w-full">
-                    {loading && <p>...</p>}
+            <div className="mt-10 px-6 w-full">
+                {loading && <p>...</p>}
 
-                    {error && <p>{error}</p>}
+                {error && <p>{error}</p>}
 
-                    <div className="w-full flex flex-col lg:flex-row">
-                        <div className="w-full lg:mr-10 mb-10 space-y-10">
-                            <ShippingAddressForm
-                                onCheck={(id) => setShippingAddress(id)}
-                            />
+                <div className="w-full flex flex-col lg:flex-row">
+                    <div className="w-full lg:mr-10 mb-10 space-y-10">
+                        <ShippingAddressForm
+                            onCheck={(id) => setShippingAddress(id)}
+                        />
 
-                            <div>
-                                <h3>Payment method</h3>
-                                <div className="my-2 space-y-2">
-                                    <h6>{paymentMethod}</h6>
-                                </div>
+                        <div>
+                            <h3>Payment method</h3>
+                            <div className="my-2 space-y-2">
+                                <h6>{paymentMethod}</h6>
                             </div>
                         </div>
+                    </div>
 
-                        <div className="w-full mt-16">
-                            {Array.isArray(cartItems) &&
-                                (cartItems.length === 0 ? (
-                                    <div className="mx-auto w-max space-y-4">
-                                        <p className="text-xl">
-                                            No items in your order.
-                                        </p>
-                                        <Button
-                                            onClick={(e) => router.push("/")}
-                                            primary
-                                        >
-                                            Continue shopping
-                                        </Button>
-                                    </div>
-                                ) : (
-                                    <ProductListing items={cartItems} />
-                                ))}
-                            <div className="mt-10">
-                                <TotalPriceOrder
-                                    total={totalPrice}
-                                ></TotalPriceOrder>
-                            </div>
+                    <div className="w-full mt-16">
+                        {Array.isArray(cartItems) &&
+                            (cartItems.length === 0 ? (
+                                <div className="mx-auto w-max space-y-4">
+                                    <p className="text-xl">
+                                        No items in your order.
+                                    </p>
+                                    <Button
+                                        onClick={(e) => router.push("/")}
+                                        primary
+                                    >
+                                        Continue shopping
+                                    </Button>
+                                </div>
+                            ) : (
+                                <ProductListing items={cartItems} />
+                            ))}
+                        <div className="mt-10">
+                            <TotalPriceOrder
+                                total={totalPrice}
+                            ></TotalPriceOrder>
                         </div>
                     </div>
                 </div>

@@ -39,7 +39,7 @@ export default function Makers() {
                 </Heading>
             </div>
 
-            <div className="mt-20 px-6 w-full flex flex-col space-y-2">
+            <div className="w-full flex flex-col gap-2 mt-8">
                 {sellers.loading ? (
                     <div className="w-full mx-auto">
                         <Loader />

@@ -15,7 +15,7 @@ import {
     Heading,
     Message,
 } from "../../components/elements"
-import { NavbarPage } from "../../components/layouts"
+import { NavbarPage, PrivatePage } from "../../components/layouts"
 
 // Constants:
 import { ACCOUNTS_SELLERS_PATH } from "../../constants/apis"
@@ -49,73 +49,55 @@ export default function BecomeSeller() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
-                <Heading>
-                    <h1>Become a seller</h1>
-                </Heading>
+            <PrivatePage>
+                <div className="py-4">
+                    <Heading>
+                        <h1>Become a seller</h1>
+                    </Heading>
+                </div>
 
-                <div className="mt-20 max-w-[500px] mx-auto">
-                    {!user ? (
-                        <>
-                            <Message>
-                                You must be logged in to access this page.
-                            </Message>
-                            <div className="mt-6">
-                                <Button
-                                    primary
-                                    onClick={() =>
-                                        router.push(LOGIN_PAGE_ROUTE)
-                                    }
-                                >
-                                    Log in
-                                </Button>
-                            </div>
-                        </>
-                    ) : (
-                        <FormContainer
-                            className="flex flex-col space-y-4"
-                            onSubmit={(e) => {
-                                e.preventDefault()
-                                doFetchSeller({
-                                    name: sellerName,
-                                    city: sellerCity,
-                                    country: sellerCountry,
-                                    description: sellerDescription,
-                                    title: sellerTitle,
-                                    user: user._id,
-                                })
-                            }}
-                        >
-                            <FormInput
-                                label="Name"
-                                onChange={(e) => setSellerName(e.target.value)}
-                            />
-                            <FormInput
-                                label="City"
-                                onChange={(e) => setSellerCity(e.target.value)}
-                            />
-                            <FormInput
-                                label="Country"
-                                onChange={(e) =>
-                                    setSellerCountry(e.target.value)
-                                }
-                            />
-                            <FormInput
-                                label="Description"
-                                onChange={(e) =>
-                                    setSellerDescription(e.target.value)
-                                }
-                            />
-                            <FormInput
-                                label="Title"
-                                onChange={(e) => setSellerTitle(e.target.value)}
-                            />
+                <div className="mt-8 max-w-[500px] mx-auto">
+                    <FormContainer
+                        className="flex flex-col space-y-4"
+                        onSubmit={(e) => {
+                            e.preventDefault()
+                            doFetchSeller({
+                                name: sellerName,
+                                city: sellerCity,
+                                country: sellerCountry,
+                                description: sellerDescription,
+                                title: sellerTitle,
+                                user: user._id,
+                            })
+                        }}
+                    >
+                        <FormInput
+                            label="Name"
+                            onChange={(e) => setSellerName(e.target.value)}
+                        />
+                        <FormInput
+                            label="City"
+                            onChange={(e) => setSellerCity(e.target.value)}
+                        />
+                        <FormInput
+                            label="Country"
+                            onChange={(e) => setSellerCountry(e.target.value)}
+                        />
+                        <FormInput
+                            label="Description"
+                            onChange={(e) =>
+                                setSellerDescription(e.target.value)
+                            }
+                        />
+                        <FormInput
+                            label="Title"
+                            onChange={(e) => setSellerTitle(e.target.value)}
+                        />
 
-                            <div className="pt-2">
-                                <Button primary>Request approval</Button>
-                            </div>
-                        </FormContainer>
-                    )}
+                        <div className="pt-2">
+                            <Button primary>Request approval</Button>
+                        </div>
+                    </FormContainer>
 
                     <div className="py-8">
                         {seller.error && <Message>{seller.error}</Message>}
@@ -127,7 +109,7 @@ export default function BecomeSeller() {
                         )}
                     </div>
                 </div>
-            </div>
+            </PrivatePage>
         </NavbarPage>
     )
 }

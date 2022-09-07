@@ -50,13 +50,13 @@ export default function MakerId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2 flex flex-col gap-10">
+            <div className="flex flex-col gap-10">
                 {seller.loading && <Loader />}
                 {seller.data && (
                     <>
-                        <Heading className="item-stretch">
-                            <h1>{seller.data.name}</h1>
-                        </Heading>
+                        <div className="py-4">
+                            <Heading>{seller.data.name}</Heading>
+                        </div>
                         <div className="flex flex-col md:flex-row gap-10 justify-center content-center align-center">
                             {seller.data.picture && (
                                 <img

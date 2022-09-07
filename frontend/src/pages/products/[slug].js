@@ -68,107 +68,100 @@ export default function ProductId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
-                {product.loading ? (
-                    <Loader />
-                ) : product.error ? (
-                    <div>{product.error}</div>
-                ) : (
-                    product.data && (
-                        <div className="flex flex-col">
-                            <Heading>
-                                <h1>{product.data.name}</h1>
-                            </Heading>
-                            <div
-                                className="
+            {product.loading ? (
+                <Loader />
+            ) : product.error ? (
+                <div>{product.error}</div>
+            ) : (
+                product.data && (
+                    <div className="flex flex-col">
+                        <div className="py-4">
+                            <Heading>{product.data.name}</Heading>
+                        </div>
+
+                        <div
+                            className="
                                     grid grid-cold-1 lg:grid-cols-3 mt-10 lg:m-0 gap-10
                                 "
-                            >
+                        >
+                            <div>
+                                <ImageCarroussel images={product.data.images} />
+                            </div>
+                            <div className="flex flex-col">
+                                {product.data.description && (
+                                    <div className="my-2">
+                                        <h5>Description</h5>
+                                        <p>{product.data.description}</p>
+                                    </div>
+                                )}
+                                <div className="my-2">
+                                    <h5>Category</h5>
+                                    <p>{product.data.category}</p>
+                                </div>
+                                <div className="my-2">
+                                    <h5>Crafted by</h5>
+                                    <a
+                                        href={MAKER_PAGE_ROUTE.replace(
+                                            "[slug]",
+                                            product.data.seller.slug
+                                        )}
+                                    >
+                                        <h6>{product.data.seller.name}</h6>
+                                    </a>
+                                    <p>
+                                        {product.data.seller.city},{" "}
+                                        {product.data.seller.country}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-8">
                                 <div>
-                                    <ImageCarroussel
-                                        images={product.data.images}
-                                    />
+                                    <h5>Price</h5>
+                                    <h2>${Number(product.data.price)}</h2>
                                 </div>
-                                <div className="flex flex-col">
-                                    {product.data.description && (
-                                        <div className="my-2">
-                                            <h5>Description</h5>
-                                            <p>{product.data.description}</p>
-                                        </div>
-                                    )}
-                                    <div className="my-2">
-                                        <h5>Category</h5>
-                                        <p>{product.data.category}</p>
-                                    </div>
-                                    <div className="my-2">
-                                        <h5>Crafted by</h5>
-                                        <a
-                                            href={MAKER_PAGE_ROUTE.replace(
-                                                "[slug]",
-                                                product.data.seller.slug
+                                <div>
+                                    <h5>Availability</h5>
+                                    <div className="flex flex-row">
+                                        <h3>
+                                            {Number(
+                                                product.data.count_in_stock
+                                            ) > 0
+                                                ? "In Stock"
+                                                : "Out of Stock"}
+                                        </h3>
+                                        <div className="grow"></div>
+                                        <h3>
+                                            {Number(
+                                                product.data.count_in_stock
                                             )}
-                                        >
-                                            <h6>{product.data.seller.name}</h6>
-                                        </a>
-                                        <p>
-                                            {product.data.seller.city},{" "}
-                                            {product.data.seller.country}
-                                        </p>
+                                            {Number(
+                                                product.data.count_in_stock
+                                            ) === 1
+                                                ? " unit"
+                                                : " units"}
+                                        </h3>
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-8">
-                                    <div>
-                                        <h5>Price</h5>
-                                        <h2>${Number(product.data.price)}</h2>
-                                    </div>
-                                    <div>
-                                        <h5>Availability</h5>
-                                        <div className="flex flex-row">
-                                            <h3>
-                                                {Number(
-                                                    product.data.count_in_stock
-                                                ) > 0
-                                                    ? "In Stock"
-                                                    : "Out of Stock"}
-                                            </h3>
-                                            <div className="grow"></div>
-                                            <h3>
-                                                {Number(
-                                                    product.data.count_in_stock
-                                                )}
-                                                {Number(
-                                                    product.data.count_in_stock
-                                                ) === 1
-                                                    ? " unit"
-                                                    : " units"}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col space-y-2">
-                                        <Button
-                                            disabled={
-                                                !product.data.count_in_stock
-                                            }
-                                            onClick={(e) => addToCartHandler(e)}
-                                            primary
-                                        >
-                                            Add to cart
-                                        </Button>
-                                        <Button
-                                            onClick={(e) =>
-                                                router.push("/cart")
-                                            }
-                                            secondary
-                                        >
-                                            Go to cart
-                                        </Button>
-                                    </div>
+                                <div className="flex flex-col space-y-2">
+                                    <Button
+                                        disabled={!product.data.count_in_stock}
+                                        onClick={(e) => addToCartHandler(e)}
+                                        primary
+                                    >
+                                        Add to cart
+                                    </Button>
+                                    <Button
+                                        onClick={(e) => router.push("/cart")}
+                                        secondary
+                                    >
+                                        Go to cart
+                                    </Button>
                                 </div>
                             </div>
                         </div>
-                    )
-                )}
-            </div>
+                    </div>
+                )
+            )}
         </NavbarPage>
     )
 }
