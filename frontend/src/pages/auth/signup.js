@@ -8,24 +8,24 @@ import { useRouter } from "next/router"
 import { useEffect, useState, useContext } from "react"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { FormContainer, FormInput } from "@/components/elements/forms"
-import { Heading, Message } from "@/components/elements/text"
-import { Loader } from "@/components/elements/misc"
-import { NavbarPage } from "@/components/layouts"
+import { Button } from "components/elements/buttons"
+import { FormContainer, FormInput } from "components/elements/forms"
+import { Heading, Message } from "components/elements/text"
+import { Loader } from "components/elements/misc"
+import { NavbarPage } from "components/layouts"
 
 // Constants:
-import { ACCOUNTS_USERS_PATH } from "@/constants/apis"
-import { HOME_PAGE_ROUTE } from "@/constants/routes"
+import { ACCOUNTS_USERS_PATH } from "constants/apis"
+import { HOME_PAGE_ROUTE } from "constants/routes"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 // Utils:
-import { getClient } from "@/utils/axios"
+import { getClient } from "utils/axios"
 
 export default function SignUp() {
     const { refreshUser, user } = useContext(AuthContext)

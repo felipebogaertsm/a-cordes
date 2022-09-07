@@ -8,11 +8,11 @@ import App from "next/app"
 import Head from "next/head"
 
 import "../styles/globals.css"
-import { AuthProvider } from "../contexts/auth"
-import { storeWrapper } from "../redux/store"
+import { AuthProvider } from "contexts/auth"
+import { storeWrapper } from "redux/store"
 
 // Services:
-import { getMyUser } from "../services/auth"
+import { getMyUser } from "services/auth"
 
 function MyApp({ Component, ...pageProps }) {
     const { user } = pageProps

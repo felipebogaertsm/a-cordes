@@ -8,11 +8,12 @@ import { useContext, useState } from "react"
 import Link from "next/link"
 
 // Components:
-import { NavbarItem, NavbarUserDropdown } from ".."
+import { NavbarItem } from "components/modules/navbar/NavbarItem"
+import { NavbarUserDropdown } from "components/modules/navbar/NavbarUserDropdown"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
-import { ButtonIcon1 } from "@/components/elements"
+import { AuthContext } from "contexts/auth"
+import { ButtonIcon1 } from "components/elements"
 
 // Styles:
 import styles from "./Navbar.module.css"

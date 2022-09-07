@@ -9,18 +9,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 
 // Actions:
-import { getCart } from "@/redux/actions/cart"
-import { createOrder } from "@/redux/actions/order"
+import { getCart } from "redux/actions/cart"
+import { createOrder } from "redux/actions/order"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { Heading } from "@/components/elements/text"
-import { NavbarPage } from "@/components/layouts"
-import { ProductListing } from "@/components/modules/products"
-import {
-    ShippingAddressForm,
-    TotalPriceOrder,
-} from "@/components/modules/orders"
+import { Button } from "components/elements/buttons"
+import { Heading } from "components/elements/text"
+import { NavbarPage } from "components/layouts"
+import { ProductListing } from "components/modules/products"
+import { ShippingAddressForm, TotalPriceOrder } from "components/modules/orders"
 
 export default function OrderPage() {
     const dispatch = useDispatch()

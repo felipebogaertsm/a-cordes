@@ -5,7 +5,7 @@
 // Contact me at me@felipebm.com
 
 // Components:
-import { FormInput } from "@/components/elements"
+import { FormInput } from "components/elements"
 
 export default function searchInput({ ...props }) {
     return (

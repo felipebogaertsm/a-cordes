@@ -8,17 +8,17 @@ import { useState, useContext } from "react"
 import { useRouter } from "next/router"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { FormContainer, FormInput } from "@/components/elements/forms"
-import { Heading, Message } from "@/components/elements/text"
-import { Loader } from "@/components/elements/misc"
-import { NavbarPage } from "@/components/layouts"
+import { Button } from "components/elements/buttons"
+import { FormContainer, FormInput } from "components/elements/forms"
+import { Heading, Message } from "components/elements/text"
+import { Loader } from "components/elements/misc"
+import { NavbarPage } from "components/layouts"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 // Services:
-import { publicRoute } from "@/services/auth"
+import { publicRoute } from "services/auth"
 
 export async function getServerSideProps(ctx) {
     return await publicRoute(ctx)

@@ -7,8 +7,8 @@
 import Link from "next/link"
 
 // Components:
-import { Heading } from "@/components/elements/text"
-import { NavbarPage } from "@/components/layouts"
+import { Heading } from "components/elements/text"
+import { NavbarPage } from "components/layouts"
 
 export default function ProductId() {
     return (

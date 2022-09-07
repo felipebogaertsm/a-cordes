@@ -7,20 +7,20 @@
 import { useEffect, useState } from "react"
 
 // Components:
-import { Loader } from "@/components/elements/misc"
-import { Heading, Message } from "@/components/elements/text"
-import { NavbarPage } from "@/components/layouts"
-import { SearchInput } from "@/components/modules/generic"
-import { GriddedProductListing } from "@/components/modules/products"
+import { Loader } from "components/elements/misc"
+import { Heading, Message } from "components/elements/text"
+import { NavbarPage } from "components/layouts"
+import { SearchInput } from "components/modules/generic"
+import { GriddedProductListing } from "components/modules/products"
 
 // Constants:
-import { PRODUCTS_RECENT_PATH } from "@/constants/apis"
+import { PRODUCTS_RECENT_PATH } from "constants/apis"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 // Utils:
-import { getClient } from "@/utils/axios"
+import { getClient } from "utils/axios"
 
 export default function Home() {
     const [keyword, setKeyword] = useState("")

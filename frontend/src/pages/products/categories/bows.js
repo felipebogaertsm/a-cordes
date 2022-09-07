@@ -8,16 +8,16 @@ import { useEffect } from "react"
 import Link from "next/link"
 
 // Components:
-import { Heading } from "@/components/elements/text"
-import { Loader } from "@/components/elements/misc"
-import { NavbarPage } from "@/components/layouts"
-import { GriddedProductListing } from "@/components/modules/products"
+import { Heading } from "components/elements/text"
+import { Loader } from "components/elements/misc"
+import { NavbarPage } from "components/layouts"
+import { GriddedProductListing } from "components/modules/products"
 
 // Constants:
-import { PRODUCT_LIST_PATH } from "@/constants/apis"
+import { PRODUCT_LIST_PATH } from "constants/apis"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 export default function ProductId() {
     const [products, doFetchProducts] = useFetch({

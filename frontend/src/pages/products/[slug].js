@@ -9,24 +9,24 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 
 // Actions:
-import { addToCart } from "@/redux/actions/cart"
+import { addToCart } from "redux/actions/cart"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { Loader } from "@/components/elements/misc"
-import { Heading } from "@/components/elements/text"
-import { NavbarPage } from "@/components/layouts"
-import { ImageCarroussel } from "@/components/modules/generic"
+import { Button } from "components/elements/buttons"
+import { Loader } from "components/elements/misc"
+import { Heading } from "components/elements/text"
+import { NavbarPage } from "components/layouts"
+import { ImageCarroussel } from "components/modules/generic"
 
 // Constants:
-import { PRODUCT_DETAIL_PATH } from "@/constants/apis"
-import { MAKER_PAGE_ROUTE } from "@/constants/routes"
+import { PRODUCT_DETAIL_PATH } from "constants/apis"
+import { MAKER_PAGE_ROUTE } from "constants/routes"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 export default function ProductId() {
     const dispatch = useDispatch()

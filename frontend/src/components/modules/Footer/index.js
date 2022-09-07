@@ -7,7 +7,7 @@
 import Link from "next/link"
 
 // Constants:
-import { BECOME_A_SELLER_PAGE_ROUTE } from "@/constants/routes"
+import { BECOME_A_SELLER_PAGE_ROUTE } from "constants/routes"
 
 export default function Footer() {
     return (

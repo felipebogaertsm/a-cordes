@@ -8,18 +8,18 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 
 // Components:
-import { Loader } from "@/components/elements/misc"
-import { Heading, Message } from "@/components/elements/text"
-import { NavbarPage } from "@/components/layouts"
-import { ListItem } from "@/components/modules/generic"
-import { MakerItem } from "@/components/modules/makers"
+import { Loader } from "components/elements/misc"
+import { Heading, Message } from "components/elements/text"
+import { NavbarPage } from "components/layouts"
+import { ListItem } from "components/modules/generic"
+import { MakerItem } from "components/modules/makers"
 
 // Constants:
-import { ACCOUNTS_SELLERS_PATH } from "@/constants/apis"
-import { MAKER_PAGE_ROUTE } from "@/constants/routes"
+import { ACCOUNTS_SELLERS_PATH } from "constants/apis"
+import { MAKER_PAGE_ROUTE } from "constants/routes"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 export default function Makers() {
     const router = useRouter()

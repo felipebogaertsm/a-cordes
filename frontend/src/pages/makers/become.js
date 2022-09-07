@@ -8,22 +8,22 @@ import { useContext, useState } from "react"
 import { useRouter } from "next/router"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { FormContainer, FormInput } from "@/components/elements/forms"
-import { Heading, Message } from "@/components/elements/text"
-import { NavbarPage, PrivatePage } from "@/components/layouts"
+import { Button } from "components/elements/buttons"
+import { FormContainer, FormInput } from "components/elements/forms"
+import { Heading, Message } from "components/elements/text"
+import { NavbarPage, PrivatePage } from "components/layouts"
 
 // Constants:
-import { ACCOUNTS_SELLERS_PATH } from "@/constants/apis"
+import { ACCOUNTS_SELLERS_PATH } from "constants/apis"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 // Utils:
-import { getClient } from "@/utils/axios"
+import { getClient } from "utils/axios"
 
 export default function BecomeSeller() {
     const [sellerName, setSellerName] = useState("")

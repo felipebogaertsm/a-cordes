@@ -7,7 +7,7 @@
 import { useEffect, useState } from "react"
 
 // Components:
-import { ProductItem } from "@/components/modules/products"
+import { ProductItem } from "components/modules/products"
 
 export default function GriddedProductListing({ products }) {
     const [productList, setProductList] = useState(products)

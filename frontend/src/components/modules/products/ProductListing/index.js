@@ -7,11 +7,11 @@
 import { useRouter } from "next/router"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { ListItem } from "@/components/modules/generic"
+import { Button } from "components/elements/buttons"
+import { ListItem } from "components/modules/generic"
 
 // Constants:
-import { MEDIA_URL } from "@/components/constants"
+import { MEDIA_URL } from "constants"
 
 export default function ProductListing({ items, removeHandler }) {
     const router = useRouter()

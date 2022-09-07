@@ -7,8 +7,8 @@
 import { useState } from "react"
 
 // Utils:
-import { getClient } from "@/utils/axios"
-import { getDetailFromResponseError } from "@/utils/errors"
+import { getClient } from "utils/axios"
+import { getDetailFromResponseError } from "utils/errors"
 
 export default function useFetch({
     client,

@@ -9,16 +9,16 @@ import { useRouter } from "next/router"
 import { createContext, useEffect, useState } from "react"
 
 // Constants:
-import { TOKEN_NAME } from "@/constants"
+import { TOKEN_NAME } from "constants"
 import {
     ACCOUNTS_TOKEN_OBTAIN_PAIR_PATH,
     ACCOUNTS_MY_USER_PATH,
-} from "@/constants/apis"
-import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "@/constants/routes"
+} from "constants/apis"
+import { LOGIN_PAGE_ROUTE, HOME_PAGE_ROUTE } from "constants/routes"
 
 // Utils:
-import { getClient } from "@/utils/axios"
-import { getDetailFromResponseError } from "@/utils/errors"
+import { getClient } from "utils/axios"
+import { getDetailFromResponseError } from "utils/errors"
 
 export const AuthContext = createContext({})
 

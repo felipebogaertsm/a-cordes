@@ -8,19 +8,19 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 
 // Components:
-import { Heading } from "@/components/elements/text"
-import { Loader } from "@/components/elements/misc"
-import { NavbarPage } from "@/components/layouts"
-import { GriddedProductListing } from "@/components/modules/products"
+import { Heading } from "components/elements/text"
+import { Loader } from "components/elements/misc"
+import { NavbarPage } from "components/layouts"
+import { GriddedProductListing } from "components/modules/products"
 
 // Constants:
-import { ACCOUNTS_SELLER_PATH, PRODUCT_LIST_PATH } from "@/constants/apis"
+import { ACCOUNTS_SELLER_PATH, PRODUCT_LIST_PATH } from "constants/apis"
 
 // Hooks:
-import { useFetch } from "@/hooks"
+import { useFetch } from "hooks"
 
 // Utils:
-import { getClient } from "@/utils/axios"
+import { getClient } from "utils/axios"
 
 export default function MakerId() {
     const router = useRouter()

@@ -9,17 +9,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 
 // Actions:
-import { clearCart, getCart, removeFromCart } from "@/redux/actions/cart"
+import { clearCart, getCart, removeFromCart } from "redux/actions/cart"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { Heading, Message } from "@/components/elements/text"
-import { Loader } from "@/components/misc"
-import { NavbarPage, PrivatePage } from "@/components/layouts"
-import { ProductListing } from "@/components/modules"
+import { Button } from "components/elements/buttons"
+import { Heading, Message } from "components/elements/text"
+import { Loader } from "components/misc"
+import { NavbarPage, PrivatePage } from "components/layouts"
+import { ProductListing } from "components/modules"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 export default function Cart() {
     const dispatch = useDispatch()

@@ -8,14 +8,14 @@ import { useRouter } from "next/router"
 import { useContext } from "react"
 
 // Components:
-import { Button } from "@/components/elements/buttons"
-import { Loader } from "@/components/elements/misc"
+import { Button } from "components/elements/buttons"
+import { Loader } from "components/elements/misc"
 
 // Constants:
-import { LOGIN_PATH } from "@/constants"
+import { LOGIN_PATH } from "constants"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 export default function PrivatePage({ children, ...props }) {
     const { user, loading, error } = useContext(AuthContext)
@@ -28,7 +28,7 @@ export default function PrivatePage({ children, ...props }) {
                 <div>{children}</div>
             ) : loading ? (
                 <div>
-                    <Loader />
+                    <Loader />{" "}
                 </div>
             ) : (
                 <div className="py-40 px-4 text-stone-600">

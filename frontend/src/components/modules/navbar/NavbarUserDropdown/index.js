@@ -8,13 +8,13 @@ import Link from "next/link"
 import { useContext } from "react"
 
 // Components:
-import { NavbarItem } from "@/components/modules/navbar"
+import { NavbarItem } from "components/modules/navbar"
 
 // Constants:
-import { USER_SETTINGS_PAGE_ROUTE } from "@/constants/routes"
+import { USER_SETTINGS_PAGE_ROUTE } from "constants/routes"
 
 // Contexts:
-import { AuthContext } from "@/contexts/auth"
+import { AuthContext } from "contexts/auth"
 
 export default function NavbarUserDropdown() {
     const { logout } = useContext(AuthContext)
