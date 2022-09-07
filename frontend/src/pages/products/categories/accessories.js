@@ -13,7 +13,7 @@ import { NavbarPage } from "../../../components/layouts"
 export default function ProductId() {
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>
                         <Link href="/">
@@ -24,10 +24,10 @@ export default function ProductId() {
                         | <span className="font-bold">Accessories</span>
                     </h1>
                 </Heading>
+            </div>
 
-                <div className="my-20 text-center font-bold text-3xl">
-                    Coming soon!
-                </div>
+            <div className="my-20 text-center font-bold text-3xl">
+                Coming soon!
             </div>
         </NavbarPage>
     )

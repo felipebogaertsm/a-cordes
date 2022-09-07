@@ -36,7 +36,7 @@ export default function ProductId() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>
                         <Link href="/">
@@ -47,13 +47,13 @@ export default function ProductId() {
                         | <span className="font-bold">Bows</span>
                     </h1>
                 </Heading>
-
-                {products.loading && <Loader />}
-                {products.error && <div>{products.error}</div>}
-                {products.data && (
-                    <GriddedProductListing products={products.data} />
-                )}
             </div>
+
+            {products.loading && <Loader />}
+            {products.error && <div>{products.error}</div>}
+            {products.data && (
+                <GriddedProductListing products={products.data} />
+            )}
         </NavbarPage>
     )
 }

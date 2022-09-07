@@ -38,7 +38,7 @@ export default function Login() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>Login</h1>
                 </Heading>

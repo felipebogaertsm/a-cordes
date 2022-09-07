@@ -18,9 +18,35 @@ import { ButtonIcon1 } from "../../elements"
 import styles from "./Navbar.module.css"
 
 export default function Navbar() {
-    const [isOpen, setIsOpen] = useState(false)
-
     const { user } = useContext(AuthContext)
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [navbarItems] = useState(
+        <>
+            <NavbarItem to="/">Home</NavbarItem>
+            <NavbarItem to="/makers">Makers</NavbarItem>
+            <NavbarItem to="/products/categories/bows">Bows</NavbarItem>
+            <NavbarItem to="/products/categories/instruments">
+                Instruments
+            </NavbarItem>
+            <NavbarItem to="/products/categories/accessories">
+                Accessories
+            </NavbarItem>
+        </>
+    )
+
+    const [navbarUserItems] = useState(
+        <>
+            {user && user !== {} && (
+                <>
+                    <NavbarItem to="/cart">Cart</NavbarItem>
+                    <NavbarUserDropdown />
+                </>
+            )}
+
+            {!user && <NavbarItem to="/auth/login">Login</NavbarItem>}
+        </>
+    )
 
     return (
         <div className="w-full">
@@ -57,32 +83,13 @@ export default function Navbar() {
 
                     <div className="hidden lg:inline mx-auto">
                         <div className="flex md:flex-row flex-col col-span-6 gap-2">
-                            <NavbarItem to="/">Home</NavbarItem>
-                            <NavbarItem to="/makers">Makers</NavbarItem>
-                            <NavbarItem to="/products/categories/bows">
-                                Bows
-                            </NavbarItem>
-                            <NavbarItem to="/products/categories/instruments">
-                                Instruments
-                            </NavbarItem>
-                            <NavbarItem to="/products/categories/accessories">
-                                Accessories
-                            </NavbarItem>
+                            {navbarItems}
                         </div>
                     </div>
 
                     <div className="hidden lg:inline">
                         <div className="flex md:flex-row flex-col ml-auto gap-2">
-                            {user && user !== {} && (
-                                <>
-                                    <NavbarItem to="/cart">Cart</NavbarItem>
-                                    <NavbarUserDropdown />
-                                </>
-                            )}
-
-                            {!user && (
-                                <NavbarItem to="/auth/login">Login</NavbarItem>
-                            )}
+                            {navbarUserItems}
                         </div>
                     </div>
                 </div>
@@ -96,11 +103,8 @@ export default function Navbar() {
                     ].join(" ")}
                 >
                     <div className="flex flex-col col-span-6 gap-2 text-white p-8">
-                        <NavbarItem to="/">Home</NavbarItem>
-                        <NavbarItem to="/makers">Makers</NavbarItem>
-                        <NavbarItem to="/makers">Bows</NavbarItem>
-                        <NavbarItem to="/makers">Instruments</NavbarItem>
-                        <NavbarItem to="/makers">Accessories</NavbarItem>
+                        {navbarItems}
+                        {navbarUserItems}
                     </div>
                 </div>
             )}

@@ -33,39 +33,39 @@ export default function Makers() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>Makers</h1>
                 </Heading>
+            </div>
 
-                <div className="mt-20 px-6 w-full flex flex-col space-y-2">
-                    {sellers.loading ? (
-                        <div className="w-full mx-auto">
-                            <Loader />
-                        </div>
-                    ) : sellers.error ? (
-                        <Message>{sellers.error}</Message>
-                    ) : (
-                        sellers.data &&
-                        sellers.data.map((maker, index) => (
-                            <ListItem
-                                key={index}
-                                number={index + 1}
-                                className="cursor-pointer"
-                                onClick={() =>
-                                    router.push(
-                                        MAKER_PAGE_ROUTE.replace(
-                                            "[slug]",
-                                            maker.slug
-                                        )
+            <div className="mt-20 px-6 w-full flex flex-col space-y-2">
+                {sellers.loading ? (
+                    <div className="w-full mx-auto">
+                        <Loader />
+                    </div>
+                ) : sellers.error ? (
+                    <Message>{sellers.error}</Message>
+                ) : (
+                    sellers.data &&
+                    sellers.data.map((maker, index) => (
+                        <ListItem
+                            key={index}
+                            number={index + 1}
+                            className="cursor-pointer"
+                            onClick={() =>
+                                router.push(
+                                    MAKER_PAGE_ROUTE.replace(
+                                        "[slug]",
+                                        maker.slug
                                     )
-                                }
-                            >
-                                <MakerItem maker={maker} />
-                            </ListItem>
-                        ))
-                    )}
-                </div>
+                                )
+                            }
+                        >
+                            <MakerItem maker={maker} />
+                        </ListItem>
+                    ))
+                )}
             </div>
         </NavbarPage>
     )

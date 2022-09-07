@@ -58,28 +58,26 @@ export default function Settings() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
+            <div className="py-4">
                 <Heading>
                     <h1>User settings</h1>
                 </Heading>
+            </div>
 
-                <div className="mt-20 px-6 mx-auto max-w-[600px] flex flex-col space-y-4">
-                    <div>
-                        <SubHeading>Account info</SubHeading>
-                        <FormContainer className="flex flex-col space-y-2">
-                            <FormInput
-                                label="Email"
-                                defaultValue={user.email}
-                                onChange={(e) =>
-                                    doFetch({ email: e.target.value })
-                                }
-                            />
-                        </FormContainer>
-                    </div>
+            <div className="mt-20 px-6 mx-auto max-w-[600px] flex flex-col space-y-4">
+                <div>
+                    <SubHeading>Account info</SubHeading>
+                    <FormContainer className="flex flex-col space-y-2">
+                        <FormInput
+                            label="Email"
+                            defaultValue={user.email}
+                            onChange={(e) => doFetch({ email: e.target.value })}
+                        />
+                    </FormContainer>
+                </div>
 
-                    <div className="pt-6">
-                        <ShippingAddressForm />
-                    </div>
+                <div className="pt-6">
+                    <ShippingAddressForm />
                 </div>
             </div>
         </NavbarPage>

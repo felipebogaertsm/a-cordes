@@ -4,10 +4,10 @@
 // Author: Felipe Bogaerts de Mattos
 // Contact me at me@felipebm.com
 
-export default function Heading(props) {
+export default function Heading({ children }) {
     return (
-        <div className="py-6 px-4 flex lg:flex-row flex-col">
-            {props.children}
+        <div className="py-2">
+            <h1>{children}</h1>
         </div>
     )
 }

@@ -35,32 +35,26 @@ export default function Home() {
 
     return (
         <NavbarPage>
-            <div className="px-6 py-2">
-                <div className="w-full">
-                    <Heading>
-                        <h1>Latest products</h1>
-                        <div className="grow"></div>
-                        <div className="font-sans font-base my-auto">
-                            <SearchInput
-                                onChange={(e) => setKeyword(e.target.value)}
-                            />
-                        </div>
-                    </Heading>
+            <div className="w-full flex lg:flex-row flex-col gap-4 py-4">
+                <Heading>Latest products</Heading>
+                <div className="grow"></div>
+                <div className="my-auto">
+                    <SearchInput onChange={(e) => setKeyword(e.target.value)} />
                 </div>
+            </div>
 
-                <div className="mt-10 px-6 w-full">
-                    {products.loading ? (
-                        <div className="w-full mx-auto">
-                            <Loader />
-                        </div>
-                    ) : products.error ? (
-                        <Message>{products.error}</Message>
-                    ) : (
-                        products.data && (
-                            <GriddedProductListing products={products.data} />
-                        )
-                    )}
-                </div>
+            <div className="w-full">
+                {products.loading ? (
+                    <div className="w-full mx-auto">
+                        <Loader />
+                    </div>
+                ) : products.error ? (
+                    <Message>{products.error}</Message>
+                ) : (
+                    products.data && (
+                        <GriddedProductListing products={products.data} />
+                    )
+                )}
             </div>
         </NavbarPage>
     )
