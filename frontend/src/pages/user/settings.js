@@ -8,29 +8,25 @@ import { useContext, useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 // Actions:
-import { listShippingAddresses } from "../../redux/actions/order"
+import { listShippingAddresses } from "@/redux/actions/order"
 
 // Components:
-import {
-    FormContainer,
-    FormInput,
-    Heading,
-    SubHeading,
-} from "../../components/elements"
-import { NavbarPage } from "../../components/layouts"
-import { ShippingAddressForm } from "../../components/modules"
+import { FormContainer, FormInput } from "@/components/elements/forms"
+import { Heading, SubHeading } from "@/components/elements/text"
+import { NavbarPage } from "@/components/layouts"
+import { ShippingAddressForm } from "@/components/modules/orders"
 
 // Constants:
-import { ACCOUNTS_MY_USER_PATH } from "../../constants/apis"
+import { ACCOUNTS_MY_USER_PATH } from "@/constants/apis"
 
 // Contexts:
-import { AuthContext } from "../../contexts/auth"
+import { AuthContext } from "@/contexts/auth"
 
 // Hooks:
-import { useFetch } from "../../hooks"
+import { useFetch } from "@/hooks"
 
 // Services:
-import { privateRoute } from "../../services/auth"
+import { privateRoute } from "@/services/auth"
 
 export async function getServerSideProps(ctx) {
     return await privateRoute(ctx)

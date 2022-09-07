@@ -11,8 +11,8 @@ import Link from "next/link"
 import { NavbarItem, NavbarUserDropdown } from ".."
 
 // Contexts:
-import { AuthContext } from "../../../contexts/auth"
-import { ButtonIcon1 } from "../../elements"
+import { AuthContext } from "@/contexts/auth"
+import { ButtonIcon1 } from "@/components/elements"
 
 // Styles:
 import styles from "./Navbar.module.css"

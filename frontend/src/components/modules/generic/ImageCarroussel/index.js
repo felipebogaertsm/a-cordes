@@ -7,7 +7,7 @@
 import { useState } from "react"
 
 // Constants:
-import { MEDIA_URL } from "../../../constants"
+import { MEDIA_URL } from "@/constants"
 
 export default function ImageCarroussel({ images }) {
     const [image, setImage] = useState(

@@ -6,12 +6,9 @@
 
 import Link from "next/link"
 
-// Components:
-import { Card } from "../../elements"
-
 // Constants:
-import { MEDIA_URL } from "../../../constants"
-import { PRODUCT_DETAIL_PAGE_ROUTE } from "../../../constants/routes"
+import { MEDIA_URL } from "@/constants"
+import { PRODUCT_DETAIL_PAGE_ROUTE } from "@/constants/routes"
 
 export default function ProductItem({ product }) {
     return (
