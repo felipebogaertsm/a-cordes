@@ -86,16 +86,14 @@ export default function OrderPage() {
 
     return (
         <NavbarPage>
-            <div className="py-4">
-                <Heading>
-                    <h1>Order</h1>
-                    <div className="grow"></div>
-                    <div className="w-max my-auto flex justify-center">
-                        <Button onClick={(e) => orderItemsHandler(e)} primary>
-                            Confirm order
-                        </Button>
-                    </div>
-                </Heading>
+            <div className="py-4 flex flex-row items-center">
+                <Heading>Order</Heading>
+                <div className="grow"></div>
+                <div className="w-max my-auto flex justify-center">
+                    <Button onClick={(e) => orderItemsHandler(e)} primary>
+                        Confirm order
+                    </Button>
+                </div>
             </div>
 
             <div className="mt-10 px-6 w-full">
