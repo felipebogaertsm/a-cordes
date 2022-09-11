@@ -1,5 +1,5 @@
 # Dependencies:
-FROM node:18-alpine as dependencies
+FROM node:18 as dependencies
 LABEL maintainer="Felipe Bogaerts de Mattos"
 
 WORKDIR /frontend
