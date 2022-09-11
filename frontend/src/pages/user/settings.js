@@ -11,9 +11,10 @@ import { useDispatch } from "react-redux"
 import { listShippingAddresses } from "redux/actions/order"
 
 // Components:
-import { FormContainer, FormInput } from "components/elements/forms"
+import { FormContainer } from "components/elements/forms"
 import { Heading, SubHeading } from "components/elements/text"
 import { NavbarPage } from "components/layouts"
+import { EditableInput1 } from "components/modules/forms"
 import { ShippingAddressForm } from "components/modules/orders"
 
 // Constants:
@@ -64,10 +65,9 @@ export default function Settings() {
                 <div>
                     <SubHeading>Account info</SubHeading>
                     <FormContainer className="flex flex-col space-y-2">
-                        <FormInput
-                            label="Email"
+                        <EditableInput1
                             defaultValue={user.email}
-                            onChange={(e) => doFetch({ email: e.target.value })}
+                            onSubmit={(text) => doFetch({ email: text })}
                         />
                     </FormContainer>
                 </div>
