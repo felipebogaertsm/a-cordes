@@ -35,7 +35,7 @@ export default function Accordion({ children, title, expanded, ...props }) {
                             !isExpanded && "hidden"
                         }`}
                     >
-                        <div className="p-2 pt-4">{children}</div>
+                        <div className="p-2">{children}</div>
                     </div>
                 </div>
             </div>

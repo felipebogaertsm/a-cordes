@@ -6,11 +6,11 @@
     }
 
     .input {
-        @apply px-3 py-2 rounded-sm bg-transparent w-full border-b-2 border-transparent;
+        @apply py-2 rounded-sm bg-transparent w-full border-b-2 border-transparent;
     }
 
     .input:enabled {
-        @apply border-primary;
+        @apply border-primary px-3 transition-all duration-200 ease-out;
     }
 
     .btnContainer {

@@ -19,6 +19,8 @@ export default function EditableInput1({
 
     useEffect(() => {
         if (enabled) {
+            const end = text.length
+            inputRef.current.setSelectionRange(end, end)
             inputRef.current.focus()
         }
     }, [enabled])
