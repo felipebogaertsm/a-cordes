@@ -17,6 +17,7 @@ export const CART_ITEMS_PATH = "/api/cart/items/"
 export const CART_ITEM_PATH = "/api/cart/items/[id]/"
 export const CART_ITEMS_CLEAR_PATH = "/api/cart/items/clear/"
 
+export const ORDER_ITEMS_PATH = "/api/orders/items/"
 export const ORDERS_SHIPPING_ADDRESSES_PATH = "/api/orders/shipping-addresses/"
 export const ORDERS_SHIPPING_ADDRESS_PATH =
     "/api/orders/shipping-addresses/[id]/"

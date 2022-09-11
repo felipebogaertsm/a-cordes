@@ -9,6 +9,7 @@ import {
     ORDERS_SHIPPING_ADDRESSES_PATH,
     ORDERS_MY_SHIPPING_ADDRESSES_PATH,
     ORDERS_SHIPPING_ADDRESS_PATH,
+    ORDER_ITEMS_PATH,
 } from "../../constants/apis"
 
 // Types:
@@ -19,11 +20,31 @@ import {
     ORDER_SHIPPING_ADDRESSES_UPDATE,
     ORDER_SHIPPING_ADDRESSES_DELETE,
     ORDER_SHIPPING_ADDRESSES_FAIL,
+    ORDER_ITEM_REQUEST,
+    ORDER_ITEM_CREATE,
+    ORDER_ITEM_FAIL,
 } from "../types/order"
 
 // Utils:
 import { getClient } from "../../utils/axios"
 import { getDetailFromResponseError } from "../../utils/errors"
+
+export const createOrder = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: ORDER_ITEM_REQUEST,
+        })
+
+        const { data } = await getClient().post(ORDER_ITEMS_PATH)
+
+        dispatch({ type: ORDER_ITEM_CREATE, payload: data })
+    } catch (err) {
+        dispatch({
+            type: ORDER_ITEM_FAIL,
+            payload: getDetailFromResponseError(err),
+        })
+    }
+}
 
 export const listShippingAddresses = () => async (dispatch) => {
     try {
