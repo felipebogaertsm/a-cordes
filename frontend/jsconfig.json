@@ -1,5 +1,14 @@
 {
     "compilerOptions": {
         "baseUrl": "./src",
+        "paths": {
+            "components/*": ["./components/*"],
+            "constants/*": ["./constants/*"],
+            "contexts/*": ["./contexts/*"],
+            "hooks/*": ["./hooks/*"],
+            "redux/*": ["./redux/*"],
+            "services/*": ["./services/*"],
+            "utils/*": ["./utils/*"],
+        }
     }
 }
