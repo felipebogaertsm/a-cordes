@@ -5,7 +5,7 @@ LABEL maintainer="Felipe Bogaerts de Mattos"
 WORKDIR /frontend
 
 COPY ./package*.json ./
-RUN npm ci
+RUN npm install --frozen-lockfile
 
 # Build:
 FROM node:18-bullseye as builder
