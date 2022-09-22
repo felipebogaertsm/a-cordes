@@ -40,10 +40,7 @@ jobs:
       run: |
         cd frontend
         docker login -u "${{ env.DOCKER_USER }}" -p "${{ env.DOCKER_PASSWORD }}"
-        docker build --pull \
-          -t "${{ env.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}" \
-          -t "${{ env.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:latest" .
-        docker push ${{ env.DOCKER_USER }}/${{ env.FRONTEND_IMAGE_NAME }}:${{ env.TAG }}
+        docker build . --no-cache
 
   test:
     name: Testing the backend
