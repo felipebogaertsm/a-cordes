@@ -8,7 +8,7 @@ import Link from "next/link"
 import { useContext } from "react"
 
 // Components:
-import NavbarItem from "components/modules/navbar/NavbarItem"
+import NavbarItem from "components/modules/fixed/navbar/NavbarItem"
 
 // Constants:
 import { USER_SETTINGS_PAGE_ROUTE } from "constants/routes"
