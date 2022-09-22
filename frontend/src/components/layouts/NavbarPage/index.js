@@ -5,7 +5,7 @@
 // Contact me at me@felipebm.com
 
 // Components:
-import { Footer, Navbar } from "components/modules"
+import { Footer, Navbar } from "components/modules/fixed"
 
 export default function NavbarPage({ children }) {
     return (

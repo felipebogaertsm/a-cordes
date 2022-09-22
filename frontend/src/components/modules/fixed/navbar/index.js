@@ -8,8 +8,8 @@ import { useContext, useState } from "react"
 import Link from "next/link"
 
 // Components:
-import NavbarItem from "components/modules/navbar/NavbarItem"
-import NavbarUserDropdown from "components/modules/navbar/NavbarUserDropdown"
+import NavbarItem from "components/modules/fixed/navbar/NavbarItem"
+import NavbarUserDropdown from "components/modules/fixed/navbar/NavbarUserDropdown"
 
 // Contexts:
 import { AuthContext } from "contexts/auth"
