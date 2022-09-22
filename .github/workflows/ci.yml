@@ -33,7 +33,7 @@ jobs:
 
   build-frontend:
     name: Build frontend
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v3
     - name: Frontend build and push
