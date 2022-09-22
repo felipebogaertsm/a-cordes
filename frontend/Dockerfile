@@ -4,7 +4,7 @@ LABEL maintainer="Felipe Bogaerts de Mattos"
 
 WORKDIR /frontend
 
-COPY package.json package-lock.json ./
+COPY ./package*.json ./
 RUN npm ci
 
 # Build:
