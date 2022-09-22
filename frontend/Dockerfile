@@ -1,5 +1,5 @@
 # Dependencies:
-FROM node:18 as dependencies
+FROM node:18-bullseye as dependencies
 LABEL maintainer="Felipe Bogaerts de Mattos"
 
 WORKDIR /frontend
@@ -8,7 +8,7 @@ COPY ./package*.json ./
 RUN npm ci
 
 # Build:
-FROM node:18 as builder
+FROM node:18-bullseye as builder
 
 WORKDIR /frontend
 COPY . .
@@ -16,7 +16,7 @@ COPY --from=dependencies /frontend/node_modules ./node_modules
 RUN yarn build
 
 # Entrypoint:
-FROM node:18 as runner
+FROM node:18-bullseye as runner
 
 WORKDIR /frontend
 ENV NODE_ENV=production

@@ -1,4 +1,4 @@
-FROM node:18 as dependencies
+FROM node:18-bullseye as dependencies
 LABEL maintainer="Felipe Bogaerts de Mattos"
 
 WORKDIR /frontend
