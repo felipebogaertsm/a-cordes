@@ -5,7 +5,7 @@ LABEL maintainer="Felipe Bogaerts de Mattos"
 WORKDIR /frontend
 
 COPY package.json package-lock.json ./
-RUN npm install --frozen-lockfile
+RUN npm ci
 
 # Build:
 FROM node:18 as builder
