@@ -5,15 +5,15 @@
 // Contact me at me@felipebm.com
 
 // Components:
-import Footer from "components/modules/footer"
-import Navbar from "components/modules/navbar"
+// import Footer from "components/modules/footer"
+// import Navbar from "components/modules/navbar"
 
 export default function NavbarPage({ children }) {
     return (
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="w-full h-full mb-10 px-6 py-2">{children}</div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }
