@@ -118,7 +118,7 @@ export default function OrderPage() {
                     <div className="w-full mt-16">
                         {Array.isArray(cartItems) &&
                             (cartItems.length === 0 ? (
-                                <div className="mx-auto w-max space-y-4">
+                                <div className="mx-auto w-max flex flex-col gap-4 items-center">
                                     <p className="text-xl">
                                         No items in your order.
                                     </p>

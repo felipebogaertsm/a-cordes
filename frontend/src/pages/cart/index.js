@@ -86,7 +86,7 @@ export default function Cart() {
 
                     {Array.isArray(cartItems) ? (
                         cartItems.length === 0 ? (
-                            <div className="mx-auto w-max space-y-4 mt-20">
+                            <div className="mx-auto w-max flex flex-col gap-4 items-center mt-20">
                                 <p className="text-xl">
                                     No items in your cart.
                                 </p>
