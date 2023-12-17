@@ -1,37 +1,12 @@
-version: "3.9"
-
 services:
-  nginx:
+  app:
     build:
-      context: ./nginx/
+      context: ./acordes
       dockerfile: Dockerfile.dev
-    restart: always
-    container_name: a-cordes-nginx
+    container_name: a-cordes-app
     ports:
-      - "8000:80"
-    depends_on:
-      - backend
-      - frontend
-  backend:
-    build: 
-      context: ./a_cordes/
-      dockerfile: Dockerfile
-    container_name: a-cordes-backend
-    volumes:
-      - ./a_cordes/:/usr/app/
-    entrypoint: >
-      bash -c "python3 manage.py migrate --no-input && 
-      python3 manage.py runserver 0.0.0.0:8000"
-    
-  frontend:
-    build: 
-      context: ./frontend/
-      dockerfile: Dockerfile.dev
-    container_name: a-cordes-frontend
+      - "3000:3000"
     environment:
       - WDS_SOCKET_PORT=0
     volumes:
-      - ./frontend/src/:/frontend/src/
-      - ./frontend/public/:/frontend/public/
-      - ./frontend/tailwind.config.js:/frontend/tailwind.config.js
-      - ./frontend/jsconfig.json:/frontend/jsconfig.json
+      - ./acordes/:/usr/app/
