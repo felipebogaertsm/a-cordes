@@ -1,5 +1,5 @@
 run:
-	@docker-compose up --build --remove-orphans
+	@docker compose up
 
 test:
-	@docker-compose -f docker-compose-test.yaml up --build --remove-orphans
+	@docker compose -f docker-compose-test.yaml up

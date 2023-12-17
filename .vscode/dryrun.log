@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/felipedemattos/Dropbox/Programs/a-cordes'
+docker-compose up --build --remove-orphans
+make: Leaving directory `/Users/felipedemattos/Dropbox/Programs/a-cordes'
+ 
