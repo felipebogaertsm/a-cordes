@@ -4,8 +4,8 @@ WORKDIR /acordes
 COPY package.json ./
 COPY package-lock.json ./
 
-RUN yarn install --frozen-lockfile --production
-RUN yarn add --dev typescript @types/react @types/node
+RUN npm ci
+RUN npm install --dev typescript @types/react @types/node
 
 FROM node:19-alpine as builder
 
@@ -15,7 +15,7 @@ COPY ./package-lock.json .
 COPY --from=dependencies /acordes/node_modules ./node_modules
 
 COPY . .
-RUN yarn build
+RUN npm build
 
 FROM node:19-alpine as runner
 
@@ -33,4 +33,4 @@ RUN chown -R admin:node-js /acordes/.next
 USER admin
 
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

@@ -1,9 +1,20 @@
 services:
+  db:
+    image: postgres:13.7
+    container_name: acordes-db
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   app:
     build:
       context: ./acordes
       dockerfile: Dockerfile.dev
-    container_name: a-cordes-app
+    container_name: acordes-app
+    env_file:
+      - ./.envs/.env.dev
     ports:
       - "3000:3000"
     environment:

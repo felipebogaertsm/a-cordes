@@ -3,7 +3,7 @@ FROM node:19-alpine as dependencies
 WORKDIR /usr/app/
 
 COPY . .
-RUN yarn install --frozen-lockfile
+RUN npm ci
 
 ENV NODE_ENV=development
 

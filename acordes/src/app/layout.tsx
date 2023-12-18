@@ -3,7 +3,10 @@ import { Inter, Lora } from "next/font/google";
 import "./globals.css";
 
 // Components:
-import Navbar from "./components/Navbar";
+import Navbar from "./_components/Navbar";
+
+// Providers:
+import TRPCProvider from "./_trpc/Provider";
 
 const sansFont = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const serifFont = Lora({ subsets: ["latin"], variable: "--font-serif" });
@@ -20,10 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sansFont.variable} ${serifFont.variable}`}>
-        <Navbar />
-        {children}
-      </body>
+      <TRPCProvider>
+        <body className={`${sansFont.variable} ${serifFont.variable}`}>
+          <Navbar />
+          {children}
+        </body>
+      </TRPCProvider>
     </html>
   );
 }
