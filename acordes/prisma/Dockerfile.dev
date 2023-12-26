@@ -1,0 +1,10 @@
+FROM node:19-alpine
+
+WORKDIR /usr/app/
+
+RUN npm install @prisma/client
+
+COPY . .
+
+EXPOSE 5555
+ENTRYPOINT ["npx", "prisma", "studio"]

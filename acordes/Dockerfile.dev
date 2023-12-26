@@ -1,4 +1,4 @@
-FROM node:19-alpine as dependencies
+FROM node:19-alpine
 
 WORKDIR /usr/app/
 
@@ -8,4 +8,4 @@ RUN npm ci
 ENV NODE_ENV=development
 
 EXPOSE 3000
-ENTRYPOINT ["yarn", "dev"]
+ENTRYPOINT ["npm", "run", "dev"]
