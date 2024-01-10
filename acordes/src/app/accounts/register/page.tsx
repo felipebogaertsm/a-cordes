@@ -1,3 +1,5 @@
+import RegistrationForm from "./_components/RegistrationForm";
+
 export default function Register() {
   return (
     <main>
@@ -6,7 +8,9 @@ export default function Register() {
         Register to <span className="font-semibold">à cordes</span>
       </h3>
 
-      <div className="mt-12">Create an account form</div>
+      <div className="mt-12 max-w-[30rem] mx-auto">
+        <RegistrationForm />
+      </div>
     </main>
   );
 }
