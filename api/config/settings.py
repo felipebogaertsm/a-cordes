@@ -34,7 +34,7 @@ API_ORIGIN_URL = os.environ.get("API_ORIGIN_URL", "localhost:8000")  # backend
 PROTOCOL = os.environ.get("PROTOCOL", "http")
 API_SERVICE_NAME = os.environ.get("API_SERVICE_NAME", "api")
 
-ALLOWED_HOSTS = [API_SERVICE_NAME, API_ORIGIN_URL]
+ALLOWED_HOSTS = ["localhost", API_SERVICE_NAME]
 
 
 # Application definition
