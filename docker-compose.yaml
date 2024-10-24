@@ -8,6 +8,17 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: acordes-api
+    env_file:
+      - ./.envs/.env.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/:/usr/app/
   app:
     build:
       context: ./acordes
