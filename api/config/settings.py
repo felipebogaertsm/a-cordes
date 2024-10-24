@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-hi0#1bnim!k3r5)g71_bpjue#aabz@lsrowm(46z$3zelk7x9k"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-hi0#1bnim!k3r5)g71_bpjue#aabz@lsrowm(46z$3zelk7x9k",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = str(os.environ.get("DEBUG", "1")) == "1"  # 1 is true
 
-ALLOWED_HOSTS = []
+APP_ORIGIN_URL = os.environ.get("APP_ORIGIN_URL", "localhost:3000")  # frontend
+API_ORIGIN_URL = os.environ.get("API_ORIGIN_URL", "localhost:8000")  # backend
+PROTOCOL = os.environ.get("PROTOCOL", "http")
+API_SERVICE_NAME = os.environ.get("API_SERVICE_NAME", "api")
+
+ALLOWED_HOSTS = [API_SERVICE_NAME, API_ORIGIN_URL]
 
 
 # Application definition
@@ -37,12 +46,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third-party apps
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
+    "django_filters",
+    "drf_yasg",
+    # My apps
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -121,3 +138,64 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# CORS settings
+# https://pypi.org/project/django-cors-headers/
+
+CORS_ALLOWED_ORIGINS = [f"{PROTOCOL}://{APP_ORIGIN_URL}"]
+CORS_ALLOW_CREDENTIALS = True  # If using with sessions/authentication
+
+
+# Django Rest Framework (DRF) settings
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
+
+# JWT settings
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": False,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+
+# drf-yasg settings for Swagger and Redoc
+# https://drf-yasg.readthedocs.io/
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    },
+    "USE_SESSION_AUTH": False,
+    "REFETCH_SCHEMA_WITH_AUTH": True,
+}
+
+# Filters
+# https://django-filter.readthedocs.io/
+
+FILTERS_VERBOSE_LOOKUPS = {
+    "exact": "is exactly",
+    "iexact": "is exactly",
+    "contains": "contains",
+    "icontains": "contains",
+    "gt": "is greater than",
+    "gte": "is greater than or equal to",
+    "lt": "is less than",
+    "lte": "is less than or equal to",
+}
