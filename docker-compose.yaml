@@ -8,27 +8,31 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: acordes-api
+    env_file:
+      - ./.envs/.env.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api/:/usr/app/
+    entrypoint: |
+      bash -c "
+      python3 manage.py migrate --no-input && 
+      python3 manage.py runserver 0.0.0.0:8000"
   app:
     build:
       context: ./acordes
       dockerfile: Dockerfile.dev
     container_name: acordes-app
-    env_file:
-      - ./.envs/.env.dev
     ports:
       - "3000:3000"
     environment:
       - WDS_SOCKET_PORT=0
     volumes:
-      - ./acordes/:/usr/app/
-  prisma-studio:
-    build:
-      context: ./acordes/prisma
-      dockerfile: Dockerfile.dev
-    container_name: acordes-prisma-studio
-    env_file:
-      - ./.envs/.env.dev
-    volumes:
-      - ./acordes/prisma:/usr/app/
-    ports:
-      - "5555:5555"
+      - ./acordes/src:/usr/app/src
+      - ./acordes/public:/usr/app/public
+      - ./acordes/package.json:/usr/app/package.json
