@@ -19,6 +19,10 @@ services:
       - "8000:8000"
     volumes:
       - ./api/:/usr/app/
+    entrypoint: |
+      bash -c "
+      python3 manage.py migrate --no-input && 
+      python3 manage.py runserver 0.0.0.0:8000"
   app:
     build:
       context: ./acordes
@@ -31,6 +35,4 @@ services:
     volumes:
       - ./acordes/src:/usr/app/src
       - ./acordes/public:/usr/app/public
-      - ./acordes/node_modules:/usr/app/node_modules
       - ./acordes/package.json:/usr/app/package.json
-      - ./acordes/package-lock.json:/usr/app/package-lock.json
