@@ -21,14 +21,3 @@ services:
       - WDS_SOCKET_PORT=0
     volumes:
       - ./acordes/:/usr/app/
-  prisma-studio:
-    build:
-      context: ./acordes/prisma
-      dockerfile: Dockerfile.dev
-    container_name: acordes-prisma-studio
-    env_file:
-      - ./.envs/.env.dev
-    volumes:
-      - ./acordes/prisma:/usr/app/
-    ports:
-      - "5555:5555"
