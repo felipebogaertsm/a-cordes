@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 import os
 from pathlib import Path
 
@@ -35,6 +36,8 @@ PROTOCOL = os.environ.get("PROTOCOL", "http")
 API_SERVICE_NAME = os.environ.get("API_SERVICE_NAME", "api")
 
 ALLOWED_HOSTS = ["localhost", API_SERVICE_NAME]
+
+AUTH_USER_MODEL = "accounts.User"  # custom auth user model
 
 
 # Application definition
@@ -162,8 +165,6 @@ REST_FRAMEWORK = {
 
 # JWT settings
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
-
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
