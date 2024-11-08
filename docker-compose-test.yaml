@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:13.7
+    container_name: acordes-db-test
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: acordes-api-test
+    env_file:
+      - ./.envs/.env.dev
+    volumes:
+      - ./api/:/usr/app/
+    entrypoint: |
+      bash -c "pytest"
