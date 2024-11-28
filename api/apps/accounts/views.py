@@ -5,8 +5,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.request import Request
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.accounts.models import User
-from apps.accounts.serializers import CustomTokenObtainPairSerializer, UserSerializer
+from apps.accounts.models import User, Dealer
+from apps.accounts.serializers import (
+    CustomTokenObtainPairSerializer,
+    UserSerializer,
+    DealerSerializer,
+)
 
 
 class AuthViewSet(viewsets.ViewSet):
@@ -53,3 +57,8 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+
+
+class DealerViewSet(viewsets.ModelViewSet):
+    queryset = Dealer.objects.all()
+    serializer_class = DealerSerializer
