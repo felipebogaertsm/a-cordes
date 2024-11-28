@@ -1,7 +1,8 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from apps.accounts.models import User
 from rest_framework_simplejwt.tokens import AccessToken
+
+from apps.accounts.models import User
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
