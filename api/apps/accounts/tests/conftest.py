@@ -1,12 +1,25 @@
 import pytest
-from django.contrib.auth import get_user_model
+from rest_framework.test import APIClient
 
-User = get_user_model()
+from apps.accounts.models import User, Dealer
 
 
 @pytest.fixture
-def test_user(db):
-    user = User.objects.create_user(
-        email="testuser@example.com", password="testpassword"
-    )
-    return user
+def create_user():
+    def _create_user(email="user@example.com", password="password123"):
+        return User.objects.create_user(email=email, password=password)
+
+    return _create_user
+
+
+@pytest.fixture
+def create_dealer():
+    def _create_dealer(name="Dealer One", country_of_origin="USA"):
+        return Dealer.objects.create(name=name, country_of_origin=country_of_origin)
+
+    return _create_dealer
+
+
+@pytest.fixture
+def api_client():
+    return APIClient()
