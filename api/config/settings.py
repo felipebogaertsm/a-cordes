@@ -22,20 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "django-insecure-hi0#1bnim!k3r5)g71_bpjue#aabz@lsrowm(46z$3zelk7x9k",
-)
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = str(os.environ.get("DEBUG", "1")) == "1"  # 1 is true
+DEBUG = os.environ.get("DEBUG", "1") == "1"  # 1 is true
 
 APP_ORIGIN_URL = os.environ.get("APP_ORIGIN_URL", "localhost:3000")  # frontend
 API_ORIGIN_URL = os.environ.get("API_ORIGIN_URL", "localhost:8000")  # backend
 PROTOCOL = os.environ.get("PROTOCOL", "http")
 API_SERVICE_NAME = os.environ.get("API_SERVICE_NAME", "api")
 
-ALLOWED_HOSTS = ["localhost", API_SERVICE_NAME]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,api").split(",")
 
 AUTH_USER_MODEL = "accounts.User"  # custom auth user model
 
@@ -97,8 +94,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("DB_ENGINE", "django.db.backends.postgresql"),
+        "NAME": os.environ["DB_NAME"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD"],
+        "HOST": os.environ.get("DB_HOST", "localhost"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
 
@@ -125,9 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en-us")
 
-TIME_ZONE = "UTC"
+TIME_ZONE = os.environ.get("TIME_ZONE", "UTC")
 
 USE_I18N = True
 
@@ -137,7 +138,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -168,8 +170,12 @@ REST_FRAMEWORK = {
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        minutes=int(os.environ.get("ACCESS_TOKEN_LIFETIME", 60))
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        days=int(os.environ.get("REFRESH_TOKEN_LIFETIME", 1))
+    ),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "ALGORITHM": "HS256",

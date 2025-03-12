@@ -3,7 +3,7 @@ services:
     image: postgres:13.7
     container_name: acordes-db
     env_file:
-      - ./.envs/.env.dev
+      - ./api/.env
     volumes:
       - ./data:/var/lib/postgresql/data
     ports:
@@ -14,15 +14,11 @@ services:
       dockerfile: Dockerfile
     container_name: acordes-api
     env_file:
-      - ./.envs/.env.dev
+      - ./api/.env
     ports:
       - "8000:8000"
     volumes:
       - ./api/:/usr/app/
-    entrypoint: |
-      bash -c "
-      python3 manage.py migrate --no-input && 
-      python3 manage.py runserver 0.0.0.0:8000"
   app:
     build:
       context: ./acordes
