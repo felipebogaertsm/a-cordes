@@ -5,6 +5,7 @@ ENV PYTHONUNBUFFERED 1
 RUN pip3 install --upgrade pip setuptools wheel
 COPY ./requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
+RUN pip3 install psycopg2 gunicorn
 
 WORKDIR /usr/app
 COPY ./ ./
