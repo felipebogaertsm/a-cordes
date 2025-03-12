@@ -1,0 +1,3 @@
+{
+  "python.defaultInterpreterPath": "./api/.venv/bin/python"  // or ".venv/Scripts/python.exe" on Windows
+}
