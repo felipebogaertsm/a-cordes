@@ -8,7 +8,7 @@ class UserManager(BaseUserManager):
 
     def create_user(
         self, email: str, password: str = None, **extra_fields: Any
-    ) -> "User":
+    ) -> "User":  # noqa: F821
         if not email:
             raise ValueError("The Email field must be set.")
         email = self.normalize_email(email)
@@ -19,7 +19,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(
         self, email: str, password: str = None, **extra_fields: Any
-    ) -> "User":
+    ) -> "User":  # noqa: F821
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
