@@ -2,7 +2,11 @@ FROM python:3.13
 
 WORKDIR /usr/app
 
+RUN apt-get update && apt-get install -y \
+    libpq-dev gcc build-essential python3-dev
+
 RUN pip install poetry
+
 COPY pyproject.toml poetry.lock /usr/app/
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-root

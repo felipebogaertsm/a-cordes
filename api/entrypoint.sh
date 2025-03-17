@@ -7,7 +7,7 @@ set -e
 sleep 2
 
 # Run Alembic migrations
-# poetry run alembic -c src/alembic.ini upgrade head
+poetry run alembic -c src/alembic.ini upgrade head
 
 # Start FastAPI application
 exec poetry run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
